@@ -1,11 +1,8 @@
-import React from 'react'
+import React from "react";
+import { Page } from "../components/Page";
 
 const Tutor = () => {
-    return (
-        <div>
-            INDIVIDUAL TUTOR PROFILE
-        </div>
-    )
-}
+  return <Page>INDIVIDUAL TUTOR PROFILE</Page>;
+};
 
 export default Tutor;

@@ -12,9 +12,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Homepage = () => {
-  console.log("HOMEPAGE LOADED");
   const classes = useStyles();
-  return (<Page>HOMEPAGE;</Page>);
+  return <Page>HOMEPAGE</Page>;
 };
 
 export default Homepage;

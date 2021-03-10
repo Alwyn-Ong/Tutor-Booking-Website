@@ -1,11 +1,13 @@
 import { Typography } from "@material-ui/core";
 import React from "react";
+import { Page } from "../components/Page";
 
 const Profile = () => {
+
   return (
-    <div>
-      <Typography>PROFILE</Typography>
-    </div>
+    <Page>
+        PROFILE
+    </Page>
   );
 };
 
