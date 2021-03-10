@@ -1,7 +1,10 @@
 import logo from "./logo.svg";
-import "./App.css";
+// import "./App.css";
 import routes from "./routes.js";
 import { useRoutes } from "react-router-dom";
+import theme from "./theme";
+import { ThemeProvider } from "@material-ui/core";
+import GlobalStyles from "./theme/GlobalStyles";
 
 function App() {
   const routing = useRoutes(routes);
@@ -22,7 +25,10 @@ function App() {
     //     </a>
     //   </header>
     // </div>
-    <>{routing}</>
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      {routing}
+    </ThemeProvider>
   );
 }
 

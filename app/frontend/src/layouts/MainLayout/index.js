@@ -1,9 +1,7 @@
+import TopBar from "./TopBar.js";
+
 const MainLayout = () => {
-    return (
-        <div>
-            Test Main Layout
-        </div>
-    )
-}
+  return <><TopBar/></>;
+};
 
 export default MainLayout;
