@@ -1,7 +1,7 @@
 import React from "react";
-import {Box, Container} from "@material-ui/core";
+import { Box, Container } from "@material-ui/core";
 
-export const Page = ({children}) => {
+export const Page = ({ children }) => {
   return (
     <Box
       display="flex"
@@ -9,9 +9,7 @@ export const Page = ({children}) => {
       height="100%"
       justifyContent="center"
     >
-      <Container maxWidth="sm">
-          {children}
-      </Container>
+      <Container maxWidth="sm">{children}</Container>
     </Box>
   );
 };
