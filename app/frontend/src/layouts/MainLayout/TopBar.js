@@ -185,13 +185,23 @@ const TopBar = () => {
             <EmojiPeople fontSize="large" className={classes.title}/>
           </Button>
           <Button component={RouterLink} to={"/tutor"}>
-            <Typography className={classes.title} variant="h3" noWrap>
-              Placeholder Individual Tutor
+            <Typography className={classes.title} variant="h6" noWrap>
+              Individual Tutor
             </Typography>
           </Button>
           <Button component={RouterLink} to={"/profile"}>
-            <Typography className={classes.title} variant="h3" noWrap>
-              Placeholder Profile
+            <Typography className={classes.title} variant="h6" noWrap>
+              Profile
+            </Typography>
+          </Button>
+          <Button component={RouterLink} to={"/tutorprofile"}>
+            <Typography className={classes.title} variant="h6" noWrap>
+              Tutor Profile
+            </Typography>
+          </Button>
+          <Button component={RouterLink} to={"/register"}>
+            <Typography className={classes.title} variant="h6" noWrap>
+              Register
             </Typography>
           </Button>
 

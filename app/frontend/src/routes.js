@@ -2,6 +2,8 @@ import MainLayout from "./layouts/MainLayout";
 import Homepage from "./views/Homepage";
 import Profile from "./views/Profile";
 import Tutor from "./views/Tutor";
+import Register from "./views/Register";
+import TutorProfile from "./views/TutorProfile";
 
 const routes = [
   // {
@@ -16,9 +18,11 @@ const routes = [
     path: "/",
     element: <MainLayout />,
     children: [
-      { path: "/", element: <Homepage/> },
-      { path: "profile", element: <Profile/>},
-      { path: "tutor", element: <Tutor/>},
+      { path: "/", element: <Homepage /> },
+      { path: "profile", element: <Profile /> },
+      { path: "tutor", element: <Tutor /> },
+      { path: "register", element: <Register /> },
+      { path: "tutorprofile", element: <TutorProfile /> },
       //   { path: "*", element: <Navigate to="/404" /> },
     ],
   },
