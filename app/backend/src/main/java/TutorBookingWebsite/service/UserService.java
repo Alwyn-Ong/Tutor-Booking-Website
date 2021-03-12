@@ -45,14 +45,15 @@ public class UserService {
 				if (user == null) {
 					User newUser = new User(email, name);
 					userDao.save(newUser);
-				} else {
-					result.put("userid", "" + user.getUserId());
-					result.put("name", user.getName());
-					result.put("email", user.getEmail());
-					result.put("isTutor", "" + user.isTutor());
-					result.put("nearestMRT", user.getNearestMRT());
-					result.put("description", user.getDescription());
-				}
+				} 
+				
+				result.put("userid", "" + user.getUserId());
+				result.put("name", user.getName());
+				result.put("email", user.getEmail());
+				result.put("isTutor", "" + user.isTutor());
+				result.put("nearestMRT", user.getNearestMRT());
+				result.put("description", user.getDescription());
+				
 				return result;
 			} else {
 				throw new APIException("Token is invalid!");
