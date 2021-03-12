@@ -37,8 +37,9 @@ public class User {
 	@ApiModelProperty(notes= "short description of user")
 	private String description;	
 	
-	public User() {
-		
+	public User(String email, String name) {
+		this.email = email;
+		this.name = name;
 	}
 	
 	public int getUserId() {
