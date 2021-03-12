@@ -14,7 +14,10 @@ const useStyles = makeStyles((theme) => ({
 const Homepage = () => {
   const classes = useStyles();
   return (
-  <Page>REGISTER</Page>);
+    <form>
+      <input type="text"></input>
+    </form>
+    );
 };
 
 export default Homepage;
