@@ -49,6 +49,9 @@ public class UserService {
 					result.put("userid", "" + user.getUserId());
 					result.put("name", user.getName());
 					result.put("email", user.getEmail());
+					result.put("isTutor", "" + user.isTutor());
+					result.put("nearestMRT", user.getNearestMRT());
+					result.put("description", user.getDescription());
 				}
 				return result;
 			} else {
