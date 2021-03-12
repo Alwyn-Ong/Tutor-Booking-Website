@@ -1,6 +1,7 @@
 package TutorBookingWebsite.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -17,6 +18,7 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 
 import java.util.*;
 
+@Service
 public class UserService {
 
 	@Autowired
@@ -38,7 +40,6 @@ public class UserService {
 			if (tokenIsValid) {
 				GoogleIdToken.Payload payload = googleToken.getPayload();
 				// Get profile information from payload
-				String userId = payload.getSubject();
 				String email = payload.getEmail();
 				String name = (String) payload.get("name");
 				User user = userDao.findByEmail(email).orElse(null);
