@@ -31,22 +31,25 @@ public class UserService {
 	@Autowired
 	private ReviewDao reviewDao;
 	
-	String[] columnName = { "userId", "email", "name", "description", "nearestMRT", "role"};
+	String[] columnName = { "userId", "email", "name", "gender", "phoneNumber", "description", "nearestMRT", "isTutor", "qualification"};
 	
 	public Map<String, Object> getTutorById(int userId){
 		try {
 			Map<String, Object> result = new HashMap<>();
 			Optional<User> user = userDao.findById(userId);
-			if (user.get().getRole() != TutorBookingWebsite.model.Role.TUTOR) {
+			if (user.get().getIsTutor() != 1) {
 				throw new APIException("no such tutor");
 			} else {
 				result.put("userid", "" + user.get().getUserId());
 				result.put("name", user.get().getName());
+				result.put("gender", user.get().getGender());
+				result.put("gender", user.get().getPhoneNumber());
 				result.put("email", user.get().getEmail());
 				result.put("decription", user.get().getDescription());
 				result.put("nearestMRT", user.get().getNearestMRT());
-				result.put("role", "" + user.get().getRole());
+				result.put("isTutor", "" + user.get().getIsTutor());
 				result.put("reviews", reviewDao.findByTutorId(userId));
+				result.put("qualification", "" + user.get().getQualification());
 			}
 			
 			return result;
@@ -59,7 +62,7 @@ public class UserService {
 		Map<String, Object> result = new HashMap<>();
 		result.put("columns", columnName);
 
-		List<User> tutors = userDao.findByRole(TutorBookingWebsite.model.Role.TUTOR);
+		List<User> tutors = userDao.findByIsTutor(1);
 		Object[] temp = new Object[tutors.size()];
 
 		int index = 0;
@@ -69,9 +72,10 @@ public class UserService {
 			result2.put("userId", placeHolder.getUserId());
 			result2.put("email", placeHolder.getEmail());
 			result2.put("name", placeHolder.getName());
+			result2.put("phoneNumber", placeHolder.getPhoneNumber());
 			result2.put("description", placeHolder.getDescription());
 			result2.put("nearestMRT", placeHolder.getNearestMRT());
-			result2.put("role", placeHolder.getRole());
+			result2.put("role", placeHolder.getIsTutor());
 			result2.put("reviws", reviewDao.findByTutorId(placeHolder.getUserId()));
 			temp[index] = result2;
 			index++;
@@ -84,7 +88,7 @@ public class UserService {
 	public ResponseEntity becomeTutor(User user) {
 		try {
 			User existingUser = userDao.findById(user.getUserId()).orElse(null);
-			existingUser.setRole(TutorBookingWebsite.model.Role.TUTOR);
+			existingUser.setIsTutor(1);
 			userDao.save(existingUser);
 			ResponseDetails responseDetails = new ResponseDetails(new Date(), "Successfully updated details",
 					"query success");
@@ -100,8 +104,10 @@ public class UserService {
 		try {
 			existingUser.setName(user.getName());
 			existingUser.setEmail(user.getEmail());
+			existingUser.setPhoneNumber(user.getPhoneNumber());
 			existingUser.setNearestMRT(user.getNearestMRT());
 			existingUser.setDescription(user.getDescription());
+			existingUser.setDescription(user.getQualification());
 
 			userDao.save(existingUser);
 

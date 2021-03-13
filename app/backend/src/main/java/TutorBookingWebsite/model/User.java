@@ -32,13 +32,18 @@ public class User {
 	private String email;
 	@ApiModelProperty(notes= "name of user")
 	private String name;
-	@Enumerated(EnumType.STRING)
+	@ApiModelProperty(notes= "gender of user")
+	private String gender;
+	@ApiModelProperty(notes= "phone number of user")
+	private int phoneNumber;
 	@ApiModelProperty(notes= "user role")
-	private Role role;	
+	private int isTutor;	
 	@ApiModelProperty(notes= "nearest MRT from user")
 	private String nearestMRT;
 	@ApiModelProperty(notes= "short description of user")
 	private String description;	
+	@ApiModelProperty(notes= "qualification user")
+	private String qualification;	
 	
 	public User() {
 		
@@ -67,12 +72,15 @@ public class User {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Role getRole() {
-		return role;
+	
+	public int getIsTutor() {
+		return isTutor;
 	}
-	public void setRole(Role role) {
-		this.role = role;
+
+	public void setIsTutor(int isTutor) {
+		this.isTutor = isTutor;
 	}
+
 	public String getNearestMRT() {
 		return nearestMRT;
 	}
@@ -84,5 +92,29 @@ public class User {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getQualification() {
+		return qualification;
+	}
+
+	public void setQualification(String qualification) {
+		this.qualification = qualification;
+	}
+
+	public int getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(int phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}	
 }

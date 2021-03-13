@@ -32,7 +32,7 @@ public class UserTimeslotService {
 		
 		Optional<User> existingUser = userDao.findById(userId);
 		
-		if (existingUser.isEmpty() || existingUser.get().getRole() != TutorBookingWebsite.model.Role.TUTOR) {
+		if (existingUser.isEmpty() || existingUser.get().getIsTutor() != 1) {
 			throw new APIException("no such tutor");
 		}
 		
