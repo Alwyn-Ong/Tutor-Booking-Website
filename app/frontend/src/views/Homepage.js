@@ -2,7 +2,8 @@ import React from "react";
 import { Page } from "../components/Page";
 import { makeStyles } from "@material-ui/core";
 import SearchBar from "../components/HomePage/SearchBar";
-// import SearchBarr from "../components/HomePage/SearchBarr";
+import FilterPanel from "../components/HomePage/FilterPanel";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
