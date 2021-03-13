@@ -29,6 +29,27 @@ public class UserService {
 	
 	String[] columnName = { "userId", "email", "name", "description", "nearestMRT", "role" };
 	
+	public Map<String, String> getTutorById(int userId){
+		try {
+			Map<String, String> result = new HashMap<>();
+			Optional<User> user = userDao.findById(userId);
+			if (user.get().getRole() != TutorBookingWebsite.model.Role.TUTOR) {
+				throw new APIException("no such tutor");
+			} else {
+				result.put("userid", "" + user.get().getUserId());
+				result.put("name", user.get().getName());
+				result.put("email", user.get().getEmail());
+				result.put("decription", user.get().getDescription());
+				result.put("nearestMRT", user.get().getNearestMRT());
+				result.put("role", "" + user.get().getRole());
+			}
+			
+			return result;
+		} catch (Throwable e) {
+			throw new APIException("no such tutor");
+		}
+	}
+	
 	public Map<String, Object> getAllTutors() {
 		Map<String, Object> result = new HashMap<>();
 		result.put("columns", columnName);
