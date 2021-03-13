@@ -72,6 +72,7 @@ public class UserService {
 			result2.put("description", placeHolder.getDescription());
 			result2.put("nearestMRT", placeHolder.getNearestMRT());
 			result2.put("role", placeHolder.getRole());
+			result2.put("reviws", reviewDao.findByTutorId(placeHolder.getUserId()));
 			temp[index] = result2;
 			index++;
 		}
