@@ -18,6 +18,8 @@ public class RequestService {
 	@Autowired
 	private RequestDao requestDao;
 	
+	
+	
 	public ResponseEntity saveRequest(Request request) {
 		try {
 			Request newRequest = new Request(request.getRemarks(), request.getRequestedTimeslot(), request.getStudentId(), request.getTutorId());
@@ -27,6 +29,17 @@ public class RequestService {
 			return new ResponseEntity(responseDetails, HttpStatus.OK);	
 		} catch (Exception e) {
 			throw new APIException("error in saving");
+		}
+	}
+	
+	public ResponseEntity deleteRequest(int requestId) {
+		try {
+			requestDao.deleteById(requestId);
+			ResponseDetails responseDetails = new ResponseDetails(new Date(), "request removed from database" + requestId,
+					"query success");
+			return new ResponseEntity(responseDetails, HttpStatus.OK);
+		} catch (Throwable e) {
+			throw new APIException("user unable to be deleted");
 		}
 	}
 }
