@@ -1,0 +1,47 @@
+#frm{
+    text-align: center;
+    font-family: Leelawadee;
+}
+#fld{
+    width: 30%;
+    box-shadow: 10px 10px 10px lightblue;
+    margin: 100px auto;
+    padding-top: 30px;
+    border-color: lightskyblue;
+}
+legend{
+    font-size: 40px;
+}
+#email{
+    color: lightslategray;
+}
+#pass{
+    color: lightslategray;
+}
+span{
+    color: red;
+}
+input{
+    text-align: center;
+    padding: 8px;
+}
+input:focus{
+    background-color: lavender;
+}
+.btn{
+    background-color: lightskyblue;
+    border: 0;
+    border-radius: 3px;
+    padding: 10px;
+    width: 120px;
+    height: 40px;
+    cursor: pointer;
+    color: white;
+    transition: all 0.5s ease-in-out;
+    outline: 0;
+}
+.btn:hover{
+    background-color: dodgerblue;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+}
