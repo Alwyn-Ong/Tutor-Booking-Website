@@ -115,7 +115,7 @@ const CustomCard = ({ classes, image, name, bio, levels, subject, price, locatio
           <Typography className={classes.subject}>{levels} {subject}</Typography>
           <Typography className={classes.price}>${price}/hr</Typography>
           <Typography className={classes.location}>Nearest MRT: {location}</Typography>
-          <Typography className={classes.qualification}>Highest Qualification: {location}</Typography>
+          <Typography className={classes.qualification}>Highest Qualification: {qualification}</Typography>
         </CardContent>
       </Card>
     </CardActionArea>
@@ -162,9 +162,10 @@ export const Results = React.memo(function SolidGameCard() {
         switch(rand){
             case 1:
                 items.push(
-                    <Grid item>
+                    <Grid item xs={12} sm={4} md={3} lg={3}>
                     <CustomCard
                         key={value.userId}
+                        // onClick={value.userId}
                         classes={styles}
                         name={value.Name}
                         bio={value.Bio}
@@ -178,7 +179,7 @@ export const Results = React.memo(function SolidGameCard() {
                 break;
             case 2:
                 items.push(
-                    <Grid item>
+                    <Grid item xs={12} sm={4} md={3} lg={3}>
                     <CustomCard
                         key={value.userId}
                         classes={styles2}
@@ -194,7 +195,7 @@ export const Results = React.memo(function SolidGameCard() {
                 break;
             case 3:
                 items.push(
-                    <Grid item>
+                    <Grid item xs={12} sm={4} md={3} lg={3}>
                     <CustomCard
                         key={value.userId}
                         classes={styles3}
@@ -210,7 +211,7 @@ export const Results = React.memo(function SolidGameCard() {
                 break;
             case 4:
                 items.push(
-                    <Grid item>
+                    <Grid item xs={12} sm={4} md={3} lg={3}>
                     <CustomCard
                         key={value.userId}
                         classes={styles4}

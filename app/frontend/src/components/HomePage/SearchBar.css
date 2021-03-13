@@ -1,5 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Sarpanch:wght@400&display=swap');
 
+
+@media (max-width: 600px) {
+  .search-bar {
+    position:relative;
+    height:30px;
+    max-width:100%;
+    padding: 0px 10px 0px 10px;
+    transition: all 1000ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
+    background: #5565c5;
+    color: white;
+    margin-right: -75px;
+    cursor: pointer;
+    z-index: 1;
+    border: 1px solid #1f221f;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  }
+}
+
 body {
   background: rgb(83, 98, 187);
   display: flex;
