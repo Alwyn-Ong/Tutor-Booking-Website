@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import TutorBookingWebsite.dao.RequestDao;
+import TutorBookingWebsite.exception.APIException;
 import TutorBookingWebsite.model.Request;
 import TutorBookingWebsite.model.ResponseDetails;
 
@@ -18,10 +19,14 @@ public class RequestService {
 	private RequestDao requestDao;
 	
 	public ResponseEntity saveRequest(Request request) {
-		Request newRequest = new Request(request.getRemarks(), request.getRequestedTimeslot(), request.getStudentId(), request.getTutorId());
-		requestDao.save(newRequest);
-		ResponseDetails responseDetails = new ResponseDetails(new Date(), "request has been saved",
-				"query success");
-		return new ResponseEntity(responseDetails, HttpStatus.OK);
+		try {
+			Request newRequest = new Request(request.getRemarks(), request.getRequestedTimeslot(), request.getStudentId(), request.getTutorId());
+			requestDao.save(newRequest);
+			ResponseDetails responseDetails = new ResponseDetails(new Date(), "request has been saved",
+					"query success");
+			return new ResponseEntity(responseDetails, HttpStatus.OK);	
+		} catch (Exception e) {
+			throw new APIException("error in saving");
+		}
 	}
 }
