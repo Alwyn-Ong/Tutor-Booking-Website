@@ -10,7 +10,7 @@ import {
 import { Email, Facebook, LinkedIn } from "@material-ui/icons";
 import { Rating } from "@material-ui/lab";
 import React from "react";
-import Timetable from "../components/IndividualTutor/Timetable";
+import Timetable from "../components/Timetable";
 import { Page } from "../components/Page";
 
 const useStyles = makeStyles((theme) => ({
@@ -55,8 +55,8 @@ const Tutor = ({ data }) => {
   };
 
   return (
-    <Page>
-      <Grid container spacing={3} direction="column">
+    <Page >
+      <Grid container spacing={3} direction="column" style={{paddingTop: "20px"}}>
         <Grid container item spacing={3}>
           <Grid item xs={6} lg={4}>
             <Avatar className={classes.large} />
@@ -145,7 +145,7 @@ const Tutor = ({ data }) => {
           <Divider variant="middle" />
         </Grid>
         <Grid item>
-          {value ? <Timetable/> : null}
+          {value ? null : <Timetable/>}
         </Grid>
       </Grid>
     </Page>
