@@ -1,5 +1,6 @@
 import {
   Avatar,
+  Chip,
   Divider,
   Grid,
   IconButton,
@@ -42,6 +43,7 @@ const Tutor = ({ data }) => {
     linkedin: "www.linkedin.com",
     email: "alwyn.ong.2018@sis.smu.edu.sg",
     qualification: "A-Level",
+    subjects: ["A-Level Physics", "A-Level Maths"],
     gender: "Male",
     review: 4.5,
     price: 100,
@@ -69,68 +71,63 @@ const Tutor = ({ data }) => {
           <Grid item xs={6} lg={4}>
             <Avatar className={classes.large} />
           </Grid>
-          <Grid item xs={6} lg={4}>
-            <Grid container spacing={3}>
-              <Grid item>
-                <Typography>{data.name}</Typography>
-              </Grid>
+          <Grid container spacing={3} item xs={6} lg={4} direction="column">
+            <Grid item>
+              <Typography>{data.name}</Typography>
             </Grid>
-            <Grid container spacing={3}>
-              <Grid item>
-                <Typography>{data.bio}</Typography>
-              </Grid>
+            <Grid item>
+              <Typography>{data.bio}</Typography>
             </Grid>
-            <Grid container spacing={3}>
-              <Grid item>
-                <IconButton
-                  onClick={() => {
-                    window.open(`http://${data.facebook}`);
-                  }}
-                >
-                  <Facebook />
-                </IconButton>
-                <IconButton
-                  onClick={() => {
-                    window.open(`http://${data.linkedin}`);
-                  }}
-                >
-                  <LinkedIn />
-                </IconButton>
-                <IconButton
-                  onClick={() => {
-                    window.href(`${data.email}`);
-                  }}
-                >
-                  <Email />
-                </IconButton>
-              </Grid>
+            <Grid item>
+              <IconButton
+                onClick={() => {
+                  window.open(`http://${data.facebook}`);
+                }}
+              >
+                <Facebook />
+              </IconButton>
+              <IconButton
+                onClick={() => {
+                  window.open(`http://${data.linkedin}`);
+                }}
+              >
+                <LinkedIn />
+              </IconButton>
+              <IconButton
+                onClick={() => {
+                  window.href(`${data.email}`);
+                }}
+              >
+                <Email />
+              </IconButton>
             </Grid>
           </Grid>
-          <Grid item xs={12} lg={4}>
-            <Grid container spacing={3}>
-              <Grid item>
-                <Typography>{data.qualification}</Typography>
-              </Grid>
+          <Grid container spacing={3} item xs={12} lg={4} direction="column">
+            <Grid item>
+              <Typography>{data.qualification}</Typography>
             </Grid>
-            <Grid container spacing={3}>
-              <Grid item>
-                <Typography>{data.gender}</Typography>
-              </Grid>
+            <Grid item container spacing={3} justify="flex-start">
+              {data.subjects.map((subject) => {
+                return (
+                  <Grid item>
+                    <Chip label={subject} />
+                  </Grid>
+                );
+              })}
             </Grid>
-            <Grid container spacing={3}>
-              <Grid item>
-                <Typography>{`$${data.price}/hr`}</Typography>
-              </Grid>
+            <Grid item>
+              <Typography>{data.gender}</Typography>
             </Grid>
-            <Grid container spacing={3}>
-              <Grid item>
-                <Rating
-                  name="half-rating-read"
-                  value={data.review}
-                  readOnly
-                  precision={0.5}
-                />
-              </Grid>
+            <Grid item>
+              <Typography>{`$${data.price}/hr`}</Typography>
+            </Grid>
+            <Grid item>
+              <Rating
+                name="half-rating-read"
+                value={data.review}
+                readOnly
+                precision={0.5}
+              />
             </Grid>
           </Grid>
         </Grid>
@@ -152,7 +149,7 @@ const Tutor = ({ data }) => {
         <Grid item>
           <Divider variant="middle" />
         </Grid>
-        <Grid item>{value ? <Reviews /> : <Timetable isTutor={false}/>}</Grid>
+        <Grid item>{value ? <Reviews /> : <Timetable isTutor={false} />}</Grid>
       </Grid>
     </Page>
   );
