@@ -10,6 +10,9 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import { useFourThreeCardMediaStyles } from '@mui-treasury/styles/cardMedia/fourThree';
+import { useState, useEffect } from 'react';
+import Pagination from '@material-ui/lab/Pagination';
+
 
 const useGridStyles = makeStyles(({ breakpoints }) => ({
   root: {
@@ -19,7 +22,7 @@ const useGridStyles = makeStyles(({ breakpoints }) => ({
   },
 }));
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   actionArea: {
     borderRadius: 16,
     transition: '0.2s',
@@ -99,9 +102,14 @@ const useStyles = makeStyles(() => ({
     fontWeight: 500,
     fontSize: 14,
   },
+  paginationStyle:{
+    '& > *': {
+      marginTop: theme.spacing(2),
+    },
+  }
 }));
 
-const CustomCard = ({ classes, image, name, bio, levels, subject, price, location, qualification }) => {
+const CustomCard = ({ classes, image, name, bio, levels, price, location, qualification }) => {
   const mediaStyles = useFourThreeCardMediaStyles();
   return (
     <CardActionArea className={classes.actionArea}>
@@ -112,7 +120,7 @@ const CustomCard = ({ classes, image, name, bio, levels, subject, price, locatio
             {name}
           </Typography>
           <Typography className={classes.bio}>{bio}</Typography>
-          <Typography className={classes.subject}>{levels} {subject}</Typography>
+          <Typography className={classes.subject}>Teaching: {levels}</Typography>
           <Typography className={classes.price}>${price}/hr</Typography>
           <Typography className={classes.location}>Nearest MRT: {location}</Typography>
           <Typography className={classes.qualification}>Highest Qualification: {qualification}</Typography>
@@ -124,15 +132,67 @@ const CustomCard = ({ classes, image, name, bio, levels, subject, price, locatio
 
 
 const tutorResults = [
-    { Name: 'Tan Ah Seng', Bio: 'Drunkard', Price: '40', 
+    { Name: '1Tan Ah Seng', Bio: 'Drunkard', Price: '40', 
     Level: 'Primary School', Gender: 'Male', Qualification: 'Degree', Location: 'Eunos', userId: 3 },
-    { Name: 'Tan Ah Beng', Bio: 'Lulser', Price: '70', 
+    { Name: '2Tan Ah Beng', Bio: 'Lulser', Price: '70', 
     Level: 'JC', Gender: 'Male', Qualification: 'O-level', Location: 'Dhoby Ghaut', userId: 1 },
-    { Name: 'Tan Ah Feng', Bio: 'Drunkard', Price: '40', 
+    { Name: '3Tan Ah Feng', Bio: 'Drunkard', Price: '40', 
     Level: 'Primary School', Gender: 'Female', Qualification: 'Degree', Location: 'Jurong', userId: 4 },
-    { Name: 'Ah Leng', Bio: 'Good lessons efficinet fast', Price: '60', 
+    { Name: '4Ah Leng', Bio: 'Good lessons efficinet fast', Price: '60', 
     Level: 'Primary School', Gender: 'Male', Qualification: 'A-level', Location: 'Dakota', userId: 5 },
-    { Name: 'Ah Peng', Bio: 'Football', Price: '50', 
+    { Name: '5Ah Peng', Bio: 'Football', Price: '50', 
+    Level: 'Sec School', Gender: 'Female', Qualification: 'Masters', Location: 'Downtown Line', userId: 2 },
+    { Name: '6Tan Ah Seng', Bio: 'Drunkard', Price: '40', 
+    Level: 'Primary School', Gender: 'Male', Qualification: 'Degree', Location: 'Eunos', userId: 3 },
+    { Name: '7Tan Ah Beng', Bio: 'Lulser', Price: '70', 
+    Level: 'JC', Gender: 'Male', Qualification: 'O-level', Location: 'Dhoby Ghaut', userId: 1 },
+    { Name: '8Tan Ah Feng', Bio: 'Drunkard', Price: '40', 
+    Level: 'Primary School', Gender: 'Female', Qualification: 'Degree', Location: 'Jurong', userId: 4 },
+    { Name: '9Ah Leng', Bio: 'Good lessons efficinet fast', Price: '60', 
+    Level: 'Primary School', Gender: 'Male', Qualification: 'A-level', Location: 'Dakota', userId: 5 },
+    { Name: '10Ah Peng', Bio: 'Football', Price: '50', 
+    Level: 'Sec School', Gender: 'Female', Qualification: 'Masters', Location: 'Downtown Line', userId: 2 },
+    { Name: '11Tan Ah Seng', Bio: 'Drunkard', Price: '40', 
+    Level: 'Primary School', Gender: 'Male', Qualification: 'Degree', Location: 'Eunos', userId: 3 },
+    { Name: '12Tan Ah Beng', Bio: 'Lulser', Price: '70', 
+    Level: 'JC', Gender: 'Male', Qualification: 'O-level', Location: 'Dhoby Ghaut', userId: 1 },
+    { Name: '13Tan Ah Feng', Bio: 'Drunkard', Price: '40', 
+    Level: 'Primary School', Gender: 'Female', Qualification: 'Degree', Location: 'Jurong', userId: 4 },
+    { Name: '14Ah Leng', Bio: 'Good lessons efficinet fast', Price: '60', 
+    Level: 'Primary School', Gender: 'Male', Qualification: 'A-level', Location: 'Dakota', userId: 5 },
+    { Name: '15Ah Peng', Bio: 'Football', Price: '50', 
+    Level: 'Sec School', Gender: 'Female', Qualification: 'Masters', Location: 'Downtown Line', userId: 2 },
+    { Name: '16Tan Ah Feng', Bio: 'Drunkard', Price: '40', 
+    Level: 'Primary School', Gender: 'Female', Qualification: 'Degree', Location: 'Jurong', userId: 4 },
+    { Name: '17Ah Leng', Bio: 'Good lessons efficinet fast', Price: '60', 
+    Level: 'Primary School', Gender: 'Male', Qualification: 'A-level', Location: 'Dakota', userId: 5 },
+    { Name: '18Ah Peng', Bio: 'Football', Price: '50', 
+    Level: 'Sec School', Gender: 'Female', Qualification: 'Masters', Location: 'Downtown Line', userId: 2 },
+    { Name: '19Tan Ah Seng', Bio: 'Drunkard', Price: '40', 
+    Level: 'Primary School', Gender: 'Male', Qualification: 'Degree', Location: 'Eunos', userId: 3 },
+    { Name: '20Tan Ah Beng', Bio: 'Lulser', Price: '70', 
+    Level: 'JC', Gender: 'Male', Qualification: 'O-level', Location: 'Dhoby Ghaut', userId: 1 },
+    { Name: '21Tan Ah Feng', Bio: 'Drunkard', Price: '40', 
+    Level: 'Primary School', Gender: 'Female', Qualification: 'Degree', Location: 'Jurong', userId: 4 },
+    { Name: '22Ah Leng', Bio: 'Good lessons efficinet fast', Price: '60', 
+    Level: 'Primary School', Gender: 'Male', Qualification: 'A-level', Location: 'Dakota', userId: 5 },
+    { Name: '23Ah Peng', Bio: 'Football', Price: '50', 
+    Level: 'Sec School', Gender: 'Female', Qualification: 'Masters', Location: 'Downtown Line', userId: 2 },
+    { Name: '24Tan Ah Feng', Bio: 'Drunkard', Price: '40', 
+    Level: 'Primary School', Gender: 'Female', Qualification: 'Degree', Location: 'Jurong', userId: 4 },
+    { Name: '25Ah Leng', Bio: 'Good lessons efficinet fast', Price: '60', 
+    Level: 'Primary School', Gender: 'Male', Qualification: 'A-level', Location: 'Dakota', userId: 5 },
+    { Name: '26Ah Peng', Bio: 'Football', Price: '50', 
+    Level: 'Sec School', Gender: 'Female', Qualification: 'Masters', Location: 'Downtown Line', userId: 2 },
+    { Name: '27Tan Ah Seng', Bio: 'Drunkard', Price: '40', 
+    Level: 'Primary School', Gender: 'Male', Qualification: 'Degree', Location: 'Eunos', userId: 3 },
+    { Name: '28Tan Ah Beng', Bio: 'Lulser', Price: '70', 
+    Level: 'JC', Gender: 'Male', Qualification: 'O-level', Location: 'Dhoby Ghaut', userId: 1 },
+    { Name: '29Tan Ah Feng', Bio: 'Drunkard', Price: '40', 
+    Level: 'Primary School', Gender: 'Female', Qualification: 'Degree', Location: 'Jurong', userId: 4 },
+    { Name: '30Ah Leng', Bio: 'Good lessons efficinet fast', Price: '60', 
+    Level: 'Primary School', Gender: 'Male', Qualification: 'A-level', Location: 'Dakota', userId: 5 },
+    { Name: '31Ah Peng', Bio: 'Football', Price: '50', 
     Level: 'Sec School', Gender: 'Female', Qualification: 'Masters', Location: 'Downtown Line', userId: 2 },
 ]
 
@@ -146,6 +206,8 @@ const tutorResults = [
 
 export const Results = React.memo(function SolidGameCard() {
   const gridStyles = useGridStyles();
+  const classes = useStyles();
+
   const styles = useStyles({ color: '#203f52' });
   const styles2 = useStyles({ color: '#4d137f' });
   const styles3 = useStyles({ color: '#ff9900' });
@@ -153,23 +215,51 @@ export const Results = React.memo(function SolidGameCard() {
 
   const items = []
   const randomStyles = [styles,styles2,styles3,styles4];
-    for (const [index, value] of tutorResults.entries()) {
+
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const handleChange = (event, value) => {
+    setCurrentPage(value);
+    let temp = tutorResults.slice((value-1)*8,(value-1)*8+8)
+    setPosts(temp);
+  };
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true);
+      const res = tutorResults;
+      //replace res with api
+      let temp = tutorResults.slice(0,8);
+      setPosts(temp);
+      setTotalPages(Math.ceil(tutorResults.length/8));
+      setLoading(false);
+    };
+    fetchPosts();
+  }, []);
+
+    for (const [index, value] of posts.entries()) {
         // items.push(<li key={index}>{value}</li>)s
         let min = 1;
         let max = 4;
         let rand = Math.floor(Math.random() * (max - min + 1)) + min;
-        console.log(rand);
+        // console.log(rand);
         switch(rand){
             case 1:
                 items.push(
-                    <Grid item xs={12} sm={4} md={3} lg={3}>
+                    <Grid item xs={12} sm={6} md={4} lg={3}>
                     <CustomCard
                         key={value.userId}
                         // onClick={value.userId}
                         classes={styles}
                         name={value.Name}
                         bio={value.Bio}
-                        subject={value.Subject}
+                        price={value.Price}
+                        levels={value.Level}
+                        qualification={value.Qualification}
+                        location={value.Location}
                         image={
                         './guy1.jpg'
                         }
@@ -179,13 +269,17 @@ export const Results = React.memo(function SolidGameCard() {
                 break;
             case 2:
                 items.push(
-                    <Grid item xs={12} sm={4} md={3} lg={3}>
+                  <Grid item xs={12} sm={6} md={4} lg={3}>
                     <CustomCard
                         key={value.userId}
+                        // onClick={value.userId}
                         classes={styles2}
                         name={value.Name}
                         bio={value.Bio}
-                        subject={value.Subject}
+                        price={value.Price}
+                        levels={value.Level}
+                        qualification={value.Qualification}
+                        location={value.Location}
                         image={
                         './guy1.jpg'
                         }
@@ -195,13 +289,17 @@ export const Results = React.memo(function SolidGameCard() {
                 break;
             case 3:
                 items.push(
-                    <Grid item xs={12} sm={4} md={3} lg={3}>
+                  <Grid item xs={12} sm={6} md={4} lg={3}>
                     <CustomCard
                         key={value.userId}
+                        // onClick={value.userId}
                         classes={styles3}
                         name={value.Name}
                         bio={value.Bio}
-                        subject={value.Subject}
+                        price={value.Price}
+                        levels={value.Level}
+                        qualification={value.Qualification}
+                        location={value.Location}
                         image={
                         './guy1.jpg'
                         }
@@ -211,13 +309,17 @@ export const Results = React.memo(function SolidGameCard() {
                 break;
             case 4:
                 items.push(
-                    <Grid item xs={12} sm={4} md={3} lg={3}>
+                  <Grid item xs={12} sm={6} md={4} lg={3}>
                     <CustomCard
                         key={value.userId}
+                        // onClick={value.userId}
                         classes={styles4}
                         name={value.Name}
                         bio={value.Bio}
-                        subject={value.Subject}
+                        price={value.Price}
+                        levels={value.Level}
+                        qualification={value.Qualification}
+                        location={value.Location}
                         image={
                         './guy1.jpg'
                         }
@@ -234,6 +336,9 @@ export const Results = React.memo(function SolidGameCard() {
       <Grid classes={gridStyles} container spacing={4}>
         {items}
       </Grid>
+      <div className={classes.paginationStyle}>
+        <Pagination count={totalPages} size="large" onChange={handleChange} />
+      </div>
     </>
   );
 });
