@@ -9,7 +9,7 @@ export const Page = ({ children }) => {
       height="100%"
       justifyContent="center"
     >
-      <Container maxWidth="sm">{children}</Container>
+      <Container maxWidth="md">{children}</Container>
     </Box>
   );
 };
