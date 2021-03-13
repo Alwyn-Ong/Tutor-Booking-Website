@@ -27,14 +27,12 @@ const getUniqueRows = (data) => {
   return arr;
 };
 
-// console.log(checkTimeSlots(generateTimeSlots(),"1-1000"))
 
 const Timetable = ({isTutor}) => {
   let days = ["", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
   let timeslots = generateTimeSlots();
 
-  console.log(timeslots);
 
   let data = ["1-1000", "2-1000", "4-1000", "1-1100", "3-1700"];
 
@@ -57,7 +55,6 @@ const Timetable = ({isTutor}) => {
 
   let uniqueRows = getUniqueRows(data);
 
-  console.log(uniqueRows);
 
   // const cellDefault = generateStateMatrix(uniqueRows.length + 1, 14);
   const cellDefault = generateStateMatrix(14, 14);
@@ -98,7 +95,6 @@ const Timetable = ({isTutor}) => {
                   <Typography>{timeslot}</Typography>
                 </td>
                 {days.slice(1).map((day, dayIndex) => {
-                  console.log(dayIndex + 1 + "-" + timeslot);
                   return data.includes(dayIndex + 1 + "-" + timeslot) || isTutor ? (
                     <td />
                   ) : (

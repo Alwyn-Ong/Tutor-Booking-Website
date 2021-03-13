@@ -42,7 +42,7 @@ const Tutor = ({ data }) => {
     facebook: "www.facebook.com",
     linkedin: "www.linkedin.com",
     email: "alwyn.ong.2018@sis.smu.edu.sg",
-    qualification: "A-Level",
+    qualification: "Bachelor of Science (Information Systems)",
     subjects: ["A-Level Physics", "A-Level Maths"],
     gender: "Male",
     review: 4.5,
