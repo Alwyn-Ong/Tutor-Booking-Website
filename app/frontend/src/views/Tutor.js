@@ -5,12 +5,15 @@ import {
   IconButton,
   makeStyles,
   Paper,
-  Tab, Tabs, Typography
+  Tab,
+  Tabs,
+  Typography,
 } from "@material-ui/core";
 import { Email, Facebook, LinkedIn } from "@material-ui/icons";
 import { Rating } from "@material-ui/lab";
 import React from "react";
 import Timetable from "../components/Timetable";
+import Reviews from "../components/Reviews";
 import { Page } from "../components/Page";
 
 const useStyles = makeStyles((theme) => ({
@@ -55,8 +58,13 @@ const Tutor = ({ data }) => {
   };
 
   return (
-    <Page >
-      <Grid container spacing={3} direction="column" style={{paddingTop: "20px"}}>
+    <Page>
+      <Grid
+        container
+        spacing={3}
+        direction="column"
+        style={{ paddingTop: "20px" }}
+      >
         <Grid container item spacing={3}>
           <Grid item xs={6} lg={4}>
             <Avatar className={classes.large} />
@@ -130,23 +138,21 @@ const Tutor = ({ data }) => {
           <Divider variant="middle" />
         </Grid>
         <Grid item>
-            <Tabs
-              value={value}
-              onChange={handleChange}
-              indicatorColor="primary"
-              textColor="primary"
-              centered
-            >
-              <Tab label="Timetable" />
-              <Tab label="Reviews" />
-            </Tabs>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            indicatorColor="primary"
+            textColor="primary"
+            centered
+          >
+            <Tab label="Timetable" />
+            <Tab label="Reviews" />
+          </Tabs>
         </Grid>
         <Grid item>
           <Divider variant="middle" />
         </Grid>
-        <Grid item>
-          {value ? null : <Timetable/>}
-        </Grid>
+        <Grid item>{value ? <Reviews /> : <Timetable />}</Grid>
       </Grid>
     </Page>
   );
