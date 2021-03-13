@@ -27,6 +27,33 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 	
+	String[] columnName = { "userId", "email", "name", "description", "nearestMRT", "role" };
+	
+	public Map<String, Object> getAllTutors() {
+		Map<String, Object> result = new HashMap<>();
+		result.put("columns", columnName);
+
+		List<User> tutors = userDao.findByRole(TutorBookingWebsite.model.Role.TUTOR);
+		Object[] temp = new Object[tutors.size()];
+
+		int index = 0;
+
+		for (User placeHolder : tutors) {
+			Map<String, Object> result2 = new HashMap<>();
+			result2.put("userId", placeHolder.getUserId());
+			result2.put("email", placeHolder.getEmail());
+			result2.put("name", placeHolder.getName());
+			result2.put("password", placeHolder.getDescription());
+			result2.put("role", placeHolder.getNearestMRT());
+			result2.put("status", placeHolder.getRole());
+			temp[index] = result2;
+			index++;
+		}
+
+		result.put("users", temp);
+		return result;
+	}
+	
 	public ResponseEntity becomeTutor(User user) {
 		try {
 			User existingUser = userDao.findById(user.getUserId()).orElse(null);
