@@ -8,39 +8,53 @@ const generateTimeSlots = () => {
   return Array.from({ length: 13 }, (_, i) => i + 10 + "00");
 };
 
-console.log(generateTimeSlots());
-
 const checkTimeSlots = (timeslots, timeslot) => {
   return timeslots.includes(timeslot) ? <td disabled /> : <td />;
 };
 
 // console.log(checkTimeSlots(generateTimeSlots(),"1-1000"))
 
-class Timetable extends React.Component {
-  days = ["", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const Timetable = () => {
+  let days = ["", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
-  timeslots = generateTimeSlots();
+  let timeslots = generateTimeSlots();
 
-  data = ["1-1000", "2-1000", "4-1000"];
+  let data = ["1-1000", "2-1000", "4-1000"];
 
-  state = {
-    cells: [
-      [false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false],
-    ],
+  const [cells, setCells] = React.useState([
+    [false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false],
+  ]);
+
+  const handleChange = (state) => {
+    setCells(state);
   };
 
-  render = () => (
+  const handleClick = () => {
+    const cells = [
+      [false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false],
+      [false, false, false, false, false, false, false],
+    ];
+    setCells(cells);
+  };
+
+  return (
     <div>
-      <TableDragSelect value={this.state.cells} onChange={this.handleChange}>
+      <TableDragSelect value={cells} onChange={handleChange}>
         <tr>
-          {this.days.map((day, index) => {
+          {days.map((day, index) => {
             return (
               <td disabled>
                 <Typography>{day}</Typography>
@@ -48,24 +62,20 @@ class Timetable extends React.Component {
             );
           })}
         </tr>
-        {/* {this.timeslots.map((time, timeSlotIndex) => {
+        {timeslots.map((time, timeSlotIndex) => {
           return (
             <tr>
-              {this.days.map((day, dayIndex) => {
-                return dayIndex === 0 ? (
-                  <td>{time}</td>
-                ) : (
-                  checkTimeSlots(
-                    this.data,
-                    dayIndex.toString().concat("-", time)
-                  )
-                );
-              })}
+              
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
             </tr>
           );
-        })} */}
+        })}
         <tr>
-          <td disabled>{this.timeslots[0]}</td>
+          <td disabled>{timeslots[0]}</td>
           <td disabled />
           <td />
           <td />
@@ -129,25 +139,9 @@ class Timetable extends React.Component {
           <td></td>
         </tr>
       </TableDragSelect>
-      <button onClick={this.handleClick}>Reset</button>
+      <button onClick={handleClick}>Reset</button>
     </div>
   );
-
-  handleChange = (cells) => this.setState({ cells });
-
-  handleClick = () => {
-    const cells = [
-      [false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false],
-    ];
-    this.setState({ cells });
-  };
-}
+};
 
 export default Timetable;
