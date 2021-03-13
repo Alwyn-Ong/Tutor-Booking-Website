@@ -8,13 +8,20 @@ import Select from '@material-ui/core/Select';
 import ReactSelect from 'react-select';
 import makeAnimated from 'react-select/animated';
 import Grid from '@material-ui/core/Grid';
+import Checkbox from '@material-ui/core/Checkbox';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import './FilterPanel.css';
 
 const animatedComponents = makeAnimated();
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
-        margin: theme.spacing(0),
+        margin: theme.spacing(2),
         // minWidth: 30,
     },
     root: {
@@ -22,7 +29,11 @@ const useStyles = makeStyles((theme) => ({
     },
     locationStyle: {
         padding: "5px",
+
+    },autocompleteStyle: {
+        padding: "8px",
     }
+
 }));
 
 function FilterPanel() {
@@ -79,8 +90,37 @@ function FilterPanel() {
 
     return (
         <div className={classes.root, classes.formControl}>
-            <Grid container spacing={0} justify="center">
-                <Grid item xs={12} sm={3}>
+            <Grid container spacing={1} justify="center" alignItems="stretch">
+
+                <Grid item xs={12} sm={4}>
+                <FormControl style={{display:"block"}} className={classes.autocompleteStyle}>
+                    <Autocomplete
+                        multiple
+                        options={locations}
+                        disableCloseOnSelect
+                        size="small"
+                        getOptionLabel={(option) => option.label}
+                        renderOption={(option, { selected }) => (
+                            <React.Fragment>
+                            <Checkbox
+                                icon={icon}
+                                checkedIcon={checkedIcon}
+                                style={{ marginRight: 2}}
+                                checked={selected}
+                            />
+                            {option.label}
+                            </React.Fragment>
+                        )}
+                        // style={{ width:"stretch" }}
+                        fullWidth ={true}
+                        renderInput={(params) => (
+                            <TextField {...params} variant="outlined" label="Filter Locations" placeholder="Nearest MRT" />
+                        )}
+                    />
+                    </FormControl>
+                </Grid>
+
+                <Grid item xs={12} sm={2}>
                     <FormControl>
                         <InputLabel htmlFor="gender">Gender</InputLabel>
                         <Select
@@ -98,7 +138,7 @@ function FilterPanel() {
                         </Select>
                     </FormControl>
                 </Grid>
-                <Grid item xs={12} sm={3}>
+                <Grid item xs={12} sm={2}>
                     <FormControl>
                         <InputLabel htmlFor="price">Price</InputLabel>
                         <Select
@@ -117,7 +157,7 @@ function FilterPanel() {
                         </Select>
                     </FormControl>
                 </Grid>
-                <Grid item xs={12} sm={3}>
+                <Grid item xs={12} sm={2}>
                     <FormControl>
                         <InputLabel htmlFor="level">Level</InputLabel>
                         <Select
@@ -138,7 +178,7 @@ function FilterPanel() {
                         </Select>
                     </FormControl>
                 </Grid>
-                <Grid item xs={12} sm={3}>
+                <Grid item xs={12} sm={2}>
                     <FormControl>
                         <InputLabel htmlFor="Tutor Qualifications">Qualifications</InputLabel>
                         <Select
@@ -160,18 +200,7 @@ function FilterPanel() {
                     </FormControl>
                 </Grid>
             </Grid>
-            <Grid item xs={12} sm={12}>
-                <div className={classes.locationStyle}>
-                    <ReactSelect
-                        options={locations}
-                        isMulti
-                        name="locations"
-                        className="basic-multi-select"
-                        components={animatedComponents}
-                        placeholder='Filter by Locations'
-                    />
-                </div>
-            </Grid>
+            
         </div>
 
     );
