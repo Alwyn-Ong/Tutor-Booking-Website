@@ -22,7 +22,7 @@ public class Timeslot {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@ApiModelProperty(notes= "unique id of timeslot")
-	private int timesloId;
+	private int timeslotId;
 	@ApiModelProperty(notes= "available timeslot")
 	private String timeslot;	
 	
@@ -31,11 +31,11 @@ public class Timeslot {
 	}
 
 	public int getTimesloId() {
-		return timesloId;
+		return timeslotId;
 	}
 
-	public void setTimesloId(int timesloId) {
-		this.timesloId = timesloId;
+	public void setTimeslotId(int timeslotId) {
+		this.timeslotId = timeslotId;
 	}
 
 	public String getTimeslot() {
