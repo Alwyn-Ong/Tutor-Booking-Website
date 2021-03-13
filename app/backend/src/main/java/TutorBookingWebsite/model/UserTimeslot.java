@@ -1,6 +1,8 @@
 package TutorBookingWebsite.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,6 +25,7 @@ public class UserTimeslot {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@ApiModelProperty(notes= "unique id of usertimeslot")
 	private int userTimeslotId;
+	@Enumerated(EnumType.STRING)
 	@ApiModelProperty(notes= "status of timeslot")
 	private Status status;
 	@ApiModelProperty(notes= "timeslot id")

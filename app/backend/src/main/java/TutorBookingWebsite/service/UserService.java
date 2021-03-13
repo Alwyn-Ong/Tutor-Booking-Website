@@ -1,12 +1,16 @@
 package TutorBookingWebsite.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.http.HttpStatus;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 
 import TutorBookingWebsite.dao.UserDao;
 import TutorBookingWebsite.exception.APIException;
+import TutorBookingWebsite.model.ResponseDetails;
 import TutorBookingWebsite.model.User;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
@@ -17,10 +21,42 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 
 import java.util.*;
 
+@Service
 public class UserService {
 
 	@Autowired
 	private UserDao userDao;
+	
+	public ResponseEntity becomeTutor(User user) {
+		try {
+			User existingUser = userDao.findById(user.getUserId()).orElse(null);
+			existingUser.setRole(TutorBookingWebsite.model.Role.TUTOR);
+			userDao.save(existingUser);
+			ResponseDetails responseDetails = new ResponseDetails(new Date(), "Successfully updated details",
+					"query success");
+			return new ResponseEntity(responseDetails, HttpStatus.OK);
+		} catch (Throwable e) {
+			throw new APIException("user unable to become a tutor");
+		}
+	}
+	
+	public ResponseEntity updateUser(User user) {
+		User existingUser = userDao.findById(user.getUserId()).orElse(null);
+		
+		try {
+			existingUser.setName(user.getName());
+			existingUser.setEmail(user.getEmail());
+			existingUser.setNearestMRT(user.getNearestMRT());
+			existingUser.setDescription(user.getDescription());
+
+			userDao.save(existingUser);
+
+			ResponseDetails responseDetails = new ResponseDetails(new Date(), "user updated", "query success");
+			return new ResponseEntity(responseDetails, HttpStatus.OK);
+		} catch (Throwable e) {
+			throw new APIException("user unable to be updated");
+		}
+	}
 	
 	public Map<String, String> verifyToken(String idToken) {
 		Map<String, String> result = new HashMap<>();

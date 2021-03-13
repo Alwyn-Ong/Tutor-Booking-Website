@@ -2,6 +2,8 @@ package TutorBookingWebsite.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,12 +32,17 @@ public class User {
 	private String email;
 	@ApiModelProperty(notes= "name of user")
 	private String name;
-	@ApiModelProperty(notes= "check if user is a tutor")
-	private boolean isTutor;	
+	@Enumerated(EnumType.STRING)
+	@ApiModelProperty(notes= "user role")
+	private Role role;	
 	@ApiModelProperty(notes= "nearest MRT from user")
 	private String nearestMRT;
 	@ApiModelProperty(notes= "short description of user")
 	private String description;	
+	
+	public User() {
+		
+	}
 	
 	public User(String email, String name) {
 		this.email = email;
@@ -60,11 +67,11 @@ public class User {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public boolean isTutor() {
-		return isTutor;
+	public Role getRole() {
+		return role;
 	}
-	public void setTutor(boolean isTutor) {
-		this.isTutor = isTutor;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 	public String getNearestMRT() {
 		return nearestMRT;
