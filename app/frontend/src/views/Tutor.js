@@ -4,12 +4,14 @@ import {
   Grid,
   IconButton,
   makeStyles,
-  Typography,
+  Paper,
+  Tab, Tabs, Typography
 } from "@material-ui/core";
-import React from "react";
-import { Page } from "../components/Page";
 import { Email, Facebook, LinkedIn } from "@material-ui/icons";
 import { Rating } from "@material-ui/lab";
+import React from "react";
+import Timetable from "../components/IndividualTutor/Timetable";
+import { Page } from "../components/Page";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// TODO: Change to get data from API
 const Tutor = ({ data }) => {
   data = {
     name: "John Tutor",
@@ -44,6 +47,12 @@ const Tutor = ({ data }) => {
   data.email = "mailto:" + data.email;
 
   const classes = useStyles();
+
+  // For the tab
+  const [value, setValue] = React.useState(0);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   return (
     <Page>
@@ -118,10 +127,25 @@ const Tutor = ({ data }) => {
           </Grid>
         </Grid>
         <Grid item>
-          <Divider variant="middle"/>
+          <Divider variant="middle" />
         </Grid>
         <Grid item>
-          Placeholder for timetable
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              indicatorColor="primary"
+              textColor="primary"
+              centered
+            >
+              <Tab label="Timetable" />
+              <Tab label="Reviews" />
+            </Tabs>
+        </Grid>
+        <Grid item>
+          <Divider variant="middle" />
+        </Grid>
+        <Grid item>
+          {value ? <Timetable/> : null}
         </Grid>
       </Grid>
     </Page>

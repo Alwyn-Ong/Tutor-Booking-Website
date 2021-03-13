@@ -1,11 +1,22 @@
 import React from "react";
 import TableDragSelect from "react-table-drag-select";
 import "react-table-drag-select/style.css";
-import "./index.css";
 
-class App extends React.Component {
-  state = {
-    cells: [
+const index = () => {
+  const [cells, setCells] = React.useState([
+    [false, false, false, false, false, false],
+    [false, false, false, false, false, false],
+    [false, false, false, false, false, false],
+    [false, false, false, false, false, false],
+    [false, false, false, false, false, false],
+    [false, false, false, false, false, false],
+    [false, false, false, false, false, false],
+  ]);
+
+  const handleChange = (cells) => setCells({ cells });
+
+  const handleClick = () => {
+    const cells = [
       [false, false, false, false, false, false, false],
       [false, false, false, false, false, false, false],
       [false, false, false, false, false, false, false],
@@ -14,31 +25,30 @@ class App extends React.Component {
       [false, false, false, false, false, false, false],
       [false, false, false, false, false, false, false],
       [false, false, false, false, false, false, false],
-    ],
+    ];
+    setCells({ cells });
   };
 
-  render = () => (
+  return (
     <div>
-      <TableDragSelect value={this.state.cells} onChange={this.handleChange}>
+      <TableDragSelect value={cells} onChange={() => handleChange()}>
         <tr>
           <td disabled />
-          <td disabled>Mon</td>
-          <td disabled>Tue</td>
-          <td disabled>Wed</td>
-          <td disabled>Thu</td>
-          <td disabled>Fri</td>
-          <td disabled>Sat</td>
-          <td disabled>Sun</td>
+          <td disabled>Monday</td>
+          <td disabled>Tuesday</td>
+          <td disabled>Wednesday</td>
+          <td disabled>Thursday</td>
+          <td disabled>Friday</td>
+          <td disabled>Saturday</td>
         </tr>
         <tr>
           <td disabled>10:00</td>
-          <td disabled/>
           <td />
           <td />
           <td />
           <td />
           <td />
-          <td></td>
+          <td>overtime</td>
         </tr>
         <tr>
           <td disabled>11:00</td>
@@ -95,25 +105,9 @@ class App extends React.Component {
           <td>overtime</td>
         </tr>
       </TableDragSelect>
-      <button onClick={this.handleClick}>Reset</button>
+      <button onClick={() => handleClick()}>Reset</button>
     </div>
   );
+};
 
-  handleChange = (cells) => this.setState({ cells });
-
-  handleClick = () => {
-    const cells = [
-      [false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false],
-    ];
-    this.setState({ cells });
-  };
-}
-
-export default App;
+export default index;
