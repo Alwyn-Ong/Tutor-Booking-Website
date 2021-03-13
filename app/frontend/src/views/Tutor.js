@@ -152,7 +152,7 @@ const Tutor = ({ data }) => {
         <Grid item>
           <Divider variant="middle" />
         </Grid>
-        <Grid item>{value ? <Reviews /> : <Timetable />}</Grid>
+        <Grid item>{value ? <Reviews /> : <Timetable isTutor={false}/>}</Grid>
       </Grid>
     </Page>
   );

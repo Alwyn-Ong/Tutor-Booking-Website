@@ -1,4 +1,4 @@
-import { Typography } from "@material-ui/core";
+import { Button, Grid, Typography } from "@material-ui/core";
 import React from "react";
 import TableDragSelect from "react-table-drag-select";
 import "react-table-drag-select/style.css";
@@ -18,7 +18,7 @@ const getUniqueRows = (data) => {
   let arr = [];
   let current = "-1";
   for (const d of data) {
-    let timeslot = d.split("-")[1]
+    let timeslot = d.split("-")[1];
     if (timeslot !== current) {
       arr.push(timeslot);
       current = timeslot;
@@ -29,7 +29,7 @@ const getUniqueRows = (data) => {
 
 // console.log(checkTimeSlots(generateTimeSlots(),"1-1000"))
 
-const Timetable = () => {
+const Timetable = ({isTutor}) => {
   let days = ["", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
   let timeslots = generateTimeSlots();
@@ -68,47 +68,61 @@ const Timetable = () => {
     setCells(state);
   };
 
-  const handleClick = () => {
+  const handleReset = () => {
+    setCells(cellDefault);
+  };
+
+  const handleUpdate = () => {
     setCells(cellDefault);
   };
 
   return (
-    <div>
-      <TableDragSelect value={cells} onChange={handleChange}>
-        <tr>
-          {days.map((day, index) => {
+    <Grid container direction="column" spacing={1}>
+      <Grid item>
+        <TableDragSelect value={cells} onChange={handleChange}>
+          <tr>
+            {days.map((day, index) => {
+              return (
+                <td disabled>
+                  <Typography>{day}</Typography>
+                </td>
+              );
+            })}
+          </tr>
+
+          {timeslots.map((timeslot) => {
+            // {uniqueRows.map((timeslot) => {
             return (
-              <td disabled>
-                <Typography>{day}</Typography>
-              </td>
+              <tr>
+                <td disabled>
+                  <Typography>{timeslot}</Typography>
+                </td>
+                {days.slice(1).map((day, dayIndex) => {
+                  console.log(dayIndex + 1 + "-" + timeslot);
+                  return data.includes(dayIndex + 1 + "-" + timeslot) || isTutor ? (
+                    <td />
+                  ) : (
+                    <td disabled />
+                  );
+                })}
+              </tr>
             );
           })}
-        </tr>
-
-        {timeslots.map((timeslot) => {
-        // {uniqueRows.map((timeslot) => {
-          console.log(timeslot);
-          return (
-            <tr>
-              <td disabled>
-                <Typography>{timeslot}</Typography>
-              </td>
-              {days.slice(1).map((day, dayIndex) => {
-                console.log(dayIndex + 1 + "-" + timeslot);
-                return data.includes(dayIndex + 1 + "-" + timeslot) ? (
-                  <td />
-                ) : (
-                  <td disabled />
-                );
-              })}
-            </tr>
-          );
-        })}
-
-        
-      </TableDragSelect>
-      <button onClick={handleClick}>Reset</button>
-    </div>
+        </TableDragSelect>
+      </Grid>
+      <Grid container item spacing={1}>
+        <Grid item>
+          <Button variant="contained" onClick={handleUpdate}>
+            Update
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button variant="contained" onClick={handleReset}>
+            Reset
+          </Button>
+        </Grid>
+      </Grid>
+    </Grid>
   );
 };
 
