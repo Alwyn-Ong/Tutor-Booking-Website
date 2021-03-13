@@ -1,9 +1,28 @@
+import { Typography } from "@material-ui/core";
 import React from "react";
 import TableDragSelect from "react-table-drag-select";
 import "react-table-drag-select/style.css";
 import "./index.css";
 
-class App extends React.Component {
+const generateTimeSlots = () => {
+  return Array.from({ length: 13 }, (_, i) => i + 10 + "00");
+};
+
+console.log(generateTimeSlots());
+
+const checkTimeSlots = (timeslots, timeslot) => {
+  return timeslots.includes(timeslot) ? <td disabled /> : <td />;
+};
+
+// console.log(checkTimeSlots(generateTimeSlots(),"1-1000"))
+
+class Timetable extends React.Component {
+  days = ["", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+  timeslots = generateTimeSlots();
+
+  data = ["1-1000", "2-1000", "4-1000"];
+
   state = {
     cells: [
       [false, false, false, false, false, false, false],
@@ -21,18 +40,33 @@ class App extends React.Component {
     <div>
       <TableDragSelect value={this.state.cells} onChange={this.handleChange}>
         <tr>
-          <td disabled />
-          <td disabled>Mon</td>
-          <td disabled>Tue</td>
-          <td disabled>Wed</td>
-          <td disabled>Thu</td>
-          <td disabled>Fri</td>
-          <td disabled>Sat</td>
-          <td disabled>Sun</td>
+          {this.days.map((day, index) => {
+            return (
+              <td disabled>
+                <Typography>{day}</Typography>
+              </td>
+            );
+          })}
         </tr>
+        {/* {this.timeslots.map((time, timeSlotIndex) => {
+          return (
+            <tr>
+              {this.days.map((day, dayIndex) => {
+                return dayIndex === 0 ? (
+                  <td>{time}</td>
+                ) : (
+                  checkTimeSlots(
+                    this.data,
+                    dayIndex.toString().concat("-", time)
+                  )
+                );
+              })}
+            </tr>
+          );
+        })} */}
         <tr>
-          <td disabled>10:00</td>
-          <td disabled/>
+          <td disabled>{this.timeslots[0]}</td>
+          <td disabled />
           <td />
           <td />
           <td />
@@ -47,7 +81,7 @@ class App extends React.Component {
           <td />
           <td />
           <td />
-          <td>overtime</td>
+          <td></td>
         </tr>
         <tr>
           <td disabled>12:00</td>
@@ -56,7 +90,7 @@ class App extends React.Component {
           <td />
           <td />
           <td />
-          <td>overtime</td>
+          <td></td>
         </tr>
         <tr>
           <td disabled>13:00</td>
@@ -65,7 +99,7 @@ class App extends React.Component {
           <td />
           <td />
           <td />
-          <td>overtime</td>
+          <td></td>
         </tr>
         <tr>
           <td disabled>14:00</td>
@@ -74,7 +108,7 @@ class App extends React.Component {
           <td />
           <td />
           <td />
-          <td>overtime</td>
+          <td></td>
         </tr>
         <tr>
           <td disabled>15:00</td>
@@ -83,7 +117,7 @@ class App extends React.Component {
           <td />
           <td />
           <td />
-          <td>overtime</td>
+          <td></td>
         </tr>
         <tr>
           <td disabled>16:00</td>
@@ -92,7 +126,7 @@ class App extends React.Component {
           <td />
           <td />
           <td />
-          <td>overtime</td>
+          <td></td>
         </tr>
       </TableDragSelect>
       <button onClick={this.handleClick}>Reset</button>
@@ -116,4 +150,4 @@ class App extends React.Component {
   };
 }
 
-export default App;
+export default Timetable;
