@@ -8,8 +8,23 @@ const generateTimeSlots = () => {
   return Array.from({ length: 13 }, (_, i) => i + 10 + "00");
 };
 
-const checkTimeSlots = (timeslots, timeslot) => {
-  return timeslots.includes(timeslot) ? <td disabled /> : <td />;
+const generateStateMatrix = (rows, cols) => {
+  return Array.from({ length: rows }, () =>
+    Array.from({ length: cols }, () => false)
+  );
+};
+
+const getUniqueRows = (data) => {
+  let arr = [];
+  let current = "-1";
+  for (const d of data) {
+    let timeslot = d.split("-")[1]
+    if (timeslot !== current) {
+      arr.push(timeslot);
+      current = timeslot;
+    }
+  }
+  return arr;
 };
 
 // console.log(checkTimeSlots(generateTimeSlots(),"1-1000"))
@@ -19,35 +34,42 @@ const Timetable = () => {
 
   let timeslots = generateTimeSlots();
 
-  let data = ["1-1000", "2-1000", "4-1000"];
+  console.log(timeslots);
 
-  const [cells, setCells] = React.useState([
-    [false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false],
-  ]);
+  let data = ["1-1000", "2-1000", "4-1000", "1-1100", "3-1700"];
+
+  // const cellDefault = [
+  //   [false, false, false, false, false, false, false],
+  //   [false, false, false, false, false, false, false],
+  //   [false, false, false, false, false, false, false],
+  //   [false, false, false, false, false, false, false],
+  //   [false, false, false, false, false, false, false],
+  //   [false, false, false, false, false, false, false],
+  //   [false, false, false, false, false, false, false],
+  //   [false, false, false, false, false, false, false],
+  //   [false, false, false, false, false, false, false],
+  //   [false, false, false, false, false, false, false],
+  //   [false, false, false, false, false, false, false],
+  //   [false, false, false, false, false, false, false],
+  //   [false, false, false, false, false, false, false],
+  //   [false, false, false, false, false, false, false],
+  // ];
+
+  let uniqueRows = getUniqueRows(data);
+
+  console.log(uniqueRows);
+
+  // const cellDefault = generateStateMatrix(uniqueRows.length + 1, 14);
+  const cellDefault = generateStateMatrix(14, 14);
+
+  const [cells, setCells] = React.useState(cellDefault);
 
   const handleChange = (state) => {
     setCells(state);
   };
 
   const handleClick = () => {
-    const cells = [
-      [false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false],
-    ];
-    setCells(cells);
+    setCells(cellDefault);
   };
 
   return (
@@ -62,82 +84,28 @@ const Timetable = () => {
             );
           })}
         </tr>
-        {timeslots.map((time, timeSlotIndex) => {
+
+        {timeslots.map((timeslot) => {
+        // {uniqueRows.map((timeslot) => {
+          console.log(timeslot);
           return (
             <tr>
-              
-              <td />
-              <td />
-              <td />
-              <td />
-              <td />
+              <td disabled>
+                <Typography>{timeslot}</Typography>
+              </td>
+              {days.slice(1).map((day, dayIndex) => {
+                console.log(dayIndex + 1 + "-" + timeslot);
+                return data.includes(dayIndex + 1 + "-" + timeslot) ? (
+                  <td />
+                ) : (
+                  <td disabled />
+                );
+              })}
             </tr>
           );
         })}
-        <tr>
-          <td disabled>{timeslots[0]}</td>
-          <td disabled />
-          <td />
-          <td />
-          <td />
-          <td />
-          <td />
-          <td></td>
-        </tr>
-        <tr>
-          <td disabled>11:00</td>
-          <td />
-          <td />
-          <td />
-          <td />
-          <td />
-          <td></td>
-        </tr>
-        <tr>
-          <td disabled>12:00</td>
-          <td />
-          <td />
-          <td />
-          <td />
-          <td />
-          <td></td>
-        </tr>
-        <tr>
-          <td disabled>13:00</td>
-          <td />
-          <td />
-          <td />
-          <td />
-          <td />
-          <td></td>
-        </tr>
-        <tr>
-          <td disabled>14:00</td>
-          <td />
-          <td />
-          <td />
-          <td />
-          <td />
-          <td></td>
-        </tr>
-        <tr>
-          <td disabled>15:00</td>
-          <td />
-          <td />
-          <td />
-          <td />
-          <td />
-          <td></td>
-        </tr>
-        <tr>
-          <td disabled>16:00</td>
-          <td />
-          <td />
-          <td />
-          <td />
-          <td />
-          <td></td>
-        </tr>
+
+        
       </TableDragSelect>
       <button onClick={handleClick}>Reset</button>
     </div>
