@@ -120,10 +120,10 @@ const CustomCard = ({ classes, image, name, bio, levels, price, location, qualif
             {name}
           </Typography>
           <Typography className={classes.bio}>{bio}</Typography>
-          <Typography className={classes.subject}>Teaching: {levels}</Typography>
+          <Typography className={classes.subject}><b>Teaching:</b> {levels}</Typography>
           <Typography className={classes.price}>${price}/hr</Typography>
-          <Typography className={classes.location}>Nearest MRT: {location}</Typography>
-          <Typography className={classes.qualification}>Highest Qualification: {qualification}</Typography>
+          <Typography className={classes.location}><b>Nearest MRT: </b> {location}</Typography>
+          <Typography className={classes.qualification}><b>Highest Qualification: </b>{qualification}</Typography>
         </CardContent>
       </Card>
     </CardActionArea>
