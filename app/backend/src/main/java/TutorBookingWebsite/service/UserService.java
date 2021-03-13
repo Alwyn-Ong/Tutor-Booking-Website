@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 
+import TutorBookingWebsite.dao.ReviewDao;
 import TutorBookingWebsite.dao.UserDao;
 import TutorBookingWebsite.exception.APIException;
 import TutorBookingWebsite.model.ResponseDetails;
@@ -27,11 +28,14 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 	
-	String[] columnName = { "userId", "email", "name", "description", "nearestMRT", "role" };
+	@Autowired
+	private ReviewDao reviewDao;
 	
-	public Map<String, String> getTutorById(int userId){
+	String[] columnName = { "userId", "email", "name", "description", "nearestMRT", "role"};
+	
+	public Map<String, Object> getTutorById(int userId){
 		try {
-			Map<String, String> result = new HashMap<>();
+			Map<String, Object> result = new HashMap<>();
 			Optional<User> user = userDao.findById(userId);
 			if (user.get().getRole() != TutorBookingWebsite.model.Role.TUTOR) {
 				throw new APIException("no such tutor");
@@ -42,6 +46,7 @@ public class UserService {
 				result.put("decription", user.get().getDescription());
 				result.put("nearestMRT", user.get().getNearestMRT());
 				result.put("role", "" + user.get().getRole());
+				result.put("reviews", reviewDao.findByTutorId(userId));
 			}
 			
 			return result;
@@ -64,9 +69,9 @@ public class UserService {
 			result2.put("userId", placeHolder.getUserId());
 			result2.put("email", placeHolder.getEmail());
 			result2.put("name", placeHolder.getName());
-			result2.put("password", placeHolder.getDescription());
-			result2.put("role", placeHolder.getNearestMRT());
-			result2.put("status", placeHolder.getRole());
+			result2.put("description", placeHolder.getDescription());
+			result2.put("nearestMRT", placeHolder.getNearestMRT());
+			result2.put("role", placeHolder.getRole());
 			temp[index] = result2;
 			index++;
 		}

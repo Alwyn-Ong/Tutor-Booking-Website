@@ -26,7 +26,7 @@ public class UserController {
 	private UserService service;
 	
 	@GetMapping("/gettutorbyid/{userId}")
-	public Map<String,String> getUserWithId(@PathVariable("userId") int userId) {
+	public Map<String,Object> getUserWithId(@PathVariable("userId") int userId) {
 		return service.getTutorById(userId);
 	}
 	
