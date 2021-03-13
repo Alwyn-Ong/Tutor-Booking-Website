@@ -63,7 +63,7 @@ const Tutor = ({ data }) => {
         container
         spacing={3}
         direction="column"
-        style={{ paddingTop: "20px" }}
+        style={{ paddingTop: "30px" }}
       >
         <Grid container item spacing={3}>
           <Grid item xs={6} lg={4}>
