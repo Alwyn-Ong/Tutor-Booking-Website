@@ -1,7 +1,7 @@
 package TutorBookingWebsite.model;
 
 public enum Status {
-	ACCEPTED,
+	OPEN,
 	PENDING,
-	REJECTED
+	CLOSED
 }

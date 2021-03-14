@@ -36,6 +36,13 @@ public class Request {
 		
 	}
 	
+	public Request(String remarks, String requestedTimeslot, int studentId, int tutorId) {
+		this.remarks = remarks;
+		this.requestedTimeslot = requestedTimeslot;
+		this.studentId = studentId;
+		this.tutorId = tutorId;
+	}
+	
 	public int getRequestId() {
 		return requestId;
 	}
