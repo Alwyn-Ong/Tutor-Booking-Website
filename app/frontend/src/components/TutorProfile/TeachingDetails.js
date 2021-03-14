@@ -60,10 +60,18 @@ const primarySubjectsList = [
     {title:"Character and Citizenship Education"}]
 
 const useStyles = makeStyles((theme) => ({
+    autocomplete: {
+        display: "flex",
+        justifyContent: "center",
+        paddingBottom: 10,
+        alignItems: "center",
+    }
 }));
 
 export default function YourDetails(props) {
     const classes = useStyles();
+    
+    const [levelTaught, setLevelTaught] = React.useState([])
 
     return (
         <Grid container className={props.instructions}>
@@ -73,17 +81,21 @@ export default function YourDetails(props) {
             </Typography>
             </Grid>
             <Grid item lg={6} sm={8} xs={12}>
-                <LevelsTaughtTransferList data={levelList}></LevelsTaughtTransferList>
+                <LevelsTaughtTransferList 
+                    data={levelList}
+                    levelTaught={levelTaught}
+                    setLevelTaught={setLevelTaught}
+                ></LevelsTaughtTransferList>
             </Grid>
             <Grid item lg={6} sm={4} xs={12}>
-                <Grid item lg={12}>
-                    <SubjectsAutoComplete data={primarySubjectsList} subjectname="Primary"></SubjectsAutoComplete>
+                <Grid item lg={12} className={classes.autocomplete}>
+                    {(levelTaught.indexOf("Primary") !== -1) && <SubjectsAutoComplete data={primarySubjectsList} subjectname="Primary"></SubjectsAutoComplete>}
                 </Grid>
-                <Grid item lg={12}>
-                    <SubjectsAutoComplete data={olevelSubjectsList} subjectname="O-Level"></SubjectsAutoComplete>
+                <Grid item lg={12} className={classes.autocomplete}>
+                    {(levelTaught.indexOf("O-Level") !== -1) && <SubjectsAutoComplete data={olevelSubjectsList} subjectname="O-Level"></SubjectsAutoComplete>}
                 </Grid>
-                <Grid item lg={12}>
-                    <SubjectsAutoComplete data={alevelSubjectsList} subjectname="A-Level"></SubjectsAutoComplete>
+                <Grid item lg={12} className={classes.autocomplete}>
+                    {(levelTaught.indexOf("A-Level") !== -1) && <SubjectsAutoComplete data={alevelSubjectsList} subjectname="A-Level"></SubjectsAutoComplete>}
                 </Grid>
             </Grid>
         </Grid>

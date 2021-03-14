@@ -20,7 +20,7 @@ export default function SubjectsAutoComplete(props) {
     <div className={classes.root}>
       <Autocomplete
         multiple
-        id="tags-standard"
+        id={props.subjectname+"_subject"}
         options={props.data}
         getOptionLabel={(option) => option.title}
         defaultValue={setOptionsData[1]}
@@ -28,8 +28,8 @@ export default function SubjectsAutoComplete(props) {
           <TextField
             {...params}
             variant="standard"
-            label={props.subjectname}
-            placeholder="Favorites"
+            label={props.subjectname + " Subjects Taught"}
+            placeholder={props.subjectname + " Subjects Taught"}
           />
         )}
       />

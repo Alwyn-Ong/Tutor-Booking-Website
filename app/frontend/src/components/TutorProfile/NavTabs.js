@@ -17,9 +17,9 @@ export default function DisabledTabs() {
         indicatorColor="primary"
         textColor="primary"
         onChange={handleChange}
-        aria-label="disabled tabs example"
+        aria-label="select tutor page view"
       >
-        <Tab label="Your Information" />
+        <Tab label="Edit Your Information" />
         <Tab label="Preview Your Posting" disabled />
       </Tabs>
     </Paper>

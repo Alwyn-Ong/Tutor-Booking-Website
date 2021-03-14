@@ -6,6 +6,7 @@ import { Container } from "@material-ui/core";
 import ProgressStepper from "../components/TutorProfile/ProgressStepper";
 import EnableSwitch from "../components/TutorProfile/EnableSwitch";
 import YourDetails from "../components/TutorProfile/YourDetails";
+import NavTabs from "../components/TutorProfile/NavTabs";
 import TeachingDetails from "../components/TutorProfile/TeachingDetails";
 import Typography from '@material-ui/core/Typography';
 
@@ -42,6 +43,7 @@ const Homepage = () => {
   const classes = useStyles();
 
   return <Container maxWidth="lg" className={classes.root}>
+    <NavTabs></NavTabs>
     <Grid container className={classes.root}>
       <Grid className={classes.grid} xs={12}>
         <EnableSwitch className={classes.enableSwitch} isTutor={!isTutor} setIsTutor={setIsTutor}></EnableSwitch>

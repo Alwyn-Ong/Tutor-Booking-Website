@@ -77,12 +77,14 @@ export default function TransferList(props) {
     setRight(right.concat(leftChecked));
     setLeft(not(left, leftChecked));
     setChecked(not(checked, leftChecked));
+    props.setLevelTaught(props.levelTaught.concat(leftChecked))
   };
 
   const handleCheckedLeft = () => {
     setLeft(left.concat(rightChecked));
     setRight(not(right, rightChecked));
     setChecked(not(checked, rightChecked));
+    props.setLevelTaught(not(props.levelTaught, rightChecked))
   };
 
   const customList = (title, items) => (
