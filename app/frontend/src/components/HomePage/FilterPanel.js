@@ -42,6 +42,7 @@ function FilterPanel() {
         price: '',
         level: '',
         qualification: '',
+        selectedLocations:[]
     });
 
     // console.log(state);
@@ -77,7 +78,17 @@ function FilterPanel() {
             ...state,
             qualification: event.target.value,
         })
-    }
+    };
+
+    const handleLocationChange = (event,value) => {
+        // const locations = event.target.locations;
+        setState({
+            ...state,
+            selectedLocations: value,
+        })
+        console.log(value);
+    };
+
     const locations = [
         { value: 'Bedok', label: 'Bedok' },
         { value: 'Eunos', label: 'Eunos' },
@@ -99,6 +110,7 @@ function FilterPanel() {
                         disableCloseOnSelect
                         size="small"
                         getOptionLabel={(option) => option.label}
+                        onChange={handleLocationChange}
                         renderOption={(option, { selected }) => (
                             <React.Fragment>
                             <Checkbox
