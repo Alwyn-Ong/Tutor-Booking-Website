@@ -1,12 +1,17 @@
 package TutorBookingWebsite.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.http.HttpStatus;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 
+import TutorBookingWebsite.dao.ReviewDao;
 import TutorBookingWebsite.dao.UserDao;
 import TutorBookingWebsite.exception.APIException;
+import TutorBookingWebsite.model.ResponseDetails;
 import TutorBookingWebsite.model.User;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
@@ -17,10 +22,95 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 
 import java.util.*;
 
+@Service
 public class UserService {
 
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private ReviewDao reviewDao;
+	
+	String[] columnName = { "userId", "email", "name", "description", "nearestMRT", "role"};
+	
+	public Map<String, Object> getTutorById(int userId){
+		try {
+			Map<String, Object> result = new HashMap<>();
+			Optional<User> user = userDao.findById(userId);
+			if (user.get().getRole() != TutorBookingWebsite.model.Role.TUTOR) {
+				throw new APIException("no such tutor");
+			} else {
+				result.put("userid", "" + user.get().getUserId());
+				result.put("name", user.get().getName());
+				result.put("email", user.get().getEmail());
+				result.put("decription", user.get().getDescription());
+				result.put("nearestMRT", user.get().getNearestMRT());
+				result.put("role", "" + user.get().getRole());
+				result.put("reviews", reviewDao.findByTutorId(userId));
+			}
+			
+			return result;
+		} catch (Throwable e) {
+			throw new APIException("no such tutor");
+		}
+	}
+	
+	public Map<String, Object> getAllTutors() {
+		Map<String, Object> result = new HashMap<>();
+		result.put("columns", columnName);
+
+		List<User> tutors = userDao.findByRole(TutorBookingWebsite.model.Role.TUTOR);
+		Object[] temp = new Object[tutors.size()];
+
+		int index = 0;
+
+		for (User placeHolder : tutors) {
+			Map<String, Object> result2 = new HashMap<>();
+			result2.put("userId", placeHolder.getUserId());
+			result2.put("email", placeHolder.getEmail());
+			result2.put("name", placeHolder.getName());
+			result2.put("description", placeHolder.getDescription());
+			result2.put("nearestMRT", placeHolder.getNearestMRT());
+			result2.put("role", placeHolder.getRole());
+			result2.put("reviws", reviewDao.findByTutorId(placeHolder.getUserId()));
+			temp[index] = result2;
+			index++;
+		}
+
+		result.put("users", temp);
+		return result;
+	}
+	
+	public ResponseEntity becomeTutor(User user) {
+		try {
+			User existingUser = userDao.findById(user.getUserId()).orElse(null);
+			existingUser.setRole(TutorBookingWebsite.model.Role.TUTOR);
+			userDao.save(existingUser);
+			ResponseDetails responseDetails = new ResponseDetails(new Date(), "Successfully updated details",
+					"query success");
+			return new ResponseEntity(responseDetails, HttpStatus.OK);
+		} catch (Throwable e) {
+			throw new APIException("user unable to become a tutor");
+		}
+	}
+	
+	public ResponseEntity updateUser(User user) {
+		User existingUser = userDao.findById(user.getUserId()).orElse(null);
+		
+		try {
+			existingUser.setName(user.getName());
+			existingUser.setEmail(user.getEmail());
+			existingUser.setNearestMRT(user.getNearestMRT());
+			existingUser.setDescription(user.getDescription());
+
+			userDao.save(existingUser);
+
+			ResponseDetails responseDetails = new ResponseDetails(new Date(), "user updated", "query success");
+			return new ResponseEntity(responseDetails, HttpStatus.OK);
+		} catch (Throwable e) {
+			throw new APIException("user unable to be updated");
+		}
+	}
 	
 	public Map<String, String> verifyToken(String idToken) {
 		Map<String, String> result = new HashMap<>();
