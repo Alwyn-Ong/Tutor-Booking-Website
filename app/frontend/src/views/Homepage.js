@@ -1,6 +1,9 @@
 import React from "react";
 import { Page } from "../components/Page";
 import { makeStyles } from "@material-ui/core";
+import SearchBar from "../components/HomePage/SearchBar";
+import FilterPanel from "../components/HomePage/FilterPanel";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,7 +16,11 @@ const useStyles = makeStyles((theme) => ({
 
 const Homepage = () => {
   const classes = useStyles();
-  return <Page>HOMEPAGE</Page>;
+  return (
+    <div>
+      <SearchBar></SearchBar>
+    </div>
+  )
 };
 
 export default Homepage;
