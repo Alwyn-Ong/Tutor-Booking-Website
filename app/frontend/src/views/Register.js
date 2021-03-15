@@ -13,14 +13,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Register() {
-  const date = new Date()
+  const userEmail = "Tiffany@gmail.com" //This can be changed to take in the user email from Gmail
   
-  return (
-    <form action="mailto:s_sample@yahoo.com" method="get" id="frm">
-    <fieldset id="fld">
-        <legend>Register</legend>
 
-        <input type="email" size="30" id="email" placeholder="Enter a Valid Email" maxlength="30" required></input>
+  return (
+    <form action="" method="get" id="frm">
+    <fieldset id="fld">
+        <legend>Final register</legend>
+
+        <h2>Complete your registration by filling up the form!</h2>
+
+        <br></br>
+        <br></br>
+
+        <input type="text" size="30" id="email" value={userEmail} maxlength="30" readonly></input>
         <br></br>
         <br></br>
 
@@ -28,16 +34,19 @@ function Register() {
         <br></br>
         <br></br>
 
-        <input type="number" size="30" id="number" placeholder="What's your number" maxlength="8" required></input>
+        <input type="tel" size="30" id="phone" placeholder="Your Phone Number" maxlength="8" pattern="[0-9]{8}"></input>
         <br></br>
         <br></br>
 
-        <input type="text" size="30" id="gender" placeholder="Your gender" maxlength="30" required></input>
+        <label id="gender">Sex:</label>
+        <input type="radio" name="msex" value="Male" /><span>Male</span>
+        <input type="radio" name="fsex" value="Female" /><span>Female</span>
+        
         <br></br>
         <br></br>
         {/* Copy radio button */}
 
-        Birthday: <input type="date"></input>
+        Birthday: <input type="date" required></input>
         <br></br>
         <br></br>
 

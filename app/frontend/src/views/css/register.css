@@ -18,9 +18,9 @@ legend{
 #pass{
     color: lightslategray;
 }
-span{
+/* span{
     color: red;
-}
+} */
 input{
     text-align: center;
     padding: 8px;
@@ -44,4 +44,8 @@ input:focus{
     background-color: dodgerblue;
     border-bottom-right-radius: 20px;
     border-top-left-radius: 20px;
+}
+
+h2{
+    color: green;
 }
