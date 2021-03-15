@@ -49,3 +49,252 @@ input:focus{
 h2{
     color: green;
 }
+
+
+
+.progress {
+    width: 0%;
+    height: 100%;
+    background: #005AF6;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: 0.3s ease-in-out;
+  }
+  .login-form {
+    position: relative;
+    width: 510px;
+    height: 70px;
+    border-radius: 35px;
+    background-color: #fff;
+    z-index: 100;
+    transition: width 0.5s, margin-top 0.3s, margin-left 0.3s;
+    left: 380px;
+    top: 320px;
+  }
+  .inputText {
+    width: 426px;
+    border: none;
+    font-family: Karla;
+    background: transparent;
+    position: absolute;
+    top: 27px;
+    font-size: 15pt;
+    color: #333;
+    z-index: 100;
+    transition: 0.3s;
+    margin-left: 35px;
+  }
+  .inputText:focus {
+    outline: none;
+  }
+  .underline, .underline-error {
+    position: absolute;
+    width: 0px;
+    left: 255px;
+    height: 2px;
+    top: 52px;
+    transition: 0.5s;
+  }
+  .underline {
+    background-color: #009fff;
+  }
+  .underline-error {
+    background-color: red;
+  }
+  .inputText:focus ~ .underline, .inputText:focus ~ .underline-error {
+    width: 440px;
+    left: 35px;
+  }
+  .underline-blank {
+    position: absolute;
+    top: 52px;
+    width: 440px;
+    left: 35px;
+    background-color: #ddd;
+    height: 2px;
+  }
+  .placeholder-blank, .placeholder-blank-error {
+    font-family: Karla;
+    position: absolute;
+    top: 28px;
+    font-size: 15pt;
+    left: 37px;
+    transition: 0.3s;
+    color: #333;
+    z-index: -1;
+  }
+  .inputText:focus ~ .placeholder-blank {
+    top: 14px;
+    font-size: 10pt;
+    color: #009fff;
+  }
+  .inputText:focus ~ .placeholder-blank-error {
+    top: 14px;
+    font-size: 10pt;
+    color: red;
+  }
+  .placeholder-filled, .placeholder-filled-error {
+    font-family: Karla;
+    position: absolute;
+    top: 14px;
+    font-size: 10pt;
+    left: 37px;
+    transition: 0.3s;
+    color: #aaa;
+  }
+  .inputText:focus ~ .placeholder-filled {
+    color: #009fff;
+  }
+  .inputText:focus ~ .placeholder-filled-error {
+    color: red;
+  }
+  .arrow-right {
+    position: absolute;
+    width: 20px;
+    height: 2px;
+    top: 9px;
+    right: 0px;
+    background-color: #009fff;
+  }
+  .arrow-right:before {
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 2px;
+    background-color: #009fff;
+    top: 5px;
+    transform: rotate(-45deg);
+    right: -2px;
+  }
+  .arrow-right:after {
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 2px;
+    background-color: #009fff;
+    top: -5px;
+    transform: rotate(45deg);
+    right: -2px;
+  }
+  .arrow-right-container {
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 25px;
+    right: 10px;
+  }
+  .arrow-left-container {
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+    position: absolute;
+    opacity: 0;
+    display: none;
+    top: 25px;
+    left: 10px;
+    transition: opacity 0.5s
+  }
+  .arrow-left {
+    position: absolute;
+    width: 20px;
+    height: 2px;
+    top: 9px;
+    right: 0px;
+    background-color: #009fff;
+  }
+  .arrow-left:before {
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 2px;
+    background-color: #009fff;
+    top: -5px;
+    transform: rotate(-45deg);
+    left: -2px;
+  }
+  .arrow-left:after {
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 2px;
+    background-color: #009fff;
+    top: 5px;
+    transform: rotate(45deg);
+    left: -2px;
+  }
+  .end-screen {
+    left: 0;
+    position: absolute;
+    font-family: Karla;
+    font-size: 20pt;
+    z-index: 1;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s;
+    text-align: center;
+    width: 100%;
+    color: black;
+  }
+  #error-message {
+    position: absolute;
+    top: 36px;
+    left: 37px;
+    font-family: Karla;
+    color: red;
+    display: none;
+    opacity: 0;
+    transition: 0.3s
+  }
+  .btn-23 {
+    cursor: pointer;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: Marvel;
+    font-size: 17pt;
+    width: 130px;
+    height: 45px;
+    position: relative;
+    border: solid navy 1px;
+    color: navy;
+    z-index: 1;
+    transition: color 0.5s ease-in-out, border 0.5s ease-in-out;
+    border-radius: 22px;
+    overflow: hidden;
+    background-color: transparent;
+    display: none;
+    opacity: 0;
+  }
+  
+  .btn-23:before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    height: 100%;
+    width: 0%;
+    background: navy;
+    border-radius: 23px;
+    transition: all 0.5s ease-in-out;
+    z-index: -1;
+  }
+  
+  .btn-23:hover:before {
+    width: 120%;
+    left: -10%;
+  }
+  
+  .btn-23:hover {
+    color: #f1f1f1;
+    border-color: transparent;
+  }
+  
+  .btn-23:active {
+    color: #f1f1f1;
+    border-color: transparent;
+  }
+  
+  .btn-23:focus {
+    outline: none
+  }
