@@ -24,6 +24,11 @@ public class RequestController {
 	@Autowired
 	private RequestService service;
 	
+	@PutMapping("/acceptrequest/{requestId}")
+	public ResponseEntity acceptRequest(@PathVariable int requestId) {
+		return service.acceptRequest(requestId);
+	}
+	
 	@GetMapping("/getallrequestforstudent/{studentId}")
 	public List<Request> getAllRequestForStudent(@PathVariable int studentId){
 		return service.getAllRequestForStudent(studentId);

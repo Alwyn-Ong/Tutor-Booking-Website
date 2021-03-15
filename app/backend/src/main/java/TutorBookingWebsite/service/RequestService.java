@@ -10,10 +10,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import TutorBookingWebsite.dao.RequestDao;
+import TutorBookingWebsite.dao.TimeslotDao;
 import TutorBookingWebsite.dao.UserDao;
+import TutorBookingWebsite.dao.UserTimeslotDao;
 import TutorBookingWebsite.exception.APIException;
 import TutorBookingWebsite.model.Request;
 import TutorBookingWebsite.model.ResponseDetails;
+import TutorBookingWebsite.model.UserTimeslot;
 
 @Service
 public class RequestService {
@@ -23,6 +26,29 @@ public class RequestService {
 	
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private TimeslotDao timeslotDao;
+	
+	@Autowired
+	private UserTimeslotDao userTimeslotDao;
+	
+	public ResponseEntity acceptRequest(int requestId) {
+		Optional<Request> request = requestDao.findById(requestId);
+		String requestTimeslot = request.get().getRequestedTimeslot();
+		int studentId = request.get().getStudentId();
+		int tutorId = request.get().getTutorId();
+		
+		int timeslotId = timeslotDao.findByTimeslot(requestTimeslot).get().getTimesloId();
+		
+		UserTimeslot acceptedTimeslot = new UserTimeslot(studentId, timeslotId, tutorId, TutorBookingWebsite.model.Status.CLOSED);
+		userTimeslotDao.save(acceptedTimeslot);
+		requestDao.deleteById(requestId);
+		
+		ResponseDetails responseDetails = new ResponseDetails(new Date(), "request have been accepted",
+				"query success");
+		return new ResponseEntity(responseDetails, HttpStatus.OK);
+	}
 	
 	public List<Request> getAllRequestForStudent(int studentId){
 		List<Request> result = requestDao.findByStudentId(studentId);
