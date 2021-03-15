@@ -20,9 +20,11 @@ const Card_component = (props) => {
             <img src={props.imgSrc} alt="" />
           <div className="heading-box">
             <h1>{props.name}<span></span></h1> 
+            
             <h3><span><i className="material-icons">location_city</i> {props.location}</span></h3>
             <h4><span><i className="material-icons">person</i> {props.birthday}</span></h4>
             <small><span><i className="material-icons">emoji_people</i> {props.sex}</span></small>
+            
           </div>
           </div>
         </header>
@@ -37,6 +39,10 @@ const Card_component = (props) => {
             <span className="activity-name" onChange={props.changeEmail}>Email</span>
             <span className="index">{props.email}</span>
           </div>
+          <button className="activity" onClick="alert()">
+            <i className="material-icons">border_color</i>
+            <span className="activity-name" >Edit profile</span>
+          </button>
         </main>
       </div>
   )

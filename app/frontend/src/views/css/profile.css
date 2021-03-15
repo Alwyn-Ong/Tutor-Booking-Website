@@ -128,11 +128,10 @@ img {
 }
 
 .button-box {
+  margin-left: 30%;
   width: 100%;
-  display: flex;
   justify-content: center;
   padding-top: 5%;
-  flex-direction: row;
 }
 @media (min-width: 601px) {
   .button-box {
