@@ -97,7 +97,7 @@ input[type="submit"]:hover {
   z-index: 1;
   background-color: #fff;
   height: 15%;
-  padding: 4px 64px;
+  padding: 10px 64px;
   align-items: center;
   text-align: center;
 }

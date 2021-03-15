@@ -127,7 +127,7 @@ function FilterPanel() {
                     </FormControl>
                 </Grid>
 
-                <Grid item xs={12} sm={3} md={2}>
+                <Grid item xs={6} sm={3} md={2}>
                     <FormControl classes={classes.formControl} style={{minWidth: 120}}>
                         <InputLabel htmlFor="gender">Gender     </InputLabel>
                         <Select
@@ -147,7 +147,7 @@ function FilterPanel() {
                         </Select>
                     </FormControl>
                 </Grid>
-                <Grid item xs={12} sm={3} md={2}>
+                <Grid item xs={6} sm={3} md={2}>
                     <FormControl classes={classes.formControl} style={{minWidth: 120}}>
                         <InputLabel htmlFor="price">Price</InputLabel>
                         <Select
@@ -165,7 +165,7 @@ function FilterPanel() {
                         </Select>
                     </FormControl>
                 </Grid>
-                <Grid item xs={12} sm={3} md={2} >
+                <Grid item xs={6} sm={3} md={2} >
                     <FormControl classes={classes.formControl} style={{minWidth: 120}}>
                         <InputLabel htmlFor="level">Level</InputLabel>
                         <Select
@@ -185,7 +185,7 @@ function FilterPanel() {
                         </Select>
                     </FormControl>
                 </Grid>
-                <Grid item xs={12} sm={3} md={2}>
+                <Grid item xs={6} sm={3} md={2}>
                     <FormControl classes={classes.formControl} style={{minWidth: 120}}>
                         <InputLabel htmlFor="TutorQualifications">Qualifications</InputLabel>
                         <Select
