@@ -12,6 +12,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import { useFourThreeCardMediaStyles } from '@mui-treasury/styles/cardMedia/fourThree';
 import { useState, useEffect } from 'react';
 import Pagination from '@material-ui/lab/Pagination';
+import Container from '@material-ui/core/Container';
 
 
 const useGridStyles = makeStyles(({ breakpoints }) => ({
@@ -335,14 +336,14 @@ export const Results = React.memo(function SolidGameCard() {
     }
 
   return (
-    <>
+    <div>
       <Grid classes={gridStyles} container spacing={4}>
         {items}
       </Grid>
       <div className={classes.paginationStyle}>
         <Pagination count={totalPages} size="large" onChange={handleChange} />
       </div>
-    </>
+    </div>
   );
 });
 export default Results
