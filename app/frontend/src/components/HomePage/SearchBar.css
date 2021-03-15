@@ -97,13 +97,20 @@ input[type="submit"]:hover {
   z-index: 1;
   background-color: #fff;
   height: 15%;
-  padding: 10px 64px;
+  padding: 10px 0px 10px 0px;
   align-items: center;
   text-align: center;
+  min-width:100%;
 }
 
 .tracks,
 .scroller {
   overflow: auto;
   display: flex;
+  padding: 50px;
+}
+
+.carousellContainer {
+  min-width: 80%;
+  box-sizing:border-box;
 }
