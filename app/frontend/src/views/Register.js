@@ -21,7 +21,8 @@ class Register extends React.Component{
       name: "",
       number: "",
       birthday: "",
-      sex: ""
+      sex: "",
+      err: []
     }
     this.handleLogin = this.handleLogin.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
@@ -31,8 +32,16 @@ class Register extends React.Component{
   }
 
   handleLogin(e){
-    alert('A name was submitted: ' + this.state.sex);
-    // need to send data back to DB from here
+    console.log(this.handleBirthdayChange.value)
+    if (this.state.err.length > 0){
+      alert('Please correct birthday');
+
+      this.setState({err: []});
+      e.preventDefault();
+    }else{
+      // need to send data back to DB from here
+    }
+    
   }
 
   handleNameChange(e){
@@ -44,7 +53,14 @@ class Register extends React.Component{
   }
 
   handleBirthdayChange(e){
+    const todaysDate = new Date();
+    const datePicked = Date.parse(e.target.value);
+    var parseDate = Date.parse(todaysDate);
     this.setState({birthday: e.target.value});
+
+    if (parseDate < datePicked){
+      this.state.err.push("Birthday is wrong")
+    };
   }
 
   handleSexChange(e){
