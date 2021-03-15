@@ -223,6 +223,9 @@ export const Results = React.memo(function SolidGameCard() {
   const [totalPages, setTotalPages] = useState(0);
   const handleChange = (event, value) => {
     setCurrentPage(value);
+    // [array of filters]
+    //let filteredResults = tutorResults.filter()
+    //setPosts(filteredResults.slice()) 
     let temp = tutorResults.slice((value-1)*8,(value-1)*8+8)
     setPosts(temp);
   };

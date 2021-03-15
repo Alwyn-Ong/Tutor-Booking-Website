@@ -5,7 +5,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import ReactSelect from 'react-select';
 import makeAnimated from 'react-select/animated';
 import Grid from '@material-ui/core/Grid';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -21,15 +20,13 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 const useStyles = makeStyles((theme) => ({
     formControl: {
         margin: theme.spacing(2),
-        // minWidth: 30,
+        fullWidth: true,
     },
     root: {
         flexGrow: 1,
+        margin: 2
     },
-    locationStyle: {
-        padding: "5px",
-
-    },autocompleteStyle: {
+    autocompleteStyle: {
         padding: "8px",
     }
 
@@ -99,10 +96,9 @@ function FilterPanel() {
     ]
 
     return (
-        <div className={classes.root, classes.formControl}>
-            <Grid container spacing={1} justify="center" alignItems="stretch">
-
-                <Grid item xs={12} sm={4}>
+        <div className={classes.root}>
+            <Grid container justify="center" alignItems="stretch">
+                <Grid item xs={12} sm={4} style={{minWidth: 120}}>
                 <FormControl style={{display:"block"}} className={classes.autocompleteStyle}>
                     <Autocomplete
                         multiple
@@ -131,82 +127,81 @@ function FilterPanel() {
                     </FormControl>
                 </Grid>
 
-                <Grid item xs={12} sm={2}>
-                    <FormControl>
-                        <InputLabel htmlFor="gender">Gender</InputLabel>
+                <Grid item xs={12} sm={3} md={2}>
+                    <FormControl classes={classes.formControl} style={{minWidth: 120}}>
+                        <InputLabel htmlFor="gender">Gender     </InputLabel>
                         <Select
-                            native
                             value={state.gender}
                             onChange={handleGenderChange}
                             inputProps={{
                                 gender: 'Male',
                                 id: 'gender',
                             }}
+                            autoWidth
                         >
-                            <option aria-label="None" value="" />
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
+                            <MenuItem value="">
+                                <em>None</em>
+                            </MenuItem>
+                            <MenuItem value="Male">Male</MenuItem>
+                            <MenuItem value="Female">Female</MenuItem>
                         </Select>
                     </FormControl>
                 </Grid>
-                <Grid item xs={12} sm={2}>
-                    <FormControl>
+                <Grid item xs={12} sm={3} md={2}>
+                    <FormControl classes={classes.formControl} style={{minWidth: 120}}>
                         <InputLabel htmlFor="price">Price</InputLabel>
                         <Select
-                            native
+                            labelId="price"
+                            id="price"
                             value={state.price}
                             onChange={handlePriceChange}
-                            inputProps={{
-                                price: '$',
-                                id: 'price',
-                            }}
                         >
-                            <option aria-label="None" value="" />
-                            <option value="$">$ (20-30/hr) </option>
-                            <option value="$$">$$ (30-50/hr)</option>
-                            <option value="$$$">$$$ (50-80/hr)</option>
+                        <MenuItem value="">
+                            <em>None</em>
+                        </MenuItem>
+                        <MenuItem value="$">$ (20-30/hr) </MenuItem>
+                        <MenuItem value="$$">$$ (30-50/hr)</MenuItem>
+                        <MenuItem value="$$$">$$$ (50-80/hr)</MenuItem>
                         </Select>
                     </FormControl>
                 </Grid>
-                <Grid item xs={12} sm={2}>
-                    <FormControl>
+                <Grid item xs={12} sm={3} md={2} >
+                    <FormControl classes={classes.formControl} style={{minWidth: 120}}>
                         <InputLabel htmlFor="level">Level</InputLabel>
                         <Select
-                            native
                             value={state.level}
                             onChange={handleLevelChange}
-                            inputProps={{
-                                level: 'Primary School',
-                                id: 'level',
-                            }}
+                            labelId="level"
+                            id="level"
                         >
-                            <option aria-label="None" value="" />
-                            <option value="primary">Primary School</option>
-                            <option value="secondary">Secondary School</option>
-                            <option value="poly">Polytechnic</option>
-                            <option value="JC">JC</option>
-                            <option value="uni">University</option>
+                        <MenuItem value="">
+                            <em>None</em>
+                        </MenuItem>
+                        <MenuItem value="primary">Primary School</MenuItem>
+                        <MenuItem value="secondary">Secondary School</MenuItem>
+                        <MenuItem value="poly">Polytechnic</MenuItem>
+                        <MenuItem value="JC">JC</MenuItem>
+                        <MenuItem value="uni">University</MenuItem>
                         </Select>
                     </FormControl>
                 </Grid>
-                <Grid item xs={12} sm={2}>
-                    <FormControl>
-                        <InputLabel htmlFor="Tutor Qualifications">Qualifications</InputLabel>
+                <Grid item xs={12} sm={3} md={2}>
+                    <FormControl classes={classes.formControl} style={{minWidth: 120}}>
+                        <InputLabel htmlFor="TutorQualifications">Qualifications</InputLabel>
                         <Select
-                            native
                             value={state.qualification}
                             onChange={handleQualificationChange}
-                            inputProps={{
-                                qualification: '',
-                                id: 'Tutor Qualifications',
-                            }}
+                            labelId="TutorQualifications"
+                            id="TutorQualifications"
                         >
-                            <option aria-label="None" value="" />
-                            <option value="olevels">O-levels</option>
-                            <option value="alevels">A-levels</option>
-                            <option value="diploma">Diploma</option>
-                            <option value="bachelors">Bachelor's Degree     </option>
-                            <option value="master">Master</option>
+                        <MenuItem value="">
+                            <em>None</em>
+                        </MenuItem>
+                        <MenuItem value="olevels">O-levels</MenuItem>
+                        <MenuItem value="alevels">A-levels</MenuItem>
+                        <MenuItem value="diploma">Diploma</MenuItem>
+                        <MenuItem value="bachelors">Bachelor's Degree</MenuItem>
+                        <MenuItem value="master">Master</MenuItem>
                         </Select>
                     </FormControl>
                 </Grid>
