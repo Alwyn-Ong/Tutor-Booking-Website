@@ -10,54 +10,53 @@ import "./css/profile.css";
 
 // https://stackoverflow.com/questions/62133040/unable-to-edit-form-fields-in-reactjs-after-fetched-from-server for form 
 // https://reactjs.org/docs/handling-events.html Handling events
+// https://codepen.io/lakshithav24/pen/bGNozyw
 
-
+const Card_component = (props) => {
+  return (
+      <div className="card">
+        <header className="card-header">
+          <div className="hello">
+            <img src={props.imgSrc} alt="" />
+          <div className="heading-box">
+            <h1>{props.name}<span></span></h1> 
+            <h3><span><i className="material-icons">location_city</i> {props.location}</span></h3>
+            <h4><span><i className="material-icons">person</i> {props.birthday}</span></h4>
+            <small><span><i className="material-icons">emoji_people</i> {props.sex}</span></small>
+          </div>
+          </div>
+        </header>
+        <main className="card-main">
+          <div className="activity">
+            <i className="material-icons">call</i> 
+            <span className="activity-name">phone</span>
+            <span className="index">{props.phone}</span>
+          </div>
+          <div className="activity">
+            <i className="material-icons">mail_outline</i>
+            <span className="activity-name" onChange={props.changeEmail}>Email</span>
+            <span className="index">{props.email}</span>
+          </div>
+        </main>
+      </div>
+  )
+}
 
 
 class Profile extends React.Component {
-
-  constructor(props) {
-      super(props);
-      // Props can be used later when calling AJAX/API
-      // Fake values
-      this.state = { 
-        profilePhoto: "willface.png",
-        name: "Nick",
-        gender: "Male",
-        email: "Lorem Ipsum",
-        phone: 91234567
-      }
-      this.submitChanges = this.submitChanges.bind(this);
+  constructor(props){
+    super(props)
+    this.state = {
+      imgSrc: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/435311/React--daily-ui-006.jpg",
+      name: "Thomas Lee",
+      location: "Singapore",
+      email: "thomas@hotmail.com",
+      phone: 12345678,
+      birthday: "20 March 1994",
+      sex: 'Male'
+    }
   }
-
-  submitChanges(e){
-    // e.preventDefault();
-
-    console.log("This was clicked");   
-    
-    console.log(this.state)
-    
-    // This is the part where the form value is being submitted
-  }
-
-  changeName(event){
-    //Set new name as var
-    var modifiedValue = event.target.value;
-    //Set new name state
-    this.setState({
-      name: modifiedValue
-    });   
-  }
-
-  changeGender(event){
-    //Set new name as var
-    var modifiedValue = event.target.value;
-    //Set new name state
-    this.setState({
-      gender: modifiedValue
-    });
-  }
-
+  
   changeEmail(event){
     //Set new name as var
     var modifiedValue = event.target.value;
@@ -67,62 +66,26 @@ class Profile extends React.Component {
     });
   }
 
-  changeNumber(event){
-    //Set new name as var
-    var modifiedValuenum = parseInt(event.target.value);
-    //Set new name state
-    this.setState({
-      phone: modifiedValuenum
-    });
-  }
-
 
   render(){
-    return(
+    return (
       <div>
-        <br></br>
-        <Container>
-            <Row>
-              <Col xs={4}>
-              <img src={this.state.profilePhoto} alt="Profile Photo" class="profilePhoto" ></img>
-              </Col>
-              <Col xs={8}>
-                <form>
-                  <TextField id="name" type="text" onChange={this.changeName.bind(this)} defaultValue={this.state.name} label="Name" />
-                  <br></br>
-                  <br></br>
-                  <FormControl component="fieldset">
-                    <FormLabel component="legend">Gender</FormLabel>
-                      <RadioGroup aria-label="gender" value={this.state.gender} onChange={this.changeGender.bind(this)}>
-                      <FormControlLabel value="Female" control={<Radio />} label="Female" checked={this.state.gender == "Female"} />
-                      <FormControlLabel value="Male" control={<Radio />} label="Male" checked={this.state.gender == "Male"}/>
-                      <FormControlLabel value="Other" control={<Radio />} label="Other" checked={this.state.gender == "Other"}/>
-                    </RadioGroup>
-                  </FormControl>
-                  <br></br>
-                  <br></br>
-                  <TextField id="email" type="email"  onChange={this.changeEmail.bind(this)} defaultValue={this.state.email} label="Email" />
-                  
-                  <br></br>
-                  <br></br>
-                  <TextField id="number" type="number"  onChange={this.changeNumber.bind(this)} defaultValue={this.state.phone} label="Number" />
-                  <br></br>
-                  <br></br>
-                    <Button variant="contained" color="primary" onClick={this.submitChanges}>
-                    Save profile changes
-                    </Button>
-                </form>
-              </Col>
-            </Row>
-          </Container>
-
-
-
+        <Card_component 
+                name={this.state.name}
+                location={this.state.location}
+                btnStyle={this.state.btnStyle}
+                icon={this.state.icon}
+                text={this.state.text}
+                phone={this.state.phone}
+                email={this.state.email}
+                birthday={this.state.birthday}
+                sex={this.state.sex}
+                imgSrc={this.state.imgSrc}
+        />
       </div>
-    
+      
     )
   }
-
 }
 
 export default Profile;
