@@ -80,14 +80,14 @@ export default function YourDetails(props) {
                     Enter your teaching details
             </Typography>
             </Grid>
-            <Grid item lg={6} sm={8} xs={12}>
+            <Grid item lg={6} sm={12} xs={12}>
                 <LevelsTaughtTransferList 
                     data={levelList}
                     levelTaught={levelTaught}
                     setLevelTaught={setLevelTaught}
                 ></LevelsTaughtTransferList>
             </Grid>
-            <Grid item lg={6} sm={4} xs={12}>
+            <Grid item lg={6} sm={12} xs={12}>
                 <Grid item lg={12} className={classes.autocomplete}>
                     {(levelTaught.indexOf("Primary") !== -1) && <SubjectsAutoComplete data={primarySubjectsList} subjectname="Primary"></SubjectsAutoComplete>}
                 </Grid>

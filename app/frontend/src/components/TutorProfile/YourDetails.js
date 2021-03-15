@@ -6,15 +6,16 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
+import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(3),
     width: '100%',
   },
   textEntry: {
-    marginTop: theme.spacing(3),
     width: '100%',
   },
   button: {
@@ -24,30 +25,50 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  divider: {
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3),
+    paddingTop: theme.spacing(3),
+    width: '100%',
+  }
 }));
 
 export default function YourDetails(props) {
   const classes = useStyles();
   const [qualification, setQualification] = React.useState("na")
+  const [location, setLocation] = React.useState("other")
   const [showSubject, setShowSubject] = React.useState(false)
 
-  const handleChange = (event) => {
+  const handleChangeQualification = (event) => {
     const value = event.target.value
     console.log(value)
     setQualification(value);
 
     if (["diploma", "bachelors", "degree", "phd"].indexOf(value) != -1) {
       setShowSubject(true)
-    } else{
+    } else {
       setShowSubject(false)
     }
+  };
+
+  const handleChangeLocation = (event) => {
+    const value = event.target.value
+    console.log(value)
+    setLocation(value);
   };
 
   return (
     <Grid container className={props.instructions}>
       <Grid item xs={12}>
+        <br></br>
         <Typography variant="h2">
-          Enter your professional background
+          Your professional background and information
+        </Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <br></br>
+        <Typography variant="h5">
+          Qualifications
         </Typography>
       </Grid>
       <Grid item xs={12}>
@@ -57,7 +78,7 @@ export default function YourDetails(props) {
             labelId="highestQualificationSelect"
             id="highestQualificationSelect"
             value={qualification}
-            onChange={handleChange}
+            onChange={handleChangeQualification}
           >
             <MenuItem value={"na"}>Not Available</MenuItem>
             <MenuItem value={"nitec"}>NITEC</MenuItem>
@@ -71,8 +92,33 @@ export default function YourDetails(props) {
           </Select>
         </FormControl>
       </Grid>
-
-      {showSubject && <TextField className={classes.textEntry} id="qualificationSubject" label="Subject" />}
+      <Grid item xs={12}>
+        {showSubject && <TextField className={classes.textEntry} id="qualificationSubject" label="Subject" />}
+      </Grid>
+      <Grid item className={classes.divider} xs={12}>
+      </Grid>
+      <Grid item xs={12}>
+      <Typography variant="h5">
+          Enter your location
+        </Typography>
+        <FormControl className={classes.formControl}>
+          <InputLabel id="locationSelectLabel">Nearest MRT</InputLabel>
+          <Select
+            labelId="nearestLocationSelect"
+            id="nearestLocationSelect"
+            value={location}
+            onChange={handleChangeLocation}
+          >
+            <MenuItem value={"bedok"}>Bedok</MenuItem>
+            <MenuItem value={"eunos"}>Eunos</MenuItem>
+            <MenuItem value={"cityhall"}>City Hall</MenuItem>
+            <MenuItem value={"serangoon"}>Serangoon</MenuItem>
+            <MenuItem value={"dhobyghaut"}>Dhoby Ghaut</MenuItem>
+            <MenuItem value={"orchard"}>Orchard</MenuItem>
+            <MenuItem value={"other"}>Other</MenuItem>
+          </Select>
+        </FormControl>
+      </Grid>
     </Grid>
   );
 }
