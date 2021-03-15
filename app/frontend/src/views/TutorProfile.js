@@ -4,7 +4,6 @@ import { Grid } from "@material-ui/core";
 import { Container } from "@material-ui/core";
 
 import ProgressStepper from "../components/TutorProfile/ProgressStepper";
-import EnableSwitch from "../components/TutorProfile/EnableSwitch";
 import YourDetails from "../components/TutorProfile/YourDetails";
 import NavTabs from "../components/TutorProfile/NavTabs";
 import TeachingDetails from "../components/TutorProfile/TeachingDetails";
@@ -44,18 +43,15 @@ const Homepage = () => {
   const classes = useStyles();
 
   return <Container maxWidth="lg" className={classes.root}>
-    <NavTabs></NavTabs>
+    <NavTabs isTutor={isTutor}></NavTabs>
     <Grid container xs={12} className={classes.root}>
-      {/* <Grid className={classes.grid} xs={12}>
-        <EnableSwitch className={classes.enableSwitch} isTutor={!isTutor} setIsTutor={setIsTutor}></EnableSwitch>
-      </Grid> */}
       <Grid className={classes.grid} xs={12}>
         {(activeStep === 0) && <YourDetails></YourDetails>}
         {(activeStep === 1) && <TeachingDetails></TeachingDetails>}
         {(activeStep === 2) && <Typography className={classes.instructions}><SetTimeSlot></SetTimeSlot></Typography>}
       </Grid>
       <Grid className={classes.grid} xs={12}>
-        {<ProgressStepper setActiveStep={setActiveStep} activeStep={activeStep}></ProgressStepper>}
+        {<ProgressStepper setActiveStep={setActiveStep} activeStep={activeStep} isTutor={isTutor}></ProgressStepper>}
       </Grid>
     </Grid>
 

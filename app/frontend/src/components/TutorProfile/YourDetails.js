@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
   textEntry: {
     marginTop: theme.spacing(3),
-    width: '70%',
+    width: '100%',
   },
   button: {
 

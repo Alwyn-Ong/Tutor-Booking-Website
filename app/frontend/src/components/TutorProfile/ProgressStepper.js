@@ -25,6 +25,7 @@ export default function HorizontalLinearStepper(props) {
   const classes = useStyles()
   const [skipped, setSkipped] = React.useState(new Set());
   const steps = getSteps();
+  const [finishText, setFinishText] = React.useState("Create");
 
   const isStepSkipped = (step) => {
     return skipped.has(step);
@@ -96,7 +97,7 @@ export default function HorizontalLinearStepper(props) {
                 onClick={handleNext}
                 className={classes.button}
               >
-                {props.activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                {props.activeStep === steps.length - 1 ? (props.isTutor?"Update":"Create") : 'Next'}
               </Button>
             </div>
           </div>
