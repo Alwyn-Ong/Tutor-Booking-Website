@@ -11,7 +11,7 @@ export default function DisabledTabs() {
   };
 
   return (
-    <Paper square>
+    <Paper square >
       <Tabs
         value={value}
         indicatorColor="primary"
