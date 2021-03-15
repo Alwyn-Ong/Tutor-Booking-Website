@@ -31,7 +31,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/getalltutors")
-	public Map<String,Object> getAllTutors() {
+	public List<Map<String, Object>> getAllTutors() {
 		return service.getAllTutors();
 	}
 	
