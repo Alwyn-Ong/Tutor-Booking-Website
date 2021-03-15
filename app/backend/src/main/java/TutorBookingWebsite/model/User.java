@@ -44,6 +44,8 @@ public class User {
 	private String description;	
 	@ApiModelProperty(notes= "qualification user")
 	private String qualification;	
+	@ApiModelProperty(notes= "price of user")
+	private int price;	
 	
 	public User() {
 		
@@ -116,5 +118,13 @@ public class User {
 
 	public void setPhoneNumber(int phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
 	}	
 }

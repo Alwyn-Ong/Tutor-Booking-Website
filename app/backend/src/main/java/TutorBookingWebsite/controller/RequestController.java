@@ -1,9 +1,12 @@
 package TutorBookingWebsite.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +23,21 @@ public class RequestController {
 	
 	@Autowired
 	private RequestService service;
+	
+	@GetMapping("/getallrequestforstudent/{studentId}")
+	public List<Request> getAllRequestForStudent(@PathVariable int studentId){
+		return service.getAllRequestForStudent(studentId);
+	}
+	
+	@GetMapping("/getallrequestforstudent/{studentId}/{tutorId}")
+	public List<Request> getAllRequestForStudent(@PathVariable int studentId, @PathVariable int tutorId){
+		return service.getAllRequestForStudent(studentId, tutorId);
+	}
+	
+	@GetMapping("/getallrequestfortutor/{userId}")
+	public List<Request> getAllRequestForTutor(@PathVariable int userId){
+		return service.getAllRequestForTutor(userId);
+	}
 	
 	@PutMapping("/saverequest")
 	public ResponseEntity saveRequest(@RequestBody Request request) {

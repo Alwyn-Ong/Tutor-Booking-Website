@@ -8,11 +8,19 @@ import org.springframework.http.HttpStatus;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 
+import TutorBookingWebsite.dao.LevelsTaughtDao;
 import TutorBookingWebsite.dao.ReviewDao;
+import TutorBookingWebsite.dao.SubjectDao;
+import TutorBookingWebsite.dao.TimeslotDao;
 import TutorBookingWebsite.dao.UserDao;
+import TutorBookingWebsite.dao.UserTimeslotDao;
 import TutorBookingWebsite.exception.APIException;
+import TutorBookingWebsite.model.LevelsTaught;
 import TutorBookingWebsite.model.ResponseDetails;
+import TutorBookingWebsite.model.Subject;
+import TutorBookingWebsite.model.Timeslot;
 import TutorBookingWebsite.model.User;
+import TutorBookingWebsite.model.UserTimeslot;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
@@ -31,8 +39,18 @@ public class UserService {
 	@Autowired
 	private ReviewDao reviewDao;
 	
-	String[] columnName = { "userId", "email", "name", "gender", "phoneNumber", "description", "nearestMRT", "isTutor", "qualification"};
+	@Autowired
+	private SubjectDao subjectDao;
 	
+	@Autowired
+	private LevelsTaughtDao levelsTaughtDao;
+	
+	@Autowired
+	private UserTimeslotDao userTimeslotDao;
+	
+	@Autowired
+	private TimeslotDao timeslotDao;
+		
 	public Map<String, Object> getTutorById(int userId){
 		try {
 			Map<String, Object> result = new HashMap<>();
@@ -41,15 +59,41 @@ public class UserService {
 				throw new APIException("no such tutor");
 			} else {
 				result.put("userid", "" + user.get().getUserId());
-				result.put("name", user.get().getName());
-				result.put("gender", user.get().getGender());
-				result.put("gender", user.get().getPhoneNumber());
-				result.put("email", user.get().getEmail());
 				result.put("decription", user.get().getDescription());
-				result.put("nearestMRT", user.get().getNearestMRT());
+				result.put("email", user.get().getEmail());
+				result.put("gender", user.get().getGender());
 				result.put("isTutor", "" + user.get().getIsTutor());
-				result.put("reviews", reviewDao.findByTutorId(userId));
+				result.put("name", user.get().getName());
+				result.put("nearestMRT", user.get().getNearestMRT());
+				result.put("phoneNumber", user.get().getPhoneNumber());
+				result.put("price", user.get().getPrice());
 				result.put("qualification", "" + user.get().getQualification());
+				result.put("reviews", reviewDao.findByTutorId(userId));
+				
+				List<Subject> subjectsTaught = subjectDao.findByTutorId(user.get().getUserId());
+				List<String> subjectTemp = new ArrayList<>();
+				for (Subject x:subjectsTaught) {
+					subjectTemp.add(x.getSubjectTaught());
+				}
+				result.put("subjectsTaught", subjectTemp);
+				
+				List<LevelsTaught> levelsTaught = levelsTaughtDao.findByTutorId(user.get().getUserId());
+				List<String> levelsTaughtTemp = new ArrayList<>();
+				for (LevelsTaught x:levelsTaught) {
+					levelsTaughtTemp.add(x.getLevelsTaught());
+				}
+				result.put("levelsTaught", levelsTaughtTemp);
+				
+				List<UserTimeslot> userTimeslot = userTimeslotDao.findByTutorId(user.get().getUserId());
+				List<String> timeslotTemp = new ArrayList<>();
+				for (UserTimeslot x:userTimeslot) {
+					if (x.getStatus() == TutorBookingWebsite.model.Status.OPEN) {
+						int timeslotId = x.getTimeslotId();
+						Optional<Timeslot> timeslot = timeslotDao.findById(timeslotId);
+						timeslotTemp.add(timeslot.get().getTimeslot());
+					}
+				}
+				result.put("openTimeslot", timeslotTemp);
 			}
 			
 			return result;
@@ -58,30 +102,52 @@ public class UserService {
 		}
 	}
 	
-	public Map<String, Object> getAllTutors() {
-		Map<String, Object> result = new HashMap<>();
-		result.put("columns", columnName);
-
-		List<User> tutors = userDao.findByIsTutor(1);
-		Object[] temp = new Object[tutors.size()];
-
-		int index = 0;
-
-		for (User placeHolder : tutors) {
-			Map<String, Object> result2 = new HashMap<>();
-			result2.put("userId", placeHolder.getUserId());
-			result2.put("email", placeHolder.getEmail());
-			result2.put("name", placeHolder.getName());
-			result2.put("phoneNumber", placeHolder.getPhoneNumber());
-			result2.put("description", placeHolder.getDescription());
-			result2.put("nearestMRT", placeHolder.getNearestMRT());
-			result2.put("role", placeHolder.getIsTutor());
-			result2.put("reviws", reviewDao.findByTutorId(placeHolder.getUserId()));
-			temp[index] = result2;
-			index++;
+	public List<Map<String, Object>> getAllTutors() {
+		List<Map<String, Object>> result= new ArrayList<>();
+		List<User> allTutors = userDao.findByIsTutor(1);
+		
+		for (User temp:allTutors) {
+			Map<String, Object> placeHolder = new HashMap<>();
+			placeHolder.put("userid", temp.getUserId());
+			placeHolder.put("description", temp.getDescription());
+			placeHolder.put("email", temp.getEmail());
+			placeHolder.put("gender", temp.getGender());
+			placeHolder.put("isTutor", temp.getIsTutor());
+			placeHolder.put("name", temp.getName());
+			placeHolder.put("nearestMRT", temp.getNearestMRT());
+			placeHolder.put("phoneNumber", temp.getPhoneNumber());
+			placeHolder.put("price", temp.getPrice());
+			placeHolder.put("qualification", temp.getQualification());
+			placeHolder.put("reviews", reviewDao.findByTutorId(temp.getUserId()));
+			
+			List<Subject> subjectsTaught = subjectDao.findByTutorId(temp.getUserId());
+			List<String> subjectTemp = new ArrayList<>();
+			for (Subject x:subjectsTaught) {
+				subjectTemp.add(x.getSubjectTaught());
+			}
+			placeHolder.put("subjectsTaught", subjectTemp);
+			
+			List<LevelsTaught> levelsTaught = levelsTaughtDao.findByTutorId(temp.getUserId());
+			List<String> levelsTaughtTemp = new ArrayList<>();
+			for (LevelsTaught x:levelsTaught) {
+				levelsTaughtTemp.add(x.getLevelsTaught());
+			}
+			placeHolder.put("levelsTaught", levelsTaughtTemp);
+			
+			List<UserTimeslot> userTimeslot = userTimeslotDao.findByTutorId(temp.getUserId());
+			List<String> timeslotTemp = new ArrayList<>();
+			for (UserTimeslot x:userTimeslot) {
+				if (x.getStatus() == TutorBookingWebsite.model.Status.OPEN) {
+					int timeslotId = x.getTimeslotId();
+					Optional<Timeslot> timeslot = timeslotDao.findById(timeslotId);
+					timeslotTemp.add(timeslot.get().getTimeslot());
+				}
+			}
+			placeHolder.put("openTimeslot", timeslotTemp);
+			
+			result.add(placeHolder);
 		}
 
-		result.put("users", temp);
 		return result;
 	}
 	
@@ -107,7 +173,9 @@ public class UserService {
 			existingUser.setPhoneNumber(user.getPhoneNumber());
 			existingUser.setNearestMRT(user.getNearestMRT());
 			existingUser.setDescription(user.getDescription());
-			existingUser.setDescription(user.getQualification());
+			existingUser.setQualification(user.getQualification());
+			existingUser.setGender(user.getGender());
+			existingUser.setPrice(user.getPrice());
 
 			userDao.save(existingUser);
 
