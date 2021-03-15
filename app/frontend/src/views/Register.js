@@ -34,7 +34,7 @@ class Register extends React.Component{
   handleLogin(e){
     console.log(this.handleBirthdayChange.value)
     if (this.state.err.length > 0){
-      alert('Please correct birthday');
+      alert(this.state.err);
 
       this.setState({err: []});
       e.preventDefault();
