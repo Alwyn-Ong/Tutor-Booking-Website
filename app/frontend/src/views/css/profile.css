@@ -272,3 +272,7 @@ img {
   border-radius: 18px;
   border: 1px solid #cfcece;
 }
+input{
+  color: #999999;
+  margin-left: 2%;
+}

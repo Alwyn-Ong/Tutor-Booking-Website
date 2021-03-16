@@ -19,86 +19,35 @@ const Card_component = (props) => {
           <div className="heading-box">
             <h1>{props.name}<span></span></h1> 
             
-            <h3><span><i className="material-icons">location_city</i> {props.location}</span></h3>
-            <h4><span><i className="material-icons">person</i> {props.birthday}</span></h4>
-            <small><span><i className="material-icons">emoji_people</i> {props.sex}</span></small>
-            
-          </div>
+            <h3><span><i className="material-icons">location_city</i><input defaultValue={props.location} readOnly={props.toggle} /> </span></h3>
+            <h4><span><i className="material-icons">person</i><input defaultValue={props.birthday} readOnly={props.toggle} /></span></h4>
+            <small><span><i className="material-icons">emoji_people</i><input defaultValue={props.sex} readOnly={props.toggle} /> </span></small>
+            </div>
+            <div className="button-box">
+            <a href="#"><i className="material-icons" onClick={props.toggleEdit}>{props.icon}</i></a>
+            </div>
           </div>
         </header>
         <main className="card-main">
           <div className="activity">
             <i className="material-icons">call</i> 
             <span className="activity-name">phone</span>
-            <span className="index">{props.phone}</span>
+            <span className="index">
+            <input defaultValue={props.phone} readOnly={props.toggle}/>
+              </span>
           </div>
           <div className="activity">
             <i className="material-icons">mail_outline</i>
             <span className="activity-name" onChange={props.changeEmail}>Email</span>
-            <span className="index">{props.email}</span>
-          </div>
-          <div className="activity">
-          <ControlledPopup>
-
-          </ControlledPopup>
-          </div>
-            
+            <span className="index">
+            <input defaultValue={props.email} readOnly={props.toggle}/>
+            </span>
+          </div>     
         </main>
       </div>
   )
 }
-const ControlledPopup = () => {
-  return(
-<Popup
-  trigger={<button className="button"> Open Modal </button>}
-  modal
-  nested
->
-  {close => (
-    <div className="modal">
-      <button className="close" onClick={close}>
-        &times;
-      </button>
-      <div className="header"> Modal Title </div>
-      <div className="content">
-        {' '}
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, a nostrum.
-        Dolorem, repellat quidem ut, minima sint vel eveniet quibusdam voluptates
-        delectus doloremque, explicabo tempore dicta adipisci fugit amet dignissimos?
-        <br />
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur sit
-        commodi beatae optio voluptatum sed eius cumque, delectus saepe repudiandae
-        explicabo nemo nam libero ad, doloribus, voluptas rem alias. Vitae?
-      </div>
-      <div className="actions">
-        <Popup
-          trigger={<button className="button"> Trigger </button>}
-          position="top center"
-          nested
-        >
-          <span>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae
-            magni omnis delectus nemo, maxime molestiae dolorem numquam
-            mollitia, voluptate ea, accusamus excepturi deleniti ratione
-            sapiente! Laudantium, aperiam doloribus. Odit, aut.
-          </span>
-        </Popup>
-        <button
-          className="button"
-          onClick={() => {
-            console.log('modal closed ');
-            close();
-          }}
-        >
-          close modal
-        </button>
-      </div>
-    </div>
-  )}
-</Popup>
-  )
-  
-};
+
 
 class Profile extends React.Component {
   constructor(props){
@@ -110,19 +59,28 @@ class Profile extends React.Component {
       email: "thomas@hotmail.com",
       phone: 12345678,
       birthday: "20 March 1994",
-      sex: 'Male'
+      sex: 'Male',
+      toggle: false,
+      icon: "create",
     }
   }
-  
-  changeEmail(event){
-    //Set new name as var
-    var modifiedValue = event.target.value;
-    //Set new name state
-    this.setState({
-      email: modifiedValue
-    });
-  }
 
+  toggleEdit(e){
+    e.preventDefault()
+    let currentStatus = this.state.toggle
+    console.log(this.state.toggle)
+    if (currentStatus == false){
+      this.setState({
+        toggle: true,
+        icon: "create"
+      })
+    }else{
+      this.setState({
+        toggle: false,
+        icon: "done"
+      })
+    }
+  }
 
   render(){
     return (
@@ -138,6 +96,9 @@ class Profile extends React.Component {
                 birthday={this.state.birthday}
                 sex={this.state.sex}
                 imgSrc={this.state.imgSrc}
+                toggle={this.state.toggle}
+                toggleEdit={this.toggleEdit.bind(this)}
+                icon={this.state.icon}
         />
       </div>
       
