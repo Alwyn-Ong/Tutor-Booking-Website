@@ -8,7 +8,7 @@ import "./css/profile.css";
 
 // https://stackoverflow.com/questions/62133040/unable-to-edit-form-fields-in-reactjs-after-fetched-from-server for form 
 // https://reactjs.org/docs/handling-events.html Handling events
-// https://codepen.io/lakshithav24/pen/bGNozyw
+// https://codepen.io/lakshithav24/pen/bGNozyw Original Codepen reference
 
 const Card_component = (props) => {
   return (
