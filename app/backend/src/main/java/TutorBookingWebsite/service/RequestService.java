@@ -39,7 +39,7 @@ public class RequestService {
 		int studentId = request.get().getStudentId();
 		int tutorId = request.get().getTutorId();
 		
-		int timeslotId = timeslotDao.findByTimeslot(requestTimeslot).get().getTimesloId();
+		int timeslotId = timeslotDao.findByTimeslot(requestTimeslot).get().getTimeslotId();
 		
 		UserTimeslot acceptedTimeslot = new UserTimeslot(studentId, timeslotId, tutorId, TutorBookingWebsite.model.Status.CLOSED);
 		userTimeslotDao.save(acceptedTimeslot);

@@ -30,7 +30,7 @@ public class Timeslot {
 		
 	}
 
-	public int getTimesloId() {
+	public int getTimeslotId() {
 		return timeslotId;
 	}
 

@@ -31,6 +31,11 @@ public class Subject {
 	public Subject() {
 		
 	}
+	
+	public Subject(String subjectTaught, int tutorId) {
+		this.subjectTaught = subjectTaught;
+		this.tutorId = tutorId;
+	}
 
 	public int getSubjectId() {
 		return subjectId;

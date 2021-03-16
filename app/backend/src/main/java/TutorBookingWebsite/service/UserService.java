@@ -186,6 +186,32 @@ public class UserService {
 		}
 	}
 	
+	public ResponseEntity updateTutorProfile(User user, List<String> subject, List<String> userTimeslot) {
+		User existingUser = userDao.findById(user.getUserId()).orElse(null);
+	
+		for (String temp:subject) {
+			subjectDao.save(new Subject(temp, user.getUserId()));
+		}
+		
+		for (String temp:userTimeslot) {
+			int timeslotId = timeslotDao.findByTimeslot(temp).get().getTimeslotId();
+			userTimeslotDao.save(new UserTimeslot(timeslotId, user.getUserId(), TutorBookingWebsite.model.Status.OPEN));
+		}
+		
+		try {
+			existingUser.setQualification(user.getQualification());
+			existingUser.setPrice(user.getPrice());
+			existingUser.setNearestMRT(user.getNearestMRT());
+			userDao.save(existingUser);
+			
+
+			ResponseDetails responseDetails = new ResponseDetails(new Date(), "user updated", "query success");
+			return new ResponseEntity(responseDetails, HttpStatus.OK);
+		} catch (Throwable e) {
+			throw new APIException("user unable to be updated");
+		}
+	}
+	
 	public Map<String, String> verifyToken(String idToken) {
 		Map<String, String> result = new HashMap<>();
 		NetHttpTransport transport = new NetHttpTransport();

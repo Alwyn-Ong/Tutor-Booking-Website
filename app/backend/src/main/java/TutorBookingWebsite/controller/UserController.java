@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import TutorBookingWebsite.model.Subject;
 import TutorBookingWebsite.model.User;
 import TutorBookingWebsite.service.UserService;
 
@@ -43,6 +44,11 @@ public class UserController {
 	@PutMapping("/updateprofile")
 	public ResponseEntity updateUser(@RequestBody User user) {
 		return service.updateUser(user);
+	}
+	
+	@PutMapping("/updatetutorprofile/{subject}/{userTimeslot}")
+	public ResponseEntity updateTutorProfile(@RequestBody User user, @PathVariable List<String> subject, @PathVariable List<String> userTimeslot) {
+		return service.updateTutorProfile(user, subject, userTimeslot);
 	}
 
 	@PostMapping("/verifytoken")
