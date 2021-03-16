@@ -3,13 +3,15 @@ import { Box, Container } from "@material-ui/core";
 
 export const Page = ({ children }) => {
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      height="100%"
-      justifyContent="center"
-    >
-      <Container maxWidth="sm">{children}</Container>
-    </Box>
+    <Container maxWidth="md">
+      <Box
+        display="flex"
+        flexDirection="column"
+        height="100%"
+        justifyContent="center"
+      >
+        {children}
+      </Box>
+    </Container>
   );
 };
