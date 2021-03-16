@@ -1,10 +1,8 @@
-import {Radio, Typography, FormControl, FormLabel, FormControlLabel, RadioGroup, TextField, Button } from "@material-ui/core";
-import React from "react";
+// import {Radio, Typography, FormControl, FormLabel, FormControlLabel, RadioGroup, TextField, Button } from "@material-ui/core";
+import React, { useState }from "react";
 import { Page } from "../components/Page";
+import Popup from 'reactjs-popup';
 
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
 import "./css/profile.css";
 
@@ -39,15 +37,68 @@ const Card_component = (props) => {
             <span className="activity-name" onChange={props.changeEmail}>Email</span>
             <span className="index">{props.email}</span>
           </div>
-          <button className="activity" onClick="alert()">
-            <i className="material-icons">border_color</i>
-            <span className="activity-name" >Edit profile</span>
-          </button>
+          <div className="activity">
+          <ControlledPopup>
+
+          </ControlledPopup>
+          </div>
+            
         </main>
       </div>
   )
 }
-
+const ControlledPopup = () => {
+  return(
+<Popup
+  trigger={<button className="button"> Open Modal </button>}
+  modal
+  nested
+>
+  {close => (
+    <div className="modal">
+      <button className="close" onClick={close}>
+        &times;
+      </button>
+      <div className="header"> Modal Title </div>
+      <div className="content">
+        {' '}
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, a nostrum.
+        Dolorem, repellat quidem ut, minima sint vel eveniet quibusdam voluptates
+        delectus doloremque, explicabo tempore dicta adipisci fugit amet dignissimos?
+        <br />
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur sit
+        commodi beatae optio voluptatum sed eius cumque, delectus saepe repudiandae
+        explicabo nemo nam libero ad, doloribus, voluptas rem alias. Vitae?
+      </div>
+      <div className="actions">
+        <Popup
+          trigger={<button className="button"> Trigger </button>}
+          position="top center"
+          nested
+        >
+          <span>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae
+            magni omnis delectus nemo, maxime molestiae dolorem numquam
+            mollitia, voluptate ea, accusamus excepturi deleniti ratione
+            sapiente! Laudantium, aperiam doloribus. Odit, aut.
+          </span>
+        </Popup>
+        <button
+          className="button"
+          onClick={() => {
+            console.log('modal closed ');
+            close();
+          }}
+        >
+          close modal
+        </button>
+      </div>
+    </div>
+  )}
+</Popup>
+  )
+  
+};
 
 class Profile extends React.Component {
   constructor(props){
