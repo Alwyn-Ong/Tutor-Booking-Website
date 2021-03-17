@@ -9,7 +9,7 @@ import Container from '@material-ui/core/Container';
 import ParallaxCarousel from './ParallaxCarousel';
 import NoticeBoard from './NoticeBoard';
 
-function SearchBarr() {
+function SearchBar() {
     // const classes = useStyles();
     const useStyles = makeStyles({
         root: {
@@ -19,6 +19,16 @@ function SearchBarr() {
         }
     });
     const classes = useStyles();
+
+    const [filter, setFilter] = React.useState({
+        gender: '',
+        price: '',
+        level: '',
+        qualification: '',
+        selectedLocations:[]
+    });
+
+    
     return (
         <Grid>
                 <Container className="heading">
@@ -26,7 +36,7 @@ function SearchBarr() {
                         <input className="search-bar" placeholder="Search for tutors!"></input>
                         <input type="submit" value="GO" href="#"></input>
                     </form>
-                    <FilterPanel></FilterPanel>
+                    <FilterPanel setState={setFilter} state={filter}></FilterPanel>
                 </Container>
                 <Container className="carousellContainer">
                     <NoticeBoard></NoticeBoard>
@@ -38,4 +48,4 @@ function SearchBarr() {
     );
 }
 
-export default SearchBarr;
+export default SearchBar;

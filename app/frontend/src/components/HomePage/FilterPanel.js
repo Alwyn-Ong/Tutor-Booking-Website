@@ -32,17 +32,17 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-function FilterPanel() {
+function FilterPanel({state, setState}) {
     const classes = useStyles();
-    const [state, setState] = React.useState({
-        gender: '',
-        price: '',
-        level: '',
-        qualification: '',
-        selectedLocations:[]
-    });
+    // const [state, setState] = React.useState({
+    //     gender: '',
+    //     price: '',
+    //     level: '',
+    //     qualification: '',
+    //     selectedLocations:[]
+    // });
 
-    // console.log(state);
+    console.log(state);
 
     const handleGenderChange = (event) => {
         const gender = event.target.gender;
