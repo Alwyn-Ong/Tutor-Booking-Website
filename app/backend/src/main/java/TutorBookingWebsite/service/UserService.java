@@ -8,12 +8,15 @@ import org.springframework.http.HttpStatus;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 
+import TutorBookingWebsite.controller.FileController;
+import TutorBookingWebsite.dao.FileDBDao;
 import TutorBookingWebsite.dao.LevelsTaughtDao;
 import TutorBookingWebsite.dao.ReviewDao;
 import TutorBookingWebsite.dao.TimeslotDao;
 import TutorBookingWebsite.dao.UserDao;
 import TutorBookingWebsite.dao.UserTimeslotDao;
 import TutorBookingWebsite.exception.APIException;
+import TutorBookingWebsite.model.FileDB;
 import TutorBookingWebsite.model.LevelsTaught;
 import TutorBookingWebsite.model.ResponseDetails;
 import TutorBookingWebsite.model.Timeslot;
@@ -45,6 +48,12 @@ public class UserService {
 	
 	@Autowired
 	private TimeslotDao timeslotDao;
+	
+	@Autowired
+	private FileDBDao fileDBDao;
+	
+	@Autowired
+	private FileController fileController;
 		
 	public Map<String, Object> getTutorById(int userId){
 		try {
@@ -54,7 +63,7 @@ public class UserService {
 				throw new APIException("no such tutor");
 			} else {
 				result.put("userid", "" + user.get().getUserId());
-				result.put("decription", user.get().getDescription());
+				result.put("description", user.get().getDescription());
 				result.put("email", user.get().getEmail());
 				result.put("gender", user.get().getGender());
 				result.put("isTutor", "" + user.get().getIsTutor());
@@ -92,6 +101,9 @@ public class UserService {
 					}
 				}
 				result.put("openTimeslot", timeslotTemp);
+				
+				result.put("imageURL", "http://localhost:8080/api/files/" + user.get().getUserId());
+				
 			}
 			
 			return result;
@@ -144,6 +156,7 @@ public class UserService {
 				}
 			}
 			placeHolder.put("openTimeslot", timeslotTemp);
+			placeHolder.put("imageURL", "http://localhost:8080/api/files/" + temp.getUserId());
 			
 			result.add(placeHolder);
 		}
