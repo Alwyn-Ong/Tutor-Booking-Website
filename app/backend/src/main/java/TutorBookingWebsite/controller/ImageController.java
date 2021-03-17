@@ -31,7 +31,6 @@ public class ImageController {
 
 	@PostMapping("/upload/{userId}")
 	public BodyBuilder uplaodImage(@PathVariable("userId") int userId,@RequestParam("imageFile") MultipartFile file) throws IOException {
-		System.out.println("Original Image Byte Size - " + file.getBytes().length);
 		Image img = new Image(userId, file.getContentType(),
 				compressBytes(file.getBytes()));
 		imageDao.save(img);

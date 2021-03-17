@@ -205,14 +205,7 @@ public class UserService {
 			Map<String,Object> tempTimeslot = (Map<String, Object>) y;
 			userTimeslot.add(tempTimeslot.get("timeslot").toString());
 		}
-		
-		for (String z:userTimeslot) {
-			System.out.println(z);
-		}
 	
-		
-		
-//		User user, List<String> subject, List<String> userTimeslot
 		User existingUser = userDao.findById(user.getUserId()).orElse(null);
 	
 		for (String temp:subject) {
