@@ -7,14 +7,6 @@ import TeachingDetails from "./TeachingDetails";
 import Typography from '@material-ui/core/Typography';
 import SetTimeSlot from "./SetTimeSlot";
 
-import {
-  highestQualificationData,
-  levelsTaughtData,
-  primarySubjectsData,
-  oLevelSubjectsData,
-  aLevelSubjectsData
-} from "./data"
-
 const useStyles = makeStyles((theme) => ({
   button: {
     marginRight: theme.spacing(1),
@@ -61,7 +53,12 @@ export default function HorizontalLinearStepper(props) {
     <div className={classes.root}>
       <Grid container xs={12} className={classes.root}>
       <Grid className={classes.grid} xs={12}>
-        {(props.activeStep === 0) && <YourDetails></YourDetails>}
+        {(props.activeStep === 0) && <YourDetails
+                                        qualification={props.qualification}
+                                        setQualification={props.setQualification}
+                                        location={props.location}
+                                        setLocation={props.setLocation}>
+                                        </YourDetails>}
         {(props.activeStep === 1) && <TeachingDetails></TeachingDetails>}
         {(props.activeStep === 2) && <Typography className={classes.instructions}><SetTimeSlot></SetTimeSlot></Typography>}
       </Grid>

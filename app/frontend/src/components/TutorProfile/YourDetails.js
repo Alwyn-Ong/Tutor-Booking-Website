@@ -5,8 +5,6 @@ import { InputLabel } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import TextField from '@material-ui/core/TextField';
-import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
@@ -33,28 +31,35 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+  //hardcoded
+  let allNearestMRT = [
+    'Bedok',
+    'Bishan',
+    'Boon Keng',
+    'Bukit Timah',
+    'Chinatown',
+    'Hougang',
+    'Jurong',
+    'Orchard',
+    'Pasir Ris',
+    'Sengkang',
+    'Sentosa',
+    'Serangoon',
+    'Simei',
+    'Woodlands']
+
 export default function YourDetails(props) {
   const classes = useStyles();
-  const [qualification, setQualification] = React.useState("na")
-  const [location, setLocation] = React.useState("other")
-  const [showSubject, setShowSubject] = React.useState(false)
 
   const handleChangeQualification = (event) => {
     const value = event.target.value
-    console.log(value)
-    setQualification(value);
-
-    if (["diploma", "bachelors", "degree", "phd"].indexOf(value) != -1) {
-      setShowSubject(true)
-    } else {
-      setShowSubject(false)
-    }
+    props.setQualification(value);
   };
 
   const handleChangeLocation = (event) => {
     const value = event.target.value
     console.log(value)
-    setLocation(value);
+    props.setLocation(value);
   };
 
   return (
@@ -77,7 +82,7 @@ export default function YourDetails(props) {
           <Select
             labelId="highestQualificationSelect"
             id="highestQualificationSelect"
-            value={qualification}
+            value={props.qualification}
             onChange={handleChangeQualification}
           >
             <MenuItem value={"na"}>Not Available</MenuItem>
@@ -86,14 +91,11 @@ export default function YourDetails(props) {
             <MenuItem value={"olevel"}>O-Level</MenuItem>
             <MenuItem value={"alevel"}>A-Level</MenuItem>
             <MenuItem value={"diploma"}>Diploma</MenuItem>
-            <MenuItem value={"bachelors"}>Bachelors</MenuItem>
-            <MenuItem value={"degree"}>Masters</MenuItem>
+            <MenuItem value={"degree"}>Degree</MenuItem>
+            <MenuItem value={"masters"}>Masters</MenuItem>
             <MenuItem value={"phd"}>PhD</MenuItem>
           </Select>
         </FormControl>
-      </Grid>
-      <Grid item xs={12}>
-        {showSubject && <TextField className={classes.textEntry} id="qualificationSubject" label="Subject" />}
       </Grid>
       <Grid item className={classes.divider} xs={12}>
       </Grid>
@@ -106,16 +108,10 @@ export default function YourDetails(props) {
           <Select
             labelId="nearestLocationSelect"
             id="nearestLocationSelect"
-            value={location}
+            value={props.location}
             onChange={handleChangeLocation}
           >
-            <MenuItem value={"bedok"}>Bedok</MenuItem>
-            <MenuItem value={"eunos"}>Eunos</MenuItem>
-            <MenuItem value={"cityhall"}>City Hall</MenuItem>
-            <MenuItem value={"serangoon"}>Serangoon</MenuItem>
-            <MenuItem value={"dhobyghaut"}>Dhoby Ghaut</MenuItem>
-            <MenuItem value={"orchard"}>Orchard</MenuItem>
-            <MenuItem value={"other"}>Other</MenuItem>
+            {allNearestMRT.map((loc) => <MenuItem value={loc}>{loc}</MenuItem>)}
           </Select>
         </FormControl>
       </Grid>

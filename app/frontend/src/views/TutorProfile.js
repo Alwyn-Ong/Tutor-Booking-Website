@@ -1,11 +1,11 @@
 import React from "react";
+import {useEffect} from 'react';
 
 import { Grid } from "@material-ui/core";
 import { Container } from "@material-ui/core";
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
-
 import ProgressStepper from "../components/TutorProfile/ProgressStepper";
 import NavTabs from "../components/TutorProfile/NavTabs";
 
@@ -29,25 +29,12 @@ const useStyles = makeStyles((theme) => ({
 
 const TutorProfile = () => {
 
-  //hardcoded
-  let userID = 1;
-  let allNearestMRT = [
-    'Bedok',
-    'Bishan',
-    'Boon Keng',
-    'Bukit Timah',
-    'Chinatown',
-    'Hougang',
-    'Jurong',
-    'Orchard',
-    'Pasir Ris',
-    'Sengkang',
-    'Sentosa',
-    'Serangoon',
-    'Simei',
-    'Woodlands']
-
+  const [userData, setUserData] = React.useState();
+  const [userID, setUserId] = React.useState(1);
   const [isTutor, setIsTutor] = React.useState(false);
+  const [qualification, setQualification] = React.useState("na")
+  const [location, setLocation] = React.useState("Bedok")
+
   const [activeStep, setActiveStep] = React.useState(0)
   const [stepSkipped, setStepSkipped] = React.useState();
   const [steps, setSteps] = React.useState(['Your Professional Background', 'Teaching Details', 'Available Timeslot']);
@@ -58,10 +45,24 @@ const TutorProfile = () => {
 
   const classes = useStyles();
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(`http://localhost:8080/api/gettutorbyid/${userID}/`);
+      const newData = await response.json();
+      console.log(newData)
+      setUserData(newData);
+      setIsTutor(newData.isTutor)
+      setQualification(newData.qualification.toLowerCase())
+      setLocation(newData.nearestMRT);
+    };
+    fetchData();
+  }, [userID]);
+
   return (
     <>
-    <NavTabs isTutor={isTutor}></NavTabs>
-    <Stepper activeStep={activeStep}>
+      {}
+      <NavTabs isTutor={isTutor}></NavTabs>
+      <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
           const stepProps = {};
           const labelProps = {};
@@ -75,20 +76,24 @@ const TutorProfile = () => {
           );
         })}
       </Stepper>
-    <Container className={classes.root}>
-      <Grid className={classes.grid} xs={12} style={{width:"100%"}}>
+      <Container className={classes.root}>
+        <Grid className={classes.grid} xs={12} style={{ width: "100%" }}>
           {<ProgressStepper isTutor={isTutor}
-                            steps={steps} 
-                            activeStep={activeStep} 
-                            setActiveStep={setActiveStep} 
-                            stepSkipped={stepSkipped} 
-                            setStepSkipped={setStepSkipped}
-                            skipped={skipped}
-                            setSkipped={setSkipped}
-                            isStepSkipped={isStepSkipped}>
-            </ProgressStepper>}
-      </Grid>
-    </Container>
+            steps={steps}
+            activeStep={activeStep}
+            setActiveStep={setActiveStep}
+            stepSkipped={stepSkipped}
+            setStepSkipped={setStepSkipped}
+            skipped={skipped}
+            setSkipped={setSkipped}
+            isStepSkipped={isStepSkipped}
+            qualification={qualification}
+            setQualification={setQualification}
+            location={location}
+            setLocation={setLocation}>
+          </ProgressStepper>}
+        </Grid>
+      </Container>
     </>
   )
 };
