@@ -205,6 +205,9 @@ function FilterPanel({state, setState}) {
                         </Select>
                     </FormControl>
                 </Grid>
+                {/* <Grid item>
+                    Apply
+                </Grid> */}
             </Grid>
             
         </div>

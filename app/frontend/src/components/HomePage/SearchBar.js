@@ -42,7 +42,7 @@ function SearchBar() {
                     <NoticeBoard></NoticeBoard>
                 </Container>
                 <Container className="tracks">
-                    <Results></Results>
+                    <Results filterConditions={filter}></Results>
                 </Container>
         </Grid>
     );

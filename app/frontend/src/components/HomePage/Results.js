@@ -115,6 +115,7 @@ const CustomCard = ({
   price,
   location,
   qualification,
+  gender,
 }) => {
   const mediaStyles = useFourThreeCardMediaStyles();
   const textCardContentStyles = useN04TextInfoContentStyles();
@@ -123,7 +124,11 @@ const CustomCard = ({
     <div>
       <h3>${price}/hr</h3>
       <p>
-        <b>Highest Qualification: </b>
+        <b>Gender: </b>
+        {gender}
+      </p>
+      <p>
+        <b>Highest qualification: </b>
         {qualification}
       </p>
       <p>
@@ -135,13 +140,13 @@ const CustomCard = ({
   );
   return (
     <CardActionArea
-      className={classes.actionArea}
+      classname={classes.actionArea}
       style={{
         border: "none",
         outline: "none",
       }}
     >
-      <Card className={classes.card}>
+      <Card classname={classes.card}>
         <CardMedia classes={mediaStyles} image={image} />
         <CardContent>
           <TextInfoContent
@@ -156,320 +161,321 @@ const CustomCard = ({
   );
 };
 
-const tutorResults = [
+let tutorResults = [
   {
-    Name: "1Tan Ah Seng",
-    Bio: "Drunkard",
+    name: "1Tan Ah Seng",
+    description: "Drunkard",
     Price: "40",
     Level: "Primary School",
-    Gender: "Male",
-    Qualification: "Degree",
-    Location: "Eunos",
+    gender: "Male",
+    qualification: "Degree",
+    nearestMrt: "Eunos",
     userId: 3,
   },
   {
-    Name: "2Tan Ah Beng",
-    Bio: "Lulser",
+    name: "2Tan Ah Beng",
+    description: "Lulser",
     Price: "70",
     Level: "JC",
-    Gender: "Male",
-    Qualification: "O-level",
-    Location: "Dhoby Ghaut",
+    gender: "Male",
+    qualification: "O-level",
+    nearestMrt: "Dhoby Ghaut",
     userId: 1,
   },
   {
-    Name: "3Tan Ah Feng",
-    Bio: "Drunkard",
+    name: "3Tan Ah Feng",
+    description: "Drunkard",
     Price: "40",
     Level: "Primary School",
-    Gender: "Female",
-    Qualification: "Degree",
-    Location: "Jurong",
+    gender: "Female",
+    qualification: "Degree",
+    nearestMrt: "Jurong",
     userId: 4,
   },
   {
-    Name: "4Ah Leng",
-    Bio: "Good lessons efficinet fast",
+    name: "4Ah Leng",
+    description: "Good lessons efficinet fast",
     Price: "60",
     Level: "Primary School",
-    Gender: "Male",
-    Qualification: "A-level",
-    Location: "Dakota",
+    gender: "Male",
+    qualification: "A-level",
+    nearestMrt: "Dakota",
     userId: 5,
   },
   {
-    Name: "5Ah Peng",
-    Bio: "Football",
+    name: "5Ah Peng",
+    description: "Football",
     Price: "50",
     Level: "Sec School",
-    Gender: "Female",
-    Qualification: "Masters",
-    Location: "Downtown Line",
+    gender: "Female",
+    qualification: "Masters",
+    nearestMrt: "Downtown Line",
     userId: 2,
   },
   {
-    Name: "6Tan Ah Seng",
-    Bio: "Drunkard",
+    name: "6Tan Ah Seng",
+    description: "Drunkard",
     Price: "40",
     Level: "Primary School",
-    Gender: "Male",
-    Qualification: "Degree",
-    Location: "Eunos",
+    gender: "Male",
+    qualification: "Degree",
+    nearestMrt: "Eunos",
     userId: 3,
   },
   {
-    Name: "7Tan Ah Beng",
-    Bio: "Lulser",
+    name: "7Tan Ah Beng",
+    description: "Lulser",
     Price: "70",
     Level: "JC",
-    Gender: "Male",
-    Qualification: "O-level",
-    Location: "Dhoby Ghaut",
+    gender: "Male",
+    qualification: "O-level",
+    nearestMrt: "Dhoby Ghaut",
     userId: 1,
   },
   {
-    Name: "8Tan Ah Feng",
-    Bio: "Drunkard",
+    name: "8Tan Ah Feng",
+    description: "Drunkard",
     Price: "40",
     Level: "Primary School",
-    Gender: "Female",
-    Qualification: "Degree",
-    Location: "Jurong",
+    gender: "Female",
+    qualification: "Degree",
+    nearestMrt: "Jurong",
     userId: 4,
   },
   {
-    Name: "9Ah Leng",
-    Bio: "Good lessons efficinet fast",
+    name: "9Ah Leng",
+    description: "Good lessons efficinet fast",
     Price: "60",
     Level: "Primary School",
-    Gender: "Male",
-    Qualification: "A-level",
-    Location: "Dakota",
+    gender: "Male",
+    qualification: "A-level",
+    nearestMrt: "Dakota",
     userId: 5,
   },
   {
-    Name: "10Ah Peng",
-    Bio: "Football",
+    name: "10Ah Peng",
+    description: "Football",
     Price: "50",
     Level: "Sec School",
-    Gender: "Female",
-    Qualification: "Masters",
-    Location: "Downtown Line",
+    gender: "Female",
+    qualification: "Masters",
+    nearestMrt: "Downtown Line",
     userId: 2,
   },
   {
-    Name: "11Tan Ah Seng",
-    Bio: "Drunkard",
+    name: "11Tan Ah Seng",
+    description: "Drunkard",
     Price: "40",
     Level: "Primary School",
-    Gender: "Male",
-    Qualification: "Degree",
-    Location: "Eunos",
+    gender: "Male",
+    qualification: "Degree",
+    nearestMrt: "Eunos",
     userId: 3,
   },
   {
-    Name: "12Tan Ah Beng",
-    Bio: "Lulser",
+    name: "12Tan Ah Beng",
+    description: "Lulser",
     Price: "70",
     Level: "JC",
-    Gender: "Male",
-    Qualification: "O-level",
-    Location: "Dhoby Ghaut",
+    gender: "Male",
+    qualification: "O-level",
+    nearestMrt: "Dhoby Ghaut",
     userId: 1,
   },
   {
-    Name: "13Tan Ah Feng",
-    Bio: "Drunkard",
+    name: "13Tan Ah Feng",
+    description: "Drunkard",
     Price: "40",
     Level: "Primary School",
-    Gender: "Female",
-    Qualification: "Degree",
-    Location: "Jurong",
+    gender: "Female",
+    qualification: "Degree",
+    nearestMrt: "Jurong",
     userId: 4,
   },
   {
-    Name: "14Ah Leng",
-    Bio: "Good lessons efficinet fast",
+    name: "14Ah Leng",
+    description: "Good lessons efficinet fast",
     Price: "60",
     Level: "Primary School",
-    Gender: "Male",
-    Qualification: "A-level",
-    Location: "Dakota",
+    gender: "Male",
+    qualification: "A-level",
+    nearestMrt: "Dakota",
     userId: 5,
   },
   {
-    Name: "15Ah Peng",
-    Bio: "Football",
+    name: "15Ah Peng",
+    description: "Football",
     Price: "50",
     Level: "Sec School",
-    Gender: "Female",
-    Qualification: "Masters",
-    Location: "Downtown Line",
+    gender: "Female",
+    qualification: "Masters",
+    nearestMrt: "Downtown Line",
     userId: 2,
   },
   {
-    Name: "16Tan Ah Feng",
-    Bio: "Drunkard",
+    name: "16Tan Ah Feng",
+    description: "Drunkard",
     Price: "40",
     Level: "Primary School",
-    Gender: "Female",
-    Qualification: "Degree",
-    Location: "Jurong",
+    gender: "Female",
+    qualification: "Degree",
+    nearestMrt: "Jurong",
     userId: 4,
   },
   {
-    Name: "17Ah Leng",
-    Bio: "Good lessons efficinet fast",
+    name: "17Ah Leng",
+    description: "Good lessons efficinet fast",
     Price: "60",
     Level: "Primary School",
-    Gender: "Male",
-    Qualification: "A-level",
-    Location: "Dakota",
+    gender: "Male",
+    qualification: "A-level",
+    nearestMrt: "Dakota",
     userId: 5,
   },
   {
-    Name: "18Ah Peng",
-    Bio: "Football",
+    name: "18Ah Peng",
+    description: "Football",
     Price: "50",
     Level: "Sec School",
-    Gender: "Female",
-    Qualification: "Masters",
-    Location: "Downtown Line",
+    gender: "Female",
+    qualification: "Masters",
+    nearestMrt: "Downtown Line",
     userId: 2,
   },
   {
-    Name: "19Tan Ah Seng",
-    Bio: "Drunkard",
+    name: "19Tan Ah Seng",
+    description: "Drunkard",
     Price: "40",
     Level: "Primary School",
-    Gender: "Male",
-    Qualification: "Degree",
-    Location: "Eunos",
+    gender: "Male",
+    qualification: "Degree",
+    nearestMrt: "Eunos",
     userId: 3,
   },
   {
-    Name: "20Tan Ah Beng",
-    Bio: "Lulser",
+    name: "20Tan Ah Beng",
+    description: "Lulser",
     Price: "70",
     Level: "JC",
-    Gender: "Male",
-    Qualification: "O-level",
-    Location: "Dhoby Ghaut",
+    gender: "Male",
+    qualification: "O-level",
+    nearestMrt: "Dhoby Ghaut",
     userId: 1,
   },
   {
-    Name: "21Tan Ah Feng",
-    Bio: "Drunkard",
+    name: "21Tan Ah Feng",
+    description: "Drunkard",
     Price: "40",
     Level: "Primary School",
-    Gender: "Female",
-    Qualification: "Degree",
-    Location: "Jurong",
+    gender: "Female",
+    qualification: "Degree",
+    nearestMrt: "Jurong",
     userId: 4,
   },
   {
-    Name: "22Ah Leng",
-    Bio: "Good lessons efficinet fast",
+    name: "22Ah Leng",
+    description: "Good lessons efficinet fast",
     Price: "60",
     Level: "Primary School",
-    Gender: "Male",
-    Qualification: "A-level",
-    Location: "Dakota",
+    gender: "Male",
+    qualification: "A-level",
+    nearestMrt: "Dakota",
     userId: 5,
   },
   {
-    Name: "23Ah Peng",
-    Bio: "Football",
+    name: "23Ah Peng",
+    description: "Football",
     Price: "50",
     Level: "Sec School",
-    Gender: "Female",
-    Qualification: "Masters",
-    Location: "Downtown Line",
+    gender: "Female",
+    qualification: "Masters",
+    nearestMrt: "Downtown Line",
     userId: 2,
   },
   {
-    Name: "24Tan Ah Feng",
-    Bio: "Drunkard",
+    name: "24Tan Ah Feng",
+    description: "Drunkard",
     Price: "40",
     Level: "Primary School",
-    Gender: "Female",
-    Qualification: "Degree",
-    Location: "Jurong",
+    gender: "Female",
+    qualification: "Degree",
+    nearestMrt: "Jurong",
     userId: 4,
   },
   {
-    Name: "25Ah Leng",
-    Bio: "Good lessons efficinet fast",
+    name: "25Ah Leng",
+    description: "Good lessons efficinet fast",
     Price: "60",
     Level: "Primary School",
-    Gender: "Male",
-    Qualification: "A-level",
-    Location: "Dakota",
+    gender: "Male",
+    qualification: "A-level",
+    nearestMrt: "Dakota",
     userId: 5,
   },
   {
-    Name: "26Ah Peng",
-    Bio: "Football",
+    name: "26Ah Peng",
+    description: "Football",
     Price: "50",
     Level: "Sec School",
-    Gender: "Female",
-    Qualification: "Masters",
-    Location: "Downtown Line",
+    gender: "Female",
+    qualification: "Masters",
+    nearestMrt: "Downtown Line",
     userId: 2,
   },
   {
-    Name: "27Tan Ah Seng",
-    Bio: "Drunkard",
+    name: "27Tan Ah Seng",
+    description: "Drunkard",
     Price: "40",
     Level: "Primary School",
-    Gender: "Male",
-    Qualification: "Degree",
-    Location: "Eunos",
+    gender: "Male",
+    qualification: "Degree",
+    nearestMrt: "Eunos",
     userId: 3,
   },
   {
-    Name: "28Tan Ah Beng",
-    Bio: "Lulser",
+    name: "28Tan Ah Beng",
+    description: "Lulser",
     Price: "70",
     Level: "JC",
-    Gender: "Male",
-    Qualification: "O-level",
-    Location: "Dhoby Ghaut",
+    gender: "Male",
+    qualification: "O-level",
+    nearestMrt: "Dhoby Ghaut",
     userId: 1,
   },
   {
-    Name: "29Tan Ah Feng",
-    Bio: "Drunkard",
+    name: "29Tan Ah Feng",
+    description: "Drunkard",
     Price: "40",
     Level: "Primary School",
-    Gender: "Female",
-    Qualification: "Degree",
-    Location: "Jurong",
+    gender: "Female",
+    qualification: "Degree",
+    nearestMrt: "Jurong",
     userId: 4,
   },
   {
-    Name: "30Ah Leng",
-    Bio: "Good lessons efficinet fast",
+    name: "30Ah Leng",
+    description: "Good lessons efficinet fast",
     Price: "60",
     Level: "Primary School",
-    Gender: "Male",
-    Qualification: "A-level",
-    Location: "Dakota",
+    gender: "Male",
+    qualification: "A-level",
+    nearestMrt: "Dakota",
     userId: 5,
   },
   {
-    Name: "31Ah Peng",
-    Bio: "Football",
+    name: "31Ah Peng",
+    description: "Football",
     Price: "50",
     Level: "Sec School",
-    Gender: "Female",
-    Qualification: "Masters",
-    Location: "Downtown Line",
+    gender: "Female",
+    qualification: "Masters",
+    nearestMrt: "Downtown Line",
     userId: 2,
   },
 ];
 
-export const Results = React.memo(function SolidGameCard() {
+ 
+export const Results = React.memo(function SolidGameCard({ filterConditions }) {
   const gridStyles = useGridStyles();
   const classes = useStyles();
 
@@ -477,30 +483,73 @@ export const Results = React.memo(function SolidGameCard() {
   const items = [];
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
+  // const [res, setRes] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+
+  // let res;
   const handleChange = (event, value) => {
     setCurrentPage(value);
     // [array of filters]
     //let filteredResults = tutorResults.filter()
     //setPosts(filteredResults.slice())
-    let temp = tutorResults.slice((value - 1) * 8, (value - 1) * 8 + 8);
-    setPosts(temp);
+    // let temp = res.slice((value - 1) * 8, (value - 1) * 8 + 8);
+    // setPosts(temp);
   };
 
   useEffect(() => {
     const fetchPosts = async () => {
       setLoading(true);
-      const res = tutorResults;
+      let res = tutorResults.filter((item) => {
+        const checkLocation = (conditions, location) => {
+          if (conditions.length == 0) {
+            return true;
+          }
+
+          for (condition of conditions) {
+            if (location === condition) {
+              return true;
+            }
+          }
+          return false;
+        };
+
+        for (var key in filterConditions) {
+          if (filterConditions[key] === "") {
+            continue;
+          } else if (key === "selectedLocations") {
+            if (!checkLocation(filterConditions[key], item.nearestMrt)) {
+              return false;
+            }
+          } else if (
+            item[key] === undefined ||
+            item[key] === "" ||
+            item[key] != filterConditions[key]
+          ) {
+            return false;
+          }
+        }
+        return true;
+
+        // return (item.gender === 'Male');
+      });
+      // setRes(filteredRes);
+      // console.log(`Before filter: ${filteredTutorResults.length}`);
+      // console.log(filteredRes);
       //replace res with api
-      let temp = tutorResults.slice(0, 8);
+      // let temp = res.slice(0, 8);
+      // let temp = res.slice((value - 1) * 8, (value - 1) * 8 + 8);
+      let temp = res.slice((currentPage - 1) * 8, (currentPage - 1) * 8 + 8);
+
+      // console.log(res);
+      
       setPosts(temp);
-      setTotalPages(Math.ceil(tutorResults.length / 8));
+      setTotalPages(Math.ceil(res.length / 8));
       setLoading(false);
     };
     fetchPosts();
-  }, []);
+  }, [filterConditions, currentPage]);
 
   for (const [index, value] of posts.entries()) {
     items.push(
@@ -509,13 +558,14 @@ export const Results = React.memo(function SolidGameCard() {
           key={value.userId}
           // onClick={value.userId}
           classes={styles}
-          name={value.Name}
-          bio={value.Bio}
+          name={value.name}
+          bio={value.description}
           price={value.Price}
           levels={value.Level}
-          qualification={value.Qualification}
-          location={value.Location}
+          qualification={value.qualification}
+          location={value.nearestMrt}
           image={"./guy1.jpg"}
+          gender={value.gender}
         />
       </Grid>
     );
@@ -527,7 +577,7 @@ export const Results = React.memo(function SolidGameCard() {
         {items}
       </Grid>
       <Grid container justify="center">
-        <div className={classes.paginationStyle}>
+        <div classname={classes.paginationStyle}>
           <Pagination
             count={totalPages}
             size="large"
