@@ -6,11 +6,14 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Typography from '@material-ui/core/Typography';
+import Input from '@material-ui/core/Input';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import { PermDeviceInformationTwoTone } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(3),
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(2),
     width: '100%',
   },
   textEntry: {
@@ -31,22 +34,25 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-  //hardcoded
-  let allNearestMRT = [
-    'Bedok',
-    'Bishan',
-    'Boon Keng',
-    'Bukit Timah',
-    'Chinatown',
-    'Hougang',
-    'Jurong',
-    'Orchard',
-    'Pasir Ris',
-    'Sengkang',
-    'Sentosa',
-    'Serangoon',
-    'Simei',
-    'Woodlands']
+//hardcoded
+let allNearestMRT = [
+  'Bedok',
+  'Bishan',
+  'Boon Keng',
+  'Bukit Timah',
+  'Chinatown',
+  'Hougang',
+  'Jurong',
+  'Orchard',
+  'Pasir Ris',
+  'Sengkang',
+  'Sentosa',
+  'Serangoon',
+  'Simei',
+  'Woodlands']
+
+  let priceList = [
+    '10', '20', '30', '40', '50', '60', '70', '80', '90', '100', '110', '120', '130', '140', '150', '160', '170', '180', '190', '200']
 
 export default function YourDetails(props) {
   const classes = useStyles();
@@ -54,6 +60,11 @@ export default function YourDetails(props) {
   const handleChangeQualification = (event) => {
     const value = event.target.value
     props.setQualification(value);
+  };
+
+  const handleChangePrice = (event) => {
+    const value = event.target.value
+    props.setPrice(value);
   };
 
   const handleChangeLocation = (event) => {
@@ -72,9 +83,6 @@ export default function YourDetails(props) {
       </Grid>
       <Grid item xs={12}>
         <br></br>
-        <Typography variant="h5">
-          Qualifications
-        </Typography>
       </Grid>
       <Grid item xs={12}>
         <FormControl className={classes.formControl}>
@@ -97,12 +105,20 @@ export default function YourDetails(props) {
           </Select>
         </FormControl>
       </Grid>
-      <Grid item className={classes.divider} xs={12}>
+      <Grid item xs={12}>
+      <FormControl className={classes.formControl}>
+          <InputLabel id="priceLabel">Price Per Hour</InputLabel>
+          <Select
+            labelId="priceLabel"
+            id="priceLabel"
+            value={props.price}
+            onChange={handleChangePrice}
+          >
+          {priceList.map((pricelist) => <MenuItem value={pricelist}>{pricelist}</MenuItem>)}
+          </Select>
+        </FormControl>
       </Grid>
       <Grid item xs={12}>
-      <Typography variant="h5">
-          Enter your location
-        </Typography>
         <FormControl className={classes.formControl}>
           <InputLabel id="locationSelectLabel">Nearest MRT</InputLabel>
           <Select

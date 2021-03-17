@@ -57,7 +57,9 @@ export default function HorizontalLinearStepper(props) {
                                         qualification={props.qualification}
                                         setQualification={props.setQualification}
                                         location={props.location}
-                                        setLocation={props.setLocation}>
+                                        setLocation={props.setLocation}
+                                        price={props.price}
+                                        setPrice={props.setPrice}>
                                         </YourDetails>}
         {(props.activeStep === 1) && <TeachingDetails></TeachingDetails>}
         {(props.activeStep === 2) && <Typography className={classes.instructions}><SetTimeSlot></SetTimeSlot></Typography>}
