@@ -8,16 +8,17 @@ import org.springframework.http.HttpStatus;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 
+import TutorBookingWebsite.controller.FileController;
+import TutorBookingWebsite.dao.FileDBDao;
 import TutorBookingWebsite.dao.LevelsTaughtDao;
 import TutorBookingWebsite.dao.ReviewDao;
-import TutorBookingWebsite.dao.SubjectDao;
 import TutorBookingWebsite.dao.TimeslotDao;
 import TutorBookingWebsite.dao.UserDao;
 import TutorBookingWebsite.dao.UserTimeslotDao;
 import TutorBookingWebsite.exception.APIException;
+import TutorBookingWebsite.model.FileDB;
 import TutorBookingWebsite.model.LevelsTaught;
 import TutorBookingWebsite.model.ResponseDetails;
-import TutorBookingWebsite.model.Subject;
 import TutorBookingWebsite.model.Timeslot;
 import TutorBookingWebsite.model.User;
 import TutorBookingWebsite.model.UserTimeslot;
@@ -40,9 +41,6 @@ public class UserService {
 	private ReviewDao reviewDao;
 	
 	@Autowired
-	private SubjectDao subjectDao;
-	
-	@Autowired
 	private LevelsTaughtDao levelsTaughtDao;
 	
 	@Autowired
@@ -50,6 +48,12 @@ public class UserService {
 	
 	@Autowired
 	private TimeslotDao timeslotDao;
+	
+	@Autowired
+	private FileDBDao fileDBDao;
+	
+	@Autowired
+	private FileController fileController;
 		
 	public Map<String, Object> getTutorById(int userId){
 		try {
@@ -59,7 +63,7 @@ public class UserService {
 				throw new APIException("no such tutor");
 			} else {
 				result.put("userid", "" + user.get().getUserId());
-				result.put("decription", user.get().getDescription());
+				result.put("description", user.get().getDescription());
 				result.put("email", user.get().getEmail());
 				result.put("gender", user.get().getGender());
 				result.put("isTutor", "" + user.get().getIsTutor());
@@ -70,18 +74,21 @@ public class UserService {
 				result.put("qualification", "" + user.get().getQualification());
 				result.put("reviews", reviewDao.findByTutorId(userId));
 				
-				List<Subject> subjectsTaught = subjectDao.findByTutorId(user.get().getUserId());
-				List<String> subjectTemp = new ArrayList<>();
-				for (Subject x:subjectsTaught) {
-					subjectTemp.add(x.getSubjectTaught());
-				}
-				result.put("subjectsTaught", subjectTemp);
-				
 				List<LevelsTaught> levelsTaught = levelsTaughtDao.findByTutorId(user.get().getUserId());
-				List<String> levelsTaughtTemp = new ArrayList<>();
+				Map<String,List<String>> levelsTaughtTemp = new HashMap<>();
+				
 				for (LevelsTaught x:levelsTaught) {
-					levelsTaughtTemp.add(x.getLevelsTaught());
+					if (!levelsTaughtTemp.containsKey(x.getLevelsTaught())) {
+						List<String> z = new ArrayList<>();
+						z.add(x.getSubject());
+						levelsTaughtTemp.put(x.getLevelsTaught(), z);
+					} else {
+						List<String> placeHolder = levelsTaughtTemp.get(x.getLevelsTaught());
+						placeHolder.add(x.getSubject());
+						levelsTaughtTemp.put(x.getLevelsTaught(), placeHolder);
+					}
 				}
+				
 				result.put("levelsTaught", levelsTaughtTemp);
 				
 				List<UserTimeslot> userTimeslot = userTimeslotDao.findByTutorId(user.get().getUserId());
@@ -94,6 +101,9 @@ public class UserService {
 					}
 				}
 				result.put("openTimeslot", timeslotTemp);
+				
+				result.put("imageURL", "http://localhost:8080/api/files/" + user.get().getUserId());
+				
 			}
 			
 			return result;
@@ -120,18 +130,20 @@ public class UserService {
 			placeHolder.put("qualification", temp.getQualification());
 			placeHolder.put("reviews", reviewDao.findByTutorId(temp.getUserId()));
 			
-			List<Subject> subjectsTaught = subjectDao.findByTutorId(temp.getUserId());
-			List<String> subjectTemp = new ArrayList<>();
-			for (Subject x:subjectsTaught) {
-				subjectTemp.add(x.getSubjectTaught());
-			}
-			placeHolder.put("subjectsTaught", subjectTemp);
-			
 			List<LevelsTaught> levelsTaught = levelsTaughtDao.findByTutorId(temp.getUserId());
-			List<String> levelsTaughtTemp = new ArrayList<>();
+			Map<String,List<String>> levelsTaughtTemp = new HashMap<>();	
 			for (LevelsTaught x:levelsTaught) {
-				levelsTaughtTemp.add(x.getLevelsTaught());
+				if (!levelsTaughtTemp.containsKey(x.getLevelsTaught())) {
+					List<String> z = new ArrayList<>();
+					z.add(x.getSubject());
+					levelsTaughtTemp.put(x.getLevelsTaught(), z);
+				} else {
+					List<String> placeHolder1 = levelsTaughtTemp.get(x.getLevelsTaught());
+					placeHolder1.add(x.getSubject());
+					levelsTaughtTemp.put(x.getLevelsTaught(), placeHolder1);
+				}
 			}
+			
 			placeHolder.put("levelsTaught", levelsTaughtTemp);
 			
 			List<UserTimeslot> userTimeslot = userTimeslotDao.findByTutorId(temp.getUserId());
@@ -144,6 +156,7 @@ public class UserService {
 				}
 			}
 			placeHolder.put("openTimeslot", timeslotTemp);
+			placeHolder.put("imageURL", "http://localhost:8080/api/files/" + temp.getUserId());
 			
 			result.add(placeHolder);
 		}
@@ -192,10 +205,12 @@ public class UserService {
 		
 		List<Object> subjects = (List<Object>)data.get("subjects");
 		List<String> subject = new ArrayList<>();
+		List<String> levelsTaught = new ArrayList<>();
 		
 		for (Object x: subjects) {
 			Map<String,Object> tempSubject = (Map<String, Object>) x;
 			subject.add(tempSubject.get("subjectTaught").toString());
+			levelsTaught.add(tempSubject.get("levelsTaught").toString());
 		}
 		
 		List<Object> timeslots = (List<Object>)data.get("timeslots");
@@ -205,18 +220,13 @@ public class UserService {
 			Map<String,Object> tempTimeslot = (Map<String, Object>) y;
 			userTimeslot.add(tempTimeslot.get("timeslot").toString());
 		}
-		
-		for (String z:userTimeslot) {
-			System.out.println(z);
-		}
 	
-		
-		
-//		User user, List<String> subject, List<String> userTimeslot
 		User existingUser = userDao.findById(user.getUserId()).orElse(null);
 	
+		int index = 0;
 		for (String temp:subject) {
-			subjectDao.save(new Subject(temp, user.getUserId()));
+			levelsTaughtDao.save(new LevelsTaught(levelsTaught.get(index),temp,user.getUserId()));
+			index++;
 		}
 		
 		for (String temp:userTimeslot) {
@@ -261,11 +271,13 @@ public class UserService {
 				if (user == null) {
 					User newUser = new User(email, name);
 					userDao.save(newUser);
-				} else {
-					result.put("userid", "" + user.getUserId());
-					result.put("name", user.getName());
-					result.put("email", user.getEmail());
 				}
+				
+				result.put("userid", "" + user.getUserId());
+				result.put("name", user.getName());
+				result.put("email", user.getEmail());
+				result.put("isTutor", "" + user.getIsTutor());
+				
 				return result;
 			} else {
 				throw new APIException("Token is invalid!");

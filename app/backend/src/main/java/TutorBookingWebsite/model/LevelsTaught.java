@@ -27,9 +27,23 @@ public class LevelsTaught {
 	private String levelsTaught;
 	@ApiModelProperty(notes= "tutor id")
 	private int tutorId;
+	@ApiModelProperty(notes= "subject")
+	private String subject;
+	
 	
 	public LevelsTaught() {
 		
+	}
+	
+	public LevelsTaught(String subject, int tutorId) {
+		this.subject = subject;
+		this.tutorId = tutorId;
+	}
+	
+	public LevelsTaught(String levelsTaught, String subject, int tutorId) {
+		this.levelsTaught = levelsTaught;
+		this.subject = subject;
+		this.tutorId = tutorId;
 	}
 	
 	public int getLevelsTaughtId() {
@@ -49,5 +63,13 @@ public class LevelsTaught {
 	}
 	public void setTutorId(int tutorId) {
 		this.tutorId = tutorId;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
 }
