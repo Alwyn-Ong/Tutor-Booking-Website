@@ -186,7 +186,33 @@ public class UserService {
 		}
 	}
 	
-	public ResponseEntity updateTutorProfile(User user, List<String> subject, List<String> userTimeslot) {
+	public ResponseEntity updateTutorProfile(Map<String, Object> data) {
+		Map<String,Object> tempUser = (Map<String, Object>) data.get("user");
+		User user = userDao.findById(Integer.parseInt(tempUser.get("userId").toString())).orElse(null);
+		
+		List<Object> subjects = (List<Object>)data.get("subjects");
+		List<String> subject = new ArrayList<>();
+		
+		for (Object x: subjects) {
+			Map<String,Object> tempSubject = (Map<String, Object>) x;
+			subject.add(tempSubject.get("subjectTaught").toString());
+		}
+		
+		List<Object> timeslots = (List<Object>)data.get("timeslots");
+		List<String> userTimeslot = new ArrayList<>();
+		
+		for (Object y:timeslots) {
+			Map<String,Object> tempTimeslot = (Map<String, Object>) y;
+			userTimeslot.add(tempTimeslot.get("timeslot").toString());
+		}
+		
+		for (String z:userTimeslot) {
+			System.out.println(z);
+		}
+	
+		
+		
+//		User user, List<String> subject, List<String> userTimeslot
 		User existingUser = userDao.findById(user.getUserId()).orElse(null);
 	
 		for (String temp:subject) {
