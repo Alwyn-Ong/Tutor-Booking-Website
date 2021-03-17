@@ -196,11 +196,12 @@ function FilterPanel({state, setState}) {
                         <MenuItem value="">
                             <em>None</em>
                         </MenuItem>
-                        <MenuItem value="olevels">O-levels</MenuItem>
-                        <MenuItem value="alevels">A-levels</MenuItem>
-                        <MenuItem value="diploma">Diploma</MenuItem>
-                        <MenuItem value="bachelors">Bachelor's Degree</MenuItem>
-                        <MenuItem value="master">Master</MenuItem>
+                        <MenuItem value="O-Levels">O-Levels</MenuItem>
+                        <MenuItem value="A-Levels">A-Levels</MenuItem>
+                        <MenuItem value="Diploma">Diploma</MenuItem>
+                        <MenuItem value="Degree">Bachelor's Degree</MenuItem>
+                        <MenuItem value="Masters">Master</MenuItem>
+                        <MenuItem value="phd">PhD</MenuItem>
                         </Select>
                     </FormControl>
                 </Grid>
