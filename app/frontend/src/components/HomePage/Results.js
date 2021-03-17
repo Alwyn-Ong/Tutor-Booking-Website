@@ -433,7 +433,7 @@ let tutorResults = [
   {
     name: "28Tan Ah Beng",
     description: "Lulser",
-    price: "70",
+    price: "20",
     Level: "JC",
     gender: "Male",
     qualification: "O-level",
@@ -504,7 +504,6 @@ export const Results = React.memo(function SolidGameCard({ filterConditions }) {
             return true;
           }
 
-          console.log(conditions)
           for (condition of conditions) {
             if (location === condition.value) {
               return true;
@@ -519,6 +518,26 @@ export const Results = React.memo(function SolidGameCard({ filterConditions }) {
           } else if (key === "selectedLocations") {
             if (!checkLocation(filterConditions[key], item.nearestMrt)) {
               return false;
+            }
+          } else if (key === "price") {
+            switch (filterConditions[key]) {
+              case "$":
+                if (item.price > 30) {
+                  return false;
+                }
+                break;
+              case "$$":
+                if (item.price < 30 || item.price > 50) {
+                  return false;
+                }
+                break;
+              case "$$$":
+                if (item.price < 50) {
+                  return false;
+                }
+                break;
+              default:
+                break;
             }
           } else if (
             item[key] === undefined ||

@@ -53,8 +53,7 @@ function FilterPanel({state, setState}) {
     };
 
     const handlePriceChange = (event) => {
-        const price = event.target.price;
-        console.log(price)
+        // const price = event.target.price;
         setState({
             ...state,
             price: event.target.value,
@@ -159,9 +158,9 @@ function FilterPanel({state, setState}) {
                         <MenuItem value="">
                             <em>None</em>
                         </MenuItem>
-                        <MenuItem value="$">$ (20-30/hr) </MenuItem>
+                        <MenuItem value="$">$ ( {"<"} 30/hr) </MenuItem>
                         <MenuItem value="$$">$$ (30-50/hr)</MenuItem>
-                        <MenuItem value="$$$">$$$ (50-80/hr)</MenuItem>
+                        <MenuItem value="$$$">$$$ ( {">"} 50/hr)</MenuItem>
                         </Select>
                     </FormControl>
                 </Grid>
