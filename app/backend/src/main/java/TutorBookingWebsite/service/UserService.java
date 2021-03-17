@@ -10,14 +10,12 @@ import java.security.GeneralSecurityException;
 
 import TutorBookingWebsite.dao.LevelsTaughtDao;
 import TutorBookingWebsite.dao.ReviewDao;
-import TutorBookingWebsite.dao.SubjectDao;
 import TutorBookingWebsite.dao.TimeslotDao;
 import TutorBookingWebsite.dao.UserDao;
 import TutorBookingWebsite.dao.UserTimeslotDao;
 import TutorBookingWebsite.exception.APIException;
 import TutorBookingWebsite.model.LevelsTaught;
 import TutorBookingWebsite.model.ResponseDetails;
-import TutorBookingWebsite.model.Subject;
 import TutorBookingWebsite.model.Timeslot;
 import TutorBookingWebsite.model.User;
 import TutorBookingWebsite.model.UserTimeslot;
@@ -38,9 +36,6 @@ public class UserService {
 	
 	@Autowired
 	private ReviewDao reviewDao;
-	
-	@Autowired
-	private SubjectDao subjectDao;
 	
 	@Autowired
 	private LevelsTaughtDao levelsTaughtDao;
@@ -70,18 +65,21 @@ public class UserService {
 				result.put("qualification", "" + user.get().getQualification());
 				result.put("reviews", reviewDao.findByTutorId(userId));
 				
-				List<Subject> subjectsTaught = subjectDao.findByTutorId(user.get().getUserId());
-				List<String> subjectTemp = new ArrayList<>();
-				for (Subject x:subjectsTaught) {
-					subjectTemp.add(x.getSubjectTaught());
-				}
-				result.put("subjectsTaught", subjectTemp);
-				
 				List<LevelsTaught> levelsTaught = levelsTaughtDao.findByTutorId(user.get().getUserId());
-				List<String> levelsTaughtTemp = new ArrayList<>();
+				Map<String,List<String>> levelsTaughtTemp = new HashMap<>();
+				
 				for (LevelsTaught x:levelsTaught) {
-					levelsTaughtTemp.add(x.getLevelsTaught());
+					if (!levelsTaughtTemp.containsKey(x.getLevelsTaught())) {
+						List<String> z = new ArrayList<>();
+						z.add(x.getSubject());
+						levelsTaughtTemp.put(x.getLevelsTaught(), z);
+					} else {
+						List<String> placeHolder = levelsTaughtTemp.get(x.getLevelsTaught());
+						placeHolder.add(x.getSubject());
+						levelsTaughtTemp.put(x.getLevelsTaught(), placeHolder);
+					}
 				}
+				
 				result.put("levelsTaught", levelsTaughtTemp);
 				
 				List<UserTimeslot> userTimeslot = userTimeslotDao.findByTutorId(user.get().getUserId());
@@ -120,18 +118,20 @@ public class UserService {
 			placeHolder.put("qualification", temp.getQualification());
 			placeHolder.put("reviews", reviewDao.findByTutorId(temp.getUserId()));
 			
-			List<Subject> subjectsTaught = subjectDao.findByTutorId(temp.getUserId());
-			List<String> subjectTemp = new ArrayList<>();
-			for (Subject x:subjectsTaught) {
-				subjectTemp.add(x.getSubjectTaught());
-			}
-			placeHolder.put("subjectsTaught", subjectTemp);
-			
 			List<LevelsTaught> levelsTaught = levelsTaughtDao.findByTutorId(temp.getUserId());
-			List<String> levelsTaughtTemp = new ArrayList<>();
+			Map<String,List<String>> levelsTaughtTemp = new HashMap<>();	
 			for (LevelsTaught x:levelsTaught) {
-				levelsTaughtTemp.add(x.getLevelsTaught());
+				if (!levelsTaughtTemp.containsKey(x.getLevelsTaught())) {
+					List<String> z = new ArrayList<>();
+					z.add(x.getSubject());
+					levelsTaughtTemp.put(x.getLevelsTaught(), z);
+				} else {
+					List<String> placeHolder1 = levelsTaughtTemp.get(x.getLevelsTaught());
+					placeHolder1.add(x.getSubject());
+					levelsTaughtTemp.put(x.getLevelsTaught(), placeHolder1);
+				}
 			}
+			
 			placeHolder.put("levelsTaught", levelsTaughtTemp);
 			
 			List<UserTimeslot> userTimeslot = userTimeslotDao.findByTutorId(temp.getUserId());
@@ -209,7 +209,7 @@ public class UserService {
 		User existingUser = userDao.findById(user.getUserId()).orElse(null);
 	
 		for (String temp:subject) {
-			subjectDao.save(new Subject(temp, user.getUserId()));
+			levelsTaughtDao.save(new LevelsTaught(temp,user.getUserId()));
 		}
 		
 		for (String temp:userTimeslot) {
