@@ -43,12 +43,6 @@ const useStyles = makeStyles((theme) => ({
         .fade(0.5)}`,
     },
   }),
-  content: ({ color }) => {
-    return {
-      backgroundColor: color,
-      padding: '1rem 1.5rem 1.5rem',
-    };
-  },
   name: {
     fontFamily: 'Georgia, serif',
     fontWeight: 'bold',
@@ -206,26 +200,12 @@ const tutorResults = [
     Level: 'Sec School', Gender: 'Female', Qualification: 'Masters', Location: 'Downtown Line', userId: 2 },
 ]
 
-// const gridStyles = useGridStyles();
-// const styles = useStyles({ color: '#203f52' });
-// const styles2 = useStyles({ color: '#4d137f' });
-// const styles3 = useStyles({ color: '#ff9900' });
-// const styles4 = useStyles({ color: '#34241e' });
-
-
-
 export const Results = React.memo(function SolidGameCard() {
   const gridStyles = useGridStyles();
   const classes = useStyles();
 
   const styles = useStyles({ color: '#203f52' });
-  // const styles2 = useStyles({ color: '#4d137f' });
-  // const styles3 = useStyles({ color: '#ff9900' });
-  // const styles4 = useStyles({ color: '#34241e' });
-
-  const items = []
-  // const randomStyles = [styles,styles2,styles3,styles4];
-
+  const items = [];
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -254,94 +234,24 @@ export const Results = React.memo(function SolidGameCard() {
   }, []);
 
     for (const [index, value] of posts.entries()) {
-        // items.push(<li key={index}>{value}</li>)s
-        // let min = 1;
-        // let max = 4;
-        // let rand = Math.floor(Math.random() * (max - min + 1)) + min;
-        // console.log(rand);
-        // switch(rand){
-        //     case 1:
-                items.push(
-                    <Grid item xs={12} sm={6} md={4} lg={3}>
-                    <CustomCard
-                        key={value.userId}
-                        // onClick={value.userId}
-                        classes={styles}
-                        name={value.Name}
-                        bio={value.Bio}
-                        price={value.Price}
-                        levels={value.Level}
-                        qualification={value.Qualification}
-                        location={value.Location}
-                        image={
-                        './guy1.jpg'
-                        }
-                    />
-                    </Grid>
-                )
-            //     break;
-            // case 2:
-            //     items.push(
-            //       <Grid item xs={12} sm={6} md={4} lg={3}>
-            //         <CustomCard
-            //             key={value.userId}
-            //             // onClick={value.userId}
-            //             classes={styles2}
-            //             name={value.Name}
-            //             bio={value.Bio}
-            //             price={value.Price}
-            //             levels={value.Level}
-            //             qualification={value.Qualification}
-            //             location={value.Location}
-            //             image={
-            //             './guy1.jpg'
-            //             }
-            //         />
-            //         </Grid>
-            //     )
-            //     break;
-            // case 3:
-            //     items.push(
-            //       <Grid item xs={12} sm={6} md={4} lg={3}>
-            //         <CustomCard
-            //             key={value.userId}
-            //             // onClick={value.userId}
-            //             classes={styles3}
-            //             name={value.Name}
-            //             bio={value.Bio}
-            //             price={value.Price}
-            //             levels={value.Level}
-            //             qualification={value.Qualification}
-            //             location={value.Location}
-            //             image={
-            //             './guy1.jpg'
-            //             }
-            //         />
-            //         </Grid>
-            //     )
-            //     break;
-            // case 4:
-            //     items.push(
-            //       <Grid item xs={12} sm={6} md={4} lg={3}>
-            //         <CustomCard
-            //             key={value.userId}
-            //             // onClick={value.userId}
-            //             classes={styles4}
-            //             name={value.Name}
-            //             bio={value.Bio}
-            //             price={value.Price}
-            //             levels={value.Level}
-            //             qualification={value.Qualification}
-            //             location={value.Location}
-            //             image={
-            //             './guy1.jpg'
-            //             }
-            //         />
-            //         </Grid>
-            //     )
-            //     break;
-        // }
-        
+      items.push(
+          <Grid item xs={12} sm={6} md={4} lg={3}>
+          <CustomCard
+              key={value.userId}
+              // onClick={value.userId}
+              classes={styles}
+              name={value.Name}
+              bio={value.Bio}
+              price={value.Price}
+              levels={value.Level}
+              qualification={value.Qualification}
+              location={value.Location}
+              image={
+              './guy1.jpg'
+              }
+          />
+          </Grid> 
+      )     
     }
 
   return (
