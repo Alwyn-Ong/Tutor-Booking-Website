@@ -12,7 +12,9 @@ import CardMedia from '@material-ui/core/CardMedia';
 import { useFourThreeCardMediaStyles } from '@mui-treasury/styles/cardMedia/fourThree';
 import { useState, useEffect } from 'react';
 import Pagination from '@material-ui/lab/Pagination';
-
+import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
+import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
+import TextInfoContent from '@mui-treasury/components/content/textInfo';
 
 const useGridStyles = makeStyles(({ breakpoints }) => ({
   root: {
@@ -104,27 +106,35 @@ const useStyles = makeStyles((theme) => ({
   },
   paginationStyle:{
     '& > *': {
-      marginTop: theme.spacing(2),
+      marginTop: theme.spacing(5),
     },
   }
 }));
 
 const CustomCard = ({ classes, image, name, bio, levels, price, location, qualification }) => {
   const mediaStyles = useFourThreeCardMediaStyles();
+  const textCardContentStyles = useN04TextInfoContentStyles();
+  const shadowStyles = useOverShadowStyles({ inactive: true });
+  const element = (
+    <div>
+      <h3>${price}/hr</h3>
+      <p><b>Highest Qualification: </b>{qualification}</p>
+      <p><b>Teaches: </b>{levels}</p>
+      <p>{bio}</p>
+    </div>
+  );
   return (
     <CardActionArea className={classes.actionArea}>
       <Card className={classes.card}>
         <CardMedia classes={mediaStyles} image={image} />
-        <CardContent className={classes.content}>
-          <Typography className={classes.name} variant={'h2'}>
-            {name}
-          </Typography>
-          <Typography className={classes.bio}>{bio}</Typography>
-          <Typography className={classes.subject}><b>Teaching:</b> {levels}</Typography>
-          <Typography className={classes.price}>${price}/hr</Typography>
-          <Typography className={classes.location}><b>Nearest MRT: </b> {location}</Typography>
-          <Typography className={classes.qualification}><b>Highest Qualification: </b>{qualification}</Typography>
-        </CardContent>
+        <CardContent>
+        <TextInfoContent
+          classes={textCardContentStyles}
+          overline={location}
+          heading={name}
+          body={element}
+        />
+      </CardContent>
       </Card>
     </CardActionArea>
   );
@@ -223,6 +233,9 @@ export const Results = React.memo(function SolidGameCard() {
   const [totalPages, setTotalPages] = useState(0);
   const handleChange = (event, value) => {
     setCurrentPage(value);
+    // [array of filters]
+    //let filteredResults = tutorResults.filter()
+    //setPosts(filteredResults.slice()) 
     let temp = tutorResults.slice((value-1)*8,(value-1)*8+8)
     setPosts(temp);
   };
@@ -332,14 +345,14 @@ export const Results = React.memo(function SolidGameCard() {
     }
 
   return (
-    <>
+    <div>
       <Grid classes={gridStyles} container spacing={4}>
         {items}
       </Grid>
       <div className={classes.paginationStyle}>
         <Pagination count={totalPages} size="large" onChange={handleChange} />
       </div>
-    </>
+    </div>
   );
 });
 export default Results

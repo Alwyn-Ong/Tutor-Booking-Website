@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import TutorBookingWebsite.model.Subject;
 import TutorBookingWebsite.model.User;
 import TutorBookingWebsite.service.UserService;
 
@@ -31,7 +32,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/getalltutors")
-	public Map<String,Object> getAllTutors() {
+	public List<Map<String, Object>> getAllTutors() {
 		return service.getAllTutors();
 	}
 	
@@ -43,6 +44,11 @@ public class UserController {
 	@PutMapping("/updateprofile")
 	public ResponseEntity updateUser(@RequestBody User user) {
 		return service.updateUser(user);
+	}
+	
+	@PutMapping("/updatetutorprofile")
+	public ResponseEntity updateTutorProfile(@RequestBody Map<String, Object> data) {
+		return service.updateTutorProfile(data);
 	}
 
 	@PostMapping("/verifytoken")

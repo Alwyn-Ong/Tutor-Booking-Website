@@ -39,6 +39,19 @@ public class UserTimeslot {
 		
 	}
 	
+	public UserTimeslot(int timeslotId, int tutorId, Status status) {
+		this.timeslotId = timeslotId;
+		this.tutorId = tutorId;
+		this.status = status;
+	}
+	
+	public UserTimeslot(int studentId, int timeslotId, int tutorId, Status status) {
+		this.studentId = studentId;
+		this.timeslotId = timeslotId;
+		this.tutorId = tutorId;
+		this.status = status;
+	}
+	
 	public int getUserTimeslotId() {
 		return userTimeslotId;
 	}

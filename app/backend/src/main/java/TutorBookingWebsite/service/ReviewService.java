@@ -24,7 +24,7 @@ public class ReviewService {
 	public List<Review> getReviewsByTutorId(int tutorId){
 		try {
 			Optional<User> user = userDao.findById(tutorId);
-			if (user.get().getRole() != TutorBookingWebsite.model.Role.TUTOR) {
+			if (user.get().getIsTutor() != 1) {
 				throw new APIException("no such tutor");
 			} else {
 				return reviewDao.findByTutorId(tutorId);	
