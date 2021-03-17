@@ -164,11 +164,11 @@ let tutorResults = [
     qualification: "Degree",
     nearestMrt: "Eunos",
     userid: 3,
-    levelsTaught:{
-      Primary:["Math","Chinese","English"],
-      Secondary:["Math","Chinese","English"],
-      JC: ["English"]
-    }
+    levelsTaught: {
+      Primary: ["Math", "Chinese", "English"],
+      Secondary: ["Math", "Chinese", "English"],
+      JC: ["English"],
+    },
   },
   {
     name: "2Tan Ah Beng",
@@ -504,8 +504,9 @@ export const Results = React.memo(function SolidGameCard({ filterConditions }) {
             return true;
           }
 
+          console.log(conditions)
           for (condition of conditions) {
-            if (location === condition) {
+            if (location === condition.value) {
               return true;
             }
           }
