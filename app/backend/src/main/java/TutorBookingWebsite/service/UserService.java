@@ -192,10 +192,12 @@ public class UserService {
 		
 		List<Object> subjects = (List<Object>)data.get("subjects");
 		List<String> subject = new ArrayList<>();
+		List<String> levelsTaught = new ArrayList<>();
 		
 		for (Object x: subjects) {
 			Map<String,Object> tempSubject = (Map<String, Object>) x;
 			subject.add(tempSubject.get("subjectTaught").toString());
+			levelsTaught.add(tempSubject.get("levelsTaught").toString());
 		}
 		
 		List<Object> timeslots = (List<Object>)data.get("timeslots");
@@ -208,8 +210,10 @@ public class UserService {
 	
 		User existingUser = userDao.findById(user.getUserId()).orElse(null);
 	
+		int index = 0;
 		for (String temp:subject) {
-			levelsTaughtDao.save(new LevelsTaught(temp,user.getUserId()));
+			levelsTaughtDao.save(new LevelsTaught(levelsTaught.get(index),temp,user.getUserId()));
+			index++;
 		}
 		
 		for (String temp:userTimeslot) {
