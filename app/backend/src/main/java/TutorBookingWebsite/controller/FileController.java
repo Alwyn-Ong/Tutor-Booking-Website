@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import TutorBookingWebsite.dao.FileDBDao;
+import TutorBookingWebsite.exception.APIException;
 import TutorBookingWebsite.model.FileDB;
 import TutorBookingWebsite.model.ResponseFile;
 import TutorBookingWebsite.model.ResponseMessage;
@@ -65,10 +66,14 @@ public class FileController {
 	@GetMapping("/files/{userId}")
 	  public ResponseEntity<byte[]> getFile(@PathVariable int userId) {
 		Optional<FileDB> existingFile = fileDBDao.findByUserId(userId);
-	    FileDB fileDB = storageService.getFile(existingFile.get().getId());
+		try {
+		    FileDB fileDB = storageService.getFile(existingFile.get().getId());
 
-	    return ResponseEntity.ok()
-	        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
-	        .body(fileDB.getData());
+		    return ResponseEntity.ok()
+		        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
+		        .body(fileDB.getData());	
+		} catch (Exception e) {
+			throw new APIException("No profile image");
+		}
 	  }
 }
