@@ -2,22 +2,14 @@ import React from "react";
 
 import { Grid } from "@material-ui/core";
 import { Container } from "@material-ui/core";
+import Stepper from '@material-ui/core/Stepper';
+import Step from '@material-ui/core/Step';
+import StepLabel from '@material-ui/core/StepLabel';
 
 import ProgressStepper from "../components/TutorProfile/ProgressStepper";
-import YourDetails from "../components/TutorProfile/YourDetails";
 import NavTabs from "../components/TutorProfile/NavTabs";
-import TeachingDetails from "../components/TutorProfile/TeachingDetails";
-import Typography from '@material-ui/core/Typography';
-import SetTimeSlot from "../components/TutorProfile/SetTimeSlot";
 
 import { makeStyles } from "@material-ui/core";
-import {
-  highestQualificationData,
-  levelsTaughtData,
-  primarySubjectsData,
-  oLevelSubjectsData,
-  aLevelSubjectsData
-} from "../components/TutorProfile/data"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,27 +27,70 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Homepage = () => {
+const TutorProfile = () => {
+
+  //hardcoded
+  let userID = 1;
+  let allNearestMRT = [
+    'Bedok',
+    'Bishan',
+    'Boon Keng',
+    'Bukit Timah',
+    'Chinatown',
+    'Hougang',
+    'Jurong',
+    'Orchard',
+    'Pasir Ris',
+    'Sengkang',
+    'Sentosa',
+    'Serangoon',
+    'Simei',
+    'Woodlands']
 
   const [isTutor, setIsTutor] = React.useState(false);
   const [activeStep, setActiveStep] = React.useState(0)
+  const [stepSkipped, setStepSkipped] = React.useState();
+  const [steps, setSteps] = React.useState(['Your Professional Background', 'Teaching Details', 'Available Timeslot']);
+  const [skipped, setSkipped] = React.useState(new Set());
+  const isStepSkipped = (step) => {
+    return skipped.has(step);
+  };
 
   const classes = useStyles();
 
-  return <Container maxWidth="lg" className={classes.root}>
+  return (
+    <>
     <NavTabs isTutor={isTutor}></NavTabs>
-    <Grid container xs={12} className={classes.root}>
-      <Grid className={classes.grid} xs={12}>
-        {(activeStep === 0) && <YourDetails></YourDetails>}
-        {(activeStep === 1) && <TeachingDetails></TeachingDetails>}
-        {(activeStep === 2) && <Typography className={classes.instructions}><SetTimeSlot></SetTimeSlot></Typography>}
+    <Stepper activeStep={activeStep}>
+        {steps.map((label, index) => {
+          const stepProps = {};
+          const labelProps = {};
+          if (isStepSkipped(index)) {
+            stepProps.completed = false;
+          }
+          return (
+            <Step key={label} {...stepProps}>
+              <StepLabel {...labelProps}>{label}</StepLabel>
+            </Step>
+          );
+        })}
+      </Stepper>
+    <Container className={classes.root}>
+      <Grid className={classes.grid} xs={12} style={{width:"100%"}}>
+          {<ProgressStepper isTutor={isTutor}
+                            steps={steps} 
+                            activeStep={activeStep} 
+                            setActiveStep={setActiveStep} 
+                            stepSkipped={stepSkipped} 
+                            setStepSkipped={setStepSkipped}
+                            skipped={skipped}
+                            setSkipped={setSkipped}
+                            isStepSkipped={isStepSkipped}>
+            </ProgressStepper>}
       </Grid>
-      <Grid className={classes.grid} xs={12}>
-        {<ProgressStepper setActiveStep={setActiveStep} activeStep={activeStep} isTutor={isTutor}></ProgressStepper>}
-      </Grid>
-    </Grid>
-
-  </Container>;
+    </Container>
+    </>
+  )
 };
 
-export default Homepage;
+export default TutorProfile;

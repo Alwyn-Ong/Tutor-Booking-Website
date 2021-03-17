@@ -1,10 +1,19 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
+import { Grid } from "@material-ui/core";
+import YourDetails from "./YourDetails";
+import TeachingDetails from "./TeachingDetails";
 import Typography from '@material-ui/core/Typography';
+import SetTimeSlot from "./SetTimeSlot";
+
+import {
+  highestQualificationData,
+  levelsTaughtData,
+  primarySubjectsData,
+  oLevelSubjectsData,
+  aLevelSubjectsData
+} from "./data"
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -16,30 +25,19 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function getSteps() {
-  return ['Your Professional Background', 'Teaching Details', 'Available Timeslot'];
-}
-
 export default function HorizontalLinearStepper(props) {
 
   const classes = useStyles()
-  const [skipped, setSkipped] = React.useState(new Set());
-  const steps = getSteps();
-  const [finishText, setFinishText] = React.useState("Create");
-
-  const isStepSkipped = (step) => {
-    return skipped.has(step);
-  };
 
   const handleNext = () => {
-    let newSkipped = skipped;
-    if (isStepSkipped(props.activeStep)) {
+    let newSkipped = props.skipped;
+    if (props.isStepSkipped(props.activeStep)) {
       newSkipped = new Set(newSkipped.values());
       newSkipped.delete(props.activeStep);
     }
 
     props.setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped(newSkipped);
+    props.setSkipped(newSkipped);
   };
 
   const handleBack = () => {
@@ -48,7 +46,7 @@ export default function HorizontalLinearStepper(props) {
 
   const handleSkip = () => {
     props.setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped((prevSkipped) => {
+    props.setSkipped((prevSkipped) => {
       const newSkipped = new Set(prevSkipped.values());
       newSkipped.add(props.activeStep);
       return newSkipped;
@@ -61,22 +59,15 @@ export default function HorizontalLinearStepper(props) {
 
   return (
     <div className={classes.root}>
-      <Stepper activeStep={props.activeStep}>
-        {steps.map((label, index) => {
-          const stepProps = {};
-          const labelProps = {};
-          if (isStepSkipped(index)) {
-            stepProps.completed = false;
-          }
-          return (
-            <Step key={label} {...stepProps}>
-              <StepLabel {...labelProps}>{label}</StepLabel>
-            </Step>
-          );
-        })}
-      </Stepper>
+      <Grid container xs={12} className={classes.root}>
+      <Grid className={classes.grid} xs={12}>
+        {(props.activeStep === 0) && <YourDetails></YourDetails>}
+        {(props.activeStep === 1) && <TeachingDetails></TeachingDetails>}
+        {(props.activeStep === 2) && <Typography className={classes.instructions}><SetTimeSlot></SetTimeSlot></Typography>}
+      </Grid>
+    </Grid>
       <div>
-        {props.activeStep === steps.length ? (
+        {props.activeStep === props.steps.length ? (
           <div>
             <Typography className={classes.instructions}>
               All steps completed - you&apos;re finished
@@ -97,7 +88,7 @@ export default function HorizontalLinearStepper(props) {
                 onClick={handleNext}
                 className={classes.button}
               >
-                {props.activeStep === steps.length - 1 ? (props.isTutor?"Update":"Create") : 'Next'}
+                {props.activeStep === props.steps.length - 1 ? (props.isTutor?"Update":"Create") : 'Next'}
               </Button>
             </div>
           </div>
