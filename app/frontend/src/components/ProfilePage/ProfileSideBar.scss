@@ -1,0 +1,11 @@
+// $sidebar-bg-color: #ffffff;
+$breakpoint-xs: 480px !default;
+$breakpoint-sm: 576px !default;
+$breakpoint-md: 768px !default;
+$breakpoint-lg: 992px !default;
+$breakpoint-xl: 1200px !default;
+$icon-size: 35px !default;
+$sidebar-width: 240px !default;
+
+@import '~react-pro-sidebar/dist/scss/styles.scss';
+
