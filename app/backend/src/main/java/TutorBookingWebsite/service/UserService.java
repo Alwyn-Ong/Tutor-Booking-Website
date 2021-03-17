@@ -265,6 +265,7 @@ public class UserService {
 					result.put("userid", "" + user.getUserId());
 					result.put("name", user.getName());
 					result.put("email", user.getEmail());
+					result.put("isTutor", "" + user.getIsTutor());
 				}
 				return result;
 			} else {
