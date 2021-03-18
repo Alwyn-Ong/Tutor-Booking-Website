@@ -5,59 +5,7 @@ import LevelsTaughtTransferList from './LevelsTaughtTransferList';
 import SubjectsAutoComplete from './SubjectsAutoComplete';
 import Typography from '@material-ui/core/Typography';
 
-const levelList = ["Primary", "A-Level", "O-Level"]
-
-const olevelSubjectsList = [
-    {title: "Accounting"},
-    {title: "Arabic"},
-    {title: "Biology"},
-    {title: "Chemistry"},
-    {title: "Commerce"},
-    {title: "Computer Science"},
-    {title: "English Language"},
-    {title: "Geography"},
-    {title: "History"},
-    {title: "Islamic Studies"},
-    {title: "Literature in English"},
-    {title: "Additional Mathematics"},
-    {title: "Mathematics D"},
-    {title: "Physics"},
-    {title: "Combined Science"},
-    {title: "Sociology"},
-    {title: "Statistics"},
-    {title: "Tamil"}
-]
-
-const alevelSubjectsList = [
-    {title: "Accounting"},
-    {title:"History"},
-    {title:"Applied Science"},
-    {title:"Biology"},
-    {title:"Chemistry"},
-    {title:"Computer Science"},
-    {title:"Economics"},
-    {title:"English Language"},
-    {title:"English Language and Literature"},
-    {title:"Further Mathematics"},
-    {title:"General Studies"},
-    {title:"Geography"},
-    {title:"Humanities"},
-    {title:"Mathematics"},
-    {title:"Physics"},
-    {title:"Statistics"}
-]
-
-const primarySubjectsList = [
-    {title:"English Language"},
-    {title:"Chinese"},
-    {title:"Malay"},
-    {title:"Tamil"},
-    {title:"Mathematics"},
-    {title:"Science"},
-    {title:"Art"},
-    {title:"Music"},
-    {title:"Social Studies"},
-    {title:"Character and Citizenship Education"}]
+const levelList = ["Primary", "A-Levels", "O-Levels"]
 
 const useStyles = makeStyles((theme) => ({
     autocomplete: {
@@ -68,10 +16,17 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+const subjectsList = [
+    "English",
+    "Maths",
+    "Science",
+    "Economics",
+    "Geography",
+    "History",
+    "Literature"]
+
 export default function YourDetails(props) {
     const classes = useStyles();
-    
-    const [levelTaught, setLevelTaught] = React.useState([])
 
     return (
         <Grid container className={props.instructions}>
@@ -83,19 +38,34 @@ export default function YourDetails(props) {
             <Grid item lg={6} sm={12} xs={12}>
                 <LevelsTaughtTransferList 
                     data={levelList}
-                    levelTaught={levelTaught}
-                    setLevelTaught={setLevelTaught}
+                    levelTaught={props.levelTaught}
+                    setLevelTaught={props.setLevelTaught}
                 ></LevelsTaughtTransferList>
             </Grid>
             <Grid item lg={6} sm={12} xs={12}>
                 <Grid item lg={12} className={classes.autocomplete}>
-                    {(levelTaught.indexOf("Primary") !== -1) && <SubjectsAutoComplete data={primarySubjectsList} subjectname="Primary"></SubjectsAutoComplete>}
+                    {(props.levelTaught.indexOf("Primary") !== -1) && <SubjectsAutoComplete 
+                                                                        data={subjectsList} 
+                                                                        userSubjects={props.primarySubjects}
+                                                                        setUserSubjects={props.setPrimarySubjects} 
+                                                                        subjectname="Primary">
+                                                                        </SubjectsAutoComplete>}
                 </Grid>
                 <Grid item lg={12} className={classes.autocomplete}>
-                    {(levelTaught.indexOf("O-Level") !== -1) && <SubjectsAutoComplete data={olevelSubjectsList} subjectname="O-Level"></SubjectsAutoComplete>}
+                    {(props.levelTaught.indexOf("O-Levels") !== -1) && <SubjectsAutoComplete 
+                                                                        data={subjectsList} 
+                                                                        userSubjects={props.olevelSubjects}
+                                                                        setUserSubjects={props.setOlevelSubjects} 
+                                                                        subjectname="O-Level">
+                                                                        </SubjectsAutoComplete>}
                 </Grid>
                 <Grid item lg={12} className={classes.autocomplete}>
-                    {(levelTaught.indexOf("A-Level") !== -1) && <SubjectsAutoComplete data={alevelSubjectsList} subjectname="A-Level"></SubjectsAutoComplete>}
+                    {(props.levelTaught.indexOf("A-Levels") !== -1) && <SubjectsAutoComplete 
+                                                                        data={subjectsList} 
+                                                                        userSubjects={props.alevelSubjects}
+                                                                        setUserSubjects={props.setAlevelSubjects} 
+                                                                        subjectname="A-Level">
+                                                                        </SubjectsAutoComplete>}
                 </Grid>
             </Grid>
         </Grid>

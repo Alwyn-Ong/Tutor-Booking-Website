@@ -61,7 +61,16 @@ export default function HorizontalLinearStepper(props) {
                                         price={props.price}
                                         setPrice={props.setPrice}>
                                         </YourDetails>}
-        {(props.activeStep === 1) && <TeachingDetails></TeachingDetails>}
+        {(props.activeStep === 1) && <TeachingDetails
+                                        levelTaught={props.levelTaught}
+                                        setLevelTaught={props.levelTaught}
+                                        primarySubjects={props.primarySubjects}
+                                        setPrimarySubjects={props.setPrimarySubjects}
+                                        olevelSubjects={props.olevelSubjects}
+                                        setOlevelSubjects={props.setOlevelSubjects}
+                                        alevelSubjects={props.alevelSubjects}
+                                        setAlevelSubjects={props.setAlevelSubjects}>
+                                        </TeachingDetails>}
         {(props.activeStep === 2) && <Typography className={classes.instructions}><SetTimeSlot></SetTimeSlot></Typography>}
       </Grid>
     </Grid>

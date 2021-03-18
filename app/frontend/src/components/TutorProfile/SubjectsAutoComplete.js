@@ -14,7 +14,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SubjectsAutoComplete(props) {
   const classes = useStyles();
-  const [options, setOptionsData] = React.useState(props.data)
+
+  console.log(props.userSubjects)
 
   return (
     <div className={classes.root}>
@@ -22,8 +23,8 @@ export default function SubjectsAutoComplete(props) {
         multiple
         id={props.subjectname+"_subject"}
         options={props.data}
-        getOptionLabel={(option) => option.title}
-        defaultValue={setOptionsData[1]}
+        getOptionLabel={(option) => option}
+        defaultValue={props.userSubjects}
         renderInput={(params) => (
           <TextField
             {...params}

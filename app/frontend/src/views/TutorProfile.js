@@ -34,6 +34,11 @@ const TutorProfile = () => {
   const [isTutor, setIsTutor] = React.useState(false);
   const [qualification, setQualification] = React.useState("na")
   const [location, setLocation] = React.useState("Bedok")
+  const [price, setPrice] = React.useState(0);
+  const [levelTaught, setLevelTaught] = React.useState([]);
+  const [primarySubjects, setPrimarySubjects] = React.useState([]);
+  const [olevelSubjects, setOlevelSubjects] = React.useState([]);
+  const [alevelSubjects, setAlevelSubjects] = React.useState([]);
 
   const [activeStep, setActiveStep] = React.useState(0)
   const [stepSkipped, setStepSkipped] = React.useState();
@@ -54,6 +59,14 @@ const TutorProfile = () => {
       setIsTutor(newData.isTutor)
       setQualification(newData.qualification.toLowerCase())
       setLocation(newData.nearestMRT);
+      setPrice(newData.price);
+      setLevelTaught(Object.keys(newData.levelsTaught));
+      if (newData.levelsTaught["Primary"])
+        setPrimarySubjects(newData.levelsTaught["Primary"])
+      if (newData.levelsTaught["O-Levels"])
+        setOlevelSubjects(newData.levelsTaught["O-Levels"])
+      if (newData.levelsTaught["A-Levels"])
+        setAlevelSubjects(newData.levelsTaught["A-Levels"])
     };
     fetchData();
   }, [userID]);
@@ -90,7 +103,17 @@ const TutorProfile = () => {
             qualification={qualification}
             setQualification={setQualification}
             location={location}
-            setLocation={setLocation}>
+            setLocation={setLocation}
+            price={price}
+            setPrice={setPrice}
+            levelTaught={levelTaught}
+            setLevelTaught={setLevelTaught}
+            primarySubjects={primarySubjects}
+            setPrimarySubjects={setPrimarySubjects}
+            olevelSubjects={olevelSubjects}
+            setOlevelSubjects={setOlevelSubjects}
+            alevelSubjects={alevelSubjects}
+            setAlevelSubjects={setAlevelSubjects}>
           </ProgressStepper>}
         </Grid>
       </Container>
