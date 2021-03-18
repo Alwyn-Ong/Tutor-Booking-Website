@@ -120,6 +120,7 @@ const CustomCard = ({
   const mediaStyles = useFourThreeCardMediaStyles();
   const textCardContentStyles = useN04TextInfoContentStyles();
   const shadowStyles = useOverShadowStyles({ inactive: true });
+  let levelsCombined = levels.join(", ");
   const element = (
     <div>
       <h3>${price}/hr</h3>
@@ -133,7 +134,7 @@ const CustomCard = ({
       </p>
       <p>
         <b>Teaches: </b>
-        {levels}
+        {levels.join(" , ")}
       </p>
       <p>{bio}</p>
     </div>
@@ -167,7 +168,7 @@ let tutorResults = [
     levelsTaught: {
       Primary: ["Math", "Chinese", "English"],
       Secondary: ["Math", "Chinese", "English"],
-      JC: ["English"],
+      JC: [],
     },
   },
   {
@@ -179,6 +180,11 @@ let tutorResults = [
     qualification: "O-Levels",
     nearestMrt: "Dhoby Ghaut",
     userid: 1,
+    levelsTaught: {
+      Primary: [],
+      Secondary: ["Math", "Chinese", "English"],
+      JC: ["English"],
+    },
   },
   {
     name: "3Tan Ah Feng",
@@ -189,6 +195,11 @@ let tutorResults = [
     qualification: "Degree",
     nearestMrt: "Jurong",
     userid: 4,
+    levelsTaught: {
+      Primary: ["Math", "Chinese", "English"],
+      Secondary: [],
+      JC: ["English"],
+    },
   },
   {
     name: "4Ah Leng",
@@ -199,6 +210,11 @@ let tutorResults = [
     qualification: "A-Levels",
     nearestMrt: "Dakota",
     userid: 5,
+    levelsTaught: {
+      Primary: ["Math", "Chinese", "English"],
+      Secondary: ["Math", "Chinese", "English"],
+      JC: ["English"],
+    },
   },
   {
     name: "5Ah Peng",
@@ -209,6 +225,11 @@ let tutorResults = [
     qualification: "Masters",
     nearestMrt: "Downtown Line",
     userid: 2,
+    levelsTaught: {
+      Primary: ["Math", "Chinese", "English"],
+      Secondary: ["Math", "Chinese", "English"],
+      JC: ["English"],
+    },
   },
   {
     name: "6Tan Ah Seng",
@@ -219,6 +240,11 @@ let tutorResults = [
     qualification: "Degree",
     nearestMrt: "Eunos",
     userid: 3,
+    levelsTaught: {
+      Primary: ["Math", "Chinese", "English"],
+      Secondary: ["Math", "Chinese", "English"],
+      JC: ["English"],
+    },
   },
   {
     name: "7Tan Ah Beng",
@@ -229,6 +255,11 @@ let tutorResults = [
     qualification: "O-Levels",
     nearestMrt: "Dhoby Ghaut",
     userid: 1,
+    levelsTaught: {
+      Primary: ["Math", "Chinese", "English"],
+      Secondary: ["Math", "Chinese", "English"],
+      JC: ["English"],
+    },
   },
   {
     name: "8Tan Ah Feng",
@@ -239,6 +270,11 @@ let tutorResults = [
     qualification: "Degree",
     nearestMrt: "Jurong",
     userid: 4,
+    levelsTaught: {
+      Primary: ["Math", "Chinese", "English"],
+      Secondary: ["Math", "Chinese", "English"],
+      JC: ["English"],
+    },
   },
   {
     name: "9Ah Leng",
@@ -249,6 +285,11 @@ let tutorResults = [
     qualification: "A-Levels",
     nearestMrt: "Dakota",
     userid: 5,
+    levelsTaught: {
+      Primary: ["Math", "Chinese", "English"],
+      Secondary: ["Math", "Chinese", "English"],
+      JC: ["English"],
+    },
   },
   {
     name: "10Ah Peng",
@@ -259,6 +300,11 @@ let tutorResults = [
     qualification: "Masters",
     nearestMrt: "Downtown Line",
     userid: 2,
+    levelsTaught: {
+      Primary: ["Math", "Chinese", "English"],
+      Secondary: ["Math", "Chinese", "English"],
+      JC: ["English"],
+    },
   },
   {
     name: "11Tan Ah Seng",
@@ -269,6 +315,11 @@ let tutorResults = [
     qualification: "Degree",
     nearestMrt: "Eunos",
     userid: 3,
+    levelsTaught: {
+      Primary: ["Math", "Chinese", "English"],
+      Secondary: ["Math", "Chinese", "English"],
+      JC: ["English"],
+    },
   },
   {
     name: "12Tan Ah Beng",
@@ -279,6 +330,11 @@ let tutorResults = [
     qualification: "O-Levels",
     nearestMrt: "Dhoby Ghaut",
     userid: 1,
+    levelsTaught: {
+      Primary: ["Math", "Chinese", "English"],
+      Secondary: ["Math", "Chinese", "English"],
+      JC: ["English"],
+    },
   },
   {
     name: "13Tan Ah Feng",
@@ -289,6 +345,11 @@ let tutorResults = [
     qualification: "Degree",
     nearestMrt: "Jurong",
     userid: 4,
+    levelsTaught: {
+      Primary: ["Math", "Chinese", "English"],
+      Secondary: ["Math", "Chinese", "English"],
+      JC: ["English"],
+    },
   },
   {
     name: "14Ah Leng",
@@ -299,6 +360,11 @@ let tutorResults = [
     qualification: "A-Levels",
     nearestMrt: "Dakota",
     userid: 5,
+    levelsTaught: {
+      Primary: ["Math", "Chinese", "English"],
+      Secondary: ["Math", "Chinese", "English"],
+      JC: ["English"],
+    },
   },
   {
     name: "15Ah Peng",
@@ -309,6 +375,11 @@ let tutorResults = [
     qualification: "Masters",
     nearestMrt: "Downtown Line",
     userid: 2,
+    levelsTaught: {
+      Primary: ["Math", "Chinese", "English"],
+      Secondary: ["Math", "Chinese", "English"],
+      JC: [],
+    },
   },
   {
     name: "16Tan Ah Feng",
@@ -319,6 +390,11 @@ let tutorResults = [
     qualification: "Degree",
     nearestMrt: "Jurong",
     userid: 4,
+    levelsTaught: {
+      Primary: ["Math", "Chinese", "English"],
+      Secondary: ["Math", "Chinese", "English"],
+      JC: ["English"],
+    },
   },
   {
     name: "17Ah Leng",
@@ -329,6 +405,11 @@ let tutorResults = [
     qualification: "A-Levels",
     nearestMrt: "Dakota",
     userid: 5,
+    levelsTaught: {
+      Primary: ["Math", "Chinese", "English"],
+      Secondary: ["Math", "Chinese", "English"],
+      JC: ["English"],
+    },
   },
   {
     name: "18Ah Peng",
@@ -339,6 +420,11 @@ let tutorResults = [
     qualification: "Masters",
     nearestMrt: "Downtown Line",
     userid: 2,
+    levelsTaught: {
+      Primary: ["Math", "Chinese", "English"],
+      Secondary: ["Math", "Chinese", "English"],
+      JC: ["English"],
+    },
   },
   {
     name: "19Tan Ah Seng",
@@ -349,6 +435,11 @@ let tutorResults = [
     qualification: "Degree",
     nearestMrt: "Eunos",
     userid: 3,
+    levelsTaught: {
+      Primary: ["Math", "Chinese", "English"],
+      Secondary: ["Math", "Chinese", "English"],
+      JC: ["English"],
+    },
   },
   {
     name: "20Tan Ah Beng",
@@ -359,6 +450,11 @@ let tutorResults = [
     qualification: "O-Levels",
     nearestMrt: "Dhoby Ghaut",
     userid: 1,
+    levelsTaught: {
+      Primary: ["Math", "Chinese", "English"],
+      Secondary: ["English"],
+      JC: ["English"],
+    },
   },
   {
     name: "21Tan Ah Feng",
@@ -369,6 +465,11 @@ let tutorResults = [
     qualification: "Degree",
     nearestMrt: "Jurong",
     userid: 4,
+    levelsTaught: {
+      Primary: ["Math", "Chinese", "English"],
+      Secondary: ["Math", "Chinese", "English"],
+      JC: ["English"],
+    },
   },
   {
     name: "22Ah Leng",
@@ -379,6 +480,11 @@ let tutorResults = [
     qualification: "A-Levels",
     nearestMrt: "Dakota",
     userid: 5,
+    levelsTaught: {
+      Primary: ["Math", "Chinese", "English"],
+      Secondary: ["Math", "Chinese", "English"],
+      JC: ["English"],
+    },
   },
   {
     name: "23Ah Peng",
@@ -389,6 +495,11 @@ let tutorResults = [
     qualification: "Masters",
     nearestMrt: "Downtown Line",
     userid: 2,
+    levelsTaught: {
+      Primary: ["Math", "Chinese", "English"],
+      Secondary: ["Math", "Chinese", "English"],
+      JC: ["English"],
+    },
   },
   {
     name: "24Tan Ah Feng",
@@ -399,6 +510,11 @@ let tutorResults = [
     qualification: "Degree",
     nearestMrt: "Jurong",
     userid: 4,
+    levelsTaught: {
+      Primary: ["Math", "Chinese", "English"],
+      Secondary: ["Math", "Chinese", "English"],
+      JC: ["English"],
+    },
   },
   {
     name: "25Ah Leng",
@@ -409,6 +525,11 @@ let tutorResults = [
     qualification: "A-Levels",
     nearestMrt: "Dakota",
     userid: 5,
+    levelsTaught: {
+      Primary: ["Math", "Chinese", "English"],
+      Secondary: ["Math", "Chinese", "English"],
+      JC: ["English"],
+    },
   },
   {
     name: "26Ah Peng",
@@ -419,6 +540,11 @@ let tutorResults = [
     qualification: "Masters",
     nearestMrt: "Downtown Line",
     userid: 2,
+    levelsTaught: {
+      Primary: ["Math", "Chinese", "English"],
+      Secondary: ["Math", "Chinese", "English"],
+      JC: ["English"],
+    },
   },
   {
     name: "27Tan Ah Seng",
@@ -429,6 +555,11 @@ let tutorResults = [
     qualification: "Diploma",
     nearestMrt: "Eunos",
     userid: 3,
+    levelsTaught: {
+      Primary: ["Math", "English"],
+      Secondary: ["Math", "Chinese", "English"],
+      JC: ["English"],
+    },
   },
   {
     name: "28Tan Ah Beng",
@@ -439,6 +570,11 @@ let tutorResults = [
     qualification: "O-Levels",
     nearestMrt: "Dhoby Ghaut",
     userid: 1,
+    levelsTaught: {
+      Primary: ["Math", "Chinese", "English"],
+      Secondary: ["Chinese", "English"],
+      JC: ["English"],
+    },
   },
   {
     name: "29Tan Ah Feng",
@@ -449,6 +585,11 @@ let tutorResults = [
     qualification: "Degree",
     nearestMrt: "Jurong",
     userid: 4,
+    levelsTaught: {
+      Primary: ["Math", "Chinese", "English"],
+      Secondary: ["Math", "Chinese", "English"],
+      JC: ["English"],
+    },
   },
   {
     name: "30Ah Leng",
@@ -459,6 +600,11 @@ let tutorResults = [
     qualification: "A-Levels",
     nearestMrt: "Dakota",
     userid: 5,
+    levelsTaught: {
+      Primary: ["Math", "Chinese", "English"],
+      Secondary: ["Math", "Chinese", "English"],
+      JC: ["English"],
+    },
   },
   {
     name: "31Ah Peng",
@@ -469,6 +615,11 @@ let tutorResults = [
     qualification: "Masters",
     nearestMrt: "Downtown Line",
     userid: 2,
+    levelsTaught: {
+      Primary: ["Math", "Chinese", "English"],
+      Secondary: ["Math", "Chinese", "English"],
+      JC: ["English"],
+    },
   },
 ];
 
@@ -539,29 +690,22 @@ export const Results = React.memo(function SolidGameCard({ filterConditions }) {
               default:
                 break;
             }
+          } else if (key === "level") {
+            if (!(filterConditions[key] in item.levelsTaught) || item.levelsTaught[filterConditions[key]].length == 0) {
+              return false;
+            }
+            // if (filterConditions[key])
           } else if (
             item[key] === undefined ||
             item[key] === "" ||
             item[key] != filterConditions[key]
           ) {
-            console.log(key);
-            console.log(item[key])
             return false;
           }
         }
         return true;
-
-        // return (item.gender === 'Male');
       });
-      // setRes(filteredRes);
-      // console.log(`Before filter: ${filteredTutorResults.length}`);
-      // console.log(filteredRes);
-      //replace res with api
-      // let temp = res.slice(0, 8);
-      // let temp = res.slice((value - 1) * 8, (value - 1) * 8 + 8);
       let temp = res.slice((currentPage - 1) * 8, (currentPage - 1) * 8 + 8);
-
-      // console.log(res);
 
       setPosts(temp);
       setTotalPages(Math.ceil(res.length / 8));
@@ -571,6 +715,14 @@ export const Results = React.memo(function SolidGameCard({ filterConditions }) {
   }, [filterConditions, currentPage]);
 
   for (const [index, value] of posts.entries()) {
+    // Get unique levels
+    let levels = [];
+    if (value.levelsTaught !== undefined) {
+      for (let key in value.levelsTaught) {
+        if (value.levelsTaught[key].length != 0) levels.push(key);
+      }
+    }
+
     items.push(
       <Grid item xs={12} sm={6} md={4} lg={3}>
         <CustomCard
@@ -580,7 +732,8 @@ export const Results = React.memo(function SolidGameCard({ filterConditions }) {
           name={value.name}
           bio={value.description}
           price={value.price}
-          levels={value.Level}
+          // levels={value.Level}
+          levels={levels}
           qualification={value.qualification}
           location={value.nearestMrt}
           image={"./guy1.jpg"}
