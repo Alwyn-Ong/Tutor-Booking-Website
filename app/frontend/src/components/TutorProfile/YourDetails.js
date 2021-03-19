@@ -113,7 +113,7 @@ export default function YourDetails(props) {
             value={props.price}
             onChange={handleChangePrice}
           >
-          {priceList.map((pricelist) => <MenuItem value={pricelist}>{pricelist}</MenuItem>)}
+          {priceList.map(pricelist => <MenuItem value={pricelist}>{pricelist}</MenuItem>)}
           </Select>
         </FormControl>
       </Grid>
@@ -126,7 +126,7 @@ export default function YourDetails(props) {
             value={props.location}
             onChange={handleChangeLocation}
           >
-            {allNearestMRT.map((loc) => <MenuItem value={loc}>{loc}</MenuItem>)}
+            {allNearestMRT.map(loc => <MenuItem value={loc}>{loc}</MenuItem>)}
           </Select>
         </FormControl>
       </Grid>
