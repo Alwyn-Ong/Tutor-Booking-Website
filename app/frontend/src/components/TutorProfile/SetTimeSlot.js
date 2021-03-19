@@ -22,15 +22,20 @@ export default function YourDetails(props) {
     return (
         <Grid container className={classes.root}>
             <Grid item className={classes.root} xs={12}>
-                <Typography variant="h2">
-                    Enter your available timeslots
-                </Typography>
+                <div>
+                    <Typography variant="h2">
+                        Enter your available timeslots
+                    </Typography>
+                </div>
             </Grid>
             <Grid item lg={2} sm={12} xs={12}>
             </Grid>
             <Grid className={classes.root} item lg={8} sm={12} xs={12}>
                 <Timetable
-                    openTimeSlot={props.openTimeSlot}
+                    openTimeSlot={props.openTimeSlot} 
+                    setOpenTimeSlot={props.setOpenTimeSlot}
+                    cells={props.openTimeSlotArr}
+                    setCells={props.setOpenTimeSlotArr}
                 ></Timetable>
             </Grid>
             <Grid item lg={2} sm={12} xs={12}>

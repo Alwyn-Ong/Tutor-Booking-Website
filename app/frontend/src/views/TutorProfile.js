@@ -11,6 +11,8 @@ import NavTabs from "../components/TutorProfile/NavTabs";
 
 import { makeStyles } from "@material-ui/core";
 
+let TIME = ["aaa", "1000", "1100", "1200", "1300", "1400", "1500", "1600", "1700", "1800", "1900", "2000", "2100", "2200"];
+
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.dark,
@@ -40,6 +42,7 @@ const TutorProfile = () => {
   const [olevelSubjects, setOlevelSubjects] = React.useState([]);
   const [alevelSubjects, setAlevelSubjects] = React.useState([]);
   const [openTimeSlot, setOpenTimeSlot] = React.useState([]);
+  const [openTimeSlotArr, setOpenTimeSlotArr] = React.useState([]);
 
   const [activeStep, setActiveStep] = React.useState(0)
   const [stepSkipped, setStepSkipped] = React.useState();
@@ -47,6 +50,24 @@ const TutorProfile = () => {
   const [skipped, setSkipped] = React.useState(new Set());
   const isStepSkipped = (step) => {
     return skipped.has(step);
+  };
+
+  const translateOpenTimeSlotToArray =(timeSlot)=> {
+    console.log(timeSlot)
+    const array = generateStateMatrix(14, 8);
+    for (const element of timeSlot){
+      var temp = element.split("-"); //0-day, 1-time
+      var thisColumn = temp[0]
+      var thisRow = TIME.indexOf(temp[1]);
+      array[thisRow][thisColumn]=true;
+    }
+    return array;
+  }
+
+  const generateStateMatrix = (rows, cols) => {
+    return Array.from({ length: rows }, () =>
+      Array.from({ length: cols }, () => false)
+    );
   };
 
   const classes = useStyles();
@@ -68,7 +89,10 @@ const TutorProfile = () => {
         setOlevelSubjects(newData.levelsTaught["O-Levels"])
       if (newData.levelsTaught["A-Levels"])
         setAlevelSubjects(newData.levelsTaught["A-Levels"])
+
+      //handle timeslot
       setOpenTimeSlot(newData.openTimeslot);
+      setOpenTimeSlotArr(translateOpenTimeSlotToArray(newData.openTimeslot));
     };
     fetchUserData();
   }, [userID]);
@@ -117,7 +141,9 @@ const TutorProfile = () => {
             alevelSubjects={alevelSubjects}
             setAlevelSubjects={setAlevelSubjects}
             openTimeSlot={openTimeSlot}
-            setOpenTimeSlot={setOpenTimeSlot}>
+            setOpenTimeSlot={setOpenTimeSlot}
+            openTimeSlotArr={openTimeSlotArr}
+            setOpenTimeSlotArr={setOpenTimeSlotArr}>
           </ProgressStepper>}
         </Grid>
       </Container>

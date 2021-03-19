@@ -1,4 +1,5 @@
 import { Button, Grid, Typography } from "@material-ui/core";
+import { SystemUpdate } from "@material-ui/icons";
 import React from "react";
 import TableDragSelect from "react-table-drag-select";
 import "react-table-drag-select/style.css";
@@ -27,8 +28,7 @@ const getUniqueRows = (data) => {
   return arr;
 };
 
-
-const Timetable = ({isTutor}) => {
+const Timetable = (props) => {
   let days = ["", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
   let timeslots = generateTimeSlots();
@@ -53,30 +53,29 @@ const Timetable = ({isTutor}) => {
 
 
   // const cellDefault = generateStateMatrix(uniqueRows.length + 1, 14);
-  const cellDefault = generateStateMatrix(14, 14);
-
-  const [cells, setCells] = React.useState(cellDefault);
+  const cellDefault = generateStateMatrix(14,8)
 
   const handleChange = (state) => {
-    setCells(state);
+    props.setCells(state);
+    props.setOpenTimeSlot(convertCellsToOutput(props.cells))
   };
 
   const handleReset = () => {
-    setCells(cellDefault);
+    props.setCells(cellDefault);
   };
 
   const handleUpdate = () => {
-    setCells(cellDefault);
+    props.setCells(cellDefault);
   };
 
   return (
     <Grid container direction="column" spacing={1}>
       <Grid item>
-        <TableDragSelect value={cells} onChange={handleChange}>
+        <TableDragSelect value={props.cells} onChange={handleChange}>
           <tr>
-            {days.map((day, index) => {
+            {days.map((day) => {
               return (
-                <td disabled>
+                <td keys={day} disabled>
                   {day}
                 </td>
               );
@@ -91,7 +90,7 @@ const Timetable = ({isTutor}) => {
                   {timeslot}
                 </td>
                 {days.slice(1).map((day, dayIndex) => {
-                  return data.includes(dayIndex + 1 + "-" + timeslot) || isTutor ? (
+                  return data.includes(dayIndex + 1 + "-" + timeslot) ? (
                     <td />
                   ) : (
                     <td disabled />

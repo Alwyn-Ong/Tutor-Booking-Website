@@ -33,10 +33,10 @@ export default function YourDetails(props) {
             <Grid item xs={12}>
                 <Typography variant="h2">
                     Enter your teaching details
-            </Typography>
+                </Typography>
             </Grid>
             <Grid item lg={6} sm={12} xs={12}>
-                <LevelsTaughtTransferList 
+                <LevelsTaughtTransferList
                     data={levelList}
                     levelTaught={props.levelTaught}
                     setLevelTaught={props.setLevelTaught}
@@ -44,28 +44,28 @@ export default function YourDetails(props) {
             </Grid>
             <Grid item lg={6} sm={12} xs={12}>
                 <Grid item lg={12} className={classes.autocomplete}>
-                    {(props.levelTaught.indexOf("Primary") !== -1) && <SubjectsAutoComplete 
-                                                                        data={subjectsList} 
-                                                                        userSubjects={props.primarySubjects}
-                                                                        setUserSubjects={props.setPrimarySubjects} 
-                                                                        subjectname="Primary">
-                                                                        </SubjectsAutoComplete>}
+                    {(props.levelTaught.indexOf("Primary") !== -1) && <SubjectsAutoComplete
+                        data={subjectsList}
+                        userSubjects={props.primarySubjects}
+                        setUserSubjects={props.setPrimarySubjects}
+                        subjectname="Primary">
+                    </SubjectsAutoComplete>}
                 </Grid>
                 <Grid item lg={12} className={classes.autocomplete}>
-                    {(props.levelTaught.indexOf("O-Levels") !== -1) && <SubjectsAutoComplete 
-                                                                        data={subjectsList} 
-                                                                        userSubjects={props.olevelSubjects}
-                                                                        setUserSubjects={props.setOlevelSubjects} 
-                                                                        subjectname="O-Level">
-                                                                        </SubjectsAutoComplete>}
+                    {(props.levelTaught.indexOf("O-Levels") !== -1) && <SubjectsAutoComplete
+                        data={subjectsList}
+                        userSubjects={props.olevelSubjects}
+                        setUserSubjects={props.setOlevelSubjects}
+                        subjectname="O-Level">
+                    </SubjectsAutoComplete>}
                 </Grid>
                 <Grid item lg={12} className={classes.autocomplete}>
-                    {(props.levelTaught.indexOf("A-Levels") !== -1) && <SubjectsAutoComplete 
-                                                                        data={subjectsList} 
-                                                                        userSubjects={props.alevelSubjects}
-                                                                        setUserSubjects={props.setAlevelSubjects} 
-                                                                        subjectname="A-Level">
-                                                                        </SubjectsAutoComplete>}
+                    {(props.levelTaught.indexOf("A-Levels") !== -1) && <SubjectsAutoComplete
+                        data={subjectsList}
+                        userSubjects={props.alevelSubjects}
+                        setUserSubjects={props.setAlevelSubjects}
+                        subjectname="A-Level">
+                    </SubjectsAutoComplete>}
                 </Grid>
             </Grid>
         </Grid>

@@ -71,10 +71,12 @@ export default function HorizontalLinearStepper(props) {
                                         alevelSubjects={props.alevelSubjects}
                                         setAlevelSubjects={props.setAlevelSubjects}>
                                         </TeachingDetails>}
-        {(props.activeStep === 2) && <Typography className={classes.instructions}>
-            <SetTimeSlot openTimeSlot={props.openTimeSlot}>
-            </SetTimeSlot>
-            </Typography>}
+        {(props.activeStep === 2) && <SetTimeSlot 
+                                        openTimeSlot={props.openTimeSlot}
+                                        setOpenTimeSlot={props.setOpenTimeSlot}
+                                        openTimeSlotArr={props.openTimeSlotArr}
+                                        setOpenTimeSlotArr={props.setOpenTimeSlotArr}>
+                                        </SetTimeSlot>}
       </Grid>
     </Grid>
       <div>
