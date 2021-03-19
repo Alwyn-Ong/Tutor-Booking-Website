@@ -76,7 +76,6 @@ export default function YourDetails(props) {
   return (
     <Grid container className={props.instructions}>
       <Grid item xs={12}>
-        <br></br>
         <Typography variant="h2">
           Your professional background and information
         </Typography>

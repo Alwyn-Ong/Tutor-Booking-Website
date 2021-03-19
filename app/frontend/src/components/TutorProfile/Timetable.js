@@ -77,7 +77,7 @@ const Timetable = ({isTutor}) => {
             {days.map((day, index) => {
               return (
                 <td disabled>
-                  <Typography>{day}</Typography>
+                  {day}
                 </td>
               );
             })}
@@ -88,7 +88,7 @@ const Timetable = ({isTutor}) => {
             return (
               <tr>
                 <td disabled>
-                  <Typography>{timeslot}</Typography>
+                  {timeslot}
                 </td>
                 {days.slice(1).map((day, dayIndex) => {
                   return data.includes(dayIndex + 1 + "-" + timeslot) || isTutor ? (

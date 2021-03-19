@@ -39,6 +39,7 @@ const TutorProfile = () => {
   const [primarySubjects, setPrimarySubjects] = React.useState([]);
   const [olevelSubjects, setOlevelSubjects] = React.useState([]);
   const [alevelSubjects, setAlevelSubjects] = React.useState([]);
+  const [openTimeSlot, setOpenTimeSlot] = React.useState([]);
 
   const [activeStep, setActiveStep] = React.useState(0)
   const [stepSkipped, setStepSkipped] = React.useState();
@@ -51,7 +52,7 @@ const TutorProfile = () => {
   const classes = useStyles();
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchUserData = async () => {
       const response = await fetch(`http://localhost:8080/api/gettutorbyid/${userID}/`);
       const newData = await response.json();
       console.log(newData)
@@ -67,8 +68,9 @@ const TutorProfile = () => {
         setOlevelSubjects(newData.levelsTaught["O-Levels"])
       if (newData.levelsTaught["A-Levels"])
         setAlevelSubjects(newData.levelsTaught["A-Levels"])
+      setOpenTimeSlot(newData.openTimeslot);
     };
-    fetchData();
+    fetchUserData();
   }, [userID]);
 
   return (
@@ -90,7 +92,7 @@ const TutorProfile = () => {
         })}
       </Stepper>
       <Container className={classes.root}>
-        <Grid className={classes.grid} xs={12} style={{ width: "100%" }}>
+        <Grid className={classes.grid} style={{ width: "100%" }}>
           {<ProgressStepper isTutor={isTutor}
             steps={steps}
             activeStep={activeStep}
@@ -113,7 +115,9 @@ const TutorProfile = () => {
             olevelSubjects={olevelSubjects}
             setOlevelSubjects={setOlevelSubjects}
             alevelSubjects={alevelSubjects}
-            setAlevelSubjects={setAlevelSubjects}>
+            setAlevelSubjects={setAlevelSubjects}
+            openTimeSlot={openTimeSlot}
+            setOpenTimeSlot={setOpenTimeSlot}>
           </ProgressStepper>}
         </Grid>
       </Container>

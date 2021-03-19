@@ -51,8 +51,8 @@ export default function HorizontalLinearStepper(props) {
 
   return (
     <div className={classes.root}>
-      <Grid container xs={12} className={classes.root}>
-      <Grid className={classes.grid} xs={12}>
+      <Grid container className={classes.root}>
+      <Grid className={classes.grid}>
         {(props.activeStep === 0) && <YourDetails
                                         qualification={props.qualification}
                                         setQualification={props.setQualification}
@@ -71,7 +71,10 @@ export default function HorizontalLinearStepper(props) {
                                         alevelSubjects={props.alevelSubjects}
                                         setAlevelSubjects={props.setAlevelSubjects}>
                                         </TeachingDetails>}
-        {(props.activeStep === 2) && <Typography className={classes.instructions}><SetTimeSlot></SetTimeSlot></Typography>}
+        {(props.activeStep === 2) && <Typography className={classes.instructions}>
+            <SetTimeSlot openTimeSlot={props.openTimeSlot}>
+            </SetTimeSlot>
+            </Typography>}
       </Grid>
     </Grid>
       <div>

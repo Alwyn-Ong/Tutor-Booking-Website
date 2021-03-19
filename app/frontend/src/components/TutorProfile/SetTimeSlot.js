@@ -17,17 +17,21 @@ const useStyles = makeStyles((theme) => ({
 export default function YourDetails(props) {
     const classes = useStyles();
 
+    console.log(props.openTimeSlot)
+
     return (
         <Grid container className={classes.root}>
             <Grid item className={classes.root} xs={12}>
                 <Typography variant="h2">
                     Enter your available timeslots
-            </Typography>
+                </Typography>
             </Grid>
             <Grid item lg={2} sm={12} xs={12}>
             </Grid>
             <Grid className={classes.root} item lg={8} sm={12} xs={12}>
-                <Timetable></Timetable>
+                <Timetable
+                    openTimeSlot={props.openTimeSlot}
+                ></Timetable>
             </Grid>
             <Grid item lg={2} sm={12} xs={12}>
             </Grid>

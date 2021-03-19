@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 
 const subjectsList = [
     "English",
-    "Maths",
+    "Mathematics",
     "Science",
     "Economics",
     "Geography",

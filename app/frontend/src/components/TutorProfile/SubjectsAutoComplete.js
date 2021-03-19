@@ -15,8 +15,6 @@ const useStyles = makeStyles((theme) => ({
 export default function SubjectsAutoComplete(props) {
   const classes = useStyles();
 
-  console.log(props.userSubjects)
-
   return (
     <div className={classes.root}>
       <Autocomplete
