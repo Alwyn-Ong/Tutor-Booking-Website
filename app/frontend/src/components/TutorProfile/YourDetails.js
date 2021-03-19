@@ -6,9 +6,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Typography from '@material-ui/core/Typography';
-import Input from '@material-ui/core/Input';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import { PermDeviceInformationTwoTone } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -113,7 +110,7 @@ export default function YourDetails(props) {
             value={props.price}
             onChange={handleChangePrice}
           >
-          {priceList.map(pricelist => <MenuItem value={pricelist}>{pricelist}</MenuItem>)}
+          {priceList.map(pricelist => <MenuItem key={pricelist} value={pricelist}>{pricelist}</MenuItem>)}
           </Select>
         </FormControl>
       </Grid>
@@ -126,7 +123,7 @@ export default function YourDetails(props) {
             value={props.location}
             onChange={handleChangeLocation}
           >
-            {allNearestMRT.map(loc => <MenuItem value={loc}>{loc}</MenuItem>)}
+            {allNearestMRT.map(loc => <MenuItem key={loc} value={loc}>{loc}</MenuItem>)}
           </Select>
         </FormControl>
       </Grid>
