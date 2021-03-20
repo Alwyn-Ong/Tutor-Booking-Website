@@ -22,54 +22,73 @@ export default function HorizontalLinearStepper(props) {
   const classes = useStyles()
 
   const sendUserData = async () => {
-    console.log(props.primarySubjects);
-    console.log(props.olevelSubjects);
-    console.log(props.alevelSubjects);
+    fetch(`http://localhost:8080/api/becometutor`,
+      {
+        method: 'PUT',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "userId": props.userID })
+      }).then(response => {
+      if (response.ok) {
+        let userObject = {
+          "userId": props.userID,
+          "qualification": props.qualification,
+          "nearestMRT": props.location,
+          "price": props.price,
+        };
+        let subjectArray = [];
+        if (props.primarySubjects.length > 0) {
+          subjectArray.push(
+            {
+              "levelsTaught": "Primary",
+              "subjectTaught": props.primarySubjects,
+            });
+        }
 
-    let userObject = {
-      "userID": props.userID,
-      "qualification:": props.qualification,
-      "nearestMRT": props.location,
-      "price": props.price,
-    };
-    let subjectArray = [];
-    if (props.primarySubjects.length > 0){
-      subjectArray.push(
-        {
-          "levelsTaught": "Primary",
-          "subjectTaught": props.primarySubjects,
-        });
-    }
-
-    if (props.olevelSubjects.length > 0)
-      subjectArray.push(
-        {
-          "levelsTaught": "O-Levels",
-          "subjectTaught": props.olevelSubjects,
-        });
-    if (props.alevelSubjects.length > 0)
-      subjectArray.push(
-        {
-          "levelsTaught": "A-Levels",
-          "subjectTaught": props.alevelSubjects
-        });
-    let timeslotArray = [];
-    for (var item of props.openTimeSlot) {
-      timeslotArray.push({ "timeslot": item });
-    }
-    let sendObject = {
-      "user": userObject,
-      "subjects": subjectArray,
-      "timeslots": timeslotArray,
-    }
-  
-    console.log(sendObject);
-  
-    return fetch(`http://localhost:8080/api/updatetutorprofile/`,
+        if (props.olevelSubjects.length > 0)
+          subjectArray.push(
+            {
+              "levelsTaught": "O-Levels",
+              "subjectTaught": props.olevelSubjects,
+            });
+        if (props.alevelSubjects.length > 0)
+          subjectArray.push(
+            {
+              "levelsTaught": "A-Levels",
+              "subjectTaught": props.alevelSubjects
+            });
+        let timeslotArray = [];
+        for (var item of props.openTimeSlot) {
+          timeslotArray.push({ "timeslot": item });
+        }
+        let sendObject = {
+          "user": userObject,
+          "subjects": subjectArray,
+          "timeslots": timeslotArray,
+        }
+        console.log(sendObject);
+        fetch(`http://localhost:8080/api/updatetutorprofile/`,
           {
             method: 'PUT',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
             body: JSON.stringify(sendObject)
-          }).then(response => response.json())
+          }).then(response2 => {
+            console.log(response2);
+            if (response2.ok) {
+              alert("Account updated successfully");
+            } else {
+              alert("Data was not updated");
+            }
+          })
+      }else{
+        alert("Update was unsuccessful");
+      }
+    })
   }
 
   const hasSubjects = () => {
@@ -94,8 +113,7 @@ export default function HorizontalLinearStepper(props) {
       alert("Please fill in all the values.");
       props.setActiveStep(2);
     } else {
-      let responseJSON = sendUserData();
-      console.log(responseJSON);
+      sendUserData();
     }
   }
 

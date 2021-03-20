@@ -15,20 +15,19 @@ const useStyles = makeStyles((theme) => ({
 export default function SubjectsAutoComplete(props) {
   const classes = useStyles();
 
-  const handleInputChange=(event)=>{
-    console.log("aaa")
-    console.log(event.target.value);
-  }
+  console.log(props.userSubjects)
 
   return (
     <div className={classes.root}>
       <Autocomplete
         multiple
+        onChange={(event, newValue) => {
+          props.setUserSubjects(newValue);
+        }}
+        value={props.userSubjects}
         id={props.subjectname+"_subject"}
         options={props.data}
         getOptionLabel={(option) => option}
-        onChange={handleInputChange}
-        defaultValue={props.userSubjects}
         renderInput={(params) => (
           <TextField
             {...params}
