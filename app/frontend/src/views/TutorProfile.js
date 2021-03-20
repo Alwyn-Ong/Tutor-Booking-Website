@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 const TutorProfile = () => {
 
   const [userData, setUserData] = React.useState();
-  const [userID, setUserId] = React.useState(1);
+  const [userID, setUserId] = React.useState(3);
   const [isTutor, setIsTutor] = React.useState(false);
   const [qualification, setQualification] = React.useState("na")
   const [location, setLocation] = React.useState("Bedok")
@@ -98,7 +98,7 @@ const TutorProfile = () => {
         setLocation(newData.nearestMRT);
         setPrice(newData.price);
         setLevelTaught(Object.keys(newData.levelsTaught));
-        if (newData.levelsTaught["Primary"]){}
+        if (newData.levelsTaught["Primary"])
           setPrimarySubjects(newData.levelsTaught["Primary"])
         if (newData.levelsTaught["O-Levels"])
           setOlevelSubjects(newData.levelsTaught["O-Levels"])
@@ -115,6 +115,8 @@ const TutorProfile = () => {
     }
     fetchUserData();
   }, [userID]);
+
+  console.log(olevelSubjects)
 
 return (
   <>

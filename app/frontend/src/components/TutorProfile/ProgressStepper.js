@@ -31,75 +31,75 @@ export default function HorizontalLinearStepper(props) {
         },
         body: JSON.stringify({ "userId": props.userID })
       }).then(response => {
-      if (response.ok) {
-        let userObject = {
-          "userId": props.userID,
-          "qualification": props.qualification,
-          "nearestMRT": props.location,
-          "price": props.price,
-        };
-        let subjectArray = [];
-        if (props.primarySubjects.length > 0) {
-          var i1;
-          for (i1 of props.primarySubjects){
-            subjectArray.push(
-              {
-                "levelsTaught": "Primary",
-                "subjectTaught": i1,
-              });
-          }
-        }
-
-        if (props.olevelSubjects.length > 0){
-          var i2;
-          for (i2 in props.olevelSubjects){
-            subjectArray.push(
-              {
-                "levelsTaught": "O-Levels",
-                "subjectTaught": i2,
-              });
-          }
-        }
-        if (props.alevelSubjects.length > 0){
-          var i3;
-        }
-        for (i3 in props.alevelSubjects){
-          subjectArray.push(
-            {
-              "levelsTaught": "A-Levels",
-              "subjectTaught": i3
-            });
-        }
-        let timeslotArray = [];
-        for (var item of props.openTimeSlot) {
-          timeslotArray.push({ "timeslot": item });
-        }
-        let sendObject = {
-          "user": userObject,
-          "subjects": subjectArray,
-          "timeslots": timeslotArray,
-        }
-        console.log(sendObject);
-        fetch(`http://localhost:8080/api/updatetutorprofile/`,
-          {
-            method: 'PUT',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(sendObject)
-          }).then(response2 => {
-            console.log(response2);
-            if (response2.ok) {
-              alert("Account updated successfully");
-            } else {
-              alert("Data was not updated");
+        if (response.ok) {
+          let userObject = {
+            "userId": props.userID,
+            "qualification": props.qualification,
+            "nearestMRT": props.location,
+            "price": props.price,
+          };
+          let subjectArray = [];
+          if (props.primarySubjects.length > 0) {
+            var i1;
+            for (i1 of props.primarySubjects) {
+              subjectArray.push(
+                {
+                  "levelsTaught": "Primary",
+                  "subjectTaught": i1,
+                });
             }
-          })
-      }else{
-        alert("Update was unsuccessful");
-      }
-    })
+          }
+
+          if (props.olevelSubjects.length > 0) {
+            var i2;
+            for (i2 of props.olevelSubjects) {
+              subjectArray.push(
+                {
+                  "levelsTaught": "O-Levels",
+                  "subjectTaught": i2,
+                });
+            }
+          }
+          if (props.alevelSubjects.length > 0) {
+            var i3;
+            for (i3 of props.alevelSubjects) {
+              subjectArray.push(
+                {
+                  "levelsTaught": "A-Levels",
+                  "subjectTaught": i3
+                });
+            }
+          }
+          let timeslotArray = [];
+          for (var item of props.openTimeSlot) {
+            timeslotArray.push({ "timeslot": item });
+          }
+          let sendObject = {
+            "user": userObject,
+            "subjects": subjectArray,
+            "timeslots": timeslotArray,
+          }
+          console.log(sendObject);
+          fetch(`http://localhost:8080/api/updatetutorprofile/`,
+            {
+              method: 'PUT',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(sendObject)
+            }).then(response2 => {
+              console.log(response2);
+              if (response2.ok) {
+                alert("Account updated successfully");
+              } else {
+                alert("Data was not updated");
+              }
+            })
+        } else {
+          alert("Update was unsuccessful");
+        }
+      })
   }
 
   const hasSubjects = () => {
