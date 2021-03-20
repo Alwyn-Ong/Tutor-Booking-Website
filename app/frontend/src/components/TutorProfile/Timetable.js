@@ -31,6 +31,8 @@ const getUniqueRows = (data) => {
 const Timetable = (props) => {
   let days = ["", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
+  let TIME = ["aaa", "1000", "1100", "1200", "1300", "1400", "1500", "1600", "1700", "1800", "1900", "2000", "2100", "2200"];
+
   let timeslots = generateTimeSlots();
 
 
@@ -57,7 +59,11 @@ const Timetable = (props) => {
 
   const handleChange = (state) => {
     props.setCells(state);
-    props.setOpenTimeSlot(convertCellsToOutput(props.cells))
+    var result = [];
+    for (var i=1; i<state.length; i++){
+      state[i].forEach((item, index) => item === true ? result.push(index+"-"+TIME[i]) : null)
+    }
+   props.setOpenTimeSlot(result);
   };
 
   const handleReset = () => {

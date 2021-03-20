@@ -17,8 +17,6 @@ const useStyles = makeStyles((theme) => ({
 export default function YourDetails(props) {
     const classes = useStyles();
 
-    console.log(props.openTimeSlot)
-
     return (
         <Grid container className={classes.root}>
             <Grid item className={classes.root} xs={12}>

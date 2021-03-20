@@ -66,7 +66,6 @@ export default function YourDetails(props) {
 
   const handleChangeLocation = (event) => {
     const value = event.target.value
-    console.log(value)
     props.setLocation(value);
   };
 
@@ -90,14 +89,14 @@ export default function YourDetails(props) {
             onChange={handleChangeQualification}
           >
             <MenuItem value={"na"}>Not Available</MenuItem>
-            <MenuItem value={"nitec"}>NITEC</MenuItem>
-            <MenuItem value={"hnitec"}>Higher NITEC</MenuItem>
-            <MenuItem value={"olevel"}>O-Level</MenuItem>
-            <MenuItem value={"alevel"}>A-Level</MenuItem>
-            <MenuItem value={"diploma"}>Diploma</MenuItem>
-            <MenuItem value={"degree"}>Degree</MenuItem>
-            <MenuItem value={"masters"}>Masters</MenuItem>
-            <MenuItem value={"phd"}>PhD</MenuItem>
+            <MenuItem value={"NITEC"}>NITEC</MenuItem>
+            <MenuItem value={"HigherNITEC"}>Higher NITEC</MenuItem>
+            <MenuItem value={"O-Levels"}>O-Level</MenuItem>
+            <MenuItem value={"A-Levels"}>A-Level</MenuItem>
+            <MenuItem value={"Diploma"}>Diploma</MenuItem>
+            <MenuItem value={"Degree"}>Degree</MenuItem>
+            <MenuItem value={"Masters"}>Masters</MenuItem>
+            <MenuItem value={"PhD"}>PhD</MenuItem>
           </Select>
         </FormControl>
       </Grid>
