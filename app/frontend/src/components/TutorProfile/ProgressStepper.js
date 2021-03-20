@@ -40,25 +40,36 @@ export default function HorizontalLinearStepper(props) {
         };
         let subjectArray = [];
         if (props.primarySubjects.length > 0) {
-          subjectArray.push(
-            {
-              "levelsTaught": "Primary",
-              "subjectTaught": props.primarySubjects,
-            });
+          var i1;
+          for (i1 of props.primarySubjects){
+            subjectArray.push(
+              {
+                "levelsTaught": "Primary",
+                "subjectTaught": i1,
+              });
+          }
         }
 
-        if (props.olevelSubjects.length > 0)
-          subjectArray.push(
-            {
-              "levelsTaught": "O-Levels",
-              "subjectTaught": props.olevelSubjects,
-            });
-        if (props.alevelSubjects.length > 0)
+        if (props.olevelSubjects.length > 0){
+          var i2;
+          for (i2 in props.olevelSubjects){
+            subjectArray.push(
+              {
+                "levelsTaught": "O-Levels",
+                "subjectTaught": i2,
+              });
+          }
+        }
+        if (props.alevelSubjects.length > 0){
+          var i3;
+        }
+        for (i3 in props.alevelSubjects){
           subjectArray.push(
             {
               "levelsTaught": "A-Levels",
-              "subjectTaught": props.alevelSubjects
+              "subjectTaught": i3
             });
+        }
         let timeslotArray = [];
         for (var item of props.openTimeSlot) {
           timeslotArray.push({ "timeslot": item });
