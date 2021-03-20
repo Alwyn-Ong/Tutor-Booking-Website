@@ -32,17 +32,17 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-function FilterPanel({state, setState}) {
+function FilterPanel() {
     const classes = useStyles();
-    // const [state, setState] = React.useState({
-    //     gender: '',
-    //     price: '',
-    //     level: '',
-    //     qualification: '',
-    //     selectedLocations:[]
-    // });
+    const [state, setState] = React.useState({
+        gender: '',
+        price: '',
+        level: '',
+        qualification: '',
+        selectedLocations:[]
+    });
 
-    console.log(state);
+    // console.log(state);
 
     const handleGenderChange = (event) => {
         const gender = event.target.gender;
@@ -53,7 +53,8 @@ function FilterPanel({state, setState}) {
     };
 
     const handlePriceChange = (event) => {
-        // const price = event.target.price;
+        const price = event.target.price;
+        console.log(price)
         setState({
             ...state,
             price: event.target.value,
@@ -158,9 +159,9 @@ function FilterPanel({state, setState}) {
                         <MenuItem value="">
                             <em>None</em>
                         </MenuItem>
-                        <MenuItem value="$">$ ( {"<"} 30/hr) </MenuItem>
+                        <MenuItem value="$">$ (20-30/hr) </MenuItem>
                         <MenuItem value="$$">$$ (30-50/hr)</MenuItem>
-                        <MenuItem value="$$$">$$$ ( {">"} 50/hr)</MenuItem>
+                        <MenuItem value="$$$">$$$ (50-80/hr)</MenuItem>
                         </Select>
                     </FormControl>
                 </Grid>
@@ -176,11 +177,11 @@ function FilterPanel({state, setState}) {
                         <MenuItem value="">
                             <em>None</em>
                         </MenuItem>
-                        <MenuItem value="Primary">Primary School</MenuItem>
-                        <MenuItem value="Secondary">Secondary School</MenuItem>
-                        <MenuItem value="Poly">Polytechnic</MenuItem>
+                        <MenuItem value="primary">Primary School</MenuItem>
+                        <MenuItem value="secondary">Secondary School</MenuItem>
+                        <MenuItem value="poly">Polytechnic</MenuItem>
                         <MenuItem value="JC">JC</MenuItem>
-                        <MenuItem value="Uni">University</MenuItem>
+                        <MenuItem value="uni">University</MenuItem>
                         </Select>
                     </FormControl>
                 </Grid>
@@ -196,18 +197,14 @@ function FilterPanel({state, setState}) {
                         <MenuItem value="">
                             <em>None</em>
                         </MenuItem>
-                        <MenuItem value="O-Levels">O-Levels</MenuItem>
-                        <MenuItem value="A-Levels">A-Levels</MenuItem>
-                        <MenuItem value="Diploma">Diploma</MenuItem>
-                        <MenuItem value="Degree">Bachelor's Degree</MenuItem>
-                        <MenuItem value="Masters">Master</MenuItem>
-                        <MenuItem value="phd">PhD</MenuItem>
+                        <MenuItem value="olevels">O-levels</MenuItem>
+                        <MenuItem value="alevels">A-levels</MenuItem>
+                        <MenuItem value="diploma">Diploma</MenuItem>
+                        <MenuItem value="bachelors">Bachelor's Degree</MenuItem>
+                        <MenuItem value="master">Master</MenuItem>
                         </Select>
                     </FormControl>
                 </Grid>
-                {/* <Grid item>
-                    Apply
-                </Grid> */}
             </Grid>
             
         </div>
