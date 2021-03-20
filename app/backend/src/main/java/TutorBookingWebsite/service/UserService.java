@@ -235,9 +235,9 @@ public class UserService {
 		}
 		
 		try {
-			existingUser.setQualification(user.getQualification());
-			existingUser.setPrice(user.getPrice());
-			existingUser.setNearestMRT(user.getNearestMRT());
+			existingUser.setQualification(tempUser.get("qualification").toString());
+			existingUser.setPrice(Integer.parseInt(tempUser.get("price").toString()));
+			existingUser.setNearestMRT(tempUser.get("nearestMRT").toString());
 			userDao.save(existingUser);
 			
 
