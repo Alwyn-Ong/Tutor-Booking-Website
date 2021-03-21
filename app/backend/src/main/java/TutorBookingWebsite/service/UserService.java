@@ -84,8 +84,10 @@ public class UserService {
 						levelsTaughtTemp.put(x.getLevelsTaught(), z);
 					} else {
 						List<String> placeHolder = levelsTaughtTemp.get(x.getLevelsTaught());
-						placeHolder.add(x.getSubject());
-						levelsTaughtTemp.put(x.getLevelsTaught(), placeHolder);
+						if (!placeHolder.contains(x.getSubject())) {
+							placeHolder.add(x.getSubject());
+							levelsTaughtTemp.put(x.getLevelsTaught(), placeHolder);	
+						}
 					}
 				}
 				
@@ -139,8 +141,10 @@ public class UserService {
 					levelsTaughtTemp.put(x.getLevelsTaught(), z);
 				} else {
 					List<String> placeHolder1 = levelsTaughtTemp.get(x.getLevelsTaught());
-					placeHolder1.add(x.getSubject());
-					levelsTaughtTemp.put(x.getLevelsTaught(), placeHolder1);
+					if (!placeHolder1.contains(x.getSubject())) {
+						placeHolder1.add(x.getSubject());
+						levelsTaughtTemp.put(x.getLevelsTaught(), placeHolder1);	
+					}
 				}
 			}
 			
@@ -209,10 +213,10 @@ public class UserService {
 		
 		for (Object x: subjects) {
 			Map<String,Object> tempSubject = (Map<String, Object>) x;
-			subject.add(tempSubject.get("subjectTaught").toString());
+			subject.add(tempSubject.get("subjectTaught").toString());	
 			levelsTaught.add(tempSubject.get("levelsTaught").toString());
 		}
-		
+			
 		List<Object> timeslots = (List<Object>)data.get("timeslots");
 		List<String> userTimeslot = new ArrayList<>();
 		
@@ -225,6 +229,8 @@ public class UserService {
 	
 		int index = 0;
 		for (String temp:subject) {
+			List<LevelsTaught> temp2 = levelsTaughtDao.findByTutorId(user.getUserId());
+			
 			levelsTaughtDao.save(new LevelsTaught(levelsTaught.get(index),temp,user.getUserId()));
 			index++;
 		}
