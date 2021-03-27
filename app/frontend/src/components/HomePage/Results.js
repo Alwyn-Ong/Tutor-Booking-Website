@@ -125,12 +125,14 @@ const CustomCard = ({
   gender,
   rating,
   reviews,
+  userid,
 }) => {
   const mediaStyles = useFourThreeCardMediaStyles();
   const textCardContentStyles = useN04TextInfoContentStyles();
   const shadowStyles = useOverShadowStyles({ inactive: true });
-  let limit = 30
-  let bioFormatted = (bio.length > limit) ? bio.substring(0,limit-3) + "..." : bio;
+  let limit = 30;
+  let bioFormatted =
+    bio.length > limit ? bio.substring(0, limit - 3) + "..." : bio;
   const element = (
     <div>
       <h3>${price}/hr</h3>
@@ -178,11 +180,14 @@ const CustomCard = ({
         <b>Teaches: </b>
         {levels.join(", ")}
       </p>
-      <p style={{ marginBottom: 0}}>{bioFormatted}</p>
+      <p style={{ marginBottom: 0 }}>{bioFormatted}</p>
     </div>
   );
   return (
-    <CardActionArea className={classes.actionArea}>
+    <CardActionArea
+      className={classes.actionArea}
+      onClick={() => console.log(userid)}
+    >
       <Card className={classes.card}>
         <CardMedia classes={mediaStyles} image={image} />
         <CardContent>
@@ -833,6 +838,7 @@ export const Results = React.memo(function SolidGameCard({
           gender={value.gender}
           reviews={value.reviews}
           rating={value.rating}
+          userid={value.userid}
         />
       </Grid>
     );
