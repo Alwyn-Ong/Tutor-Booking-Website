@@ -16,7 +16,8 @@ import { useN04TextInfoContentStyles } from "@mui-treasury/styles/textInfoConten
 import { useOverShadowStyles } from "@mui-treasury/styles/shadow/over";
 import TextInfoContent from "@mui-treasury/components/content/textInfo";
 import "./Button.css";
-
+import Backdrop from "@material-ui/core/Backdrop";
+import CircularProgress from "@material-ui/core/CircularProgress";
 const useGridStyles = makeStyles(({ breakpoints }) => ({
   root: {
     [breakpoints.up("md")]: {
@@ -103,6 +104,10 @@ const useStyles = makeStyles((theme) => ({
     "& > *": {
       marginTop: theme.spacing(5),
     },
+  },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: "#fff",
   },
 }));
 
@@ -623,7 +628,10 @@ let tutorResults = [
   },
 ];
 
-export const Results = React.memo(function SolidGameCard({ filterConditions, search }) {
+export const Results = React.memo(function SolidGameCard({
+  filterConditions,
+  search,
+}) {
   const gridStyles = useGridStyles();
   const classes = useStyles();
 
@@ -631,25 +639,30 @@ export const Results = React.memo(function SolidGameCard({ filterConditions, sea
   const items = [];
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
-  // const [res, setRes] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
 
-  // let res;
-  const handleChange = (event, value) => {
-    setCurrentPage(value);
-    // [array of filters]
-    //let filteredResults = tutorResults.filter()
-    //setPosts(filteredResults.slice())
-    // let temp = res.slice((value - 1) * 8, (value - 1) * 8 + 8);
-    // setPosts(temp);
+  // For Backdrop
+  const [isLoading, setIsLoading] = useState(true);
+
+  var requestOptions = {
+    method: "GET",
+    redirect: "follow",
   };
 
-  // useEffect(() => {
-  //   effect
-    
-  // }, [search])
+  fetch("http://localhost:8080/api/getalltutors", requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      console.log(result);
+      tutorResults = result;
+      setIsLoading(false);
+    })
+    .catch((error) => console.log("error", error));
+
+  const handleChange = (event, value) => {
+    setCurrentPage(value);
+  };
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -696,7 +709,10 @@ export const Results = React.memo(function SolidGameCard({ filterConditions, sea
                 break;
             }
           } else if (key === "level") {
-            if (!(filterConditions[key] in item.levelsTaught) || item.levelsTaught[filterConditions[key]].length == 0) {
+            if (
+              !(filterConditions[key] in item.levelsTaught) ||
+              item.levelsTaught[filterConditions[key]].length == 0
+            ) {
               return false;
             }
             // if (filterConditions[key])
@@ -712,23 +728,29 @@ export const Results = React.memo(function SolidGameCard({ filterConditions, sea
       });
 
       let searchList = search.split(" ");
-      for (var searchCondition of searchList){
+      for (var searchCondition of searchList) {
         res = res.filter((item) => {
-          for (var key in item){
-            if (key == "userid") continue
-            if (key != "levelsTaught"){
-              if (item[key].toLowerCase().includes(searchCondition.toLowerCase())){
+          for (var key in item) {
+            if (key == "userid") continue;
+            if (key != "levelsTaught") {
+              if (
+                item[key].toLowerCase().includes(searchCondition.toLowerCase())
+              ) {
                 return true;
               }
             } else {
-              for (var level in key){
-                if (key[level].toLowerCase().includes(searchCondition.toLowerCase())){
+              for (var level in key) {
+                if (
+                  key[level]
+                    .toLowerCase()
+                    .includes(searchCondition.toLowerCase())
+                ) {
                   return true;
                 }
               }
             }
           }
-        })
+        });
       }
 
       let temp = res.slice((currentPage - 1) * 8, (currentPage - 1) * 8 + 8);
@@ -771,6 +793,9 @@ export const Results = React.memo(function SolidGameCard({ filterConditions, sea
 
   return (
     <div>
+      <Backdrop className={classes.backdrop} open={isLoading}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <Grid classes={gridStyles} container spacing={4}>
         {items}
       </Grid>

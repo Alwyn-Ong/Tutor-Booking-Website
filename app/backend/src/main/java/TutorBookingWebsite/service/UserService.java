@@ -19,6 +19,7 @@ import TutorBookingWebsite.exception.APIException;
 import TutorBookingWebsite.model.FileDB;
 import TutorBookingWebsite.model.LevelsTaught;
 import TutorBookingWebsite.model.ResponseDetails;
+import TutorBookingWebsite.model.Review;
 import TutorBookingWebsite.model.Timeslot;
 import TutorBookingWebsite.model.User;
 import TutorBookingWebsite.model.UserTimeslot;
@@ -122,15 +123,30 @@ public class UserService {
 			Map<String, Object> placeHolder = new HashMap<>();
 			placeHolder.put("userid", temp.getUserId());
 			placeHolder.put("description", temp.getDescription());
-			placeHolder.put("email", temp.getEmail());
+//			placeHolder.put("email", temp.getEmail());
 			placeHolder.put("gender", temp.getGender());
-			placeHolder.put("isTutor", temp.getIsTutor());
+//			placeHolder.put("isTutor", temp.getIsTutor());
 			placeHolder.put("name", temp.getName());
 			placeHolder.put("nearestMRT", temp.getNearestMRT());
-			placeHolder.put("phoneNumber", temp.getPhoneNumber());
+//			placeHolder.put("phoneNumber", temp.getPhoneNumber());
 			placeHolder.put("price", temp.getPrice());
 			placeHolder.put("qualification", temp.getQualification());
-			placeHolder.put("reviews", reviewDao.findByTutorId(temp.getUserId()));
+//			placeHolder.put("reviews", reviewDao.findByTutorId(temp.getUserId()));
+			
+			
+			List<Review> reviews = reviewDao.findByTutorId(temp.getUserId());
+			if (reviews.size() != 0) {
+				// Calculate average review score
+				int totalRating = 0;
+				for (Review review: reviews) {
+					totalRating += review.getNumberOfStars();
+				}
+				double overallRating = totalRating / reviews.size();
+				placeHolder.put("rating", overallRating);
+				placeHolder.put("reviews", reviews.size());
+				
+			}
+			
 			
 			List<LevelsTaught> levelsTaught = levelsTaughtDao.findByTutorId(temp.getUserId());
 			Map<String,List<String>> levelsTaughtTemp = new HashMap<>();	
@@ -150,16 +166,16 @@ public class UserService {
 			
 			placeHolder.put("levelsTaught", levelsTaughtTemp);
 			
-			List<UserTimeslot> userTimeslot = userTimeslotDao.findByTutorId(temp.getUserId());
-			List<String> timeslotTemp = new ArrayList<>();
-			for (UserTimeslot x:userTimeslot) {
-				if (x.getStatus() == TutorBookingWebsite.model.Status.OPEN) {
-					int timeslotId = x.getTimeslotId();
-					Optional<Timeslot> timeslot = timeslotDao.findById(timeslotId);
-					timeslotTemp.add(timeslot.get().getTimeslot());
-				}
-			}
-			placeHolder.put("openTimeslot", timeslotTemp);
+//			List<UserTimeslot> userTimeslot = userTimeslotDao.findByTutorId(temp.getUserId());
+//			List<String> timeslotTemp = new ArrayList<>();
+//			for (UserTimeslot x:userTimeslot) {
+//				if (x.getStatus() == TutorBookingWebsite.model.Status.OPEN) {
+//					int timeslotId = x.getTimeslotId();
+//					Optional<Timeslot> timeslot = timeslotDao.findById(timeslotId);
+//					timeslotTemp.add(timeslot.get().getTimeslot());
+//				}
+//			}
+//			placeHolder.put("openTimeslot", timeslotTemp);
 			placeHolder.put("imageURL", "http://localhost:8080/api/files/" + temp.getUserId());
 			
 			result.add(placeHolder);
