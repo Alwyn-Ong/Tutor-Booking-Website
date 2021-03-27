@@ -161,472 +161,472 @@ const CustomCard = ({
   );
 };
 
-let tutorResults = [
-  {
-    name: "1Tan Ah Seng",
-    description: "Drunkard",
-    price: "40",
-    gender: "Male",
-    qualification: "Degree",
-    nearestMrt: "Eunos",
-    userid: 3,
-    levelsTaught: {
-      Primary: ["Math", "Chinese", "English"],
-      Secondary: ["Math", "Chinese", "English"],
-      JC: [],
-    },
-  },
-  {
-    name: "2Tan Ah Beng",
-    description: "Lulser",
-    price: "70",
-    Level: "JC",
-    gender: "Male",
-    qualification: "O-Levels",
-    nearestMrt: "Dhoby Ghaut",
-    userid: 1,
-    levelsTaught: {
-      Primary: [],
-      Secondary: ["Math", "Chinese", "English"],
-      JC: ["English"],
-    },
-  },
-  {
-    name: "3Tan Ah Feng",
-    description: "Drunkard",
-    price: "40",
-    Level: "Primary School",
-    gender: "Female",
-    qualification: "Degree",
-    nearestMrt: "Jurong",
-    userid: 4,
-    levelsTaught: {
-      Primary: ["Math", "Chinese", "English"],
-      Secondary: [],
-      JC: ["English"],
-    },
-  },
-  {
-    name: "4Ah Leng",
-    description: "Good lessons efficinet fast",
-    price: "60",
-    Level: "Primary School",
-    gender: "Male",
-    qualification: "A-Levels",
-    nearestMrt: "Dakota",
-    userid: 5,
-    levelsTaught: {
-      Primary: ["Math", "Chinese", "English"],
-      Secondary: ["Math", "Chinese", "English"],
-      JC: ["English"],
-    },
-  },
-  {
-    name: "5Ah Peng",
-    description: "Football",
-    price: "50",
-    Level: "Sec School",
-    gender: "Female",
-    qualification: "Masters",
-    nearestMrt: "Downtown Line",
-    userid: 2,
-    levelsTaught: {
-      Primary: ["Math", "Chinese", "English"],
-      Secondary: ["Math", "Chinese", "English"],
-      JC: ["English"],
-    },
-  },
-  {
-    name: "6Tan Ah Seng",
-    description: "Drunkard",
-    price: "40",
-    Level: "Primary School",
-    gender: "Male",
-    qualification: "Degree",
-    nearestMrt: "Eunos",
-    userid: 3,
-    levelsTaught: {
-      Primary: ["Math", "Chinese", "English"],
-      Secondary: ["Math", "Chinese", "English"],
-      JC: ["English"],
-    },
-  },
-  {
-    name: "7Tan Ah Beng",
-    description: "Lulser",
-    price: "70",
-    Level: "JC",
-    gender: "Male",
-    qualification: "O-Levels",
-    nearestMrt: "Dhoby Ghaut",
-    userid: 1,
-    levelsTaught: {
-      Primary: ["Math", "Chinese", "English"],
-      Secondary: ["Math", "Chinese", "English"],
-      JC: ["English"],
-    },
-  },
-  {
-    name: "8Tan Ah Feng",
-    description: "Drunkard",
-    price: "40",
-    Level: "Primary School",
-    gender: "Female",
-    qualification: "Degree",
-    nearestMrt: "Jurong",
-    userid: 4,
-    levelsTaught: {
-      Primary: ["Math", "Chinese", "English"],
-      Secondary: ["Math", "Chinese", "English"],
-      JC: ["English"],
-    },
-  },
-  {
-    name: "9Ah Leng",
-    description: "Good lessons efficinet fast",
-    price: "60",
-    Level: "Primary School",
-    gender: "Male",
-    qualification: "A-Levels",
-    nearestMrt: "Dakota",
-    userid: 5,
-    levelsTaught: {
-      Primary: ["Math", "Chinese", "English"],
-      Secondary: ["Math", "Chinese", "English"],
-      JC: ["English"],
-    },
-  },
-  {
-    name: "10Ah Peng",
-    description: "Football",
-    price: "50",
-    Level: "Sec School",
-    gender: "Female",
-    qualification: "Masters",
-    nearestMrt: "Downtown Line",
-    userid: 2,
-    levelsTaught: {
-      Primary: ["Math", "Chinese", "English"],
-      Secondary: ["Math", "Chinese", "English"],
-      JC: ["English"],
-    },
-  },
-  {
-    name: "11Tan Ah Seng",
-    description: "Drunkard",
-    price: "40",
-    Level: "Primary School",
-    gender: "Male",
-    qualification: "Degree",
-    nearestMrt: "Eunos",
-    userid: 3,
-    levelsTaught: {
-      Primary: ["Math", "Chinese", "English"],
-      Secondary: ["Math", "Chinese", "English"],
-      JC: ["English"],
-    },
-  },
-  {
-    name: "12Tan Ah Beng",
-    description: "Lulser",
-    price: "70",
-    Level: "JC",
-    gender: "Male",
-    qualification: "O-Levels",
-    nearestMrt: "Dhoby Ghaut",
-    userid: 1,
-    levelsTaught: {
-      Primary: ["Math", "Chinese", "English"],
-      Secondary: ["Math", "Chinese", "English"],
-      JC: ["English"],
-    },
-  },
-  {
-    name: "13Tan Ah Feng",
-    description: "Drunkard",
-    price: "40",
-    Level: "Primary School",
-    gender: "Female",
-    qualification: "Degree",
-    nearestMrt: "Jurong",
-    userid: 4,
-    levelsTaught: {
-      Primary: ["Math", "Chinese", "English"],
-      Secondary: ["Math", "Chinese", "English"],
-      JC: ["English"],
-    },
-  },
-  {
-    name: "14Ah Leng",
-    description: "Good lessons efficinet fast",
-    price: "60",
-    Level: "Primary School",
-    gender: "Male",
-    qualification: "A-Levels",
-    nearestMrt: "Dakota",
-    userid: 5,
-    levelsTaught: {
-      Primary: ["Math", "Chinese", "English"],
-      Secondary: ["Math", "Chinese", "English"],
-      JC: ["English"],
-    },
-  },
-  {
-    name: "15Ah Peng",
-    description: "Football",
-    price: "50",
-    Level: "Sec School",
-    gender: "Female",
-    qualification: "Masters",
-    nearestMrt: "Downtown Line",
-    userid: 2,
-    levelsTaught: {
-      Primary: ["Math", "Chinese", "English"],
-      Secondary: ["Math", "Chinese", "English"],
-      JC: [],
-    },
-  },
-  {
-    name: "16Tan Ah Feng",
-    description: "Drunkard",
-    price: "40",
-    Level: "Primary School",
-    gender: "Female",
-    qualification: "Degree",
-    nearestMrt: "Jurong",
-    userid: 4,
-    levelsTaught: {
-      Primary: ["Math", "Chinese", "English"],
-      Secondary: ["Math", "Chinese", "English"],
-      JC: ["English"],
-    },
-  },
-  {
-    name: "17Ah Leng",
-    description: "Good lessons efficinet fast",
-    price: "60",
-    Level: "Primary School",
-    gender: "Male",
-    qualification: "A-Levels",
-    nearestMrt: "Dakota",
-    userid: 5,
-    levelsTaught: {
-      Primary: ["Math", "Chinese", "English"],
-      Secondary: ["Math", "Chinese", "English"],
-      JC: ["English"],
-    },
-  },
-  {
-    name: "18Ah Peng",
-    description: "Football",
-    price: "50",
-    Level: "Sec School",
-    gender: "Female",
-    qualification: "Masters",
-    nearestMrt: "Downtown Line",
-    userid: 2,
-    levelsTaught: {
-      Primary: ["Math", "Chinese", "English"],
-      Secondary: ["Math", "Chinese", "English"],
-      JC: ["English"],
-    },
-  },
-  {
-    name: "19Tan Ah Seng",
-    description: "Drunkard",
-    price: "40",
-    Level: "Primary School",
-    gender: "Male",
-    qualification: "Degree",
-    nearestMrt: "Eunos",
-    userid: 3,
-    levelsTaught: {
-      Primary: ["Math", "Chinese", "English"],
-      Secondary: ["Math", "Chinese", "English"],
-      JC: ["English"],
-    },
-  },
-  {
-    name: "20Tan Ah Beng",
-    description: "Lulser",
-    price: "70",
-    Level: "JC",
-    gender: "Male",
-    qualification: "O-Levels",
-    nearestMrt: "Dhoby Ghaut",
-    userid: 1,
-    levelsTaught: {
-      Primary: ["Math", "Chinese", "English"],
-      Secondary: ["English"],
-      JC: ["English"],
-    },
-  },
-  {
-    name: "21Tan Ah Feng",
-    description: "Drunkard",
-    price: "40",
-    Level: "Primary School",
-    gender: "Female",
-    qualification: "Degree",
-    nearestMrt: "Jurong",
-    userid: 4,
-    levelsTaught: {
-      Primary: ["Math", "Chinese", "English"],
-      Secondary: ["Math", "Chinese", "English"],
-      JC: ["English"],
-    },
-  },
-  {
-    name: "22Ah Leng",
-    description: "Good lessons efficinet fast",
-    price: "60",
-    Level: "Primary School",
-    gender: "Male",
-    qualification: "A-Levels",
-    nearestMrt: "Dakota",
-    userid: 5,
-    levelsTaught: {
-      Primary: ["Math", "Chinese", "English"],
-      Secondary: ["Math", "Chinese", "English"],
-      JC: ["English"],
-    },
-  },
-  {
-    name: "23Ah Peng",
-    description: "Football",
-    price: "50",
-    Level: "Sec School",
-    gender: "Female",
-    qualification: "Masters",
-    nearestMrt: "Downtown Line",
-    userid: 2,
-    levelsTaught: {
-      Primary: ["Math", "Chinese", "English"],
-      Secondary: ["Math", "Chinese", "English"],
-      JC: ["English"],
-    },
-  },
-  {
-    name: "24Tan Ah Feng",
-    description: "Drunkard",
-    price: "40",
-    Level: "Primary School",
-    gender: "Female",
-    qualification: "Degree",
-    nearestMrt: "Jurong",
-    userid: 4,
-    levelsTaught: {
-      Primary: ["Math", "Chinese", "English"],
-      Secondary: ["Math", "Chinese", "English"],
-      JC: ["English"],
-    },
-  },
-  {
-    name: "25Ah Leng",
-    description: "Good lessons efficinet fast",
-    price: "60",
-    Level: "Primary School",
-    gender: "Male",
-    qualification: "A-Levels",
-    nearestMrt: "Dakota",
-    userid: 5,
-    levelsTaught: {
-      Primary: ["Math", "Chinese", "English"],
-      Secondary: ["Math", "Chinese", "English"],
-      JC: ["English"],
-    },
-  },
-  {
-    name: "26Ah Peng",
-    description: "Football",
-    price: "50",
-    Level: "Sec School",
-    gender: "Female",
-    qualification: "Masters",
-    nearestMrt: "Downtown Line",
-    userid: 2,
-    levelsTaught: {
-      Primary: ["Math", "Chinese", "English"],
-      Secondary: ["Math", "Chinese", "English"],
-      JC: ["English"],
-    },
-  },
-  {
-    name: "27Tan Ah Seng",
-    description: "Drunkard",
-    price: "40",
-    Level: "Primary School",
-    gender: "Male",
-    qualification: "Diploma",
-    nearestMrt: "Eunos",
-    userid: 3,
-    levelsTaught: {
-      Primary: ["Math", "English"],
-      Secondary: ["Math", "Chinese", "English"],
-      JC: ["English"],
-    },
-  },
-  {
-    name: "28Tan Ah Beng",
-    description: "Lulser",
-    price: "20",
-    Level: "JC",
-    gender: "Male",
-    qualification: "O-Levels",
-    nearestMrt: "Dhoby Ghaut",
-    userid: 1,
-    levelsTaught: {
-      Primary: ["Math", "Chinese", "English"],
-      Secondary: ["Chinese", "English"],
-      JC: ["English"],
-    },
-  },
-  {
-    name: "29Tan Ah Feng",
-    description: "Drunkard",
-    price: "40",
-    Level: "Primary School",
-    gender: "Female",
-    qualification: "Degree",
-    nearestMrt: "Jurong",
-    userid: 4,
-    levelsTaught: {
-      Primary: ["Math", "Chinese", "English"],
-      Secondary: ["Math", "Chinese", "English"],
-      JC: ["English"],
-    },
-  },
-  {
-    name: "30Ah Leng",
-    description: "Good lessons efficinet fast",
-    price: "60",
-    Level: "Primary School",
-    gender: "Male",
-    qualification: "A-Levels",
-    nearestMrt: "Dakota",
-    userid: 5,
-    levelsTaught: {
-      Primary: ["Math", "Chinese", "English"],
-      Secondary: ["Math", "Chinese", "English"],
-      JC: ["English"],
-    },
-  },
-  {
-    name: "31Ah Peng",
-    description: "Football",
-    price: "50",
-    Level: "Sec School",
-    gender: "Female",
-    qualification: "Masters",
-    nearestMrt: "Downtown Line",
-    userid: 2,
-    levelsTaught: {
-      Primary: ["Math", "Chinese", "English"],
-      Secondary: ["Math", "Chinese", "English"],
-      JC: ["English"],
-    },
-  },
-];
+// let tutorResults = [
+//   {
+//     name: "1Tan Ah Seng",
+//     description: "Drunkard",
+//     price: "40",
+//     gender: "Male",
+//     qualification: "Degree",
+//     nearestMrt: "Eunos",
+//     userid: 3,
+//     levelsTaught: {
+//       Primary: ["Math", "Chinese", "English"],
+//       Secondary: ["Math", "Chinese", "English"],
+//       JC: [],
+//     },
+//   },
+//   {
+//     name: "2Tan Ah Beng",
+//     description: "Lulser",
+//     price: "70",
+//     Level: "JC",
+//     gender: "Male",
+//     qualification: "O-Levels",
+//     nearestMrt: "Dhoby Ghaut",
+//     userid: 1,
+//     levelsTaught: {
+//       Primary: [],
+//       Secondary: ["Math", "Chinese", "English"],
+//       JC: ["English"],
+//     },
+//   },
+//   {
+//     name: "3Tan Ah Feng",
+//     description: "Drunkard",
+//     price: "40",
+//     Level: "Primary School",
+//     gender: "Female",
+//     qualification: "Degree",
+//     nearestMrt: "Jurong",
+//     userid: 4,
+//     levelsTaught: {
+//       Primary: ["Math", "Chinese", "English"],
+//       Secondary: [],
+//       JC: ["English"],
+//     },
+//   },
+//   {
+//     name: "4Ah Leng",
+//     description: "Good lessons efficinet fast",
+//     price: "60",
+//     Level: "Primary School",
+//     gender: "Male",
+//     qualification: "A-Levels",
+//     nearestMrt: "Dakota",
+//     userid: 5,
+//     levelsTaught: {
+//       Primary: ["Math", "Chinese", "English"],
+//       Secondary: ["Math", "Chinese", "English"],
+//       JC: ["English"],
+//     },
+//   },
+//   {
+//     name: "5Ah Peng",
+//     description: "Football",
+//     price: "50",
+//     Level: "Sec School",
+//     gender: "Female",
+//     qualification: "Masters",
+//     nearestMrt: "Downtown Line",
+//     userid: 2,
+//     levelsTaught: {
+//       Primary: ["Math", "Chinese", "English"],
+//       Secondary: ["Math", "Chinese", "English"],
+//       JC: ["English"],
+//     },
+//   },
+//   {
+//     name: "6Tan Ah Seng",
+//     description: "Drunkard",
+//     price: "40",
+//     Level: "Primary School",
+//     gender: "Male",
+//     qualification: "Degree",
+//     nearestMrt: "Eunos",
+//     userid: 3,
+//     levelsTaught: {
+//       Primary: ["Math", "Chinese", "English"],
+//       Secondary: ["Math", "Chinese", "English"],
+//       JC: ["English"],
+//     },
+//   },
+//   {
+//     name: "7Tan Ah Beng",
+//     description: "Lulser",
+//     price: "70",
+//     Level: "JC",
+//     gender: "Male",
+//     qualification: "O-Levels",
+//     nearestMrt: "Dhoby Ghaut",
+//     userid: 1,
+//     levelsTaught: {
+//       Primary: ["Math", "Chinese", "English"],
+//       Secondary: ["Math", "Chinese", "English"],
+//       JC: ["English"],
+//     },
+//   },
+//   {
+//     name: "8Tan Ah Feng",
+//     description: "Drunkard",
+//     price: "40",
+//     Level: "Primary School",
+//     gender: "Female",
+//     qualification: "Degree",
+//     nearestMrt: "Jurong",
+//     userid: 4,
+//     levelsTaught: {
+//       Primary: ["Math", "Chinese", "English"],
+//       Secondary: ["Math", "Chinese", "English"],
+//       JC: ["English"],
+//     },
+//   },
+//   {
+//     name: "9Ah Leng",
+//     description: "Good lessons efficinet fast",
+//     price: "60",
+//     Level: "Primary School",
+//     gender: "Male",
+//     qualification: "A-Levels",
+//     nearestMrt: "Dakota",
+//     userid: 5,
+//     levelsTaught: {
+//       Primary: ["Math", "Chinese", "English"],
+//       Secondary: ["Math", "Chinese", "English"],
+//       JC: ["English"],
+//     },
+//   },
+//   {
+//     name: "10Ah Peng",
+//     description: "Football",
+//     price: "50",
+//     Level: "Sec School",
+//     gender: "Female",
+//     qualification: "Masters",
+//     nearestMrt: "Downtown Line",
+//     userid: 2,
+//     levelsTaught: {
+//       Primary: ["Math", "Chinese", "English"],
+//       Secondary: ["Math", "Chinese", "English"],
+//       JC: ["English"],
+//     },
+//   },
+//   {
+//     name: "11Tan Ah Seng",
+//     description: "Drunkard",
+//     price: "40",
+//     Level: "Primary School",
+//     gender: "Male",
+//     qualification: "Degree",
+//     nearestMrt: "Eunos",
+//     userid: 3,
+//     levelsTaught: {
+//       Primary: ["Math", "Chinese", "English"],
+//       Secondary: ["Math", "Chinese", "English"],
+//       JC: ["English"],
+//     },
+//   },
+//   {
+//     name: "12Tan Ah Beng",
+//     description: "Lulser",
+//     price: "70",
+//     Level: "JC",
+//     gender: "Male",
+//     qualification: "O-Levels",
+//     nearestMrt: "Dhoby Ghaut",
+//     userid: 1,
+//     levelsTaught: {
+//       Primary: ["Math", "Chinese", "English"],
+//       Secondary: ["Math", "Chinese", "English"],
+//       JC: ["English"],
+//     },
+//   },
+//   {
+//     name: "13Tan Ah Feng",
+//     description: "Drunkard",
+//     price: "40",
+//     Level: "Primary School",
+//     gender: "Female",
+//     qualification: "Degree",
+//     nearestMrt: "Jurong",
+//     userid: 4,
+//     levelsTaught: {
+//       Primary: ["Math", "Chinese", "English"],
+//       Secondary: ["Math", "Chinese", "English"],
+//       JC: ["English"],
+//     },
+//   },
+//   {
+//     name: "14Ah Leng",
+//     description: "Good lessons efficinet fast",
+//     price: "60",
+//     Level: "Primary School",
+//     gender: "Male",
+//     qualification: "A-Levels",
+//     nearestMrt: "Dakota",
+//     userid: 5,
+//     levelsTaught: {
+//       Primary: ["Math", "Chinese", "English"],
+//       Secondary: ["Math", "Chinese", "English"],
+//       JC: ["English"],
+//     },
+//   },
+//   {
+//     name: "15Ah Peng",
+//     description: "Football",
+//     price: "50",
+//     Level: "Sec School",
+//     gender: "Female",
+//     qualification: "Masters",
+//     nearestMrt: "Downtown Line",
+//     userid: 2,
+//     levelsTaught: {
+//       Primary: ["Math", "Chinese", "English"],
+//       Secondary: ["Math", "Chinese", "English"],
+//       JC: [],
+//     },
+//   },
+//   {
+//     name: "16Tan Ah Feng",
+//     description: "Drunkard",
+//     price: "40",
+//     Level: "Primary School",
+//     gender: "Female",
+//     qualification: "Degree",
+//     nearestMrt: "Jurong",
+//     userid: 4,
+//     levelsTaught: {
+//       Primary: ["Math", "Chinese", "English"],
+//       Secondary: ["Math", "Chinese", "English"],
+//       JC: ["English"],
+//     },
+//   },
+//   {
+//     name: "17Ah Leng",
+//     description: "Good lessons efficinet fast",
+//     price: "60",
+//     Level: "Primary School",
+//     gender: "Male",
+//     qualification: "A-Levels",
+//     nearestMrt: "Dakota",
+//     userid: 5,
+//     levelsTaught: {
+//       Primary: ["Math", "Chinese", "English"],
+//       Secondary: ["Math", "Chinese", "English"],
+//       JC: ["English"],
+//     },
+//   },
+//   {
+//     name: "18Ah Peng",
+//     description: "Football",
+//     price: "50",
+//     Level: "Sec School",
+//     gender: "Female",
+//     qualification: "Masters",
+//     nearestMrt: "Downtown Line",
+//     userid: 2,
+//     levelsTaught: {
+//       Primary: ["Math", "Chinese", "English"],
+//       Secondary: ["Math", "Chinese", "English"],
+//       JC: ["English"],
+//     },
+//   },
+//   {
+//     name: "19Tan Ah Seng",
+//     description: "Drunkard",
+//     price: "40",
+//     Level: "Primary School",
+//     gender: "Male",
+//     qualification: "Degree",
+//     nearestMrt: "Eunos",
+//     userid: 3,
+//     levelsTaught: {
+//       Primary: ["Math", "Chinese", "English"],
+//       Secondary: ["Math", "Chinese", "English"],
+//       JC: ["English"],
+//     },
+//   },
+//   {
+//     name: "20Tan Ah Beng",
+//     description: "Lulser",
+//     price: "70",
+//     Level: "JC",
+//     gender: "Male",
+//     qualification: "O-Levels",
+//     nearestMrt: "Dhoby Ghaut",
+//     userid: 1,
+//     levelsTaught: {
+//       Primary: ["Math", "Chinese", "English"],
+//       Secondary: ["English"],
+//       JC: ["English"],
+//     },
+//   },
+//   {
+//     name: "21Tan Ah Feng",
+//     description: "Drunkard",
+//     price: "40",
+//     Level: "Primary School",
+//     gender: "Female",
+//     qualification: "Degree",
+//     nearestMrt: "Jurong",
+//     userid: 4,
+//     levelsTaught: {
+//       Primary: ["Math", "Chinese", "English"],
+//       Secondary: ["Math", "Chinese", "English"],
+//       JC: ["English"],
+//     },
+//   },
+//   {
+//     name: "22Ah Leng",
+//     description: "Good lessons efficinet fast",
+//     price: "60",
+//     Level: "Primary School",
+//     gender: "Male",
+//     qualification: "A-Levels",
+//     nearestMrt: "Dakota",
+//     userid: 5,
+//     levelsTaught: {
+//       Primary: ["Math", "Chinese", "English"],
+//       Secondary: ["Math", "Chinese", "English"],
+//       JC: ["English"],
+//     },
+//   },
+//   {
+//     name: "23Ah Peng",
+//     description: "Football",
+//     price: "50",
+//     Level: "Sec School",
+//     gender: "Female",
+//     qualification: "Masters",
+//     nearestMrt: "Downtown Line",
+//     userid: 2,
+//     levelsTaught: {
+//       Primary: ["Math", "Chinese", "English"],
+//       Secondary: ["Math", "Chinese", "English"],
+//       JC: ["English"],
+//     },
+//   },
+//   {
+//     name: "24Tan Ah Feng",
+//     description: "Drunkard",
+//     price: "40",
+//     Level: "Primary School",
+//     gender: "Female",
+//     qualification: "Degree",
+//     nearestMrt: "Jurong",
+//     userid: 4,
+//     levelsTaught: {
+//       Primary: ["Math", "Chinese", "English"],
+//       Secondary: ["Math", "Chinese", "English"],
+//       JC: ["English"],
+//     },
+//   },
+//   {
+//     name: "25Ah Leng",
+//     description: "Good lessons efficinet fast",
+//     price: "60",
+//     Level: "Primary School",
+//     gender: "Male",
+//     qualification: "A-Levels",
+//     nearestMrt: "Dakota",
+//     userid: 5,
+//     levelsTaught: {
+//       Primary: ["Math", "Chinese", "English"],
+//       Secondary: ["Math", "Chinese", "English"],
+//       JC: ["English"],
+//     },
+//   },
+//   {
+//     name: "26Ah Peng",
+//     description: "Football",
+//     price: "50",
+//     Level: "Sec School",
+//     gender: "Female",
+//     qualification: "Masters",
+//     nearestMrt: "Downtown Line",
+//     userid: 2,
+//     levelsTaught: {
+//       Primary: ["Math", "Chinese", "English"],
+//       Secondary: ["Math", "Chinese", "English"],
+//       JC: ["English"],
+//     },
+//   },
+//   {
+//     name: "27Tan Ah Seng",
+//     description: "Drunkard",
+//     price: "40",
+//     Level: "Primary School",
+//     gender: "Male",
+//     qualification: "Diploma",
+//     nearestMrt: "Eunos",
+//     userid: 3,
+//     levelsTaught: {
+//       Primary: ["Math", "English"],
+//       Secondary: ["Math", "Chinese", "English"],
+//       JC: ["English"],
+//     },
+//   },
+//   {
+//     name: "28Tan Ah Beng",
+//     description: "Lulser",
+//     price: "20",
+//     Level: "JC",
+//     gender: "Male",
+//     qualification: "O-Levels",
+//     nearestMrt: "Dhoby Ghaut",
+//     userid: 1,
+//     levelsTaught: {
+//       Primary: ["Math", "Chinese", "English"],
+//       Secondary: ["Chinese", "English"],
+//       JC: ["English"],
+//     },
+//   },
+//   {
+//     name: "29Tan Ah Feng",
+//     description: "Drunkard",
+//     price: "40",
+//     Level: "Primary School",
+//     gender: "Female",
+//     qualification: "Degree",
+//     nearestMrt: "Jurong",
+//     userid: 4,
+//     levelsTaught: {
+//       Primary: ["Math", "Chinese", "English"],
+//       Secondary: ["Math", "Chinese", "English"],
+//       JC: ["English"],
+//     },
+//   },
+//   {
+//     name: "30Ah Leng",
+//     description: "Good lessons efficinet fast",
+//     price: "60",
+//     Level: "Primary School",
+//     gender: "Male",
+//     qualification: "A-Levels",
+//     nearestMrt: "Dakota",
+//     userid: 5,
+//     levelsTaught: {
+//       Primary: ["Math", "Chinese", "English"],
+//       Secondary: ["Math", "Chinese", "English"],
+//       JC: ["English"],
+//     },
+//   },
+//   {
+//     name: "31Ah Peng",
+//     description: "Football",
+//     price: "50",
+//     Level: "Sec School",
+//     gender: "Female",
+//     qualification: "Masters",
+//     nearestMrt: "Downtown Line",
+//     userid: 2,
+//     levelsTaught: {
+//       Primary: ["Math", "Chinese", "English"],
+//       Secondary: ["Math", "Chinese", "English"],
+//       JC: ["English"],
+//     },
+//   },
+// ];
 
 export const Results = React.memo(function SolidGameCard({
   filterConditions,
@@ -646,19 +646,23 @@ export const Results = React.memo(function SolidGameCard({
   // For Backdrop
   const [isLoading, setIsLoading] = useState(true);
 
+  // From api
+  const [tutorResults, setTutorResults] = useState([]);
+
   var requestOptions = {
     method: "GET",
     redirect: "follow",
   };
 
-  fetch("http://localhost:8080/api/getalltutors", requestOptions)
-    .then((response) => response.json())
-    .then((result) => {
-      console.log(result);
-      tutorResults = result;
-      setIsLoading(false);
-    })
-    .catch((error) => console.log("error", error));
+  isLoading &&
+    fetch("http://localhost:8080/api/getalltutors", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        setTutorResults(result);
+        setIsLoading(false);
+      })
+      .catch((error) => console.log("error", error));
 
   const handleChange = (event, value) => {
     setCurrentPage(value);
@@ -667,6 +671,7 @@ export const Results = React.memo(function SolidGameCard({
   useEffect(() => {
     const fetchPosts = async () => {
       setLoading(true);
+
       let res = tutorResults.filter((item) => {
         const checkLocation = (conditions, location) => {
           if (conditions.length == 0) {
@@ -760,7 +765,7 @@ export const Results = React.memo(function SolidGameCard({
       setLoading(false);
     };
     fetchPosts();
-  }, [filterConditions, currentPage, search]);
+  }, [tutorResults, filterConditions, currentPage, search]);
 
   for (const [index, value] of posts.entries()) {
     // Get unique levels
@@ -784,7 +789,9 @@ export const Results = React.memo(function SolidGameCard({
           levels={levels}
           qualification={value.qualification}
           location={value.nearestMrt}
-          image={"./guy1.jpg"}
+          // image={"./guy1.jpg"}
+          // image="http://localhost:8080/api/files/1"
+          image={value.imageURL}
           gender={value.gender}
         />
       </Grid>
@@ -796,14 +803,22 @@ export const Results = React.memo(function SolidGameCard({
       <Backdrop className={classes.backdrop} open={isLoading}>
         <CircularProgress color="inherit" />
       </Backdrop>
-      <Grid classes={gridStyles} container spacing={4}>
-        {items}
-      </Grid>
-      <Grid container justify="center">
-        <div className={classes.paginationStyle}>
-          <Pagination count={totalPages} size="large" onChange={handleChange} />
-        </div>
-      </Grid>
+      {!isLoading && (
+        <>
+          <Grid classes={gridStyles} container spacing={4}>
+            {items}
+          </Grid>
+          <Grid container justify="center">
+            <div className={classes.paginationStyle}>
+              <Pagination
+                count={totalPages}
+                size="large"
+                onChange={handleChange}
+              />
+            </div>
+          </Grid>
+        </>
+      )}
     </div>
   );
 });
