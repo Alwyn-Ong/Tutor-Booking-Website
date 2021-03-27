@@ -721,8 +721,8 @@ export const Results = React.memo(function SolidGameCard({
             return true;
           }
 
-          for (condition of conditions) {
-            if (location === condition.value) {
+          for (let condition of conditions) {
+            if (location.toLowerCase() === condition.value.toLowerCase()) {
               return true;
             }
           }
@@ -733,7 +733,7 @@ export const Results = React.memo(function SolidGameCard({
           if (filterConditions[key] === "") {
             continue;
           } else if (key === "selectedLocations") {
-            if (!checkLocation(filterConditions[key], item.nearestMrt)) {
+            if (!checkLocation(filterConditions[key], item.nearestMRT)) {
               return false;
             }
           } else if (key === "price") {
@@ -802,16 +802,17 @@ export const Results = React.memo(function SolidGameCard({
         });
       }
 
-      let temp = res.slice((currentPage - 1) * 8, (currentPage - 1) * 8 + 8);
+      // let temp = res.slice((currentPage - 1) * 8, (currentPage - 1) * 8 + 8);
 
-      setPosts(temp);
-      setTotalPages(Math.ceil(res.length / 8));
+      setPosts(res);
+      setCurrentPage(1);
+      // setTotalPages(Math.ceil(res.length / 8));
       setLoading(false);
     };
     fetchPosts();
-  }, [tutorResults, filterConditions, currentPage, search]);
+  }, [tutorResults, filterConditions, search]);
 
-  for (const [index, value] of posts.entries()) {
+  for (const [index, value] of posts.slice((currentPage - 1) * 8, (currentPage - 1) * 8 + 8).entries()) {
     // Get unique levels
     let levels = [];
     if (value.levelsTaught !== undefined) {
@@ -862,7 +863,8 @@ export const Results = React.memo(function SolidGameCard({
           <Grid container justify="center">
             <div className={classes.paginationStyle}>
               <Pagination
-                count={totalPages}
+                // count={totalPages}
+                count={Math.ceil(posts.length / 8)}
                 size="large"
                 onChange={handleChange}
               />
