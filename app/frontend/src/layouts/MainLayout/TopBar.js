@@ -15,18 +15,23 @@ import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import EmojiPeople from "@material-ui/icons/EmojiPeople";
-import { NavLink as RouterLink } from "react-router-dom";
+import { Navigate, NavLink as RouterLink } from "react-router-dom";
 import { Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
+    zIndex:100,
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
   },
   menuButton: {
     marginRight: theme.spacing(2),
   },
   title: {
-    display: "none",
+    // display: "none",
+    flexGrow: 1,
     [theme.breakpoints.up("sm")]: {
       display: "block",
     },
@@ -105,6 +110,12 @@ const TopBar = () => {
     handleMobileMenuClose();
   };
 
+  const viewProfile = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+    window.location.href = "/profile"
+  }
+
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
@@ -120,7 +131,7 @@ const TopBar = () => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={viewProfile}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );
@@ -136,14 +147,14 @@ const TopBar = () => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
+      {/* <MenuItem>
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="secondary">
             <MailIcon />
           </Badge>
         </IconButton>
         <p>Messages</p>
-      </MenuItem>
+      </MenuItem> */}
       <MenuItem>
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={11} color="secondary">
@@ -168,7 +179,7 @@ const TopBar = () => {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar position="static" className={classes.appBar}>
         <Toolbar>
           {/* <IconButton
             edge="start"
@@ -184,12 +195,8 @@ const TopBar = () => {
             </Typography>
             <EmojiPeople fontSize="large" className={classes.title}/>
           </Button>
-          <Button component={RouterLink} to={"/tutor"}>
-            <Typography className={classes.title} variant="h6" noWrap>
-              Individual Tutor
-            </Typography>
-          </Button>
-          <Button component={RouterLink} to={"/profile"}>
+         
+          {/* <Button component={RouterLink} to={"/profile"}>
             <Typography className={classes.title} variant="h6" noWrap>
               Profile
             </Typography>
@@ -203,7 +210,7 @@ const TopBar = () => {
             <Typography className={classes.title} variant="h6" noWrap>
               Register
             </Typography>
-          </Button>
+          </Button> */}
 
           {/* <Typography className={classes.title} variant="h6" noWrap>
             Home
