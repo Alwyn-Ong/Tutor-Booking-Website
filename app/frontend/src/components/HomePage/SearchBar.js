@@ -28,6 +28,8 @@ function SearchBar() {
     selectedLocations: [],
   });
 
+  const [search, setSearch] = React.useState("");
+
   return (
     <Grid>
       <Container className="heading">
@@ -35,8 +37,12 @@ function SearchBar() {
           <input
             className="search-bar"
             placeholder="Search for tutors!"
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
           ></input>
-          <input type="submit" value="GO" href="#"></input>
+          <input type="submit" value="GO"></input>
         </form>
         <FilterPanel setState={setFilter} state={filter}></FilterPanel>
       </Container>
@@ -44,7 +50,7 @@ function SearchBar() {
         <NoticeBoard></NoticeBoard>
       </Container>
       <Container className="tracks">
-        <Results filterConditions={filter}></Results>
+        <Results filterConditions={filter} search={search}></Results>
       </Container>
     </Grid>
   );

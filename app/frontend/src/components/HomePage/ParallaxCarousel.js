@@ -8,6 +8,8 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import ParallaxSlide from '@mui-treasury/components/slide/parallax';
 import DotIndicator from '@mui-treasury/components/indicator/dot';
 import { useArrowDarkButtonStyles } from '@mui-treasury/styles/button/arrowDark';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const data = [
   {

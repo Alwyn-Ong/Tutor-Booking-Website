@@ -623,7 +623,7 @@ let tutorResults = [
   },
 ];
 
-export const Results = React.memo(function SolidGameCard({ filterConditions }) {
+export const Results = React.memo(function SolidGameCard({ filterConditions, search }) {
   const gridStyles = useGridStyles();
   const classes = useStyles();
 
@@ -645,6 +645,11 @@ export const Results = React.memo(function SolidGameCard({ filterConditions }) {
     // let temp = res.slice((value - 1) * 8, (value - 1) * 8 + 8);
     // setPosts(temp);
   };
+
+  // useEffect(() => {
+  //   effect
+    
+  // }, [search])
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -705,6 +710,27 @@ export const Results = React.memo(function SolidGameCard({ filterConditions }) {
         }
         return true;
       });
+
+      let searchList = search.split(" ");
+      for (var searchCondition of searchList){
+        res = res.filter((item) => {
+          for (var key in item){
+            if (key == "userid") continue
+            if (key != "levelsTaught"){
+              if (item[key].toLowerCase().includes(searchCondition.toLowerCase())){
+                return true;
+              }
+            } else {
+              for (var level in key){
+                if (key[level].toLowerCase().includes(searchCondition.toLowerCase())){
+                  return true;
+                }
+              }
+            }
+          }
+        })
+      }
+
       let temp = res.slice((currentPage - 1) * 8, (currentPage - 1) * 8 + 8);
 
       setPosts(temp);
@@ -712,7 +738,7 @@ export const Results = React.memo(function SolidGameCard({ filterConditions }) {
       setLoading(false);
     };
     fetchPosts();
-  }, [filterConditions, currentPage]);
+  }, [filterConditions, currentPage, search]);
 
   for (const [index, value] of posts.entries()) {
     // Get unique levels
