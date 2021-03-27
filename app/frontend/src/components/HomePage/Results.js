@@ -733,10 +733,11 @@ export const Results = React.memo(function SolidGameCard({
       });
 
       let searchList = search.split(" ");
+      const noCheckList = ["userid","rating","reviews","price"]
       for (var searchCondition of searchList) {
         res = res.filter((item) => {
           for (var key in item) {
-            if (key == "userid") continue;
+            if (noCheckList.includes(key)) continue;
             if (key != "levelsTaught") {
               if (
                 item[key].toLowerCase().includes(searchCondition.toLowerCase())
@@ -788,7 +789,7 @@ export const Results = React.memo(function SolidGameCard({
           // levels={value.Level}
           levels={levels}
           qualification={value.qualification}
-          location={value.nearestMrt}
+          location={value.nearestMRT}
           // image={"./guy1.jpg"}
           // image="http://localhost:8080/api/files/1"
           image={value.imageURL}
