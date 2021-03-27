@@ -42,26 +42,27 @@ const ReviewCard = ({ data, colour }) => {
   }));
 
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+  // const [expanded, setExpanded] = React.useState(false);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+  // const handleExpandClick = () => {
+  //   setExpanded(!expanded);
+  // };
 
   const title = () => {
     return (
       <>
-        {data.tuitionType}{" "}
-        <Rating
+        {data.tuitionType}{" | "}
+        {data.reviewDate}
+        {/* <Rating
           name="half-rating-read"
-          value={data.rating}
+          value={data.numberOfStars}
           readOnly
           precision={0.5}
           size="small"
           style={{
             verticalAlign: "top",
           }}
-        />
+        /> */}
       </>
     );
   };
@@ -74,23 +75,33 @@ const ReviewCard = ({ data, colour }) => {
             {data.initial}
           </Avatar>
         }
-        action={
+        // action={
           // <IconButton aria-label="settings">
           //   <MoreVertIcon />
           // </IconButton>
-          <IconButton
-            className={clsx(classes.expand, {
-              [classes.expandOpen]: expanded,
-            })}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-            aria-label="show more"
-          >
-            <ExpandMoreIcon />
-          </IconButton>
-        }
+          // <IconButton
+          //   className={clsx(classes.expand, {
+          //     [classes.expandOpen]: expanded,
+          //   })}
+          //   onClick={handleExpandClick}
+          //   aria-expanded={expanded}
+          //   aria-label="show more"
+          // >
+          //   <ExpandMoreIcon />
+          // </IconButton>
+        // }
         title={title()}
-        subheader={data.date}
+        subheader={<Rating
+          name="half-rating-read"
+          value={data.numberOfStars}
+          readOnly
+          precision={0.5}
+          size="small"
+          style={{
+            verticalAlign: "top",
+          }}
+        />}
+        // subheader={"21 May"}
       />
 
       {/* <CardActions disableSpacing>
@@ -105,9 +116,9 @@ const ReviewCard = ({ data, colour }) => {
           <ExpandMoreIcon />
         </IconButton>
       </CardActions> */}
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography>{data.description}</Typography>
+      {/* <Collapse in={expanded} timeout="auto" unmountOnExit> */}
+        <CardContent style={{paddingTop:"0px"}}>
+          <Typography>{data.message}</Typography>
           {/* <Typography paragraph>
             Heat 1/2 cup of the broth in a pot until simmering, add saffron and
             set aside for 10 minutes.
@@ -135,7 +146,7 @@ const ReviewCard = ({ data, colour }) => {
             serve.
           </Typography> */}
         </CardContent>
-      </Collapse>
+      {/* </Collapse> */}
     </Card>
   );
 };

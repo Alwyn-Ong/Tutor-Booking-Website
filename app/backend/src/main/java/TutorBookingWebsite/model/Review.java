@@ -31,6 +31,14 @@ public class Review {
 	private int tutorId;	
 	@ApiModelProperty(notes= "user id of student")
 	private int studentId;
+	@ApiModelProperty(notes= "date of review")
+	private String reviewDate;
+	@ApiModelProperty(notes= "initial of student")
+	private String initial;
+	@ApiModelProperty(notes= "subject type of tuition in review")
+	private String tuitionType;
+	
+	
 	
 	public Review() {
 		
@@ -75,4 +83,30 @@ public class Review {
 	public void setStudentId(int studentId) {
 		this.studentId = studentId;
 	}
+
+	public String getReviewDate() {
+		return reviewDate;
+	}
+
+	public void setReviewDate(String reviewDate) {
+		this.reviewDate = reviewDate;
+	}
+
+	public String getInitial() {
+		return initial;
+	}
+
+	public void setInitial(String initial) {
+		this.initial = initial;
+	}
+
+	public String getTuitionType() {
+		return tuitionType;
+	}
+
+	public void setTuitionType(String tuitionType) {
+		this.tuitionType = tuitionType;
+	}
+	
+	
 }

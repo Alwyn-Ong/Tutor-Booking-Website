@@ -213,7 +213,7 @@ const Tutor = () => {
               <Divider variant="middle" />
             </Grid>
             <Grid item>
-              {value ? <Reviews /> : <Timetable isTutor={false} data={data.openTimeslot}/>}
+              {value ? <Reviews reviews={data.reviews} /> : <Timetable isTutor={false} data={data.openTimeslot}/>}
             </Grid>
           </Grid>
         </>

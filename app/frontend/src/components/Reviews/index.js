@@ -26,53 +26,53 @@ const getColor = () => {
   }
 }
 
-const index = () => {
+const index = ({reviews}) => {
 
   //TODO: Get from API
-  let reviews = [
-    {
-      initial: "R",
-      tuitionType: "English",
-      date: "13 March 2021",
-      description: "Kind and funny.",
-      rating: 5.0,
-    },
-    {
-      initial: "B",
-      tuitionType: "Math",
-      date: "13 May 2021",
-      description: "Kind and funny.",
-      rating: 4.5,
-    },
-    {
-      initial: "B",
-      tuitionType: "Math",
-      date: "13 May 2021",
-      description: "Kind and funny.",
-      rating: 4.5,
-    },
-    {
-      initial: "B",
-      tuitionType: "Math",
-      date: "13 May 2021",
-      description: "Kind and funny.",
-      rating: 4.5,
-    },
-    {
-      initial: "B",
-      tuitionType: "Math",
-      date: "13 May 2021",
-      description: "Kind and funny.",
-      rating: 4.5,
-    },
-    {
-      initial: "B",
-      tuitionType: "Math",
-      date: "13 May 2021",
-      description: "Kind and funny.",
-      rating: 4.5,
-    },
-  ];
+  // let reviews = [
+  //   {
+  //     initial: "R",
+  //     tuitionType: "English",
+  //     date: "13 March 2021",
+  //     description: "Kind and funny.",
+  //     rating: 5.0,
+  //   },
+  //   {
+  //     initial: "B",
+  //     tuitionType: "Math",
+  //     date: "13 May 2021",
+  //     description: "Kind and funny.",
+  //     rating: 4.5,
+  //   },
+  //   {
+  //     initial: "B",
+  //     tuitionType: "Math",
+  //     date: "13 May 2021",
+  //     description: "Kind and funny.",
+  //     rating: 4.5,
+  //   },
+  //   {
+  //     initial: "B",
+  //     tuitionType: "Math",
+  //     date: "13 May 2021",
+  //     description: "Kind and funny.",
+  //     rating: 4.5,
+  //   },
+  //   {
+  //     initial: "B",
+  //     tuitionType: "Math",
+  //     date: "13 May 2021",
+  //     description: "Kind and funny.",
+  //     rating: 4.5,
+  //   },
+  //   {
+  //     initial: "B",
+  //     tuitionType: "Math",
+  //     date: "13 May 2021",
+  //     description: "Kind and funny.",
+  //     rating: 4.5,
+  //   },
+  // ];
 
   return (
     <Grid container spacing={3} direction="column">
