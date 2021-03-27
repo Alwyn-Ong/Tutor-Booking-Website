@@ -73,7 +73,20 @@ public class UserService {
 				result.put("phoneNumber", user.get().getPhoneNumber());
 				result.put("price", user.get().getPrice());
 				result.put("qualification", "" + user.get().getQualification());
-				result.put("reviews", reviewDao.findByTutorId(userId));
+//				result.put("reviews", reviewDao.findByTutorId(userId));
+				
+				List<Review> reviews = reviewDao.findByTutorId(userId);
+				if (reviews.size() != 0) {
+					// Calculate average review score
+					int totalRating = 0;
+					for (Review review: reviews) {
+						totalRating += review.getNumberOfStars();
+					}
+					double overallRating = totalRating / reviews.size();
+					result.put("rating", overallRating);
+					result.put("reviews", reviews);
+					
+				}
 				
 				List<LevelsTaught> levelsTaught = levelsTaughtDao.findByTutorId(user.get().getUserId());
 				Map<String,List<String>> levelsTaughtTemp = new HashMap<>();

@@ -28,13 +28,13 @@ const getUniqueRows = (data) => {
 };
 
 
-const Timetable = ({isTutor}) => {
+const Timetable = ({isTutor, data}) => {
   let days = ["", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
   let timeslots = generateTimeSlots();
 
 
-  let data = ["1-1000", "2-1000", "4-1000", "1-1100", "3-1700"];
+  // let data = ["1-1000", "2-1000", "4-1000", "1-1100", "3-1700"];
 
   // const cellDefault = [
   //   [false, false, false, false, false, false, false],

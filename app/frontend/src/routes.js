@@ -20,10 +20,11 @@ const routes = [
     children: [
       { path: "/", element: <Homepage /> },
       { path: "profile", element: <Profile /> },
-      { path: "tutor", element: <Tutor /> },
+      { path: "tutor/:id", element: <Tutor /> },
       { path: "register", element: <Register /> },
       { path: "tutorprofile", element: <TutorProfile /> },
-      //   { path: "*", element: <Navigate to="/404" /> },
+      { path: "*", element: <Homepage /> },
+      // { path: "*", element: <Navigate to="/" /> },
     ],
   },
 ];

@@ -19,8 +19,8 @@ import "./Button.css";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { Rating } from "@material-ui/lab";
-import {useNavigate} from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import { CustomCard } from "./CustomCard";
 const useGridStyles = makeStyles(({ breakpoints }) => ({
   root: {
     [breakpoints.up("md")]: {
@@ -114,95 +114,96 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CustomCard = ({
-  classes,
-  image,
-  name,
-  bio,
-  levels,
-  price,
-  location,
-  qualification,
-  gender,
-  rating,
-  reviews,
-  userid,
-}) => {
-  const mediaStyles = useFourThreeCardMediaStyles();
-  const textCardContentStyles = useN04TextInfoContentStyles();
-  const shadowStyles = useOverShadowStyles({ inactive: true });
-  let limit = 30;
-  let bioFormatted =
-    bio.length > limit ? bio.substring(0, limit - 3) + "..." : bio;
-  const element = (
-    <div>
-      <h3>${price}/hr</h3>
-      <h5>
-        {rating ? (
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              flexWrap: "wrap",
-              justifyContent: "center",
-            }}
-          >
-            <Rating
-              name="half-rating-read"
-              value={rating}
-              readOnly
-              precision={0.1}
-            />
-            <span>({reviews})</span>
-          </div>
-        ) : (
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              flexWrap: "wrap",
-              justifyContent: "center",
-            }}
-          >
-            <Rating name="half-rating-read" value={0} readOnly max={1} />
-            <span style={{ fontSize: "small" }}>No reviews yet</span>
-          </div>
-        )}
-      </h5>
-      <p style={{ marginBottom: 0 }}>
-        <b>Gender: </b>
-        {gender}
-      </p>
-      <p style={{ marginBottom: 0 }}>
-        <b>Highest qualification: </b>
-        {qualification}
-      </p>
-      <p style={{ marginBottom: 0 }}>
-        <b>Teaches: </b>
-        {levels.join(", ")}
-      </p>
-      <p style={{ marginBottom: 0 }}>{bioFormatted}</p>
-    </div>
-  );
-  return (
-    <CardActionArea
-      className={classes.actionArea}
-      onClick={() => console.log(userid)}
-    >
-      <Card className={classes.card}>
-        <CardMedia classes={mediaStyles} image={image} />
-        <CardContent>
-          <TextInfoContent
-            classes={textCardContentStyles}
-            overline={location}
-            heading={name}
-            body={element}
-          />
-        </CardContent>
-      </Card>
-    </CardActionArea>
-  );
-};
+// const CustomCard = ({
+//   classes,
+//   image,
+//   name,
+//   bio,
+//   levels,
+//   price,
+//   location,
+//   qualification,
+//   gender,
+//   rating,
+//   reviews,
+//   userid,
+//   redirect
+// }) => {
+//   const mediaStyles = useFourThreeCardMediaStyles();
+//   const textCardContentStyles = useN04TextInfoContentStyles();
+//   const shadowStyles = useOverShadowStyles({ inactive: true });
+//   let limit = 30;
+//   let bioFormatted =
+//     bio.length > limit ? bio.substring(0, limit - 3) + "..." : bio;
+//   const element = (
+//     <div>
+//       <h3>${price}/hr</h3>
+//       <h5>
+//         {rating ? (
+//           <div
+//             style={{
+//               display: "flex",
+//               alignItems: "center",
+//               flexWrap: "wrap",
+//               justifyContent: "center",
+//             }}
+//           >
+//             <Rating
+//               name="half-rating-read"
+//               value={rating}
+//               readOnly
+//               precision={0.1}
+//             />
+//             <span>({reviews})</span>
+//           </div>
+//         ) : (
+//           <div
+//             style={{
+//               display: "flex",
+//               alignItems: "center",
+//               flexWrap: "wrap",
+//               justifyContent: "center",
+//             }}
+//           >
+//             <Rating name="half-rating-read" value={0} readOnly max={1} />
+//             <span style={{ fontSize: "small" }}>No reviews yet</span>
+//           </div>
+//         )}
+//       </h5>
+//       <p style={{ marginBottom: 0 }}>
+//         <b>Gender: </b>
+//         {gender}
+//       </p>
+//       <p style={{ marginBottom: 0 }}>
+//         <b>Highest qualification: </b>
+//         {qualification}
+//       </p>
+//       <p style={{ marginBottom: 0 }}>
+//         <b>Teaches: </b>
+//         {levels.join(", ")}
+//       </p>
+//       <p style={{ marginBottom: 0 }}>{bioFormatted}</p>
+//     </div>
+//   );
+//   return (
+//     <CardActionArea
+//       className={classes.actionArea}
+//       onClick={() => useNavigate(`/tutor/`)}
+//     >
+//       <Card className={classes.card}>
+//         <CardMedia classes={mediaStyles} image={image} />
+//         <CardContent>
+//           <TextInfoContent
+//             classes={textCardContentStyles}
+//             overline={location}
+//             heading={name}
+//             body={element}
+//           />
+//         </CardContent>
+//       </Card>
+//     </CardActionArea>
+//   );
+// };
 
 // let tutorResults = [
 //   {
@@ -812,7 +813,15 @@ export const Results = React.memo(function SolidGameCard({
     fetchPosts();
   }, [tutorResults, filterConditions, search]);
 
-  for (const [index, value] of posts.slice((currentPage - 1) * 8, (currentPage - 1) * 8 + 8).entries()) {
+  // FOr redirect to individual tutor page
+  const redirectToTutor = (userid) => {
+    useNavigate(`/tutor/${userid}`);
+    // window.href
+  };
+
+  for (const [index, value] of posts
+    .slice((currentPage - 1) * 8, (currentPage - 1) * 8 + 8)
+    .entries()) {
     // Get unique levels
     let levels = [];
     if (value.levelsTaught !== undefined) {
@@ -841,14 +850,12 @@ export const Results = React.memo(function SolidGameCard({
           reviews={value.reviews}
           rating={value.rating}
           userid={value.userid}
+          // redirect={redirectToTutor}
+          onClick={() => redirectToTutor(value.userid)}
         />
       </Grid>
     );
   }
-
-  const redirectToTutor = () => {
-    useNavigate("/tutor");
-  };
 
   return (
     <div>
