@@ -19,6 +19,7 @@ import "./Button.css";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { Rating } from "@material-ui/lab";
+import {useNavigate} from "react-router-dom";
 
 const useGridStyles = makeStyles(({ breakpoints }) => ({
   root: {
@@ -843,6 +844,10 @@ export const Results = React.memo(function SolidGameCard({
       </Grid>
     );
   }
+
+  const redirectToTutor = () => {
+    useNavigate("/tutor");
+  };
 
   return (
     <div>
