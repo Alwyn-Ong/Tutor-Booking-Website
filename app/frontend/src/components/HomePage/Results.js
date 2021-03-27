@@ -18,6 +18,8 @@ import TextInfoContent from "@mui-treasury/components/content/textInfo";
 import "./Button.css";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { Rating } from "@material-ui/lab";
+
 const useGridStyles = makeStyles(({ breakpoints }) => ({
   root: {
     [breakpoints.up("md")]: {
@@ -121,27 +123,62 @@ const CustomCard = ({
   location,
   qualification,
   gender,
+  rating,
+  reviews,
 }) => {
   const mediaStyles = useFourThreeCardMediaStyles();
   const textCardContentStyles = useN04TextInfoContentStyles();
   const shadowStyles = useOverShadowStyles({ inactive: true });
-  let levelsCombined = levels.join(", ");
+  let limit = 30
+  let bioFormatted = (bio.length > limit) ? bio.substring(0,limit-3) + "..." : bio;
   const element = (
     <div>
       <h3>${price}/hr</h3>
-      <p>
+      <h5>
+        {rating ? (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              flexWrap: "wrap",
+              justifyContent: "center",
+            }}
+          >
+            <Rating
+              name="half-rating-read"
+              value={rating}
+              readOnly
+              precision={0.1}
+            />
+            <span>({reviews})</span>
+          </div>
+        ) : (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              flexWrap: "wrap",
+              justifyContent: "center",
+            }}
+          >
+            <Rating name="half-rating-read" value={0} readOnly max={1} />
+            <span style={{ fontSize: "small" }}>No reviews yet</span>
+          </div>
+        )}
+      </h5>
+      <p style={{ marginBottom: 0 }}>
         <b>Gender: </b>
         {gender}
       </p>
-      <p>
+      <p style={{ marginBottom: 0 }}>
         <b>Highest qualification: </b>
         {qualification}
       </p>
-      <p>
+      <p style={{ marginBottom: 0 }}>
         <b>Teaches: </b>
-        {levels.join(" , ")}
+        {levels.join(", ")}
       </p>
-      <p>{bio}</p>
+      <p style={{ marginBottom: 0}}>{bioFormatted}</p>
     </div>
   );
   return (
@@ -733,7 +770,7 @@ export const Results = React.memo(function SolidGameCard({
       });
 
       let searchList = search.split(" ");
-      const noCheckList = ["userid","rating","reviews","price"]
+      const noCheckList = ["userid", "rating", "reviews", "price"];
       for (var searchCondition of searchList) {
         res = res.filter((item) => {
           for (var key in item) {
@@ -794,6 +831,8 @@ export const Results = React.memo(function SolidGameCard({
           // image="http://localhost:8080/api/files/1"
           image={value.imageURL}
           gender={value.gender}
+          reviews={value.reviews}
+          rating={value.rating}
         />
       </Grid>
     );
