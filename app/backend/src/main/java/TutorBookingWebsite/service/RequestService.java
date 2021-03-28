@@ -33,6 +33,9 @@ public class RequestService {
 	@Autowired
 	private UserTimeslotDao userTimeslotDao;
 	
+	@Autowired
+	private NotificationService notificationService;
+	
 	public ResponseEntity acceptRequest(int requestId) {
 		Optional<Request> request = requestDao.findById(requestId);
 		String requestTimeslot = request.get().getRequestedTimeslot();
@@ -79,6 +82,7 @@ public class RequestService {
 		try {
 			Request newRequest = new Request(request.getRemarks(), request.getRequestedTimeslot(), request.getStudentId(), request.getTutorId());
 			requestDao.save(newRequest);
+			notificationService.sendNotificationToAdmin(userDao.findById(request.getTutorId()).get());
 			ResponseDetails responseDetails = new ResponseDetails(new Date(), "request has been saved",
 					"query success");
 			return new ResponseEntity(responseDetails, HttpStatus.OK);	
