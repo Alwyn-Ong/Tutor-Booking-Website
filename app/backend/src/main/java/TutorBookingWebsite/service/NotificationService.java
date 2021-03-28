@@ -28,13 +28,15 @@ public class NotificationService {
 		this.javaMailSender = javaMailSender;
 	}
 	
-	public void sendNotificationToAdmin(User user) throws MailException{
+	public void sendNotificationToAdmin(User user, String studentName, String requestedTimeslot) throws MailException{
 		SimpleMailMessage mail = new SimpleMailMessage();
 		mail.setTo(user.getEmail());
 		mail.setFrom(hostEmail);
 		mail.setSubject("Pending Request");
-		String emailText = "Dear User, \n\nPlease note that an interested student has requested a timeslot for your tuition service! " +  " \n\nYou may wish to login to view the request. " + " \n\nPlease do not reply to "
-						+ "this automated email.\n\n" + "Regards,\nTutorBooking Team";
+		String emailText = "Dear Tutor, \n\nPlease note that " + studentName + " has requested a timeslot at " + requestedTimeslot + " for your tuition service! " 
+							+  " \n\nYou may wish to login to view the specifics of the request. " 
+							+ " \n\nPlease do not reply to "+ "this automated email.\n\n" 
+							+ "Regards,\nTutorBooking Team";
 		mail.setText(emailText);
 	
 		javaMailSender.send(mail);
