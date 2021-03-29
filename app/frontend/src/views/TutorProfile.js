@@ -1,6 +1,7 @@
 import React from "react";
 import { Page } from "../components/Page";
 import { makeStyles } from "@material-ui/core";
+import TutorProfile from "../components/TutorProfile"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,8 +13,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Homepage = () => {
+
   const classes = useStyles();
-  return <Page>TUTOR PROFILE</Page>;
+  // return <Page>TUTOR PROFILE</Page>;
+  return (
+    <Page>
+      <TutorProfile></TutorProfile>
+    </Page>
+  );
 };
 
 export default Homepage;
