@@ -120,20 +120,14 @@ const Homepage = () => {
       setLoading(true);
     }
 
-    const timer = React.useRef();
-
-    timer.current = window.setTimeout(() => {
-      fetch("http://localhost:8080/api/updateprofile", requestOptions)
-        .then((response) => response.text())
-        .then((result) => {
-          console.log(result);
-          setSuccess(true);
-          setLoading(false);
-          // setSuccess(true);
-          // setLoading(false);
-        })
-        .catch((error) => console.log("error", error));
-    }, 2000);
+    fetch("http://localhost:8080/api/updateprofile", requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        console.log(result);
+        setSuccess(true);
+        setLoading(false);
+      })
+      .catch((error) => console.log("error", error));
   };
 
   console.log(values);
