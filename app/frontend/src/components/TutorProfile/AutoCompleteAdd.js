@@ -47,30 +47,30 @@ export default function FreeSoloCreateOptionDialog({
   return (
     <React.Fragment>
       <Autocomplete
-        value={value.address}
+        value={value.nearestMRT}
         onChange={(event, newValue) => {
           console.log(newValue);
           if (typeof newValue === "string") {
             console.log(newValue);
             setValue((state) => {
-              return { ...state, address: newValue }; // label: newValue,
+              return { ...state, nearestMRT: newValue }; // label: newValue,
               // value: newValue,
             });
           } else if (newValue && newValue.value) {
             console.log(newValue);
             setValue((state) => {
-              return { ...state, address: newValue.value }; // label: newValue.inputValue,
+              return { ...state, nearestMRT: newValue.value }; // label: newValue.inputValue,
               // value: newValue.inputValue,
             });
           } else if (newValue && newValue.inputValue) {
             setValue((state) => {
-              return { ...state, address: newValue.inputValue }; // label: newValue.inputValue,
+              return { ...state, nearestMRT: newValue.inputValue }; // label: newValue.inputValue,
               // value: newValue.inputValue,
             });
           } else {
             // setValue(newValue);
             setValue((state) => {
-              return { ...state, address: "" }; // label: newValue,
+              return { ...state, nearestMRT: "" }; // label: newValue,
             });
 
             // setValue({

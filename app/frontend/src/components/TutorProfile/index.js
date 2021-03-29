@@ -81,20 +81,59 @@ const Homepage = () => {
     name: "",
     email: "",
     phone: "",
-    address: "",
+    nearestMRT: "",
     description: "",
     gender: "",
-    qualification: ""
+    qualification: "",
   });
 
   const handleLocationChange = (event, value) => {
     // const locations = event.target.locations;
-    let address = value != null ? value.value : "";
+    let nearestMRT = value != null ? value.value : "";
     setValues({
       ...values,
-      address: address,
+      nearestMRT: nearestMRT,
     });
     // console.log(value);
+  };
+
+  const [loading, setLoading] = React.useState(false);
+  const [success, setSuccess] = React.useState(false);
+
+  const handleSave = () => {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    let body = values;
+    body.userId = 1;
+    var requestOptions = {
+      method: "PUT",
+      headers: myHeaders,
+      body: JSON.stringify(body),
+      redirect: "follow",
+    };
+
+    console.log(JSON.stringify(body));
+
+    if (!loading) {
+      setSuccess(false);
+      setLoading(true);
+    }
+
+    const timer = React.useRef();
+
+    timer.current = window.setTimeout(() => {
+      fetch("http://localhost:8080/api/updateprofile", requestOptions)
+        .then((response) => response.text())
+        .then((result) => {
+          console.log(result);
+          setSuccess(true);
+          setLoading(false);
+          // setSuccess(true);
+          // setLoading(false);
+        })
+        .catch((error) => console.log("error", error));
+    }, 2000);
   };
 
   console.log(values);
@@ -110,7 +149,11 @@ const Homepage = () => {
         // closeButtonClass="secondary"
         // saveButtonClass="primary"
         header={true}
-        onSave={() => alert("Saved")}
+        onSave={() => handleSave()}
+        loading={loading}
+        setLoading={setLoading}
+        success={success}
+        setSuccess={setSuccess}
       >
         <SettingsPage handler="/settings/general">
           <Grid container spacing={3} direction="row">
@@ -170,7 +213,11 @@ const Homepage = () => {
               />
             </Grid> */}
             <Grid item md={12} lg={6} xs={12} sm={12} xl={6}>
-              <AutoCompleteAdd options={locations} value={values} setValue={setValues}/>
+              <AutoCompleteAdd
+                options={locations}
+                value={values}
+                setValue={setValues}
+              />
             </Grid>
             <Grid item md={12} lg={6} xs={12} sm={12} xl={6}>
               <TextField

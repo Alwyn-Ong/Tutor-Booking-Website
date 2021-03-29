@@ -7,6 +7,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Button } from "@material-ui/core";
+import SaveButton from "./SaveButton";
 
 export class SettingsFooter extends Component {
   /**
@@ -19,7 +20,11 @@ export class SettingsFooter extends Component {
     onPaneLeave: PropTypes.func.isRequired,
     closeButtonClass: PropTypes.string,
     saveButtonClass: PropTypes.string,
-    onSave: PropTypes.func
+    onSave: PropTypes.func,
+    loading: PropTypes.bool,
+    setLoading: PropTypes.func,
+    success: PropTypes.bool,
+    setSuccess: PropTypes.func
   };
 
   constructor(props) {
@@ -62,6 +67,7 @@ export class SettingsFooter extends Component {
         <Button variant="contained" color="primary" onClick={this.props.onSave}>
           Save
         </Button>
+        <SaveButton {...this.props}/>
       </div>
     );
   }

@@ -24,6 +24,10 @@ export class SettingsContent extends Component {
     onPaneLeave: PropTypes.func,
     onMenuItemClick: PropTypes.func,
     onSave: PropTypes.func,
+    loading: PropTypes.bool,
+    setLoading: PropTypes.func,
+    success: PropTypes.bool,
+    setSuccess: PropTypes.func
   };
 
   /**
