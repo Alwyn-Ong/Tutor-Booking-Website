@@ -151,6 +151,7 @@ const Homepage = () => {
                 renderInput={(params) => (
                   <TextField {...params} label="Combo box" variant="outlined" />
                 )}
+                freeSolo
                 // style={{ width:"stretch" }}
                 fullWidth={true}
                 renderInput={(params) => (
@@ -161,6 +162,9 @@ const Homepage = () => {
                     placeholder="Nearest MRT"
                   />
                 )}
+                handleHomeEndKeys
+                clearOnBlur
+                selectOnFocus
               />
             </Grid>
             <Grid item md={12} lg={6}>

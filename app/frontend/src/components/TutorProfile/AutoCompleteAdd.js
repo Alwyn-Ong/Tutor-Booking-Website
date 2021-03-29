@@ -1,4 +1,3 @@
-/* eslint-disable no-use-before-define */
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -11,52 +10,56 @@ import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete
 
 const filter = createFilterOptions();
 
-export default function FreeSoloCreateOptionDialog({options, values, setValues}) {
-  // const [value, setValue] = React.useState(null);
+export default function FreeSoloCreateOptionDialog({options}) {
+  const [value, setValue] = React.useState(null);
   const [open, toggleOpen] = React.useState(false);
 
   const handleClose = () => {
     setDialogValue({
-      title: '',
+      label: '',
+      value: '',
     });
 
     toggleOpen(false);
   };
 
   const [dialogValue, setDialogValue] = React.useState({
-    title: '',
+    label: '',
+    value: '',
   });
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setValues({
-      ...state,
-      address: dialogValue,
+    setValue({
+      label: dialogValue.label,
+      value: dialogValue.value,
     });
-    alert("New address added!");
+
     handleClose();
   };
 
   return (
     <React.Fragment>
       <Autocomplete
-        value={values}
+        value={value}
         onChange={(event, newValue) => {
           if (typeof newValue === 'string') {
             // timeout to avoid instant validation of the dialog's form.
             setTimeout(() => {
               toggleOpen(true);
               setDialogValue({
-                title: newValue,
+                label: newValue,
+                value: '',
               });
             });
           } else if (newValue && newValue.inputValue) {
             toggleOpen(true);
             setDialogValue({
-              title: newValue.inputValue,
+              label: newValue.inputValue,
+              value: '',
             });
           } else {
-            setValues(newValue);
+            setValue(newValue);
           }
         }}
         filterOptions={(options, params) => {
@@ -65,14 +68,14 @@ export default function FreeSoloCreateOptionDialog({options, values, setValues})
           if (params.inputValue !== '') {
             filtered.push({
               inputValue: params.inputValue,
-              title: `Add "${params.inputValue}"`,
+              label: `Add "${params.inputValue}"`,
             });
           }
 
           return filtered;
         }}
         id="free-solo-dialog-demo"
-        options={locations}
+        options={options}
         getOptionLabel={(option) => {
           // e.g value selected with enter, right from the input
           if (typeof option === 'string') {
@@ -81,17 +84,17 @@ export default function FreeSoloCreateOptionDialog({options, values, setValues})
           if (option.inputValue) {
             return option.inputValue;
           }
-          return option.title;
+          return option.label;
         }}
         selectOnFocus
         clearOnBlur
         handleHomeEndKeys
-        renderOption={(option) => option.title}
-        style={{ width: 300 }}
+        renderOption={(option) => option.label}
+        // style={{ width: 300 }}
         freeSolo
         fullWidth={true}
         renderInput={(params) => (
-          <TextField {...params} label="Nearest MRT" variant="outlined" />
+          <TextField {...params} label="Free solo dialog" variant="outlined" />
         )}
       />
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
@@ -99,16 +102,24 @@ export default function FreeSoloCreateOptionDialog({options, values, setValues})
           <DialogTitle id="form-dialog-title">Add a new film</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Did you miss any location in our list? Please, add it!
+              Did you miss any film in our list? Please, add it!
             </DialogContentText>
             <TextField
               autoFocus
               margin="dense"
               id="name"
-              value={dialogValue.title}
-              onChange={(event) => setDialogValue({ ...dialogValue, title: event.target.value })}
+              value={dialogValue.label}
+              onChange={(event) => setDialogValue({ ...dialogValue, label: event.target.value })}
               label="title"
               type="text"
+            />
+            <TextField
+              margin="dense"
+              id="name"
+              value={dialogValue.value}
+              onChange={(event) => setDialogValue({ ...dialogValue, value: event.target.value })}
+              label="value"
+              type="number"
             />
           </DialogContent>
           <DialogActions>
