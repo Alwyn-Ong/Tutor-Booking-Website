@@ -76,14 +76,16 @@ const index = ({reviews}) => {
 
   return (
     <Grid container spacing={3} direction="column">
-      {reviews.map((review, id) => {
+      {reviews ? (reviews.map((review, id) => {
         let colour = getColor();
         return (
           <Grid item key={id}>
             <ReviewCard data={review} colour={colour}/>
           </Grid>
         );
-      })}
+      })) : (
+        <Grid item><Typography variant="h3" style={{textAlign: "center"}}>No reviews yet!</Typography></Grid>
+      )}
     </Grid>
   );
 };
