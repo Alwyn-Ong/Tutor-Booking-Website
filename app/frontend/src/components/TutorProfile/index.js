@@ -12,7 +12,7 @@ import {
 // } from "react-settings-pane";
 import React from "react";
 
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles.css";
 
 import { TextField, Grid } from "@material-ui/core";
@@ -69,7 +69,9 @@ const Homepage = () => {
   const [values, setValues] = React.useState({
     name: "",
     email: "",
-    phone: ""
+    phone: "",
+    address: "",
+    description: "",
   });
 
   console.log(values);
@@ -88,8 +90,8 @@ const Homepage = () => {
         onSave={() => alert("Saved")}
       >
         <SettingsPage handler="/settings/general">
-          <Grid container spacing={3} direction="column">
-            <Grid item>
+          <Grid container spacing={3} direction="row">
+            <Grid item md={12} lg={6}>
               <TextField
                 required
                 id="outlined-required-name"
@@ -104,7 +106,7 @@ const Homepage = () => {
                 }}
               />
             </Grid>
-            <Grid item>
+            <Grid item md={12} lg={6}>
               <TextField
                 required
                 id="outlined-required-email"
@@ -119,7 +121,7 @@ const Homepage = () => {
                 }}
               />
             </Grid>
-            <Grid item>
+            <Grid item md={12} lg={6}>
               <TextField
                 required
                 id="outlined-required-phone"
@@ -134,17 +136,31 @@ const Homepage = () => {
                 }}
               />
             </Grid>
-            <Grid item>
+            <Grid item md={12} lg={6}>
               <TextField
                 required
                 id="outlined-required-phone"
                 label="Phone (Required)"
                 // defaultValue="Name"
                 variant="outlined"
-                value={values.phone}
+                value={values.address}
                 onChange={(e) => {
                   setValues((state) => {
-                    return { ...state, phone: e.target.value };
+                    return { ...state, address: e.target.value };
+                  });
+                }}
+              />
+            </Grid>
+            <Grid item md={12} lg={6}>
+              <TextField
+                id="outlined-required-desc"
+                label="Description"
+                // defaultValue="Name"
+                variant="outlined"
+                value={values.description}
+                onChange={(e) => {
+                  setValues((state) => {
+                    return { ...state, description: e.target.value };
                   });
                 }}
               />
