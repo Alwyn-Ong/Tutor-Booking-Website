@@ -17,6 +17,7 @@ import "./styles.css";
 
 import { TextField, Grid } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import AutoCompleteAdd from "./AutoCompleteAdd";
 
 const locations = [
   { value: "Bedok", label: "Bedok" },
@@ -26,7 +27,6 @@ const locations = [
   { value: "Dhoby Ghaut", label: "Dhoby Ghaut" },
   { value: "Orchard", label: "Orchard" },
 ];
-
 
 const Homepage = () => {
   let settings = {
@@ -87,7 +87,7 @@ const Homepage = () => {
 
   const handleLocationChange = (event, value) => {
     // const locations = event.target.locations;
-    let address = value != null ? value.value : ""
+    let address = value != null ? value.value : "";
     setValues({
       ...values,
       address: address,
@@ -143,23 +143,28 @@ const Homepage = () => {
               />
             </Grid>
             <Grid item md={12} lg={6}>
-            <Autocomplete
-              options={locations}
-              size="small"
-              getOptionLabel={(option) => option.label}
-              onChange={handleLocationChange}
-              renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
-              // style={{ width:"stretch" }}
-              fullWidth={true}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  variant="outlined"
-                  label="Nearest MRT"
-                  placeholder="Nearest MRT"
-                />
-              )}
-            />
+              <Autocomplete
+                options={locations}
+                size="small"
+                getOptionLabel={(option) => option.label}
+                onChange={handleLocationChange}
+                renderInput={(params) => (
+                  <TextField {...params} label="Combo box" variant="outlined" />
+                )}
+                // style={{ width:"stretch" }}
+                fullWidth={true}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    variant="outlined"
+                    label="Nearest MRT"
+                    placeholder="Nearest MRT"
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item md={12} lg={6}>
+              <AutoCompleteAdd options={locations} values={values} setValues={setValues}/>
             </Grid>
             <Grid item md={12} lg={6}>
               <TextField
