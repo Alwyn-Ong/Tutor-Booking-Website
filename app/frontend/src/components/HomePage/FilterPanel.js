@@ -95,7 +95,7 @@ function FilterPanel({ state, setState }) {
 
   return (
     <div className={classes.root}>
-      <Grid container justify="center" alignItems="stretch">
+      <Grid container justify="center" alignItems="stretch" spacing={3}>
         <Grid item xs={12} sm={4} style={{ minWidth: 120 }}>
           <FormControl
             style={{ display: "block" }}
