@@ -83,6 +83,8 @@ const Homepage = () => {
     phone: "",
     address: "",
     description: "",
+    gender: "",
+    qualification: ""
   });
 
   const handleLocationChange = (event, value) => {
@@ -172,9 +174,8 @@ const Homepage = () => {
             </Grid>
             <Grid item md={12} lg={6} xs={12} sm={12} xl={6}>
               <TextField
-                required
                 id="outlined-required-phone"
-                label="Phone (Required)"
+                label="Phone"
                 // defaultValue="Name"
                 variant="outlined"
                 value={values.phone}
@@ -195,6 +196,34 @@ const Homepage = () => {
                 onChange={(e) => {
                   setValues((state) => {
                     return { ...state, description: e.target.value };
+                  });
+                }}
+              />
+            </Grid>
+            <Grid item md={12} lg={6} xs={12} sm={12} xl={6}>
+              <TextField
+                id="outlined-required-desc"
+                label="Qualification"
+                // defaultValue="Name"
+                variant="outlined"
+                value={values.qualification}
+                onChange={(e) => {
+                  setValues((state) => {
+                    return { ...state, qualification: e.target.value };
+                  });
+                }}
+              />
+            </Grid>
+            <Grid item md={12} lg={6} xs={12} sm={12} xl={6}>
+              <TextField
+                id="outlined-required-desc"
+                label="Gender"
+                // defaultValue="Name"
+                variant="outlined"
+                value={values.gender}
+                onChange={(e) => {
+                  setValues((state) => {
+                    return { ...state, gender: e.target.value };
                   });
                 }}
               />
