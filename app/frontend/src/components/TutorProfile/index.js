@@ -112,7 +112,7 @@ const Homepage = () => {
       >
         <SettingsPage handler="/settings/general">
           <Grid container spacing={3} direction="row">
-            <Grid item md={12} lg={6}>
+            <Grid item md={12} lg={6} xs={12} sm={12} xl={6}>
               <TextField
                 required
                 id="outlined-required-name"
@@ -127,7 +127,7 @@ const Homepage = () => {
                 }}
               />
             </Grid>
-            <Grid item md={12} lg={6}>
+            <Grid item md={12} lg={6} xs={12} sm={12} xl={6}>
               <TextField
                 required
                 id="outlined-required-email"
@@ -142,7 +142,7 @@ const Homepage = () => {
                 }}
               />
             </Grid>
-            <Grid item md={12} lg={6}>
+            {/* <Grid item md={12} lg={6} xs={12} sm={12} xl={6}>
               <Autocomplete
                 options={locations}
                 size="small"
@@ -166,11 +166,11 @@ const Homepage = () => {
                 clearOnBlur
                 selectOnFocus
               />
+            </Grid> */}
+            <Grid item md={12} lg={6} xs={12} sm={12} xl={6}>
+              <AutoCompleteAdd options={locations} value={values} setValue={setValues}/>
             </Grid>
-            <Grid item md={12} lg={6}>
-              <AutoCompleteAdd options={locations} values={values} setValues={setValues}/>
-            </Grid>
-            <Grid item md={12} lg={6}>
+            <Grid item md={12} lg={6} xs={12} sm={12} xl={6}>
               <TextField
                 required
                 id="outlined-required-phone"
@@ -185,7 +185,7 @@ const Homepage = () => {
                 }}
               />
             </Grid>
-            <Grid item md={12} lg={6}>
+            <Grid item md={12} lg={6} xs={12} sm={12} xl={6}>
               <TextField
                 id="outlined-required-desc"
                 label="Description"
