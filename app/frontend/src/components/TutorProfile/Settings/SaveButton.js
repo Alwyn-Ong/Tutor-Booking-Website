@@ -10,8 +10,9 @@ import SaveIcon from "@material-ui/icons/Save";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    // display: 'flex',
-    alignItems: 'end',
+    display: 'flex',
+    justifyContent: 'flex-end'
+    // alignItems: 'flexend',
   },
   wrapper: {
     margin: theme.spacing(1),

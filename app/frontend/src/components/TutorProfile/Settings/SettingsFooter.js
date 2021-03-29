@@ -64,9 +64,9 @@ export class SettingsFooter extends Component {
         {/* <button className={this.props.saveButtonClass || "btn btn-primary"}>
           Save
         </button> */}
-        <Button variant="contained" color="primary" onClick={this.props.onSave}>
+        {/* <Button variant="contained" color="primary" onClick={this.props.onSave}>
           Save
-        </Button>
+        </Button> */}
         <SaveButton {...this.props}/>
       </div>
     );

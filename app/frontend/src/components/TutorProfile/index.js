@@ -122,11 +122,18 @@ const Homepage = () => {
 
     fetch("http://localhost:8080/api/updateprofile", requestOptions)
       .then((response) => response.text())
-      .then((result) => {
-        console.log(result);
-        setSuccess(true);
-        setLoading(false);
-      })
+      .then(
+        (result) =>
+          new Promise((resolve) => {
+            setTimeout(() => {
+              resolve(result);
+              console.log(result);
+              setSuccess(true);
+              setLoading(false);
+            }, 2000);
+          })
+      )
+
       .catch((error) => console.log("error", error));
   };
 
