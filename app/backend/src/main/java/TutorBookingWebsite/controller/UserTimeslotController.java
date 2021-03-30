@@ -24,4 +24,9 @@ public class UserTimeslotController {
 	public List<String> getAllOpenTimeslot(@PathVariable("tutorId") int tutorId) {
 		return service.getAllOpenTimeslot(tutorId);
 	}
+	
+	@GetMapping("/getallclosedtimeslot/{tutorId}")
+	public List<String> getAllClosedTimeslot(@PathVariable("tutorId") int tutorId) {
+		return service.getAllClosedTimeslot(tutorId);
+	}
 }

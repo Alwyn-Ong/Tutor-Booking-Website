@@ -205,6 +205,56 @@ const Homepage = () => {
         )
         .catch((error) => console.log("error", error));
     } else {
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      let body = tutorValues;
+      body.user.userId = userId;
+      var requestOptions = {
+        method: "PUT",
+        headers: myHeaders,
+        body: JSON.stringify(body),
+        redirect: "follow",
+      };
+
+      console.log(JSON.stringify(body));
+
+      if (!loading) {
+        setSuccess(false);
+        setLoading(true);
+      }
+      
+      console.log(body)
+
+      fetch("http://localhost:8080/api/updatetutorprofile", requestOptions)
+        .then((response) => response.text())
+        .then((result) => {
+          toast.promise(
+            new Promise((resolve, reject) => {
+              setTimeout(() => {
+                console.log(result);
+                if (result.message.includes("Could not")) {
+                  reject(result);
+                } else {
+                  resolve(result);
+                }
+                setOpen(false);
+                setSuccess(true);
+                setLoading(false);
+                // resolve(result);
+                // console.log(result);
+                // setSuccess(true);
+                // setLoading(false);
+              }, 2000);
+            }),
+            {
+              loading: "Uploading",
+              success: "Successfully uploaded image!",
+              error: "Error when uploading image.",
+            }
+          );
+        })
+        .catch((error) => console.log("error", error));
     }
   };
 
@@ -228,9 +278,9 @@ const Homepage = () => {
 
   // For tutor values
   const [tutorValues, setTutorValues] = React.useState({
-    price: 20,
+    user: { price: 20 },
     subjects: [],
-    timeslots: []
+    timeslots: [],
   });
   console.log(tutorValues);
 
@@ -238,7 +288,7 @@ const Homepage = () => {
     setTutorValues((state) => {
       return {
         ...state,
-        price: newValue,
+        user: { price: newValue },
       };
     });
   };
@@ -248,26 +298,28 @@ const Homepage = () => {
     setTutorValues((state) => {
       return {
         ...state,
-        price: event.target.value === "" ? "" : Number(event.target.value),
+        user: {
+          price: event.target.value === "" ? "" : Number(event.target.value),
+        },
       };
     });
   };
 
   const handleBlur = () => {
-    if (tutorValues.price < 0) {
+    if (tutorValues.user.price < 0) {
       // setValue(0);
       setTutorValues((state) => {
         return {
           ...state,
-          price: 0,
+          user: { price: 0 },
         };
       });
-    } else if (tutorValues.price > 100) {
+    } else if (tutorValues.user.price > 100) {
       // setValue(100);
       setTutorValues((state) => {
         return {
           ...state,
-          price: 100,
+          user: { price: 100 },
         };
       });
     }
@@ -374,6 +426,12 @@ const Homepage = () => {
     "6-2200",
     "7-2200",
   ];
+
+  
+  fetch("http://localhost:8080/api/getallopentimeslot/" + userId)
+  .then(response => response.json())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
 
   console.log(values);
   return (
@@ -740,8 +798,8 @@ const Homepage = () => {
                           aria-label="pretto slider"
                           defaultValue={20}
                           value={
-                            typeof tutorValues.price === "number"
-                              ? tutorValues.price
+                            typeof tutorValues.user.price === "number"
+                              ? tutorValues.user.price
                               : 0
                           }
                           onChange={handleSliderChange}
@@ -751,7 +809,7 @@ const Homepage = () => {
                       <Grid item>
                         <Input
                           className={{ width: 42 }}
-                          value={tutorValues.price}
+                          value={tutorValues.user.price}
                           margin="dense"
                           onChange={handleInputChange}
                           onBlur={handleBlur}
@@ -799,7 +857,11 @@ const Homepage = () => {
                   </Grid>
                 </Grid>
               ) : (
-                <Timetable isTutor data={timeTableData} setProfileData={setTutorValues}/>
+                <Timetable
+                  isTutor
+                  data={timeTableData}
+                  setProfileData={setTutorValues}
+                />
               )}
             </Grid>
           </Grid>

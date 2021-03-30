@@ -233,12 +233,17 @@ public class UserService {
 	}
 	
 	public ResponseEntity updateTutorProfile(Map<String, Object> data) {
+		System.out.println("check0");
 		Map<String,Object> tempUser = (Map<String, Object>) data.get("user");
 		User user = userDao.findById(Integer.parseInt(tempUser.get("userId").toString())).orElse(null);
+		
+		System.out.println("check1");
 		
 		List<Object> subjects = (List<Object>)data.get("subjects");
 		List<String> subject = new ArrayList<>();
 		List<String> levelsTaught = new ArrayList<>();
+		
+		System.out.println("check2");
 		
 		for (Object x: subjects) {
 			Map<String,Object> tempSubject = (Map<String, Object>) x;
@@ -246,15 +251,23 @@ public class UserService {
 			levelsTaught.add(tempSubject.get("levelsTaught").toString());
 		}
 			
+		System.out.println("check3");
+		
 		List<Object> timeslots = (List<Object>)data.get("timeslots");
 		List<String> userTimeslot = new ArrayList<>();
+		
+		System.out.println("check4");
 		
 		for (Object y:timeslots) {
 			Map<String,Object> tempTimeslot = (Map<String, Object>) y;
 			userTimeslot.add(tempTimeslot.get("timeslot").toString());
 		}
+		
+		System.out.println("check5");
 	
 		User existingUser = userDao.findById(user.getUserId()).orElse(null);
+		
+		System.out.println("check6");
 	
 		int index = 0;
 		for (String temp:subject) {
@@ -264,16 +277,25 @@ public class UserService {
 			index++;
 		}
 		
+		System.out.println("check7");
+		
 		for (String temp:userTimeslot) {
 			int timeslotId = timeslotDao.findByTimeslot(temp).get().getTimeslotId();
 			userTimeslotDao.save(new UserTimeslot(timeslotId, user.getUserId(), TutorBookingWebsite.model.Status.OPEN));
 		}
 		
+		System.out.println("check8");
+		
 		try {
-			existingUser.setQualification(tempUser.get("qualification").toString());
+			System.out.println("check9");
+//			existingUser.setQualification(tempUser.get("qualification").toString());
+			System.out.println("check10");
 			existingUser.setPrice(Integer.parseInt(tempUser.get("price").toString()));
-			existingUser.setNearestMRT(tempUser.get("nearestMRT").toString());
+			System.out.println("check11");
+//			existingUser.setNearestMRT(tempUser.get("nearestMRT").toString());
+			System.out.println("check12");
 			userDao.save(existingUser);
+			System.out.println("check13");
 			
 
 			ResponseDetails responseDetails = new ResponseDetails(new Date(), "user updated", "query success");
