@@ -460,19 +460,39 @@ const Homepage = () => {
   const [isListingProfile, setIsListingProfile] = React.useState(false);
   console.log(isListingProfile);
 
-  const PurpleSwitch = withStyles({
-    switchBase: {
-      color: blue[300],
-      "&$checked": {
-        color: blue[500],
-      },
-      "&$checked + $track": {
-        backgroundColor: blue[500],
-      },
-    },
-    checked: {},
-    track: {},
-  })(Switch);
+  const [isLoadingListingProfile, setIsLoadingListingProfile] = React.useState(
+    true
+  );
+
+  if (isLoadingListingProfile) {
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+
+    fetch("http://localhost:8080/api/gettutorstatus/1", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        // console.log(result);
+        setIsListingProfile(result.status);
+        setIsLoadingListingProfile(false);
+      })
+      .catch((error) => console.log("error", error));
+  }
+
+  // const PurpleSwitch = withStyles({
+  //   switchBase: {
+  //     color: blue[300],
+  //     "&$checked": {
+  //       color: blue[500],
+  //     },
+  //     "&$checked + $track": {
+  //       backgroundColor: blue[500],
+  //     },
+  //   },
+  //   checked: {},
+  //   track: {},
+  // })(Switch);
 
   return (
     <SettingsPane
@@ -636,7 +656,7 @@ const Homepage = () => {
             </Grid>
             <Grid item md={12} lg={6} xs={12} sm={12} xl={6}>
               <TextField
-                id="outlined-required-desc"
+                id="outlined-required-Gender"
                 label="Gender"
                 // defaultValue="Name"
                 variant="outlined"
@@ -812,54 +832,53 @@ const Homepage = () => {
                         console.log(e);
                         setIsListingProfile(e.target.checked);
                         // if (!isListingProfile) {
-                          var myHeaders = new Headers();
-                          myHeaders.append("Content-Type", "application/json");
+                        var myHeaders = new Headers();
+                        myHeaders.append("Content-Type", "application/json");
 
-                          var raw = JSON.stringify({ userId: userId });
+                        var raw = JSON.stringify({ userId: userId });
 
-                          var requestOptions = {
-                            method: "PUT",
-                            headers: myHeaders,
-                            body: raw,
-                            redirect: "follow",
-                          };
+                        var requestOptions = {
+                          method: "PUT",
+                          headers: myHeaders,
+                          body: raw,
+                          redirect: "follow",
+                        };
 
-                          fetch(
-                            "http://localhost:8080/api/becometutor",
-                            requestOptions
-                          )
-                            .then((response) => response.json())
-                            .then((result) => {
-                              console.log(result);
-                              toast.promise(
-                                new Promise((resolve, reject) => {
-                                  setTimeout(() => {
-                                    console.log(result);
-                                    if (result.message.includes("unable")) {
-                                      reject(result);
-                                    } else {
-                                      resolve(result);
-                                    }
-                                    // setOpen(false);
-                                    // setSuccess(true);
-                                    setLoading(false);
-                                    // resolve(result);
-                                    // console.log(result);
-                                    // setSuccess(true);
-                                    // setLoading(false);
-                                  }, 2000);
-                                }),
-                                {
-                                  loading: "Listing profile",
-                                  success: "Successfully listed profile!",
-                                  error: "Error when listing profile.",
-                                }
-                              );
-                            })
+                        fetch(
+                          "http://localhost:8080/api/becometutor",
+                          requestOptions
+                        )
+                          .then((response) => response.json())
+                          .then((result) => {
+                            console.log(result);
+                            toast.promise(
+                              new Promise((resolve, reject) => {
+                                setTimeout(() => {
+                                  console.log(result);
+                                  if (result.message.includes("unable")) {
+                                    reject(result);
+                                  } else {
+                                    resolve(result);
+                                  }
+                                  // setOpen(false);
+                                  // setSuccess(true);
+                                  setLoading(false);
+                                  // resolve(result);
+                                  // console.log(result);
+                                  // setSuccess(true);
+                                  // setLoading(false);
+                                }, 2000);
+                              }),
+                              {
+                                loading: "Listing profile",
+                                success: "Successfully listed profile!",
+                                error: "Error when listing profile.",
+                              }
+                            );
+                          })
 
-                            .catch((error) => console.log("error", error));
-                        }
-                      }
+                          .catch((error) => console.log("error", error));
+                      }}
                       // name="checkedB"
                       color="primary"
                     />

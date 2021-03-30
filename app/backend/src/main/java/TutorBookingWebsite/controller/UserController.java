@@ -35,9 +35,9 @@ public class UserController {
 		return service.getAllTutors();
 	}
 	
-	@GetMapping("/gettutorstatus")
-	public Map<String, Integer> getTutorStatus(@RequestBody User user) {
-		return service.getTutorStatus(user);
+	@GetMapping("/gettutorstatus/{userId}")
+	public Map<String, Integer> getTutorStatus(@PathVariable("userId") int userId) {
+		return service.getTutorStatus(userId);
 	}
 	
 	@PutMapping("/becometutor")

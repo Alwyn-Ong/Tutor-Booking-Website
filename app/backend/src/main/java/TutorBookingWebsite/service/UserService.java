@@ -214,10 +214,10 @@ public class UserService {
 		}
 	}
 	
-	public Map<String,Integer> getTutorStatus(User user) {
+	public Map<String,Integer> getTutorStatus(int userId) {
 		Map<String, Integer> res = new HashMap<>();
 		try {
-			User existingUser = userDao.findById(user.getUserId()).orElse(null);
+			User existingUser = userDao.findById(userId).orElse(null);
 			res.put("status",existingUser.getIsTutor());
 			return res;
 		} catch (Throwable e) {
