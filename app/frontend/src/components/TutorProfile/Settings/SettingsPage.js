@@ -20,7 +20,8 @@ export class SettingsPage extends Component {
     onChange: PropTypes.func,
     switchContent: PropTypes.func,
     onPaneLeave: PropTypes.func,
-    onMenuItemClick: PropTypes.func
+    onMenuItemClick: PropTypes.func,
+    setCurrPage: PropTypes.func,
   };
 
   /**
@@ -67,6 +68,7 @@ export class SettingsPage extends Component {
 
   componentDidMount() {
     this.updateForm();
+    this.props.setCurrPage(this.props.handler);
   }
 
   componentDidUpdate() {

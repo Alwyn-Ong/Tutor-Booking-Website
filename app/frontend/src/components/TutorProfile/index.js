@@ -4,6 +4,8 @@ import {
   SettingsContent,
   SettingsMenu,
 } from "./Settings";
+
+import SettingsFooter from "./Settings/SettingsFooter";
 // import {
 //   SettingsPane,
 //   SettingsPage,
@@ -27,6 +29,11 @@ import CloseIcon from "@material-ui/icons/Close";
 
 import { toast } from "react-hot-toast";
 
+import { withStyles, makeStyles } from '@material-ui/core/styles';
+import Slider from '@material-ui/core/Slider';
+import Typography from '@material-ui/core/Typography';
+import Tooltip from '@material-ui/core/Tooltip';
+
 const locations = [
   { value: "Bedok", label: "Bedok" },
   { value: "Eunos", label: "Eunos" },
@@ -35,6 +42,36 @@ const locations = [
   { value: "Dhoby Ghaut", label: "Dhoby Ghaut" },
   { value: "Orchard", label: "Orchard" },
 ];
+
+const PrettoSlider = withStyles({
+  root: {
+    color: '#52af77',
+    height: 8,
+  },
+  thumb: {
+    height: 24,
+    width: 24,
+    backgroundColor: '#fff',
+    border: '2px solid currentColor',
+    marginTop: -8,
+    marginLeft: -12,
+    '&:focus, &:hover, &$active': {
+      boxShadow: 'inherit',
+    },
+  },
+  active: {},
+  valueLabel: {
+    left: 'calc(-50% + 4px)',
+  },
+  track: {
+    height: 8,
+    borderRadius: 4,
+  },
+  rail: {
+    height: 8,
+    borderRadius: 4,
+  },
+})(Slider);
 
 const Homepage = () => {
   let settings = {
@@ -112,41 +149,43 @@ const Homepage = () => {
   // TODO: Change userid
   const userId = 1;
 
-  const handleSave = () => {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+  const handleSave = (page) => {
+    if (page === "/settings/general") {
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
 
-    let body = values;
-    body.userId = userId;
-    var requestOptions = {
-      method: "PUT",
-      headers: myHeaders,
-      body: JSON.stringify(body),
-      redirect: "follow",
-    };
+      let body = values;
+      body.userId = userId;
+      var requestOptions = {
+        method: "PUT",
+        headers: myHeaders,
+        body: JSON.stringify(body),
+        redirect: "follow",
+      };
 
-    console.log(JSON.stringify(body));
+      console.log(JSON.stringify(body));
 
-    if (!loading) {
-      setSuccess(false);
-      setLoading(true);
+      if (!loading) {
+        setSuccess(false);
+        setLoading(true);
+      }
+
+      fetch("http://localhost:8080/api/updateprofile", requestOptions)
+        .then((response) => response.text())
+        .then(
+          (result) =>
+            new Promise((resolve) => {
+              setTimeout(() => {
+                resolve(result);
+                console.log(result);
+                setSuccess(true);
+                setLoading(false);
+              }, 2000);
+            })
+        )
+        .catch((error) => console.log("error", error));
+    } else {
     }
-
-    fetch("http://localhost:8080/api/updateprofile", requestOptions)
-      .then((response) => response.text())
-      .then(
-        (result) =>
-          new Promise((resolve) => {
-            setTimeout(() => {
-              resolve(result);
-              console.log(result);
-              setSuccess(true);
-              setLoading(false);
-            }, 2000);
-          })
-      )
-
-      .catch((error) => console.log("error", error));
   };
 
   // For image dialog
@@ -163,6 +202,13 @@ const Homepage = () => {
     </>
   );
 
+  // For switching of tabs for save
+  const [currSettingsPage, setCurrSettingsPage] = React.useState("");
+  console.log(currSettingsPage);
+
+  // For tutor values
+  const [tutorValues, setTutorValues] = React.useState({});
+
   console.log(values);
   return (
     <SettingsPane
@@ -176,13 +222,16 @@ const Homepage = () => {
         // closeButtonClass="secondary"
         // saveButtonClass="primary"
         header={true}
-        onSave={() => handleSave()}
+        onSave={() => handleSave(currSettingsPage)}
         loading={loading}
         setLoading={setLoading}
         success={success}
         setSuccess={setSuccess}
       >
-        <SettingsPage handler="/settings/general">
+        <SettingsPage
+          handler="/settings/general"
+          setCurrPage={setCurrSettingsPage}
+        >
           <Grid container spacing={3} direction="row">
             <Grid
               item
@@ -482,9 +531,11 @@ const Homepage = () => {
               <option value="orange">Orange</option>
             </select>
           </fieldset> */}
+          <SettingsFooter />
         </SettingsPage>
         <SettingsPage
           handler="/settings/profile"
+          setCurrPage={setCurrSettingsPage}
           // options={dynamicOptionsForProfilePage}
         >
           {/* <fieldset className="form-group">
@@ -513,6 +564,8 @@ const Homepage = () => {
               <option value="orange">Orange</option>
             </select>
           </fieldset> */}
+          <Typography gutterBottom>Price ($)/hour</Typography>
+          <PrettoSlider valueLabelDisplay="auto" aria-label="pretto slider" defaultValue={20} />
           <TextField
             required
             id="outlined-required"
