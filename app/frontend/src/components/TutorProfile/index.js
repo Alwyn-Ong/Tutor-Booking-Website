@@ -52,7 +52,7 @@ const Homepage = () => {
       url: "/settings/general", // Identifier (url-slug)
     },
     {
-      title: "Profile",
+      title: "Tutor",
       url: "/settings/profile",
     },
   ];

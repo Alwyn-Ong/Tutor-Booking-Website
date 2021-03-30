@@ -21,7 +21,7 @@ import { Button } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
-    zIndex:100,
+    zIndex: 100,
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
       display: "block",
     },
     color: "white",
-    textTransform: "capitalize"
+    textTransform: "capitalize",
   },
   search: {
     position: "relative",
@@ -113,8 +113,8 @@ const TopBar = () => {
   const viewProfile = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
-    window.location.href = "/profile"
-  }
+    // window.location.href = "/tutorProfile";
+  };
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
@@ -169,6 +169,8 @@ const TopBar = () => {
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
           color="inherit"
+          component={RouterLink}
+          to={"/tutorprofile"}
         >
           <AccountCircle />
         </IconButton>
@@ -193,9 +195,9 @@ const TopBar = () => {
             <Typography className={classes.title} variant="h3" noWrap>
               Tutor Booking System
             </Typography>
-            <EmojiPeople fontSize="large" className={classes.title}/>
+            <EmojiPeople fontSize="large" className={classes.title} />
           </Button>
-         
+
           {/* <Button component={RouterLink} to={"/profile"}>
             <Typography className={classes.title} variant="h6" noWrap>
               Profile
