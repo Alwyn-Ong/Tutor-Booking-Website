@@ -365,4 +365,19 @@ public class UserService {
 		}
 		throw new APIException("An error occured in verfiying the token!");
 	}
+	
+	public Map<String, Object> getUserProfile(int userId){
+		Map<String, Object> result = new HashMap<>();
+		User existingUser = userDao.findById(userId).get();
+		
+		result.put("name", existingUser.getName());
+		result.put("email", existingUser.getEmail());
+		result.put("nearestMRT", existingUser.getNearestMRT());
+		result.put("name", existingUser.getName());
+		result.put("description", existingUser.getDescription());
+		result.put("phoneNumber", existingUser.getPhoneNumber());
+		result.put("gender", existingUser.getGender());
+		result.put("qualification", existingUser.getQualification());
+		return result;
+	}
 }
