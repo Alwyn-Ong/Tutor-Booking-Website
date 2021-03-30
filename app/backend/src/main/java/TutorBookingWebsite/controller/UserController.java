@@ -45,6 +45,11 @@ public class UserController {
 		return service.getUserProfile(userId);
 	}
 	
+	@GetMapping("/gettutorprofile/{userId}")
+	public Map<String, Object> getTutorProfile(@PathVariable("userId") int userId) {
+		return service.getTutorProfile(userId);
+	}
+	
 	@PutMapping("/becometutor")
 	public ResponseEntity becomeTutor(@RequestBody User user) {
 		return service.becomeTutor(user);
