@@ -211,12 +211,12 @@ public class UserService {
 			throw new APIException("user unable to become a tutor");
 		}
 	}
-	
-	public Map<String,Integer> getTutorStatus(int userId) {
+
+	public Map<String, Integer> getTutorStatus(int userId) {
 		Map<String, Integer> res = new HashMap<>();
 		try {
 			User existingUser = userDao.findById(userId).orElse(null);
-			res.put("status",existingUser.getIsTutor());
+			res.put("status", existingUser.getIsTutor());
 			return res;
 		} catch (Throwable e) {
 			throw new APIException("user unable to become a tutor");
@@ -382,12 +382,8 @@ public class UserService {
 
 	public Map<String, Object> getTutorProfile(int userId) {
 		Map<String, Object> result = new HashMap<>();
-//		user: { price: 20 },
-//	    subjects: [],
-//	    timeslots: [],
 
 		try {
-
 			User existingUser = userDao.findById(userId).get();
 			List<LevelsTaught> levelsTaught = levelsTaughtDao.findByTutorId(userId);
 			List<String> subjectArrayList = new ArrayList<>();
