@@ -327,3 +327,9 @@ ul.settings-menu li.menu-item.active a:before {
   max-width: 100%; 
   flex-basis: 100%;
 }
+
+.MuiDropzonePreviewList-removeButton {
+  position: unset;
+  top: unset;
+  right: unset;
+}

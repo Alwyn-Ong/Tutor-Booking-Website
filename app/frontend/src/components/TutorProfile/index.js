@@ -14,7 +14,7 @@ import React from "react";
 
 // import "bootstrap/dist/css/bootstrap.min.css";
 
-import { TextField, Grid } from "@material-ui/core";
+import { TextField, Grid, Avatar } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import AutoCompleteAdd from "./AutoCompleteAdd";
 import "./styles.css";
@@ -184,6 +184,39 @@ const Homepage = () => {
       >
         <SettingsPage handler="/settings/general">
           <Grid container spacing={3} direction="row">
+            <Grid
+              item
+              md={12}
+              lg={12}
+              xs={12}
+              sm={12}
+              xl={12}
+              container
+              direction="column"
+              justify="center"
+              alignItems="center"
+              spacing={2}
+            >
+              <Grid container item justify="center" alignItems="center">
+                <Grid item>
+                  <Avatar
+                    src={`http://localhost:8080/api/files/${userId}`}
+                    style={{ width: "200px", height: "200px" }}
+                  />
+                </Grid>
+              </Grid>
+              <Grid container item justify="center" alignItems="flex-end">
+                <Grid item>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => setOpen(true)}
+                  >
+                    Upload Image
+                  </Button>
+                </Grid>
+              </Grid>
+            </Grid>
             <Grid item md={12} lg={6} xs={12} sm={12} xl={6}>
               <TextField
                 required
@@ -316,13 +349,13 @@ const Homepage = () => {
                   }
                   filesLimit={1}
                 /> */}
-              <Button
+              {/* <Button
                 variant="contained"
                 color="primary"
                 onClick={() => setOpen(true)}
               >
                 Add Image
-              </Button>
+              </Button> */}
 
               <DropzoneDialogBase
                 dialogTitle={dialogTitle()}

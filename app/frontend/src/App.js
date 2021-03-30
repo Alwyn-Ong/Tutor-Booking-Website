@@ -6,6 +6,7 @@ import theme from "./theme";
 import { ThemeProvider } from "@material-ui/core";
 import GlobalStyles from "./theme/GlobalStyles";
 import { Toaster } from "react-hot-toast";
+import { StylesProvider } from "@material-ui/core/styles";
 
 function App() {
   const routing = useRoutes(routes);
@@ -26,11 +27,13 @@ function App() {
     //     </a>
     //   </header>
     // </div>
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      {routing}
-      <Toaster />
-    </ThemeProvider>
+    <StylesProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        {routing}
+        <Toaster />
+      </ThemeProvider>
+    </StylesProvider>
   );
 }
 
