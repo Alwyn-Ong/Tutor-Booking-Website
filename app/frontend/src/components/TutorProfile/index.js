@@ -427,7 +427,7 @@ const Homepage = () => {
     "7-2200",
   ];
 
-  
+
   fetch("http://localhost:8080/api/getallopentimeslot/" + userId)
   .then(response => response.json())
   .then(result => console.log(result))
@@ -872,13 +872,3 @@ const Homepage = () => {
 };
 
 export default Homepage;
-
-{
-  /* <TextField
-          required
-          id="outlined-required"
-          label="Name (Required)"
-          // defaultValue="Name"
-          variant="outlined"
-        /> */
-}
