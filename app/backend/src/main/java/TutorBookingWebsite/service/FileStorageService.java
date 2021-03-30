@@ -1,6 +1,7 @@
 package TutorBookingWebsite.service;
 
 import java.io.IOException;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,18 @@ public class FileStorageService {
 
   public FileDB store(MultipartFile file, int userId) throws IOException {
     String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-    FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes(), userId);
+    
+    Optional <FileDB> temp = fileDBDao.findByUserId(userId);
+    FileDB fileDB;
+    if (temp == null) {
+    	fileDB = new FileDB(fileName, file.getContentType(), file.getBytes(), userId);    	
+    } else {
+    	fileDB = temp.get();
+    	fileDB.setData(file.getBytes());
+    	fileDB.setName(fileName);
+    }
 
-    return fileDBDao.save(FileDB);
+    return fileDBDao.save(fileDB);
   }
 
   public FileDB getFile(String id) {
