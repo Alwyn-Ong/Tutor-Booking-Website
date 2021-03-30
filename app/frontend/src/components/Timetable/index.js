@@ -69,14 +69,14 @@ const Timetable = ({ isTutor, data }) => {
   const handleUpdate = () => {
     let newData = [];
     for (let i = 0; i < cells.length; i++) {
-      for (let j = 0; i < cells[i].length; j++) {
+      for (let j = 0; j < cells[i].length; j++) {
         if (cells[i][j]) {
-          newData.push(`${cells[i]}-${cells[j]}`)
+          newData.push(`${j}-${timeslots[i-1]}`)
         }
       }
     }
     console.log(newData);
-    setCells(cellDefault);
+    // setCells(cellDefault);
   };
 
   console.log(cells);
