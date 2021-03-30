@@ -223,8 +223,8 @@ const Homepage = () => {
         setSuccess(false);
         setLoading(true);
       }
-      
-      console.log(body)
+
+      console.log(body);
 
       fetch("http://localhost:8080/api/updatetutorprofile", requestOptions)
         .then((response) => response.text())
@@ -333,7 +333,7 @@ const Homepage = () => {
 
   // For timetable
   // TODO: Get from api
-  let timeTableData = [
+  let timeTableDataDefault = [
     "1-1000",
     "2-1000",
     "3-1000",
@@ -427,11 +427,21 @@ const Homepage = () => {
     "7-2200",
   ];
 
+  // For timeslots
+  const [timeTableData, setTimeTableData] = React.useState(
+    timeTableDataDefault
+  );
 
-  fetch("http://localhost:8080/api/getallopentimeslot/" + userId)
-  .then(response => response.json())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  isLoading && fetch("http://localhost:8080/api/getallopentimeslot/" + userId)
+    .then((response) => response.json())
+    .then((result) => {
+      console.log(result);
+      setTimeTableData(result);
+      setIsLoading(false);
+    })
+    .catch((error) => console.log("error", error));
 
   console.log(values);
   return (
@@ -857,11 +867,13 @@ const Homepage = () => {
                   </Grid>
                 </Grid>
               ) : (
-                <Timetable
-                  isTutor
-                  data={timeTableData}
-                  setProfileData={setTutorValues}
-                />
+                !isLoading && (
+                  <Timetable
+                    isTutor
+                    data={timeTableData}
+                    setProfileData={setTutorValues}
+                  />
+                )
               )}
             </Grid>
           </Grid>

@@ -30,6 +30,8 @@ const getUniqueRows = (data) => {
 const Timetable = ({ isTutor, data, setProfileData }) => {
   let days = ["", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
+  console.log(data);
+
   let timeslots = generateTimeSlots();
 
   // let data = ["1-1000", "2-1000", "4-1000", "1-1100", "3-1700"];
@@ -57,6 +59,16 @@ const Timetable = ({ isTutor, data, setProfileData }) => {
   const cellDefault = generateStateMatrix(14, 14);
 
   const [cells, setCells] = React.useState(cellDefault);
+
+  if (isTutor) {
+    for (let i = 0; i < cells.length; i++) {
+      for (let j = 0; j < cells[i].length; j++) {
+        if(data.includes(`${j}-${timeslots[i - 1]}`)){
+          cells[i][j] = true
+        }
+      }
+    }
+  }
 
   const handleChange = (state) => {
     setCells(state);
