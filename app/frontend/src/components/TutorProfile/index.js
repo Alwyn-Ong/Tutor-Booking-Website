@@ -34,7 +34,7 @@ import Slider from "@material-ui/core/Slider";
 import Typography from "@material-ui/core/Typography";
 import Tooltip from "@material-ui/core/Tooltip";
 import Input from "@material-ui/core/Input";
-import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
+import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
 
 const locations = [
   { value: "Bedok", label: "Bedok" },
@@ -581,81 +581,62 @@ const Homepage = () => {
           setCurrPage={setCurrSettingsPage}
           // options={dynamicOptionsForProfilePage}
         >
-          {/* <fieldset className="form-group">
-            <label for="profileName">Name: </label>
-            <input
-              type="text"
-              className="form-control"
-              name="mysettings.general.name"
-              placeholder="Name"
-              id="general.ame"
-              onChange={settingsChanged}
-              defaultValue={settings["mysettings.general.name"]}
-            />
-          </fieldset>
-          <fieldset className="form-group">
-            <label for="profileColor">Color-Theme: </label>
-            <select
-              name="mysettings.general.color-theme"
-              id="profileColor"
-              className="form-control"
-              defaultValue={settings["mysettings.general.color-theme"]}
-            >
-              <option value="blue">Blue</option>
-              <option value="red">Red</option>
-              <option value="purple">Purple</option>
-              <option value="orange">Orange</option>
-            </select>
-          </fieldset> */}
-          <Typography gutterBottom>Price ($)/hour</Typography>
-          <Grid container spacing={2} alignItems="center">
-            {/* <Grid item><MonetizationOnIcon/></Grid> */}
-            <Grid item xs>
-              {/* <Slider
+          <Grid container spacing={3}>
+            <Grid item item md={12} lg={6} xs={12} sm={12} xl={6}>
+              <Typography gutterBottom>Price ($)/hour</Typography>
+
+              <Grid container spacing={2} alignItems="center">
+                <Grid item xs>
+                  {/* <Slider
                 value={
                   typeof tutorValues.price === "number" ? tutorValues.price : 0
                 }
                 onChange={handleSliderChange}
                 aria-labelledby="input-slider"
               /> */}
-              <PrettoSlider
-                valueLabelDisplay="auto"
-                aria-label="pretto slider"
-                defaultValue={20}
-                value={
-                  typeof tutorValues.price === "number" ? tutorValues.price : 0
-                }
-                onChange={handleSliderChange}
-                aria-labelledby="input-slider"
-              />
+                  <PrettoSlider
+                    valueLabelDisplay="auto"
+                    aria-label="pretto slider"
+                    defaultValue={20}
+                    value={
+                      typeof tutorValues.price === "number"
+                        ? tutorValues.price
+                        : 0
+                    }
+                    onChange={handleSliderChange}
+                    aria-labelledby="input-slider"
+                  />
+                </Grid>
+                <Grid item>
+                  <Input
+                    className={{ width: 42 }}
+                    value={tutorValues.price}
+                    margin="dense"
+                    onChange={handleInputChange}
+                    onBlur={handleBlur}
+                    inputProps={{
+                      step: 1,
+                      min: 0,
+                      max: 100,
+                      type: "number",
+                      "aria-labelledby": "input-slider",
+                    }}
+                  />
+                </Grid>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Input
-                className={{ width: 42 }}
-                value={tutorValues.price}
-                margin="dense"
-                onChange={handleInputChange}
-                onBlur={handleBlur}
-                inputProps={{
-                  step: 1,
-                  min: 0,
-                  max: 100,
-                  type: "number",
-                  "aria-labelledby": "input-slider",
-                }}
+            <Grid item md={12} lg={6} xs={12} sm={12} xl={6}>
+              <TextField
+                required
+                id="outlined-required"
+                label="Name (Required)"
+                // defaultValue="Name"
+                variant="outlined"
+                value={values}
+                onChange={(e) => setValues(e.target.value)}
               />
             </Grid>
           </Grid>
-          
-          <TextField
-            required
-            id="outlined-required"
-            label="Name (Required)"
-            // defaultValue="Name"
-            variant="outlined"
-            value={values}
-            onChange={(e) => setValues(e.target.value)}
-          />
         </SettingsPage>
       </SettingsContent>
     </SettingsPane>
