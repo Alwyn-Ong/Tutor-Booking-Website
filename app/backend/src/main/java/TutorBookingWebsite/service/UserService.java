@@ -200,7 +200,11 @@ public class UserService {
 	public ResponseEntity becomeTutor(User user) {
 		try {
 			User existingUser = userDao.findById(user.getUserId()).orElse(null);
-			existingUser.setIsTutor(1);
+			if (existingUser.getIsTutor() == 0) {
+				existingUser.setIsTutor(1);				
+			} else {
+				existingUser.setIsTutor(0);
+			}
 			userDao.save(existingUser);
 			ResponseDetails responseDetails = new ResponseDetails(new Date(), "Successfully updated details",
 					"query success");
@@ -209,6 +213,19 @@ public class UserService {
 			throw new APIException("user unable to become a tutor");
 		}
 	}
+	
+	public Map<String,Integer> getTutorStatus(User user) {
+		Map<String, Integer> res = new HashMap<>();
+		try {
+			User existingUser = userDao.findById(user.getUserId()).orElse(null);
+			res.put("status",existingUser.getIsTutor());
+			return res;
+		} catch (Throwable e) {
+			throw new APIException("user unable to become a tutor");
+		}
+	}
+	
+	
 	
 	public ResponseEntity updateUser(User user) {
 		User existingUser = userDao.findById(user.getUserId()).orElse(null);

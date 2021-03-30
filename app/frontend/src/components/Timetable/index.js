@@ -60,7 +60,9 @@ const Timetable = ({ isTutor, data, setProfileData }) => {
 
   const [cells, setCells] = React.useState(cellDefault);
 
-  if (isTutor) {
+  const [hasChangedForTutor, setHasChangedForTutor] = React.useState(false);
+
+  if (isTutor && !hasChangedForTutor) {
     for (let i = 0; i < cells.length; i++) {
       for (let j = 0; j < cells[i].length; j++) {
         if(data.includes(`${j}-${timeslots[i - 1]}`)){
@@ -68,6 +70,7 @@ const Timetable = ({ isTutor, data, setProfileData }) => {
         }
       }
     }
+    setHasChangedForTutor(true);
   }
 
   const handleChange = (state) => {

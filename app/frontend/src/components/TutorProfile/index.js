@@ -5,7 +5,6 @@ import {
   SettingsMenu,
 } from "./Settings";
 
-import SettingsFooter from "./Settings/SettingsFooter";
 // import {
 //   SettingsPane,
 //   SettingsPage,
@@ -16,7 +15,17 @@ import React from "react";
 
 // import "bootstrap/dist/css/bootstrap.min.css";
 
-import { TextField, Grid, Avatar, Tabs, Tab, Divider } from "@material-ui/core";
+import {
+  TextField,
+  Grid,
+  Avatar,
+  Tabs,
+  Tab,
+  Divider,
+  FormControlLabel,
+  FormGroup,
+  Switch,
+} from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import AutoCompleteAdd from "./AutoCompleteAdd";
 import "./styles.css";
@@ -36,6 +45,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Input from "@material-ui/core/Input";
 import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
 import Timetable from "../Timetable";
+import { blue } from "@material-ui/core/colors";
 
 const locations = [
   { value: "Bedok", label: "Bedok" },
@@ -227,7 +237,7 @@ const Homepage = () => {
       console.log(body);
 
       fetch("http://localhost:8080/api/updatetutorprofile", requestOptions)
-        .then((response) => response.text())
+        .then((response) => response.json())
         .then((result) => {
           toast.promise(
             new Promise((resolve, reject) => {
@@ -248,9 +258,9 @@ const Homepage = () => {
               }, 2000);
             }),
             {
-              loading: "Uploading",
-              success: "Successfully uploaded image!",
-              error: "Error when uploading image.",
+              loading: "Updating profile",
+              success: "Successfully updated profile!",
+              error: "Error when updating profile.",
             }
           );
         })
@@ -434,16 +444,36 @@ const Homepage = () => {
 
   const [isLoading, setIsLoading] = React.useState(true);
 
-  isLoading && fetch("http://localhost:8080/api/getallopentimeslot/" + userId)
-    .then((response) => response.json())
-    .then((result) => {
-      console.log(result);
-      setTimeTableData(result);
-      setIsLoading(false);
-    })
-    .catch((error) => console.log("error", error));
+  isLoading &&
+    fetch("http://localhost:8080/api/getallopentimeslot/" + userId)
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        setTimeTableData(result);
+        setIsLoading(false);
+      })
+      .catch((error) => console.log("error", error));
 
   console.log(values);
+
+  // For listing of profiles
+  const [isListingProfile, setIsListingProfile] = React.useState(false);
+  console.log(isListingProfile);
+
+  const PurpleSwitch = withStyles({
+    switchBase: {
+      color: blue[300],
+      "&$checked": {
+        color: blue[500],
+      },
+      "&$checked + $track": {
+        backgroundColor: blue[500],
+      },
+    },
+    checked: {},
+    track: {},
+  })(Switch);
+
   return (
     <SettingsPane
       items={menu}
@@ -765,7 +795,6 @@ const Homepage = () => {
               <option value="orange">Orange</option>
             </select>
           </fieldset> */}
-          <SettingsFooter />
         </SettingsPage>
         <SettingsPage
           handler="/settings/profile"
@@ -773,6 +802,72 @@ const Homepage = () => {
           // options={dynamicOptionsForProfilePage}
         >
           <Grid container spacing={3} direction="column">
+            <Grid item>
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={isListingProfile}
+                      onChange={(e) => {
+                        console.log(e);
+                        setIsListingProfile(e.target.checked);
+                        // if (!isListingProfile) {
+                          var myHeaders = new Headers();
+                          myHeaders.append("Content-Type", "application/json");
+
+                          var raw = JSON.stringify({ userId: userId });
+
+                          var requestOptions = {
+                            method: "PUT",
+                            headers: myHeaders,
+                            body: raw,
+                            redirect: "follow",
+                          };
+
+                          fetch(
+                            "http://localhost:8080/api/becometutor",
+                            requestOptions
+                          )
+                            .then((response) => response.json())
+                            .then((result) => {
+                              console.log(result);
+                              toast.promise(
+                                new Promise((resolve, reject) => {
+                                  setTimeout(() => {
+                                    console.log(result);
+                                    if (result.message.includes("unable")) {
+                                      reject(result);
+                                    } else {
+                                      resolve(result);
+                                    }
+                                    // setOpen(false);
+                                    // setSuccess(true);
+                                    setLoading(false);
+                                    // resolve(result);
+                                    // console.log(result);
+                                    // setSuccess(true);
+                                    // setLoading(false);
+                                  }, 2000);
+                                }),
+                                {
+                                  loading: "Listing profile",
+                                  success: "Successfully listed profile!",
+                                  error: "Error when listing profile.",
+                                }
+                              );
+                            })
+
+                            .catch((error) => console.log("error", error));
+                        }
+                      }
+                      // name="checkedB"
+                      color="primary"
+                    />
+                  }
+                  label="List profile as tutor"
+                />
+              </FormGroup>
+            </Grid>
             <Grid item>
               <Tabs
                 value={tabValue}

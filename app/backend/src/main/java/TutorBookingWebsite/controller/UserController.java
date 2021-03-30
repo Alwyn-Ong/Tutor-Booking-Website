@@ -35,6 +35,11 @@ public class UserController {
 		return service.getAllTutors();
 	}
 	
+	@GetMapping("/gettutorstatus")
+	public Map<String, Integer> getTutorStatus(@RequestBody User user) {
+		return service.getTutorStatus(user);
+	}
+	
 	@PutMapping("/becometutor")
 	public ResponseEntity becomeTutor(@RequestBody User user) {
 		return service.becomeTutor(user);
