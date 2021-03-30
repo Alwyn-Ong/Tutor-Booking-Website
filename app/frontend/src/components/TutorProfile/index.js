@@ -227,13 +227,13 @@ const Homepage = () => {
     setTutorValues((state) => {
       return {
         ...state,
-        price: event.target.value === "" ? 0 : Number(event.target.value),
+        price: event.target.value === "" ? "" : Number(event.target.value),
       };
     });
   };
 
   const handleBlur = () => {
-    if (value < 0) {
+    if (tutorValues.price < 0) {
       // setValue(0);
       setTutorValues((state) => {
         return {
@@ -241,7 +241,7 @@ const Homepage = () => {
           price: 0,
         };
       });
-    } else if (value > 100) {
+    } else if (tutorValues.price > 100) {
       // setValue(100);
       setTutorValues((state) => {
         return {
