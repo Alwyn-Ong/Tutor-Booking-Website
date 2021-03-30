@@ -13,11 +13,19 @@ import {
 import React from "react";
 
 // import "bootstrap/dist/css/bootstrap.min.css";
-import "./styles.css";
 
 import { TextField, Grid } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import AutoCompleteAdd from "./AutoCompleteAdd";
+import "./styles.css";
+
+import { DropzoneArea, DropzoneDialogBase } from "material-ui-dropzone";
+// import { StylesProvider } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
+
+import { toast } from "react-hot-toast";
 
 const locations = [
   { value: "Bedok", label: "Bedok" },
@@ -85,6 +93,7 @@ const Homepage = () => {
     description: "",
     gender: "",
     qualification: "",
+    file: [],
   });
 
   const handleLocationChange = (event, value) => {
@@ -100,12 +109,15 @@ const Homepage = () => {
   const [loading, setLoading] = React.useState(false);
   const [success, setSuccess] = React.useState(false);
 
+  // TODO: Change userid
+  const userId = 1;
+
   const handleSave = () => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
     let body = values;
-    body.userId = 1;
+    body.userId = userId;
     var requestOptions = {
       method: "PUT",
       headers: myHeaders,
@@ -136,6 +148,20 @@ const Homepage = () => {
 
       .catch((error) => console.log("error", error));
   };
+
+  // For image dialog
+  const [open, setOpen] = React.useState(false);
+  const dialogTitle = () => (
+    <>
+      <span>Upload file</span>
+      <IconButton
+        style={{ right: "12px", top: "8px", position: "absolute" }}
+        onClick={() => setOpen(false)}
+      >
+        <CloseIcon />
+      </IconButton>
+    </>
+  );
 
   console.log(values);
   return (
@@ -274,6 +300,125 @@ const Homepage = () => {
                     return { ...state, gender: e.target.value };
                   });
                 }}
+              />
+            </Grid>
+            <Grid item md={12} lg={6} xs={12} sm={12} xl={6}>
+              {/* <DropzoneArea
+                  acceptedFiles={["image/*"]}
+                  dropzoneText={"Drag and drop an image here or click"}
+                  onChange={(files) =>
+                    setValues((state) => {
+                      return {
+                        ...state,
+                        file: files,
+                      };
+                    })
+                  }
+                  filesLimit={1}
+                /> */}
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => setOpen(true)}
+              >
+                Add Image
+              </Button>
+
+              <DropzoneDialogBase
+                dialogTitle={dialogTitle()}
+                acceptedFiles={["image/*"]}
+                fileObjects={values.file}
+                cancelButtonText={"cancel"}
+                submitButtonText={"submit"}
+                maxFileSize={5000000}
+                open={open}
+                onAdd={(newFileObjs) => {
+                  console.log("onAdd", newFileObjs);
+                  // setFileObjects([].concat(fileObjects, newFileObjs));
+                  setValues((state) => {
+                    return {
+                      ...state,
+                      file: newFileObjs,
+                    };
+                  });
+                }}
+                onDelete={(deleteFileObj) => {
+                  console.log("onDelete", deleteFileObj);
+                  setValues((state) => {
+                    return {
+                      ...state,
+                      file: [],
+                    };
+                  });
+                }}
+                onClose={() => setOpen(false)}
+                onSave={() => {
+                  // console.log("onSave", fileObjects);
+                  var formdata = new FormData();
+                  formdata.append(
+                    "file",
+                    values.file[0].file,
+                    values.file[0].file.name
+                  );
+
+                  var requestOptions = {
+                    method: "POST",
+                    body: formdata,
+                    redirect: "follow",
+                  };
+
+                  fetch(
+                    `http://localhost:8080/api/upload/${userId}`,
+                    requestOptions
+                  )
+                    .then((response) => response.json())
+                    .then((result) => {
+                      console.log(result.message);
+                      //
+                      toast.promise(
+                        new Promise((resolve, reject) => {
+                          setTimeout(() => {
+                            if (result.message.includes("Could not")) {
+                              reject(result);
+                            } else {
+                              resolve(result);
+                            }
+                            setOpen(false);
+                            // resolve(result);
+                            // console.log(result);
+                            // setSuccess(true);
+                            // setLoading(false);
+                          }, 2000);
+                        }),
+                        {
+                          loading: "Uploading",
+                          success: "Successfully uploaded image!",
+                          error: "Error when uploading image.",
+                        }
+                      );
+
+                      // if (result.message.includes("Could not")) {
+                      //   toast.error("Error uploading image!");
+                      // } else {
+                      //   toast.success("Image successfully uploaded!");
+                      // }
+                      // setOpen(false);
+                    })
+                    .catch((error) => {
+                      console.log("error", error);
+                      toast.error("Error uploading image!");
+                    });
+                  // setValues((state) => {
+                  //   return {
+                  //     ...state,
+                  //     file: newFileObjs,
+                  //   };
+                  // });
+                }}
+                showPreviews={true}
+                // showPreviewsInDropzone={true}
+                showFileNamesInPreview={true}
+                filesLimit={1}
               />
             </Grid>
           </Grid>

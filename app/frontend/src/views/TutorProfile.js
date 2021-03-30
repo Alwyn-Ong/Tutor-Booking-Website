@@ -17,7 +17,7 @@ const Homepage = () => {
   const classes = useStyles();
   // return <Page>TUTOR PROFILE</Page>;
   return (
-    <Page>
+    <Page maxWidth="lg">
       <TutorProfile></TutorProfile>
     </Page>
   );

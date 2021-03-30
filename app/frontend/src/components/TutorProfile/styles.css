@@ -321,3 +321,9 @@ ul.settings-menu li.menu-item.active a:before {
 .MuiFormControl-root{
   width: 100%;
 }
+
+.MuiGrid-grid-xs-4 {
+  flex-grow: 0;
+  max-width: 100%; 
+  flex-basis: 100%;
+}
