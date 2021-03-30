@@ -45,6 +45,23 @@ const locations = [
   { value: "Orchard", label: "Orchard" },
 ];
 
+const subjectLevels = [
+  { levelsTaught: "Primary", subjectTaught: "Math" },
+  { levelsTaught: "Primary", subjectTaught: "English" },
+  { levelsTaught: "Primary", subjectTaught: "Science" },
+  { levelsTaught: "Secondary", subjectTaught: "English" },
+  { levelsTaught: "Secondary", subjectTaught: "Math" },
+  { levelsTaught: "Secondary", subjectTaught: "Science" },
+  { levelsTaught: "Secondary", subjectTaught: "Literature" },
+  { levelsTaught: "Secondary", subjectTaught: "Geography" },
+  { levelsTaught: "JC", subjectTaught: "English" },
+  { levelsTaught: "JC", subjectTaught: "Math" },
+  { levelsTaught: "JC", subjectTaught: "Physics" },
+  { levelsTaught: "JC", subjectTaught: "Biology" },
+  { levelsTaught: "JC", subjectTaught: "Literature" },
+  { levelsTaught: "JC", subjectTaught: "Geography" },
+];
+
 const PrettoSlider = withStyles({
   root: {
     color: "#52af77",
@@ -206,12 +223,14 @@ const Homepage = () => {
 
   // For switching of tabs for save
   const [currSettingsPage, setCurrSettingsPage] = React.useState("");
-  console.log(currSettingsPage);
+  // console.log(currSettingsPage);
 
   // For tutor values
   const [tutorValues, setTutorValues] = React.useState({
     price: 20,
+    subjects: [],
   });
+  console.log(tutorValues);
 
   const handleSliderChange = (event, newValue) => {
     setTutorValues((state) => {
@@ -626,14 +645,34 @@ const Homepage = () => {
               </Grid>
             </Grid>
             <Grid item md={12} lg={6} xs={12} sm={12} xl={6}>
-              <TextField
-                required
-                id="outlined-required"
-                label="Name (Required)"
-                // defaultValue="Name"
-                variant="outlined"
-                value={values}
-                onChange={(e) => setValues(e.target.value)}
+              <Autocomplete
+                id="grouped-demo"
+                // options={options.sort(
+                //   (a, b) => -b.firstLetter.localeCompare(a.firstLetter)
+                // )}
+                multiple
+                options={subjectLevels}
+                groupBy={(option) => option.levelsTaught}
+                getOptionLabel={(option) =>
+                  `${option.levelsTaught} - ${option.subjectTaught}`
+                }
+                // style={{ width: 300 }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Subjects To Teach"
+                    variant="outlined"
+                  />
+                )}
+                disableCloseOnSelect
+                onChange={(e, v) => {
+                  setTutorValues((state) => {
+                    return {
+                      ...state,
+                      subjects: v,
+                    };
+                  });
+                }}
               />
             </Grid>
           </Grid>
