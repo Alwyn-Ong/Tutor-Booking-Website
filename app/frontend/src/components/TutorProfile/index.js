@@ -230,6 +230,7 @@ const Homepage = () => {
   const [tutorValues, setTutorValues] = React.useState({
     price: 20,
     subjects: [],
+
   });
   console.log(tutorValues);
 
@@ -712,7 +713,7 @@ const Homepage = () => {
                 textColor="primary"
                 centered
               >
-                <Tab label="Tutor Profile" />
+                <Tab label="Profile" />
                 <Tab label="Timeslots" />
               </Tabs>
             </Grid>

@@ -2,7 +2,7 @@ import { Button, Grid, Typography } from "@material-ui/core";
 import React from "react";
 import TableDragSelect from "react-table-drag-select";
 import "react-table-drag-select/style.css";
-import "./index.css";
+import "./index2.css";
 
 const generateTimeSlots = () => {
   return Array.from({ length: 13 }, (_, i) => i + 10 + "00");
@@ -71,7 +71,7 @@ const Timetable = ({ isTutor, data }) => {
     for (let i = 0; i < cells.length; i++) {
       for (let j = 0; j < cells[i].length; j++) {
         if (cells[i][j]) {
-          newData.push(`${j}-${timeslots[i-1]}`)
+          newData.push({ timeslot: `${j}-${timeslots[i - 1]}` });
         }
       }
     }
