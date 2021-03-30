@@ -17,6 +17,7 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import EmojiPeople from "@material-ui/icons/EmojiPeople";
 import { Navigate, NavLink as RouterLink } from "react-router-dom";
 import { Button } from "@material-ui/core";
+import Notifications from "react-notifications-menu";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -237,6 +238,7 @@ const TopBar = () => {
                 <MailIcon />
               </Badge>
             </IconButton> */}
+            <Notifications data={["test"]} />
             <IconButton aria-label="show 17 new notifications" color="inherit">
               <Badge badgeContent={17} color="secondary">
                 <NotificationsIcon />
