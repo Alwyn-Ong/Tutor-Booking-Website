@@ -27,12 +27,10 @@ const getUniqueRows = (data) => {
   return arr;
 };
 
-
-const Timetable = ({isTutor, data}) => {
+const Timetable = ({ isTutor, data }) => {
   let days = ["", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
   let timeslots = generateTimeSlots();
-
 
   // let data = ["1-1000", "2-1000", "4-1000", "1-1100", "3-1700"];
 
@@ -55,7 +53,6 @@ const Timetable = ({isTutor, data}) => {
 
   let uniqueRows = getUniqueRows(data);
 
-
   // const cellDefault = generateStateMatrix(uniqueRows.length + 1, 14);
   const cellDefault = generateStateMatrix(14, 14);
 
@@ -70,8 +67,19 @@ const Timetable = ({isTutor, data}) => {
   };
 
   const handleUpdate = () => {
+    let newData = [];
+    for (let i = 0; i < cells.length; i++) {
+      for (let j = 0; i < cells[i].length; j++) {
+        if (cells[i][j]) {
+          newData.push(`${cells[i]}-${cells[j]}`)
+        }
+      }
+    }
+    console.log(newData);
     setCells(cellDefault);
   };
+
+  console.log(cells);
 
   return (
     <Grid container direction="column" spacing={1}>
@@ -95,7 +103,8 @@ const Timetable = ({isTutor, data}) => {
                   <Typography>{timeslot}</Typography>
                 </td>
                 {days.slice(1).map((day, dayIndex) => {
-                  return data.includes(dayIndex + 1 + "-" + timeslot) || isTutor ? (
+                  return data.includes(dayIndex + 1 + "-" + timeslot) ||
+                    isTutor ? (
                     <td />
                   ) : (
                     <td disabled />

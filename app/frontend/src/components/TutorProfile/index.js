@@ -16,7 +16,7 @@ import React from "react";
 
 // import "bootstrap/dist/css/bootstrap.min.css";
 
-import { TextField, Grid, Avatar } from "@material-ui/core";
+import { TextField, Grid, Avatar, Tabs, Tab, Divider } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import AutoCompleteAdd from "./AutoCompleteAdd";
 import "./styles.css";
@@ -35,6 +35,7 @@ import Typography from "@material-ui/core/Typography";
 import Tooltip from "@material-ui/core/Tooltip";
 import Input from "@material-ui/core/Input";
 import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
+import Timetable from "../Timetable";
 
 const locations = [
   { value: "Bedok", label: "Bedok" },
@@ -270,6 +271,108 @@ const Homepage = () => {
       });
     }
   };
+
+  // For the tab
+  const [tabValue, setTabValue] = React.useState(0);
+  const handleTabChange = (event, newValue) => {
+    setTabValue(newValue);
+  };
+
+  // For timetable
+  // TODO: Get from api
+  let timeTableData = [
+    "1-1000",
+    "2-1000",
+    "3-1000",
+    "4-1000",
+    "5-1000",
+    "6-1000",
+    "7-1000",
+    "1-1100",
+    "2-1100",
+    "3-1100",
+    "4-1100",
+    "5-1100",
+    "6-1100",
+    "7-1100",
+    "1-1200",
+    "2-1200",
+    "3-1200",
+    "4-1200",
+    "5-1200",
+    "6-1200",
+    "7-1200",
+    "1-1300",
+    "2-1300",
+    "3-1300",
+    "4-1300",
+    "5-1300",
+    "6-1300",
+    "7-1300",
+    "1-1400",
+    "2-1400",
+    "3-1400",
+    "4-1400",
+    "5-1400",
+    "6-1400",
+    "7-1400",
+    "1-1500",
+    "2-1500",
+    "3-1500",
+    "4-1500",
+    "5-1500",
+    "6-1500",
+    "7-1500",
+    "1-1600",
+    "2-1600",
+    "3-1600",
+    "4-1600",
+    "5-1600",
+    "6-1600",
+    "7-1600",
+    "1-1700",
+    "2-1700",
+    "3-1700",
+    "4-1700",
+    "5-1700",
+    "6-1700",
+    "7-1700",
+    "1-1800",
+    "2-1800",
+    "3-1800",
+    "4-1800",
+    "5-1800",
+    "6-1800",
+    "7-1800",
+    "1-1900",
+    "2-1900",
+    "3-1900",
+    "4-1900",
+    "5-1900",
+    "6-1900",
+    "7-1900",
+    "1-2000",
+    "2-2000",
+    "3-2000",
+    "4-2000",
+    "5-2000",
+    "6-2000",
+    "7-2000",
+    "1-2100",
+    "2-2100",
+    "3-2100",
+    "4-2100",
+    "5-2100",
+    "6-2100",
+    "7-2100",
+    "1-2200",
+    "2-2200",
+    "3-2200",
+    "4-2200",
+    "5-2200",
+    "6-2200",
+    "7-2200",
+  ];
 
   console.log(values);
   return (
@@ -600,80 +703,103 @@ const Homepage = () => {
           setCurrPage={setCurrSettingsPage}
           // options={dynamicOptionsForProfilePage}
         >
-          <Grid container spacing={3}>
-            <Grid item item md={12} lg={6} xs={12} sm={12} xl={6}>
-              <Typography gutterBottom>Price ($)/hour</Typography>
+          <Grid container spacing={3} direction="column">
+            <Grid item>
+              <Tabs
+                value={tabValue}
+                onChange={handleTabChange}
+                indicatorColor="primary"
+                textColor="primary"
+                centered
+              >
+                <Tab label="Tutor Profile" />
+                <Tab label="Timeslots" />
+              </Tabs>
+            </Grid>
+            <Grid item>
+              <Divider variant="middle" />
+            </Grid>
+            <Grid item>
+              {!tabValue ? (
+                <Grid container spacing={3}>
+                  <Grid item item md={12} lg={6} xs={12} sm={12} xl={6}>
+                    <Typography gutterBottom>Price ($)/hour</Typography>
 
-              <Grid container spacing={2} alignItems="center">
-                <Grid item xs>
-                  {/* <Slider
-                value={
-                  typeof tutorValues.price === "number" ? tutorValues.price : 0
-                }
-                onChange={handleSliderChange}
-                aria-labelledby="input-slider"
-              /> */}
-                  <PrettoSlider
-                    valueLabelDisplay="auto"
-                    aria-label="pretto slider"
-                    defaultValue={20}
+                    <Grid container spacing={2} alignItems="center">
+                      <Grid item xs>
+                        {/* <Slider
                     value={
-                      typeof tutorValues.price === "number"
-                        ? tutorValues.price
-                        : 0
+                      typeof tutorValues.price === "number" ? tutorValues.price : 0
                     }
                     onChange={handleSliderChange}
                     aria-labelledby="input-slider"
-                  />
+                  /> */}
+                        <PrettoSlider
+                          valueLabelDisplay="auto"
+                          aria-label="pretto slider"
+                          defaultValue={20}
+                          value={
+                            typeof tutorValues.price === "number"
+                              ? tutorValues.price
+                              : 0
+                          }
+                          onChange={handleSliderChange}
+                          aria-labelledby="input-slider"
+                        />
+                      </Grid>
+                      <Grid item>
+                        <Input
+                          className={{ width: 42 }}
+                          value={tutorValues.price}
+                          margin="dense"
+                          onChange={handleInputChange}
+                          onBlur={handleBlur}
+                          inputProps={{
+                            step: 1,
+                            min: 0,
+                            max: 100,
+                            type: "number",
+                            "aria-labelledby": "input-slider",
+                          }}
+                        />
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                  <Grid item md={12} lg={6} xs={12} sm={12} xl={6}>
+                    <Autocomplete
+                      id="grouped-demo"
+                      // options={options.sort(
+                      //   (a, b) => -b.firstLetter.localeCompare(a.firstLetter)
+                      // )}
+                      multiple
+                      options={subjectLevels}
+                      groupBy={(option) => option.levelsTaught}
+                      getOptionLabel={(option) =>
+                        `${option.levelsTaught} - ${option.subjectTaught}`
+                      }
+                      // style={{ width: 300 }}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          label="Subjects To Teach"
+                          variant="outlined"
+                        />
+                      )}
+                      disableCloseOnSelect
+                      onChange={(e, v) => {
+                        setTutorValues((state) => {
+                          return {
+                            ...state,
+                            subjects: v,
+                          };
+                        });
+                      }}
+                    />
+                  </Grid>
                 </Grid>
-                <Grid item>
-                  <Input
-                    className={{ width: 42 }}
-                    value={tutorValues.price}
-                    margin="dense"
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    inputProps={{
-                      step: 1,
-                      min: 0,
-                      max: 100,
-                      type: "number",
-                      "aria-labelledby": "input-slider",
-                    }}
-                  />
-                </Grid>
-              </Grid>
-            </Grid>
-            <Grid item md={12} lg={6} xs={12} sm={12} xl={6}>
-              <Autocomplete
-                id="grouped-demo"
-                // options={options.sort(
-                //   (a, b) => -b.firstLetter.localeCompare(a.firstLetter)
-                // )}
-                multiple
-                options={subjectLevels}
-                groupBy={(option) => option.levelsTaught}
-                getOptionLabel={(option) =>
-                  `${option.levelsTaught} - ${option.subjectTaught}`
-                }
-                // style={{ width: 300 }}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Subjects To Teach"
-                    variant="outlined"
-                  />
-                )}
-                disableCloseOnSelect
-                onChange={(e, v) => {
-                  setTutorValues((state) => {
-                    return {
-                      ...state,
-                      subjects: v,
-                    };
-                  });
-                }}
-              />
+              ) : (
+                <Timetable isTutor data={timeTableData} />
+              )}
             </Grid>
           </Grid>
         </SettingsPage>
