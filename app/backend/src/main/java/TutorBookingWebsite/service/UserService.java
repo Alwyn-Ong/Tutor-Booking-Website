@@ -37,26 +37,26 @@ public class UserService {
 
 	@Autowired
 	private UserDao userDao;
-	
+
 	@Autowired
 	private ReviewDao reviewDao;
-	
+
 	@Autowired
 	private LevelsTaughtDao levelsTaughtDao;
-	
+
 	@Autowired
 	private UserTimeslotDao userTimeslotDao;
-	
+
 	@Autowired
 	private TimeslotDao timeslotDao;
-	
+
 	@Autowired
 	private FileDBDao fileDBDao;
-	
+
 	@Autowired
 	private FileController fileController;
-		
-	public Map<String, Object> getTutorById(int userId){
+
+	public Map<String, Object> getTutorById(int userId) {
 		try {
 			Map<String, Object> result = new HashMap<>();
 			Optional<User> user = userDao.findById(userId);
@@ -74,24 +74,24 @@ public class UserService {
 				result.put("price", user.get().getPrice());
 				result.put("qualification", "" + user.get().getQualification());
 //				result.put("reviews", reviewDao.findByTutorId(userId));
-				
+
 				List<Review> reviews = reviewDao.findByTutorId(userId);
 				if (reviews.size() != 0) {
 					// Calculate average review score
 					int totalRating = 0;
-					for (Review review: reviews) {
+					for (Review review : reviews) {
 						totalRating += review.getNumberOfStars();
 					}
 					double overallRating = totalRating / reviews.size();
 					result.put("rating", overallRating);
 					result.put("reviews", reviews);
-					
+
 				}
-				
+
 				List<LevelsTaught> levelsTaught = levelsTaughtDao.findByTutorId(user.get().getUserId());
-				Map<String,List<String>> levelsTaughtTemp = new HashMap<>();
-				
-				for (LevelsTaught x:levelsTaught) {
+				Map<String, List<String>> levelsTaughtTemp = new HashMap<>();
+
+				for (LevelsTaught x : levelsTaught) {
 					if (!levelsTaughtTemp.containsKey(x.getLevelsTaught())) {
 						List<String> z = new ArrayList<>();
 						z.add(x.getSubject());
@@ -100,16 +100,16 @@ public class UserService {
 						List<String> placeHolder = levelsTaughtTemp.get(x.getLevelsTaught());
 						if (!placeHolder.contains(x.getSubject())) {
 							placeHolder.add(x.getSubject());
-							levelsTaughtTemp.put(x.getLevelsTaught(), placeHolder);	
+							levelsTaughtTemp.put(x.getLevelsTaught(), placeHolder);
 						}
 					}
 				}
-				
+
 				result.put("levelsTaught", levelsTaughtTemp);
-				
+
 				List<UserTimeslot> userTimeslot = userTimeslotDao.findByTutorId(user.get().getUserId());
 				List<String> timeslotTemp = new ArrayList<>();
-				for (UserTimeslot x:userTimeslot) {
+				for (UserTimeslot x : userTimeslot) {
 					if (x.getStatus() == TutorBookingWebsite.model.Status.OPEN) {
 						int timeslotId = x.getTimeslotId();
 						Optional<Timeslot> timeslot = timeslotDao.findById(timeslotId);
@@ -117,22 +117,22 @@ public class UserService {
 					}
 				}
 				result.put("openTimeslot", timeslotTemp);
-				
+
 				result.put("imageURL", "http://localhost:8080/api/files/" + user.get().getUserId());
-				
+
 			}
-			
+
 			return result;
 		} catch (Throwable e) {
 			throw new APIException("no such tutor");
 		}
 	}
-	
+
 	public List<Map<String, Object>> getAllTutors() {
-		List<Map<String, Object>> result= new ArrayList<>();
+		List<Map<String, Object>> result = new ArrayList<>();
 		List<User> allTutors = userDao.findByIsTutor(1);
-		
-		for (User temp:allTutors) {
+
+		for (User temp : allTutors) {
 			Map<String, Object> placeHolder = new HashMap<>();
 			placeHolder.put("userid", temp.getUserId());
 			placeHolder.put("description", temp.getDescription());
@@ -145,25 +145,23 @@ public class UserService {
 			placeHolder.put("price", temp.getPrice());
 			placeHolder.put("qualification", temp.getQualification());
 //			placeHolder.put("reviews", reviewDao.findByTutorId(temp.getUserId()));
-			
-			
+
 			List<Review> reviews = reviewDao.findByTutorId(temp.getUserId());
 			if (reviews.size() != 0) {
 				// Calculate average review score
 				int totalRating = 0;
-				for (Review review: reviews) {
+				for (Review review : reviews) {
 					totalRating += review.getNumberOfStars();
 				}
 				double overallRating = totalRating / reviews.size();
 				placeHolder.put("rating", overallRating);
 				placeHolder.put("reviews", reviews.size());
-				
+
 			}
-			
-			
+
 			List<LevelsTaught> levelsTaught = levelsTaughtDao.findByTutorId(temp.getUserId());
-			Map<String,List<String>> levelsTaughtTemp = new HashMap<>();	
-			for (LevelsTaught x:levelsTaught) {
+			Map<String, List<String>> levelsTaughtTemp = new HashMap<>();
+			for (LevelsTaught x : levelsTaught) {
 				if (!levelsTaughtTemp.containsKey(x.getLevelsTaught())) {
 					List<String> z = new ArrayList<>();
 					z.add(x.getSubject());
@@ -172,13 +170,13 @@ public class UserService {
 					List<String> placeHolder1 = levelsTaughtTemp.get(x.getLevelsTaught());
 					if (!placeHolder1.contains(x.getSubject())) {
 						placeHolder1.add(x.getSubject());
-						levelsTaughtTemp.put(x.getLevelsTaught(), placeHolder1);	
+						levelsTaughtTemp.put(x.getLevelsTaught(), placeHolder1);
 					}
 				}
 			}
-			
+
 			placeHolder.put("levelsTaught", levelsTaughtTemp);
-			
+
 //			List<UserTimeslot> userTimeslot = userTimeslotDao.findByTutorId(temp.getUserId());
 //			List<String> timeslotTemp = new ArrayList<>();
 //			for (UserTimeslot x:userTimeslot) {
@@ -190,18 +188,18 @@ public class UserService {
 //			}
 //			placeHolder.put("openTimeslot", timeslotTemp);
 			placeHolder.put("imageURL", "http://localhost:8080/api/files/" + temp.getUserId());
-			
+
 			result.add(placeHolder);
 		}
 
 		return result;
 	}
-	
+
 	public ResponseEntity becomeTutor(User user) {
 		try {
 			User existingUser = userDao.findById(user.getUserId()).orElse(null);
 			if (existingUser.getIsTutor() == 0) {
-				existingUser.setIsTutor(1);				
+				existingUser.setIsTutor(1);
 			} else {
 				existingUser.setIsTutor(0);
 			}
@@ -213,23 +211,21 @@ public class UserService {
 			throw new APIException("user unable to become a tutor");
 		}
 	}
-	
-	public Map<String,Integer> getTutorStatus(User user) {
+
+	public Map<String, Integer> getTutorStatus(User user) {
 		Map<String, Integer> res = new HashMap<>();
 		try {
 			User existingUser = userDao.findById(user.getUserId()).orElse(null);
-			res.put("status",existingUser.getIsTutor());
+			res.put("status", existingUser.getIsTutor());
 			return res;
 		} catch (Throwable e) {
 			throw new APIException("user unable to become a tutor");
 		}
 	}
-	
-	
-	
+
 	public ResponseEntity updateUser(User user) {
 		User existingUser = userDao.findById(user.getUserId()).orElse(null);
-		
+
 		try {
 			existingUser.setName(user.getName());
 			existingUser.setEmail(user.getEmail());
@@ -248,61 +244,61 @@ public class UserService {
 			throw new APIException("user unable to be updated");
 		}
 	}
-	
+
 	public ResponseEntity updateTutorProfile(Map<String, Object> data) {
 		System.out.println("check0");
-		Map<String,Object> tempUser = (Map<String, Object>) data.get("user");
+		Map<String, Object> tempUser = (Map<String, Object>) data.get("user");
 		User user = userDao.findById(Integer.parseInt(tempUser.get("userId").toString())).orElse(null);
-		
+
 		System.out.println("check1");
-		
-		List<Object> subjects = (List<Object>)data.get("subjects");
+
+		List<Object> subjects = (List<Object>) data.get("subjects");
 		List<String> subject = new ArrayList<>();
 		List<String> levelsTaught = new ArrayList<>();
-		
+
 		System.out.println("check2");
-		
-		for (Object x: subjects) {
-			Map<String,Object> tempSubject = (Map<String, Object>) x;
-			subject.add(tempSubject.get("subjectTaught").toString());	
+
+		for (Object x : subjects) {
+			Map<String, Object> tempSubject = (Map<String, Object>) x;
+			subject.add(tempSubject.get("subjectTaught").toString());
 			levelsTaught.add(tempSubject.get("levelsTaught").toString());
 		}
-			
+
 		System.out.println("check3");
-		
-		List<Object> timeslots = (List<Object>)data.get("timeslots");
+
+		List<Object> timeslots = (List<Object>) data.get("timeslots");
 		List<String> userTimeslot = new ArrayList<>();
-		
+
 		System.out.println("check4");
-		
-		for (Object y:timeslots) {
-			Map<String,Object> tempTimeslot = (Map<String, Object>) y;
+
+		for (Object y : timeslots) {
+			Map<String, Object> tempTimeslot = (Map<String, Object>) y;
 			userTimeslot.add(tempTimeslot.get("timeslot").toString());
 		}
-		
+
 		System.out.println("check5");
-	
+
 		User existingUser = userDao.findById(user.getUserId()).orElse(null);
-		
+
 		System.out.println("check6");
-	
+
 		int index = 0;
-		for (String temp:subject) {
+		for (String temp : subject) {
 			List<LevelsTaught> temp2 = levelsTaughtDao.findByTutorId(user.getUserId());
-			
-			levelsTaughtDao.save(new LevelsTaught(levelsTaught.get(index),temp,user.getUserId()));
+
+			levelsTaughtDao.save(new LevelsTaught(levelsTaught.get(index), temp, user.getUserId()));
 			index++;
 		}
-		
+
 		System.out.println("check7");
-		
-		for (String temp:userTimeslot) {
+
+		for (String temp : userTimeslot) {
 			int timeslotId = timeslotDao.findByTimeslot(temp).get().getTimeslotId();
 			userTimeslotDao.save(new UserTimeslot(timeslotId, user.getUserId(), TutorBookingWebsite.model.Status.OPEN));
 		}
-		
+
 		System.out.println("check8");
-		
+
 		try {
 			System.out.println("check9");
 //			existingUser.setQualification(tempUser.get("qualification").toString());
@@ -313,7 +309,6 @@ public class UserService {
 			System.out.println("check12");
 			userDao.save(existingUser);
 			System.out.println("check13");
-			
 
 			ResponseDetails responseDetails = new ResponseDetails(new Date(), "user updated", "query success");
 			return new ResponseEntity(responseDetails, HttpStatus.OK);
@@ -321,7 +316,7 @@ public class UserService {
 			throw new APIException("user unable to be updated");
 		}
 	}
-	
+
 	public Map<String, String> verifyToken(String idToken) {
 		Map<String, String> result = new HashMap<>();
 		NetHttpTransport transport = new NetHttpTransport();
@@ -346,12 +341,12 @@ public class UserService {
 					User newUser = new User(email, name);
 					userDao.save(newUser);
 				}
-				
+
 				result.put("userid", "" + user.getUserId());
 				result.put("name", user.getName());
 				result.put("email", user.getEmail());
 				result.put("isTutor", "" + user.getIsTutor());
-				
+
 				return result;
 			} else {
 				throw new APIException("Token is invalid!");
@@ -365,19 +360,73 @@ public class UserService {
 		}
 		throw new APIException("An error occured in verfiying the token!");
 	}
-	
-	public Map<String, Object> getUserProfile(int userId){
+
+	public Map<String, Object> getUserProfile(int userId) {
 		Map<String, Object> result = new HashMap<>();
-		User existingUser = userDao.findById(userId).get();
-		
-		result.put("name", existingUser.getName());
-		result.put("email", existingUser.getEmail());
-		result.put("nearestMRT", existingUser.getNearestMRT());
-		result.put("name", existingUser.getName());
-		result.put("description", existingUser.getDescription());
-		result.put("phoneNumber", existingUser.getPhoneNumber());
-		result.put("gender", existingUser.getGender());
-		result.put("qualification", existingUser.getQualification());
-		return result;
+		try {
+			User existingUser = userDao.findById(userId).get();
+
+			result.put("name", existingUser.getName());
+			result.put("email", existingUser.getEmail());
+			result.put("nearestMRT", existingUser.getNearestMRT());
+			result.put("name", existingUser.getName());
+			result.put("description", existingUser.getDescription());
+			result.put("phoneNumber", existingUser.getPhoneNumber());
+			result.put("gender", existingUser.getGender());
+			result.put("qualification", existingUser.getQualification());
+			return result;
+		} catch (Exception e) {
+			throw new APIException("Error in retrieving!");
+		}
+	}
+
+	public Map<String, Object> getTutorProfile(int userId) {
+		Map<String, Object> result = new HashMap<>();
+//		user: { price: 20 },
+//	    subjects: [],
+//	    timeslots: [],
+
+		try {
+
+			User existingUser = userDao.findById(userId).get();
+			List<LevelsTaught> levelsTaught = levelsTaughtDao.findByTutorId(userId);
+			List<String> subjectArrayList = new ArrayList<>();
+
+			for (LevelsTaught temp : levelsTaught) {
+				if (!subjectArrayList.contains(temp.getSubject())) {
+					subjectArrayList.add(temp.getSubject());
+				}
+			}
+			String[] subjects = new String[subjectArrayList.size()];
+
+			for (int i = 0; i < subjects.length; i++) {
+				subjects[i] = subjectArrayList.get(i);
+			}
+			result.put("subjects", subjects);
+
+			List<UserTimeslot> userTimeslot = userTimeslotDao.findByTutorId(userId);
+			List<String> timeslotTemp = new ArrayList<>();
+
+			for (UserTimeslot temp : userTimeslot) {
+				if (temp.getStatus() == TutorBookingWebsite.model.Status.OPEN) {
+					int timeslotId = temp.getTimeslotId();
+					Optional<Timeslot> timeslot = timeslotDao.findById(timeslotId);
+					timeslotTemp.add(timeslot.get().getTimeslot());
+				}
+			}
+			String[] timeslot = new String[timeslotTemp.size()];
+			for (int i = 0; i < timeslot.length; i++) {
+				timeslot[i] = timeslotTemp.get(i);
+			}
+			result.put("timeslot", timeslot);
+
+			Map<String, Integer> placeHolder = new HashMap<>();
+			placeHolder.put("price", existingUser.getPrice());
+			result.put("user", placeHolder);
+
+			return result;
+		} catch (Exception e) {
+			throw new APIException("Error in retrieving!");
+		}
 	}
 }
