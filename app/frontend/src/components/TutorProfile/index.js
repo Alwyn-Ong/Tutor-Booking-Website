@@ -29,10 +29,12 @@ import CloseIcon from "@material-ui/icons/Close";
 
 import { toast } from "react-hot-toast";
 
-import { withStyles, makeStyles } from '@material-ui/core/styles';
-import Slider from '@material-ui/core/Slider';
-import Typography from '@material-ui/core/Typography';
-import Tooltip from '@material-ui/core/Tooltip';
+import { withStyles, makeStyles } from "@material-ui/core/styles";
+import Slider from "@material-ui/core/Slider";
+import Typography from "@material-ui/core/Typography";
+import Tooltip from "@material-ui/core/Tooltip";
+import Input from "@material-ui/core/Input";
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 
 const locations = [
   { value: "Bedok", label: "Bedok" },
@@ -45,23 +47,23 @@ const locations = [
 
 const PrettoSlider = withStyles({
   root: {
-    color: '#52af77',
+    color: "#52af77",
     height: 8,
   },
   thumb: {
     height: 24,
     width: 24,
-    backgroundColor: '#fff',
-    border: '2px solid currentColor',
+    backgroundColor: "#fff",
+    border: "2px solid currentColor",
     marginTop: -8,
     marginLeft: -12,
-    '&:focus, &:hover, &$active': {
-      boxShadow: 'inherit',
+    "&:focus, &:hover, &$active": {
+      boxShadow: "inherit",
     },
   },
   active: {},
   valueLabel: {
-    left: 'calc(-50% + 4px)',
+    left: "calc(-50% + 4px)",
   },
   track: {
     height: 8,
@@ -207,7 +209,48 @@ const Homepage = () => {
   console.log(currSettingsPage);
 
   // For tutor values
-  const [tutorValues, setTutorValues] = React.useState({});
+  const [tutorValues, setTutorValues] = React.useState({
+    price: 20,
+  });
+
+  const handleSliderChange = (event, newValue) => {
+    setTutorValues((state) => {
+      return {
+        ...state,
+        price: newValue,
+      };
+    });
+  };
+
+  const handleInputChange = (event) => {
+    // setValue(event.target.value === "" ? "" : Number(event.target.value));
+    setTutorValues((state) => {
+      return {
+        ...state,
+        price: event.target.value === "" ? 0 : Number(event.target.value),
+      };
+    });
+  };
+
+  const handleBlur = () => {
+    if (value < 0) {
+      // setValue(0);
+      setTutorValues((state) => {
+        return {
+          ...state,
+          price: 0,
+        };
+      });
+    } else if (value > 100) {
+      // setValue(100);
+      setTutorValues((state) => {
+        return {
+          ...state,
+          price: 100,
+        };
+      });
+    }
+  };
 
   console.log(values);
   return (
@@ -565,7 +608,45 @@ const Homepage = () => {
             </select>
           </fieldset> */}
           <Typography gutterBottom>Price ($)/hour</Typography>
-          <PrettoSlider valueLabelDisplay="auto" aria-label="pretto slider" defaultValue={20} />
+          <Grid container spacing={2} alignItems="center">
+            {/* <Grid item><MonetizationOnIcon/></Grid> */}
+            <Grid item xs>
+              {/* <Slider
+                value={
+                  typeof tutorValues.price === "number" ? tutorValues.price : 0
+                }
+                onChange={handleSliderChange}
+                aria-labelledby="input-slider"
+              /> */}
+              <PrettoSlider
+                valueLabelDisplay="auto"
+                aria-label="pretto slider"
+                defaultValue={20}
+                value={
+                  typeof tutorValues.price === "number" ? tutorValues.price : 0
+                }
+                onChange={handleSliderChange}
+                aria-labelledby="input-slider"
+              />
+            </Grid>
+            <Grid item>
+              <Input
+                className={{ width: 42 }}
+                value={tutorValues.price}
+                margin="dense"
+                onChange={handleInputChange}
+                onBlur={handleBlur}
+                inputProps={{
+                  step: 1,
+                  min: 0,
+                  max: 100,
+                  type: "number",
+                  "aria-labelledby": "input-slider",
+                }}
+              />
+            </Grid>
+          </Grid>
+          
           <TextField
             required
             id="outlined-required"
