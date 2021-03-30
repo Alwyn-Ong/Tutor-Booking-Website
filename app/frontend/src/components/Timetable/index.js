@@ -27,7 +27,7 @@ const getUniqueRows = (data) => {
   return arr;
 };
 
-const Timetable = ({ isTutor, data }) => {
+const Timetable = ({ isTutor, data, setProfileData }) => {
   let days = ["", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
   let timeslots = generateTimeSlots();
@@ -74,6 +74,14 @@ const Timetable = ({ isTutor, data }) => {
           newData.push({ timeslot: `${j}-${timeslots[i - 1]}` });
         }
       }
+    }
+    if (setProfileData) {
+      setProfileData((state) => {
+        return {
+          ...state,
+          timeslots: newData,
+        };
+      });
     }
     console.log(newData);
     // setCells(cellDefault);
