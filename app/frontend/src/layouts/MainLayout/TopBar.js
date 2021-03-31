@@ -143,6 +143,27 @@ const TopBar = () => {
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "center",
+      }}
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "center",
+      }}
+      getContentAnchorEl={null}
+      id={menuId}
+      keepMounted
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <MenuItem onClick={viewProfile}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+    </Menu>
+  );
 
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
@@ -163,8 +184,8 @@ const TopBar = () => {
         </IconButton>
         <p>Messages</p>
       </MenuItem> */}
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
+      <MenuItem onClick={handleProfileMenuOpen}>
+        <IconButton aria-label="show 11 new notifications" color="inherit" >
           <Badge badgeContent={11} color="secondary">
             <NotificationsIcon />
           </Badge>
