@@ -120,50 +120,59 @@ const TopBar = () => {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-
+  
+  let notifications = [{message:"Request1"},{message:"Request2"}]
+  
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "center",
-      }}
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "center",
-      }}
-      getContentAnchorEl={null}
-      id={menuId}
-      keepMounted
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={viewProfile}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+        getContentAnchorEl={null}
+        id={menuId}
+        keepMounted
+        open={isMenuOpen}
+        onClose={handleMenuClose}
+      >
+    {
+    notifications.map(notification=>{
+      return (
+        // <MenuItem onClick={viewProfile}>Profile</MenuItem>
+        <MenuItem onClick={handleMenuClose}>{notification.message}</MenuItem>
+      )
+      
+    })
+    }
+  </Menu>
   );
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "center",
-      }}
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "center",
-      }}
-      getContentAnchorEl={null}
-      id={menuId}
-      keepMounted
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={viewProfile}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
+  // const renderMenu = (
+  //   <Menu
+  //     anchorEl={anchorEl}
+  //     anchorOrigin={{
+  //       vertical: "bottom",
+  //       horizontal: "center",
+  //     }}
+  //     transformOrigin={{
+  //       vertical: "top",
+  //       horizontal: "center",
+  //     }}
+  //     getContentAnchorEl={null}
+  //     id={menuId}
+  //     keepMounted
+  //     open={isMenuOpen}
+  //     onClose={handleMenuClose}
+  //   >
+  //     <MenuItem onClick={viewProfile}>Profile</MenuItem>
+  //     <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+  //   </Menu>
+  // );
 
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
