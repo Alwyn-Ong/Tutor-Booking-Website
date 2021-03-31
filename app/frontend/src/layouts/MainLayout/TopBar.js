@@ -98,9 +98,9 @@ const TopBar = () => {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  // const handleProfileMenuOpen = (event) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -125,10 +125,17 @@ const TopBar = () => {
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "center",
+      }}
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "center",
+      }}
+      getContentAnchorEl={null}
       id={menuId}
       keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
@@ -164,14 +171,12 @@ const TopBar = () => {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      <MenuItem component={RouterLink}
-          to={"/profile"}>
+      <MenuItem component={RouterLink} to={"/profile"}>
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
           color="inherit"
-          
         >
           <AccountCircle />
         </IconButton>
@@ -239,7 +244,11 @@ const TopBar = () => {
               </Badge>
             </IconButton> */}
             {/* <Notifications data={["test"]} /> */}
-            <IconButton aria-label="show 17 new notifications" color="inherit">
+            <IconButton
+              aria-label="show 17 new notifications"
+              color="inherit"
+              onClick={handleProfileMenuOpen}
+            >
               <Badge badgeContent={17} color="secondary">
                 <NotificationsIcon />
               </Badge>
@@ -249,7 +258,6 @@ const TopBar = () => {
               aria-label="account of current user"
               aria-controls={menuId}
               aria-haspopup="true"
-              // onClick={handleProfileMenuOpen}
               // onClick={handleProfileMenuOpen}
               component={RouterLink}
               to="/profile"
