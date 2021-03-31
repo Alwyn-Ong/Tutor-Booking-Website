@@ -98,9 +98,9 @@ const TopBar = () => {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  // const handleProfileMenuOpen = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -164,14 +164,14 @@ const TopBar = () => {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem component={RouterLink}
+          to={"/tutorprofile"}>
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
           color="inherit"
-          component={RouterLink}
-          to={"/tutorprofile"}
+          
         >
           <AccountCircle />
         </IconButton>
@@ -238,7 +238,7 @@ const TopBar = () => {
                 <MailIcon />
               </Badge>
             </IconButton> */}
-            <Notifications data={["test"]} />
+            {/* <Notifications data={["test"]} /> */}
             <IconButton aria-label="show 17 new notifications" color="inherit">
               <Badge badgeContent={17} color="secondary">
                 <NotificationsIcon />
@@ -249,7 +249,10 @@ const TopBar = () => {
               aria-label="account of current user"
               aria-controls={menuId}
               aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
+              // onClick={handleProfileMenuOpen}
+              // onClick={handleProfileMenuOpen}
+              component={RouterLink}
+              to="/tutorProfile"
               color="inherit"
             >
               <AccountCircle />
