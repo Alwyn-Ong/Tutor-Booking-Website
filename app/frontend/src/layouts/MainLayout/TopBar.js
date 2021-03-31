@@ -16,8 +16,9 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import EmojiPeople from "@material-ui/icons/EmojiPeople";
 import { Navigate, NavLink as RouterLink } from "react-router-dom";
-import { Button } from "@material-ui/core";
-import Notifications from "react-notifications-menu";
+import { Button, Grid, Icon } from "@material-ui/core";
+import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
+import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -120,37 +121,50 @@ const TopBar = () => {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-  
-  let notifications = [{message:"Request1"},{message:"Request2"}]
-  
+
+  let notifications = [{ message: "Request1" }, { message: "Request2" }];
+
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
-        anchorEl={anchorEl}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "center",
-        }}
-        getContentAnchorEl={null}
-        id={menuId}
-        keepMounted
-        open={isMenuOpen}
-        onClose={handleMenuClose}
-      >
-    {
-    notifications.map(notification=>{
-      return (
-        // <MenuItem onClick={viewProfile}>Profile</MenuItem>
-        <MenuItem onClick={handleMenuClose}>{notification.message}</MenuItem>
-      )
-      
-    })
-    }
-  </Menu>
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "center",
+      }}
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "center",
+      }}
+      getContentAnchorEl={null}
+      id={menuId}
+      keepMounted
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      {notifications.map((notification) => {
+        return (
+          // <MenuItem onClick={viewProfile}>Profile</MenuItem>
+          <MenuItem>
+            <Grid container>
+              <Grid item>
+                <Typography>{notification.message}</Typography>
+              </Grid>
+              <Grid item>
+                <IconButton>
+                  <CheckCircleOutlineIcon />
+                </IconButton>
+              </Grid>
+              <Grid item>
+                <IconButton>
+                  <CancelOutlinedIcon />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </MenuItem>
+        );
+      })}
+    </Menu>
   );
   // const renderMenu = (
   //   <Menu
@@ -194,7 +208,7 @@ const TopBar = () => {
         <p>Messages</p>
       </MenuItem> */}
       <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton aria-label="show 11 new notifications" color="inherit" >
+        <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={11} color="secondary">
             <NotificationsIcon />
           </Badge>
