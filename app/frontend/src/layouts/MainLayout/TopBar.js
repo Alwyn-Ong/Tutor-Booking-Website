@@ -165,7 +165,7 @@ const TopBar = () => {
         <p>Notifications</p>
       </MenuItem>
       <MenuItem component={RouterLink}
-          to={"/tutorprofile"}>
+          to={"/profile"}>
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
@@ -252,7 +252,7 @@ const TopBar = () => {
               // onClick={handleProfileMenuOpen}
               // onClick={handleProfileMenuOpen}
               component={RouterLink}
-              to="/tutorProfile"
+              to="/profile"
               color="inherit"
             >
               <AccountCircle />
