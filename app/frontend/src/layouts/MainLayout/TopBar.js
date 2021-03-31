@@ -16,7 +16,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import EmojiPeople from "@material-ui/icons/EmojiPeople";
 import { Navigate, NavLink as RouterLink } from "react-router-dom";
-import { Button, Grid, Icon } from "@material-ui/core";
+import { Avatar, Button, Grid, Icon } from "@material-ui/core";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
 
@@ -123,9 +123,16 @@ const TopBar = () => {
   };
 
   let notifications = [
-    { remarks: "Request1", requestedTimeslot: "1-1200" },
-    { remarks: "Request2", requestedTimeslot: "2-1200" },
+    { remarks: "Toa Payoh", requestedTimeslot: "1-1200", imageURL:"http://localhost:8080/api/files/2"},
+    { remarks: "Pasir Ris", requestedTimeslot: "2-1700", imageURL:"http://localhost:8080/api/files/3" },
   ];
+
+  let renderTimeslot = (timeslot) => {
+    let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    let timeSlotArr = timeslot.split("-");
+    timeSlotArr[0] = days[timeSlotArr[0] - 1];
+    return timeSlotArr.join(" - ");
+  };
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -149,23 +156,32 @@ const TopBar = () => {
         return (
           // <MenuItem onClick={viewProfile}>Profile</MenuItem>
           <MenuItem>
-            <Grid container>
-              <Grid container item direction="column" xs={8}>
+            <Grid container spacing={2}>
+              <Grid item xs={2}>
+                <Avatar
+                  width="15px"
+                  height="15px"
+                  src={notification.imageURL}
+                ></Avatar>
+              </Grid>
+              <Grid container item direction="column" xs={6}>
                 <Grid item>
-                  <Typography variant="h6">{notification.requestedTimeslot}</Typography>
+                  <Typography variant="h6">
+                    {renderTimeslot(notification.requestedTimeslot)}
+                  </Typography>
                 </Grid>
                 <Grid item>
-                  <Typography variant="h4">{notification.remarks}</Typography>
+                  <Typography variant="h5">{`Location: ${notification.remarks}`}</Typography>
                 </Grid>
               </Grid>
               <Grid item xs={2}>
                 <IconButton>
-                  <CheckCircleOutlineIcon />
+                  <CheckCircleOutlineIcon style={{ color: "green" }} />
                 </IconButton>
               </Grid>
               <Grid item xs={2}>
                 <IconButton>
-                  <CancelOutlinedIcon />
+                  <CancelOutlinedIcon style={{ color: "red" }} />
                 </IconButton>
               </Grid>
             </Grid>
