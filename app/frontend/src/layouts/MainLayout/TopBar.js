@@ -122,7 +122,10 @@ const TopBar = () => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  let notifications = [{ message: "Request1" }, { message: "Request2" }];
+  let notifications = [
+    { remarks: "Request1", requestedTimeslot: "1-1200" },
+    { remarks: "Request2", requestedTimeslot: "2-1200" },
+  ];
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -147,15 +150,20 @@ const TopBar = () => {
           // <MenuItem onClick={viewProfile}>Profile</MenuItem>
           <MenuItem>
             <Grid container>
-              <Grid item>
-                <Typography>{notification.message}</Typography>
+              <Grid container item direction="column" xs={8}>
+                <Grid item>
+                  <Typography variant="h6">{notification.requestedTimeslot}</Typography>
+                </Grid>
+                <Grid item>
+                  <Typography variant="h4">{notification.remarks}</Typography>
+                </Grid>
               </Grid>
-              <Grid item>
+              <Grid item xs={2}>
                 <IconButton>
                   <CheckCircleOutlineIcon />
                 </IconButton>
               </Grid>
-              <Grid item>
+              <Grid item xs={2}>
                 <IconButton>
                   <CancelOutlinedIcon />
                 </IconButton>
