@@ -304,16 +304,9 @@ const TopBar = () => {
                                 size="small"
                                 color="primary"
                                 avatar={
-                                  <Avatar
-                                  //  style={{ color: "red" }}
-                                  >
-                                    {renderTimeslot(timeslot)[2]}
-                                  </Avatar>
+                                  <Avatar>{renderTimeslot(timeslot)[2]}</Avatar>
                                 }
                                 label={renderTimeslot(timeslot)[1]}
-                                // style={{ color: "red" }}
-                                // style={{backgroundColor:"red"}}
-                                // style={{colorPrimary: "red"}}
                               ></Chip>
                             </ThemeProvider>
                           </Grid>
