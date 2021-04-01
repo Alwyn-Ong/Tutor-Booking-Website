@@ -4,6 +4,7 @@ import Profile from "./views/Profile";
 import Tutor from "./views/Tutor";
 import Register from "./views/Register";
 import TutorProfile from "./views/TutorProfile";
+import Dashboard from "./views/Dashboard";
 
 const routes = [
   // {
@@ -23,6 +24,7 @@ const routes = [
       { path: "tutor/:id", element: <Tutor /> },
       { path: "register", element: <Register /> },
       { path: "tutorprofile", element: <TutorProfile /> },
+      { path: "tutorprofile", element: <Dashboard /> },
       { path: "*", element: <Homepage /> },
       // { path: "*", element: <Navigate to="/" /> },
     ],
