@@ -40,6 +40,7 @@ import {
   faArrowUp,
   faArrowLeft,
   faAngleDown,
+  faEye
 } from "@fortawesome/free-solid-svg-icons";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -50,18 +51,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import avatar4 from "../../../assets/utils/images/avatars/4.jpg";
 
 const data = [
-  { name: "Page A", uv: 4000, pv: 2400, amt: 2400 },
-  { name: "Page B", uv: 3000, pv: 1398, amt: 2210 },
-  { name: "Page C", uv: 2000, pv: 9800, amt: 2290 },
-  { name: "Page D", uv: 2780, pv: 3908, amt: 2000 },
-  { name: "Page E", uv: 1890, pv: 4800, amt: 2181 },
-  { name: "Page F", uv: 2390, pv: 3800, amt: 2500 },
-  { name: "Page G", uv: 3490, pv: 4300, amt: 2100 },
-  { name: "Page C", uv: 2000, pv: 6800, amt: 2290 },
-  { name: "Page D", uv: 4780, pv: 7908, amt: 2000 },
-  { name: "Page E", uv: 2890, pv: 9800, amt: 2181 },
-  { name: "Page F", uv: 1390, pv: 3800, amt: 1500 },
-  { name: "Page G", uv: 3490, pv: 4300, amt: 2100 },
+  { name: "Page A", Tutees: 2, pv: 15, amt: 2400 },
+  { name: "Page B", Tutees: 3, pv: 13, amt: 2210 },
+  { name: "Page C", Tutees: 2, pv: 5, amt: 2290 },
+  { name: "Page D", Tutees: 2, pv: 39, amt: 2000 },
+  { name: "Page E", Tutees: 1, pv: 28, amt: 2181 },
+  { name: "Page F", Tutees: 2, pv: 38, amt: 2500 },
+  { name: "Page G", Tutees: 2, pv: 43, amt: 2100 },
+  { name: "Page C", Tutees: 2, pv: 28, amt: 2290 },
+  { name: "Page D", Tutees: 1, pv: 49, amt: 2000 },
+  { name: "Page E", Tutees: 2, pv: 58, amt: 2181 },
+  { name: "Page F", Tutees: 1, pv: 18, amt: 1500 },
+  { name: "Page G", Tutees: 4, pv: 13, amt: 2100 },
 ];
 
 const data2 = [
@@ -127,7 +128,7 @@ export default class Dashboard extends Component {
                         <i className="header-icon lnr-rocket icon-gradient bg-tempting-azure">
                           {" "}
                         </i>
-                        Bandwidth Reports
+                        Overall Report
                       </div>
                       <div className="btn-actions-pane-right">
                         <Button
@@ -172,7 +173,7 @@ export default class Dashboard extends Component {
                                   <div className="widget-content-wrapper">
                                     <div className="widget-content-left mr-3">
                                       <div className="widget-numbers fsize-3 text-muted">
-                                        63%
+                                        20%
                                       </div>
                                     </div>
                                     <div className="widget-content-right">
@@ -185,7 +186,7 @@ export default class Dashboard extends Component {
                                     <Progress
                                       className="progress-bar-sm progress-bar-animated-alt"
                                       color="danger"
-                                      value="63"
+                                      value="20"
                                     />
                                   </div>
                                 </div>
@@ -197,12 +198,12 @@ export default class Dashboard extends Component {
                                   <div className="widget-content-wrapper">
                                     <div className="widget-content-left mr-3">
                                       <div className="widget-numbers fsize-3 text-muted">
-                                        32%
+                                        81%
                                       </div>
                                     </div>
                                     <div className="widget-content-right">
                                       <div className="text-muted opacity-6">
-                                        Submitted Tickers
+                                        Satisfied Tutees
                                       </div>
                                     </div>
                                   </div>
@@ -210,7 +211,7 @@ export default class Dashboard extends Component {
                                     <Progress
                                       className="progress-bar-sm progress-bar-animated-alt"
                                       color="success"
-                                      value="32"
+                                      value="81"
                                     />
                                   </div>
                                 </div>
@@ -218,7 +219,7 @@ export default class Dashboard extends Component {
                             </Col>
                           </Row>
                           <div className="divider mt-4" />
-                          {/* <Row>
+                          <Row>
                             <Col md="6">
                               <div className="widget-content">
                                 <div className="widget-content-outer">
@@ -230,7 +231,7 @@ export default class Dashboard extends Component {
                                     </div>
                                     <div className="widget-content-right">
                                       <div className="text-muted opacity-6">
-                                        Server Allocation
+                                        Left a review
                                       </div>
                                     </div>
                                   </div>
@@ -250,12 +251,12 @@ export default class Dashboard extends Component {
                                   <div className="widget-content-wrapper">
                                     <div className="widget-content-left mr-3">
                                       <div className="widget-numbers fsize-3 text-muted">
-                                        41%
+                                        11%
                                       </div>
                                     </div>
                                     <div className="widget-content-right">
                                       <div className="text-muted opacity-6">
-                                        Generated Leads
+                                        Unsatisfied Tutees
                                       </div>
                                     </div>
                                   </div>
@@ -263,21 +264,21 @@ export default class Dashboard extends Component {
                                     <Progress
                                       className="progress-bar-sm progress-bar-animated-alt"
                                       color="warning"
-                                      value="41"
+                                      value="11"
                                     />
                                   </div>
                                 </div>
                               </div>
                             </Col>
-                          </Row> */}
+                          </Row>
                         </CardBody>
                         <div className="widget-chart p-0">
                           <div className="widget-chart-content">
                             <div className="widget-description mt-0 text-warning">
-                              <FontAwesomeIcon icon={faArrowLeft} />
+                              <FontAwesomeIcon icon={faArrowUp} />
                               <span className="pl-1">175.5%</span>
                               <span className="text-muted opacity-8 pl-1">
-                                increased server resources
+                                Concurrent Tutees
                               </span>
                             </div>
                           </div>
@@ -314,7 +315,7 @@ export default class Dashboard extends Component {
                               <Tooltip />
                               <Area
                                 type="monotoneX"
-                                dataKey="uv"
+                                dataKey="Tutees"
                                 stroke="var(--warning)"
                                 strokeWidth={2}
                                 fillOpacity={1}
@@ -474,10 +475,10 @@ export default class Dashboard extends Component {
                         <div className="widget-chart-content">
                           <div className="icon-wrapper rounded-circle">
                             <div className="icon-wrapper-bg bg-primary" />
-                            <i className="lnr-cog text-primary" />
+                            <i className="lnr-graduation-hat text-primary" />
                           </div>
                           <div className="widget-numbers">43</div>
-                          <div className="widget-subheading">Total Reviews</div>
+                          <div className="widget-subheading">New Tutees</div>
                           <div className="widget-description text-success">
                             <FontAwesomeIcon icon={faAngleUp} />
                             <span className="pl-1">175.5%</span>
@@ -505,11 +506,11 @@ export default class Dashboard extends Component {
                         <div className="widget-chart-content">
                           <div className="icon-wrapper rounded-circle">
                             <div className="icon-wrapper-bg bg-danger" />
-                            <i className="lnr-laptop-phone text-danger" />
+                            <i className="lnr-envelope text-danger" />
                           </div>
-                          <div className="widget-numbers">5.82k</div>
+                          <div className="widget-numbers">43</div>
                           <div className="widget-subheading">
-                            Reports Submitted
+                            Reviews Submitted
                           </div>
                           <div className="widget-description text-danger">
                             <FontAwesomeIcon icon={faAngleDown} />
@@ -520,7 +521,7 @@ export default class Dashboard extends Component {
                           <ResponsiveContainer height={100}>
                             <BarChart data={data}>
                               <Bar
-                                dataKey="uv"
+                                dataKey="pv"
                                 fill="#81a4ff"
                                 stroke="#3f6ad8"
                                 strokeWidth={2}
@@ -538,11 +539,11 @@ export default class Dashboard extends Component {
                       <div className="card mb-3 bg-arielle-smile widget-chart text-white card-border">
                         <div className="icon-wrapper rounded-circle">
                           <div className="icon-wrapper-bg bg-white opacity-10" />
-                          <i className="lnr-cog icon-gradient bg-arielle-smile" />
+                          <i className="lnr-calendar-full icon-gradient bg-arielle-smile" />
                         </div>
                         <div className="widget-numbers">10</div>
                         <div className="widget-subheading">
-                          Sessions in the past month
+                          Months since joined
                         </div>
                         <div className="widget-description text-white">
                           <FontAwesomeIcon icon={faAngleUp} />
@@ -583,7 +584,7 @@ export default class Dashboard extends Component {
                         <div className="widget-chart-content text-white">
                           <div className="icon-wrapper rounded-circle">
                             <div className="icon-wrapper-bg bg-white opacity-4" />
-                            <i className="lnr-cog" />
+                            <i className="lnr-eye" />
                           </div>
                           <div className="widget-numbers">458</div>
                           <div className="widget-subheading">Total Profile Views</div>
@@ -658,7 +659,7 @@ export default class Dashboard extends Component {
                   </div>
                 </Col>
               </Row>
-              <div className="row">
+              {/* <div className="row">
                 <div className="col-md-6 col-lg-3">
                   <div className="card-shadow-danger mb-3 widget-chart widget-chart2 text-left card">
                     <div className="widget-content">
@@ -787,20 +788,20 @@ export default class Dashboard extends Component {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <Row>
                 <Col md="12">
                   <Card className="main-card mb-3">
                     <div className="card-header">
                       Active Tutees
-                      <div className="btn-actions-pane-right">
+                      {/* <div className="btn-actions-pane-right">
                         <div role="group" className="btn-group-sm btn-group">
                           <button className="active btn btn-info">
                             Last Week
                           </button>
                           <button className="btn btn-info">All Month</button>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                     <div className="table-responsive">
                       <table className="align-middle mb-0 table table-borderless table-striped table-hover">
@@ -810,7 +811,7 @@ export default class Dashboard extends Component {
                             <th>Name</th>
                             <th className="text-center">Location</th>
                             <th className="text-center">Status</th>
-                            <th className="text-center">Actions</th>
+                            {/* <th className="text-center">Actions</th> */}
                           </tr>
                         </thead>
                         <tbody>
@@ -824,7 +825,7 @@ export default class Dashboard extends Component {
                                       <img
                                         width={40}
                                         className="rounded-circle"
-                                        // src={avatar4}
+                                        src="http://localhost:8080/api/files/1"
                                         alt="Avatar"
                                       />
                                     </div>
@@ -834,24 +835,24 @@ export default class Dashboard extends Component {
                                       John Doe
                                     </div>
                                     <div className="widget-subheading opacity-7">
-                                      Web Developer
+                                      Secondary 3 Student
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </td>
-                            <td className="text-center">Madrid</td>
+                            <td className="text-center">Toa Payoh</td>
                             <td className="text-center">
-                              <div className="badge badge-warning">Pending</div>
+                              <div className="badge badge-warning">Past</div>
                             </td>
-                            <td className="text-center">
+                            {/* <td className="text-center">
                               <button
                                 type="button"
                                 className="btn btn-primary btn-sm"
                               >
                                 Details
                               </button>
-                            </td>
+                            </td> */}
                           </tr>
                           <tr>
                             <td className="text-center text-muted">#2</td>
@@ -863,7 +864,7 @@ export default class Dashboard extends Component {
                                       <img
                                         width={40}
                                         className="rounded-circle"
-                                        // src={avatar3}
+                                        src="http://localhost:8080/api/files/2"
                                         alt="Avatar"
                                       />
                                     </div>
@@ -873,26 +874,26 @@ export default class Dashboard extends Component {
                                       Ruben Tillman
                                     </div>
                                     <div className="widget-subheading opacity-7">
-                                      Etiam sit amet orci eget
+                                      JC Student
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </td>
-                            <td className="text-center">Berlin</td>
+                            <td className="text-center">Pasir Ris</td>
                             <td className="text-center">
                               <div className="badge badge-success">
-                                Completed
+                                Current
                               </div>
                             </td>
-                            <td className="text-center">
+                            {/* <td className="text-center">
                               <button
                                 type="button"
                                 className="btn btn-primary btn-sm"
                               >
                                 Details
                               </button>
-                            </td>
+                            </td> */}
                           </tr>
                           <tr>
                             <td className="text-center text-muted">#3</td>
@@ -904,7 +905,7 @@ export default class Dashboard extends Component {
                                       <img
                                         width={40}
                                         className="rounded-circle"
-                                        // src={avatar2}
+                                        src="http://localhost:8080/api/files/4"
                                         alt="Avatar"
                                       />
                                     </div>
@@ -914,26 +915,26 @@ export default class Dashboard extends Component {
                                       Elliot Huber
                                     </div>
                                     <div className="widget-subheading opacity-7">
-                                      Lorem ipsum dolor sic
+                                      JC 1 Student
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </td>
-                            <td className="text-center">London</td>
+                            <td className="text-center">Serangoon</td>
                             <td className="text-center">
                               <div className="badge badge-danger">
-                                In Progress
+                                Incoming
                               </div>
                             </td>
-                            <td className="text-center">
+                            {/* <td className="text-center">
                               <button
                                 type="button"
                                 className="btn btn-primary btn-sm"
                               >
                                 Details
                               </button>
-                            </td>
+                            </td> */}
                           </tr>
                           <tr>
                             <td className="text-center text-muted">#4</td>
@@ -946,6 +947,7 @@ export default class Dashboard extends Component {
                                         width={40}
                                         className="rounded-circle"
                                         alt="Avatar"
+                                        src="http://localhost:8080/api/files/5"
                                       />
                                     </div>
                                   </div>
@@ -954,38 +956,38 @@ export default class Dashboard extends Component {
                                       Vinnie Wagstaff
                                     </div>
                                     <div className="widget-subheading opacity-7">
-                                      UI Designer
+                                      Secondary 5 Student
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </td>
-                            <td className="text-center">Amsterdam</td>
+                            <td className="text-center">Bukit Batok</td>
                             <td className="text-center">
                               <div className="badge badge-info">On Hold</div>
                             </td>
-                            <td className="text-center">
+                            {/* <td className="text-center">
                               <button
                                 type="button"
                                 className="btn btn-primary btn-sm"
                               >
                                 Details
                               </button>
-                            </td>
+                            </td> */}
                           </tr>
                         </tbody>
                       </table>
                     </div>
-                    <div className="d-block text-center card-footer">
+                    {/* <div className="d-block text-center card-footer">
                       <button className="mr-2 btn-icon btn-icon-only btn btn-outline-danger">
                         <i className="pe-7s-trash btn-icon-wrapper"> </i>
                       </button>
                       <button className="btn-wide btn btn-success">Save</button>
-                    </div>
+                    </div> */}
                   </Card>
                 </Col>
               </Row>
-              <Row>
+              {/* <Row>
                 <Col md="4">
                   <div className="card mb-3 widget-chart">
                     <div className="widget-chart-content">
@@ -1076,7 +1078,7 @@ export default class Dashboard extends Component {
                     </div>
                   </div>
                 </Col>
-              </Row>
+              </Row> */}
             </div>
           </ReactCSSTransitionGroup>
         </Fragment>
