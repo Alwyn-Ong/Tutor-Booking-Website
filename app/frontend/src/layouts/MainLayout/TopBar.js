@@ -40,6 +40,7 @@ import {
   red,
   yellow,
 } from "@material-ui/core/colors";
+import toast from "react-hot-toast";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -143,43 +144,54 @@ const TopBar = () => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  let notifications = [
+  let defaultNotifications = [
     {
+      requestId: 1,
       remarks: "Toa Payoh",
       requestedTimeslot: ["1-1200"],
       imageURL: "http://localhost:8080/api/files/2",
     },
     {
+      requestId: 2,
       remarks: "Pasir Ris",
       requestedTimeslot: ["2-1700", "6-1700"],
       imageURL: "http://localhost:8080/api/files/3",
     },
     {
+      requestId: 3,
       remarks: "Bishan",
       requestedTimeslot: ["3-1700"],
       imageURL: "http://localhost:8080/api/files/4",
     },
     {
+      requestId: 4,
       remarks: "Serangoon",
       requestedTimeslot: ["1-1000"],
       imageURL: "http://localhost:8080/api/files/5",
     },
     {
+      requestId: 5,
       remarks: "Woodlands",
       requestedTimeslot: ["5-1200"],
       imageURL: "http://localhost:8080/api/files/6",
     },
     {
+      requestId: 6,
       remarks: "Jurong East",
       requestedTimeslot: ["4-1800", "6-1800"],
       imageURL: "http://localhost:8080/api/files/7",
     },
     {
+      requestId: 7,
       remarks: "Sengkang",
       requestedTimeslot: ["3-1900"],
       imageURL: "http://localhost:8080/api/files/8",
     },
   ];
+
+  const [notifications, setNotifications] = React.useState(
+    defaultNotifications
+  );
 
   let renderTimeslot = (timeslot) => {
     // let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -252,6 +264,47 @@ const TopBar = () => {
     sunTheme,
   ];
 
+  const acceptRequest = (requestId) => {
+    toast.promise(
+      new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve();
+          setNotifications((state) => {
+            return state.filter(
+              (notification) => notification.requestId != requestId
+            );
+          });
+        }, 2000);
+      }),
+      {
+        loading: "Accepting Request",
+        success: "Successfully accepted request!",
+        error: "Error when accepting request.",
+      }
+    );
+  };
+
+  const rejectRequest = (requestId) => {
+    console.log(requestId);
+    toast.promise(
+      new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve();
+          setNotifications((state) => {
+            return state.filter(
+              (notification) => notification.requestId != requestId
+            );
+          });
+        }, 2000);
+      }),
+      {
+        loading: "Rejecting Request",
+        success: "Successfully rejected request!",
+        error: "Error when rejecting request.",
+      }
+    );
+  };
+
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -317,12 +370,12 @@ const TopBar = () => {
                 </Grid>
               </Grid>
               <Grid item xs={2}>
-                <IconButton>
+                <IconButton onClick={()=>acceptRequest(notification.requestId)}>
                   <CheckCircleOutlineIcon style={{ color: "green" }} />
                 </IconButton>
               </Grid>
               <Grid item xs={2}>
-                <IconButton>
+                <IconButton onClick={()=>rejectRequest(notification.requestId)}>
                   <CancelOutlinedIcon style={{ color: "red" }} />
                 </IconButton>
               </Grid>
@@ -455,11 +508,11 @@ const TopBar = () => {
             </IconButton> */}
             {/* <Notifications data={["test"]} /> */}
             <IconButton
-              aria-label="show 17 new notifications"
+              aria-label="show new notifications"
               color="inherit"
               onClick={handleProfileMenuOpen}
             >
-              <Badge badgeContent={17} color="secondary">
+              <Badge badgeContent={notifications.length} color="secondary">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
