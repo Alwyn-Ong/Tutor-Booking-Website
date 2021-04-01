@@ -1,35 +1,37 @@
+import MomentUtils from "@date-io/moment";
 import {
   Avatar,
+  Backdrop,
+  Button,
   Chip,
   Divider,
   Grid,
   IconButton,
   makeStyles,
-  Paper,
   Tab,
   Tabs,
+  TextField,
   Typography,
-  Backdrop,
 } from "@material-ui/core";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import {
-  ContactSupportOutlined,
-  Email,
-  Facebook,
-  LinkedIn,
   Call,
-  School,
+  Email,
   LocalLibrary,
-  Person,
-  Money,
   MonetizationOn,
+  Person,
+  School,
 } from "@material-ui/icons";
 import { Rating } from "@material-ui/lab";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import "moment/locale/de";
 import React from "react";
-import Timetable from "../components/Timetable";
-import Reviews from "../components/Reviews";
-import { Page } from "../components/Page";
+import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import { Page } from "../components/Page";
+import Reviews from "../components/Reviews";
+import Timetable from "../components/Timetable";
+import WeekPicker from "../components/Tutor/WeekPicker";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -107,6 +109,22 @@ const Tutor = () => {
   };
 
   console.log(data);
+
+  // For save
+  const sendTimeslotRequest = () => {
+    toast.promise(
+      new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve();
+        }, 2000);
+      }),
+      {
+        loading: "Accepting Request",
+        success: "Successfully accepted request!",
+        error: "Error when accepting request.",
+      }
+    );
+  };
 
   return (
     <Page maxWidth="xl">
@@ -241,9 +259,6 @@ const Tutor = () => {
             </Grid>
             <Grid container direction="column" spacing={3} item xs={12} md={9}>
               <Grid item>
-                <Divider variant="middle" />
-              </Grid>
-              <Grid item>
                 <Tabs
                   value={value}
                   onChange={handleChange}
@@ -258,13 +273,32 @@ const Tutor = () => {
               <Grid item>
                 <Divider variant="middle" />
               </Grid>
-              <Grid item>
-                {value ? (
+              {value ? (
+                <Grid item>
                   <Reviews reviews={data.reviews} />
-                ) : (
-                  <Timetable isTutor={false} data={data.openTimeslot} />
-                )}
-              </Grid>
+                </Grid>
+              ) : (
+                <>
+                  <Grid item>
+                    <Timetable isTutor={false} data={data.openTimeslot} />
+                  </Grid>
+                  <Grid item>
+                    <MuiPickersUtilsProvider utils={MomentUtils} locale="en">
+                      <WeekPicker />
+                    </MuiPickersUtilsProvider>
+                  </Grid>
+                  <Grid item container direction="column" spacing={2}>
+                    <Grid item>
+                      <TextField id="outlined-basic" label="Remarks" />
+                    </Grid>
+                      <Button variant="contained" onClick={sendTimeslotRequest}>
+                        Send Request
+                      </Button>
+                    <Grid>
+                    </Grid>
+                  </Grid>
+                </>
+              )}
             </Grid>
           </Grid>
         </>
