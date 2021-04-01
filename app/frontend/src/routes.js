@@ -24,7 +24,7 @@ const routes = [
       { path: "tutor/:id", element: <Tutor /> },
       { path: "register", element: <Register /> },
       { path: "tutorprofile", element: <TutorProfile /> },
-      { path: "tutorprofile", element: <Dashboard /> },
+      { path: "dashboard", element: <Dashboard /> },
       { path: "*", element: <Homepage /> },
       // { path: "*", element: <Navigate to="/" /> },
     ],
