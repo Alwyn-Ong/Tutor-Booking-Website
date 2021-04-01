@@ -16,9 +16,30 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import EmojiPeople from "@material-ui/icons/EmojiPeople";
 import { Navigate, NavLink as RouterLink } from "react-router-dom";
-import { Avatar, Button, Grid, Icon } from "@material-ui/core";
+import {
+  Avatar,
+  Button,
+  Chip,
+  createMuiTheme,
+  Grid,
+  Icon,
+  ThemeProvider,
+} from "@material-ui/core";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
+import {
+  amber,
+  blue,
+  green,
+  indigo,
+  lightGreen,
+  lime,
+  orange,
+  pink,
+  purple,
+  red,
+  yellow,
+} from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -123,16 +144,113 @@ const TopBar = () => {
   };
 
   let notifications = [
-    { remarks: "Toa Payoh", requestedTimeslot: "1-1200", imageURL:"http://localhost:8080/api/files/2"},
-    { remarks: "Pasir Ris", requestedTimeslot: "2-1700", imageURL:"http://localhost:8080/api/files/3" },
+    {
+      remarks: "Toa Payoh",
+      requestedTimeslot: ["1-1200"],
+      imageURL: "http://localhost:8080/api/files/2",
+    },
+    {
+      remarks: "Pasir Ris",
+      requestedTimeslot: ["2-1700", "6-1700"],
+      imageURL: "http://localhost:8080/api/files/3",
+    },
+    {
+      remarks: "Bishan",
+      requestedTimeslot: ["3-1700"],
+      imageURL: "http://localhost:8080/api/files/4",
+    },
+    {
+      remarks: "Serangoon",
+      requestedTimeslot: ["1-1000"],
+      imageURL: "http://localhost:8080/api/files/5",
+    },
+    {
+      remarks: "Woodlands",
+      requestedTimeslot: ["5-1200"],
+      imageURL: "http://localhost:8080/api/files/6",
+    },
+    {
+      remarks: "Jurong East",
+      requestedTimeslot: ["4-1800", "6-1800"],
+      imageURL: "http://localhost:8080/api/files/7",
+    },
+    {
+      remarks: "Sengkang",
+      requestedTimeslot: ["3-1900"],
+      imageURL: "http://localhost:8080/api/files/8",
+    },
   ];
 
   let renderTimeslot = (timeslot) => {
-    let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    // let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    let days = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
     let timeSlotArr = timeslot.split("-");
-    timeSlotArr[0] = days[timeSlotArr[0] - 1];
-    return timeSlotArr.join(" - ");
+    timeSlotArr.push(days[timeSlotArr[0] - 1]);
+    // return timeSlotArr.join(" - ");
+    return timeSlotArr;
   };
+
+  const monTheme = createMuiTheme({
+    palette: {
+      primary: {
+        main: red[400],
+      },
+    },
+  });
+  const tueTheme = createMuiTheme({
+    palette: {
+      primary: {
+        main: orange[800],
+      },
+    },
+  });
+  const wedTheme = createMuiTheme({
+    palette: {
+      primary: {
+        // main: yellow["300"],
+        // main: "#fff500",
+        main: pink[900],
+      },
+    },
+  });
+  const thuTheme = createMuiTheme({
+    palette: {
+      primary: {
+        main: green[800],
+      },
+    },
+  });
+  const friTheme = createMuiTheme({
+    palette: {
+      primary: {
+        main: blue[500],
+      },
+    },
+  });
+  const satTheme = createMuiTheme({
+    palette: {
+      primary: {
+        main: indigo[500],
+      },
+    },
+  });
+  const sunTheme = createMuiTheme({
+    palette: {
+      primary: {
+        main: purple[500],
+      },
+    },
+  });
+
+  const dailyThemes = [
+    monTheme,
+    tueTheme,
+    wedTheme,
+    thuTheme,
+    friTheme,
+    satTheme,
+    sunTheme,
+  ];
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -167,11 +285,42 @@ const TopBar = () => {
               <Grid container item direction="column" xs={6}>
                 <Grid item>
                   <Typography variant="h6">
-                    {renderTimeslot(notification.requestedTimeslot)}
+                    {`${notification.remarks}`}
                   </Typography>
                 </Grid>
                 <Grid item>
-                  <Typography variant="h5">{`Location: ${notification.remarks}`}</Typography>
+                  <Typography variant="h5">
+                    <Grid container spacing={1}>
+                      {notification.requestedTimeslot.map((timeslot) => {
+                        return (
+                          <Grid item>
+                            <ThemeProvider
+                              theme={
+                                dailyThemes[renderTimeslot(timeslot)[0] - 1]
+                              }
+                            >
+                              <Chip
+                                variant="outlined"
+                                size="small"
+                                color="primary"
+                                avatar={
+                                  <Avatar
+                                  //  style={{ color: "red" }}
+                                  >
+                                    {renderTimeslot(timeslot)[2]}
+                                  </Avatar>
+                                }
+                                label={renderTimeslot(timeslot)[1]}
+                                // style={{ color: "red" }}
+                                // style={{backgroundColor:"red"}}
+                                // style={{colorPrimary: "red"}}
+                              ></Chip>
+                            </ThemeProvider>
+                          </Grid>
+                        );
+                      })}
+                    </Grid>
+                  </Typography>
                 </Grid>
               </Grid>
               <Grid item xs={2}>
