@@ -106,7 +106,7 @@ input[type="submit"]:hover {
 .tracks,
 .scroller {
   overflow: auto;
-  display: flex;
+  /* display: flex; */
   padding: 50px;
 }
 
