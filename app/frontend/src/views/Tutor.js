@@ -1,5 +1,8 @@
 import MomentUtils from "@date-io/moment";
 import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
   Avatar,
   Backdrop,
   Button,
@@ -31,6 +34,7 @@ import { useParams } from "react-router-dom";
 import { Page } from "../components/Page";
 import Reviews from "../components/Reviews";
 import Timetable from "../components/Timetable";
+import Stats from "../components/Tutor/Stats";
 import WeekPicker from "../components/Tutor/WeekPicker";
 
 const useStyles = makeStyles((theme) => ({
@@ -138,6 +142,7 @@ const Tutor = () => {
             spacing={3}
             style={{ paddingTop: "30px" }}
             wrap="wrap"
+            justify="space-around"
           >
             <Grid
               container
@@ -146,7 +151,7 @@ const Tutor = () => {
               md={3}
               direction="column"
               spacing={1}
-              justify="center"
+              justify="flex-start"
               alignItems="stretch"
             >
               <Grid item>
@@ -256,8 +261,57 @@ const Tutor = () => {
               <Grid item style={{ marginTop: "20px" }}>
                 <Typography variant="h4">{data.description}</Typography>
               </Grid>
+              {/* <Grid item>
+                <Accordion expanded>
+                  <AccordionSummary
+                    // expandIcon={<ExpandMore />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    <Typography>
+                      <AssessmentOutlinedIcon /> Compare with other tutors
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Stats />
+                  </AccordionDetails>
+                </Accordion>
+              </Grid> */}
             </Grid>
-            <Grid container direction="column" spacing={3} item xs={12} md={9}>
+            {/* <Grid item md={4}>
+                <Accordion
+                    expanded
+                    >
+                  <AccordionSummary
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    <Typography><AssessmentOutlinedIcon/> Compare with other tutors</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Stats />
+                  </AccordionDetails>
+                </Accordion>
+            </Grid> */}
+            <Grid container direction="column" spacing={3} item xs={12} md={7}>
+              {/* <Grid item>
+                <Accordion expanded>
+                  <AccordionSummary
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    <Typography>
+                      <AssessmentOutlinedIcon /> Compare with other tutors
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Stats />
+                  </AccordionDetails>
+                </Accordion>
+              </Grid> */}
+              <Grid item>
+                <Stats />
+              </Grid>
               <Grid item>
                 <Tabs
                   value={value}
@@ -291,11 +345,10 @@ const Tutor = () => {
                     <Grid item>
                       <TextField id="outlined-basic" label="Remarks" />
                     </Grid>
-                      <Button variant="contained" onClick={sendTimeslotRequest}>
-                        Send Request
-                      </Button>
-                    <Grid>
-                    </Grid>
+                    <Button variant="contained" onClick={sendTimeslotRequest}>
+                      Send Request
+                    </Button>
+                    <Grid></Grid>
                   </Grid>
                 </>
               )}
