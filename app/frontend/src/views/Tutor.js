@@ -347,19 +347,25 @@ const Tutor = () => {
                   <Grid item>
                     <Timetable isTutor={false} data={data.openTimeslot} />
                   </Grid>
-                  <Grid item>
-                    <MuiPickersUtilsProvider utils={MomentUtils} locale="en">
-                      <WeekPicker />
-                    </MuiPickersUtilsProvider>
-                  </Grid>
-                  <Grid item container direction="column" spacing={2}>
+                  <Grid item container spacing={2} alignItems="center">
                     <Grid item>
                       <TextField id="outlined-basic" label="Remarks" />
                     </Grid>
-                    <Button variant="contained" onClick={sendTimeslotRequest}>
-                      Send Request
-                    </Button>
-                    <Grid></Grid>
+                    <Grid item>
+                      <Grid item>
+                        <MuiPickersUtilsProvider
+                          utils={MomentUtils}
+                          locale="en"
+                        >
+                          <WeekPicker />
+                        </MuiPickersUtilsProvider>
+                      </Grid>
+                    </Grid>
+                    <Grid>
+                      <Button variant="contained" onClick={sendTimeslotRequest}>
+                        Send Request
+                      </Button>
+                    </Grid>
                   </Grid>
                 </>
               )}
