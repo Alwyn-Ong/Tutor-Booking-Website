@@ -30,7 +30,21 @@ const index = () => {
         <Grid item md={6}>
           <Card className="main-card mb-4">
             <CardBody>
-              <Tooltip title="See this tutor as compared to the average of all tutors">
+              {/* <Tooltip title="See how this tutor fares compared to the normalised average of all tutors."> */}
+              <Tooltip
+                title={
+                  <>
+                    <p>
+                      See how this tutor fares compared to the normalised
+                      average of all tutors.
+                    </p>
+                    <p>
+                      The average tutor's score would be 50 and anything more
+                      than 50 is above average, and vice versa.
+                    </p>
+                  </>
+                }
+              >
                 <div>
                   <CardTitle>Comparing to other tutors</CardTitle>
                 </div>

@@ -14,6 +14,7 @@ import {
   Tab,
   Tabs,
   TextField,
+  Tooltip,
   Typography,
 } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -320,8 +321,18 @@ const Tutor = () => {
                   textColor="primary"
                   centered
                 >
-                  <Tab label="Timetable" />
-                  <Tab label="Reviews" />
+                  <Tooltip
+                    title="Click and drag to select your preferred timeslot among the tutors free timeslots."
+                    disableFocusListener
+                  >
+                    <Tab label="Timetable" />
+                  </Tooltip>
+                  <Tooltip
+                    title="View reviews for this tutor."
+                    disableFocusListener
+                  >
+                    <Tab label="Reviews" />
+                  </Tooltip>
                 </Tabs>
               </Grid>
               <Grid item>
