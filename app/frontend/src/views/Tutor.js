@@ -122,6 +122,7 @@ const Tutor = () => {
   const [sendTimeslot, setSendTimeslot] = React.useState(false);
   console.log("SENDTIMESLOT: " + sendTimeslot);
   // For save
+  //TODO: Integrate
   const sendTimeslotRequest = () => {
     if (!auth.name) {
       setIsOpenModal(true);

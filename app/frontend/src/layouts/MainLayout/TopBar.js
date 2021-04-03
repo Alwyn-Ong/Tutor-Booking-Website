@@ -240,6 +240,7 @@ const TopBar = () => {
     },
   ];
 
+  //TODO: Integrate
   const [notifications, setNotifications] = React.useState(
     defaultNotifications
   );
