@@ -39,6 +39,7 @@ import Stats from "../components/Tutor/Stats";
 import WeekPicker from "../components/Tutor/WeekPicker";
 import LoginModal from "../components/Auth/LoginModal";
 // import ReactModalLogin from "react-modal-login"
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -117,6 +118,9 @@ const Tutor = () => {
 
   console.log(data);
 
+  let auth = useSelector((state) => state.auth);
+
+  const [sendTimeslot, setSendTimeslot] = React.useState(false);
   // For save
   const sendTimeslotRequest = () => {
     // toast.promise(
@@ -131,8 +135,44 @@ const Tutor = () => {
     //     error: "Error when accepting request.",
     //   }
     // );
-    openModal();
+    if (!auth) {
+      openModal();
+    } else {
+      setSendTimeslot(true);
+    }
   };
+
+  if (sendTimeslot) {
+    toast.promise(
+      new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve();
+        }, 2000);
+      }),
+      {
+        loading: "Sending Request",
+        success: "Successfully sent request!",
+        error: "Error when sending request.",
+      }
+    );
+    setSendTimeslot(false);
+  }
+  // React.useEffect(() => {
+  //   return () => {
+  //     toast.promise(
+  //       new Promise((resolve, reject) => {
+  //         setTimeout(() => {
+  //           resolve();
+  //         }, 2000);
+  //       }),
+  //       {
+  //         loading: "Sending Request",
+  //         success: "Successfully sent request!",
+  //         error: "Error when sending request.",
+  //       }
+  //     );
+  //   };
+  // }, [auth]);
 
   // For modal
   // const [modalState, setModalState] = React.useState({
