@@ -567,7 +567,8 @@ const Homepage = () => {
             </Grid>
             <Grid item md={12} lg={6} xs={12} sm={12} xl={6}>
               <TextField
-                required
+                // required
+                disabled
                 id="outlined-required-email"
                 label="Email (Required)"
                 // defaultValue="Name"
