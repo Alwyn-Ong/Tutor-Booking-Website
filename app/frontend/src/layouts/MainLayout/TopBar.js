@@ -46,6 +46,9 @@ import { toast } from "react-hot-toast";
 import { useSelector, useDispatch } from "react-redux";
 import { updateLogout } from "../../actions/authActions";
 
+// For login modal
+import LoginModal from "../../components/Auth/LoginModal";
+
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -166,16 +169,32 @@ const TopBar = () => {
     dispatch(updateLogout());
   };
   const handleLoginout = () => {
-    if (auth) {
+    if (auth.name) {
       //Logout
       updateLogoutDispatch();
-      toast.success("Logged out!")
+      toast.success("Logged out!");
     } else {
       //Login
+      openModal();
     }
     setAccountAnchorEl(null);
   };
 
+  // For login modal
+  const modalStateRef = React.createRef();
+
+  // console.log(modalState);
+  const openModal = () => {
+    console.log(modalStateRef);
+    modalStateRef.current.setState((state) => {
+      return {
+        ...state,
+        showModal: true,
+      };
+    });
+  };
+
+  // TODO: Integrate with API
   let defaultNotifications = [
     {
       requestId: 1,
@@ -296,6 +315,7 @@ const TopBar = () => {
     sunTheme,
   ];
 
+  //TODO: Integrate with backend
   const acceptRequest = (requestId) => {
     toast.promise(
       new Promise((resolve, reject) => {
@@ -453,7 +473,9 @@ const TopBar = () => {
       >
         My Dashboard
       </MenuItem>
-      <MenuItem onClick={handleLoginout}>{auth.name ? "Logout" : "Login"}</MenuItem>
+      <MenuItem onClick={handleLoginout}>
+        {auth.name ? "Logout" : "Login"}
+      </MenuItem>
     </Menu>
   );
 
@@ -503,6 +525,7 @@ const TopBar = () => {
 
   return (
     <div className={classes.grow}>
+      <LoginModal ref={modalStateRef} />
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
           {/* <IconButton
