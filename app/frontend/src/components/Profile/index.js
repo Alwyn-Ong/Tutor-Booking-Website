@@ -46,6 +46,7 @@ import Input from "@material-ui/core/Input";
 import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
 import Timetable from "../Timetable";
 import { blue } from "@material-ui/core/colors";
+import { useSelector } from "react-redux";
 
 const locations = [
   { value: "Bedok", label: "Bedok" },
@@ -104,6 +105,11 @@ const PrettoSlider = withStyles({
 })(Slider);
 
 const Homepage = () => {
+
+  // TODO: Change userid
+  const auth = useSelector((state) => state.auth);
+  const userId = auth.id;
+
   let settings = {
     "mysettings.general.name": "Dennis Stücken",
     "mysettings.general.color-theme": "purple",
@@ -163,21 +169,50 @@ const Homepage = () => {
     file: [],
   });
 
-  const handleLocationChange = (event, value) => {
-    // const locations = event.target.locations;
-    let nearestMRT = value != null ? value.value : "";
-    setValues({
-      ...values,
-      nearestMRT: nearestMRT,
-    });
-    // console.log(value);
-  };
+  const [fetchData, setIsFetchData] = React.useState(true);
+  //Fetch data from API
+  if (fetchData) {
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+
+    fetch("http://localhost:8080/api/getuserprofile/" + userId, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        setValues((state) => {
+          return {
+            ...state,
+            name: result.name || auth.name,
+            email: result.email,
+            phone: result.phoneNumber,
+            nearestMRT: result.nearestMRT,
+            description: result.description,
+            gender: result.gender,
+            qualification: result.qualification,
+          };
+        });
+        setIsFetchData(false);
+      })
+      .catch((error) => console.log("error", error));
+
+    const handleLocationChange = (event, value) => {
+      // const locations = event.target.locations;
+      let nearestMRT = value != null ? value.value : "";
+      setValues({
+        ...values,
+        nearestMRT: nearestMRT,
+      });
+      setIsFetchData(false);
+      // console.log(value);
+    };
+  }
 
   const [loading, setLoading] = React.useState(false);
   const [success, setSuccess] = React.useState(false);
 
-  // TODO: Change userid
-  const userId = 1;
+  
 
   const handleSave = (page) => {
     if (page === "/settings/general") {
@@ -697,7 +732,7 @@ const Homepage = () => {
                 fileObjects={values.file}
                 cancelButtonText={"cancel"}
                 submitButtonText={"submit"}
-                maxFileSize={5000000}
+                maxFileSize={1048576}
                 open={open}
                 onAdd={(newFileObjs) => {
                   console.log("onAdd", newFileObjs);

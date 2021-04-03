@@ -22,9 +22,9 @@ public class FileStorageService {
     String fileName = StringUtils.cleanPath(file.getOriginalFilename());
     
     Optional <FileDB> temp = fileDBDao.findByUserId(userId);
-    FileDB fileDB;
-    if (temp == null) {
-    	fileDB = new FileDB(fileName, file.getContentType(), file.getBytes(), userId);    	
+    FileDB fileDB = null;
+    if (temp == null || !temp.isPresent()) {
+    	fileDB = new FileDB(fileName, file.getContentType(), file.getBytes(), userId);    
     } else {
     	fileDB = temp.get();
     	fileDB.setData(file.getBytes());
