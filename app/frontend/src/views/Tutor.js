@@ -135,14 +135,14 @@ const Tutor = () => {
   };
 
   // For modal
-  const [modalState, setModalState] = React.useState({
-    showModal: false,
-    loading: false,
-    error: null,
-  });
+  // const [modalState, setModalState] = React.useState({
+  //   showModal: false,
+  //   loading: false,
+  //   error: null,
+  // });
   const modalStateRef = React.createRef();
 
-  console.log(modalState);
+  // console.log(modalState);
   const openModal = () => {
     console.log(modalStateRef);
     modalStateRef.current.setState((state) => {
@@ -152,57 +152,57 @@ const Tutor = () => {
       };
     });
   };
-  const closeModal = () => {
-    setModalState((state) => {
-      return {
-        ...state,
-        showModal: false,
-        error: null,
-      };
-    });
-  };
+  // const closeModal = () => {
+  //   setModalState((state) => {
+  //     return {
+  //       ...state,
+  //       showModal: false,
+  //       error: null,
+  //     };
+  //   });
+  // };
 
-  const startLoading = () => {
-    setModalState((state) => {
-      return {
-        ...state,
-        loading: true,
-      };
-    });
-  };
+  // const startLoading = () => {
+  //   setModalState((state) => {
+  //     return {
+  //       ...state,
+  //       loading: true,
+  //     };
+  //   });
+  // };
 
-  const finishLoading = () => {
-    setModalState((state) => {
-      return {
-        ...state,
-        loading: false,
-      };
-    });
-  };
+  // const finishLoading = () => {
+  //   setModalState((state) => {
+  //     return {
+  //       ...state,
+  //       loading: false,
+  //     };
+  //   });
+  // };
 
-  const afterTabsChange = () => {
-    setModalState((state) => {
-      return {
-        ...state,
-        error: null,
-      };
-    });
-  };
+  // const afterTabsChange = () => {
+  //   setModalState((state) => {
+  //     return {
+  //       ...state,
+  //       error: null,
+  //     };
+  //   });
+  // };
 
-  const onLoginSuccess = (args) => {
-    toast.success("Login successful!");
-    console.log(response);
-  };
+  // const onLoginSuccess = (args) => {
+  //   toast.success("Login successful!");
+  //   console.log(response);
+  // };
 
-  const onLoginFail = (method, response) => {
-    toast.error("Login failed...");
-    setModalState((state) => {
-      return {
-        ...state,
-        error: response,
-      };
-    });
-  };
+  // const onLoginFail = (method, response) => {
+  //   toast.error("Login failed...");
+  //   setModalState((state) => {
+  //     return {
+  //       ...state,
+  //       error: response,
+  //     };
+  //   });
+  // };
 
   return (
     <Page maxWidth="xl">
@@ -451,18 +451,7 @@ const Tutor = () => {
                       <Button variant="contained" onClick={sendTimeslotRequest}>
                         Send Request
                       </Button>
-                      <LoginModal
-                        modalState={modalState}
-                        closeModal={closeModal}
-                        startLoading={startLoading}
-                        finishLoading={finishLoading}
-                        afterTabsChange={afterTabsChange}
-                        onLoginSuccess={() => {
-                          onLoginSuccess;
-                        }}
-                        onLoginFail={onLoginFail}
-                        ref={modalStateRef}
-                      />
+                      <LoginModal ref={modalStateRef} />
                     </Grid>
                   </Grid>
                 </>
