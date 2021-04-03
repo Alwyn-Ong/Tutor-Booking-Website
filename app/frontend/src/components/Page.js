@@ -3,7 +3,7 @@ import { Box, Container } from "@material-ui/core";
 
 export const Page = ({ children, maxWidth="md" }) => {
   return (
-    <Container maxWidth={maxWidth} style={{height:"100%"}}>
+    <Container maxWidth={maxWidth}>
       <Box
         display="flex"
         flexDirection="column"
