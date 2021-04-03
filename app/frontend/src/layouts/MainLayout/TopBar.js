@@ -40,7 +40,11 @@ import {
   red,
   yellow,
 } from "@material-ui/core/colors";
-import toast from "react-hot-toast";
+import { toast } from "react-hot-toast";
+
+// Redux
+import { useSelector, useDispatch } from "react-redux";
+import { updateLogout } from "../../actions/authActions";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -117,8 +121,8 @@ const TopBar = () => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const [accountAnchorEl, setAccountAnchorEl]=React.useState(null)
-  
+  const [accountAnchorEl, setAccountAnchorEl] = React.useState(null);
+
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const isAccountMenuOpen = Boolean(accountAnchorEl);
@@ -126,7 +130,7 @@ const TopBar = () => {
   const handleNotificationsMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  
+
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
@@ -142,11 +146,11 @@ const TopBar = () => {
 
   const handleAccountMenuOpen = (event) => {
     setAccountAnchorEl(event.currentTarget);
-  }
+  };
 
   const handleAccountMenuClose = (event) => {
     setAccountAnchorEl(null);
-  }
+  };
 
   const viewProfile = () => {
     setAnchorEl(null);
@@ -154,6 +158,22 @@ const TopBar = () => {
     // window.location.href = "/tutorProfile";
   };
 
+  // For redux login/logout
+  const auth = useSelector((state) => state.auth);
+
+  const dispatch = useDispatch();
+  const updateLogoutDispatch = () => {
+    dispatch(updateLogout());
+  };
+  const handleLoginout = () => {
+    if (auth) {
+      //Logout
+      updateLogoutDispatch();
+    } else {
+      //Login
+    }
+    setAccountAnchorEl(null);
+  };
 
   let defaultNotifications = [
     {
@@ -381,12 +401,16 @@ const TopBar = () => {
                 </Grid>
               </Grid>
               <Grid item xs={2}>
-                <IconButton onClick={()=>acceptRequest(notification.requestId)}>
+                <IconButton
+                  onClick={() => acceptRequest(notification.requestId)}
+                >
                   <CheckCircleOutlineIcon style={{ color: "green" }} />
                 </IconButton>
               </Grid>
               <Grid item xs={2}>
-                <IconButton onClick={()=>rejectRequest(notification.requestId)}>
+                <IconButton
+                  onClick={() => rejectRequest(notification.requestId)}
+                >
                   <CancelOutlinedIcon style={{ color: "red" }} />
                 </IconButton>
               </Grid>
@@ -414,8 +438,21 @@ const TopBar = () => {
       open={isAccountMenuOpen}
       onClose={handleAccountMenuClose}
     >
-      <MenuItem component={RouterLink} to={"/profile"} onClick={handleAccountMenuClose}>Profile</MenuItem>
-      <MenuItem component={RouterLink} to={"/dashboard"} onClick={handleAccountMenuClose}>My Dashboard</MenuItem>
+      <MenuItem
+        component={RouterLink}
+        to={"/profile"}
+        onClick={handleAccountMenuClose}
+      >
+        Profile
+      </MenuItem>
+      <MenuItem
+        component={RouterLink}
+        to={"/dashboard"}
+        onClick={handleAccountMenuClose}
+      >
+        My Dashboard
+      </MenuItem>
+      <MenuItem onClick={handleLoginout}>{auth ? "Logout" : "Login"}</MenuItem>
     </Menu>
   );
 
@@ -446,9 +483,9 @@ const TopBar = () => {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      <MenuItem 
-      // component={RouterLink} to={"/profile"}
-      onClick={handleAccountMenuOpen}
+      <MenuItem
+        // component={RouterLink} to={"/profile"}
+        onClick={handleAccountMenuOpen}
       >
         <IconButton
           aria-label="account of current user"
