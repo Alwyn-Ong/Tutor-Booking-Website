@@ -169,6 +169,7 @@ const TopBar = () => {
     if (auth) {
       //Logout
       updateLogoutDispatch();
+      toast.success("Logged out!")
     } else {
       //Login
     }
@@ -452,7 +453,7 @@ const TopBar = () => {
       >
         My Dashboard
       </MenuItem>
-      <MenuItem onClick={handleLoginout}>{auth ? "Logout" : "Login"}</MenuItem>
+      <MenuItem onClick={handleLoginout}>{auth.name ? "Logout" : "Login"}</MenuItem>
     </Menu>
   );
 
