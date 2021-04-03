@@ -414,8 +414,8 @@ const TopBar = () => {
       open={isAccountMenuOpen}
       onClose={handleAccountMenuClose}
     >
-      <MenuItem component={RouterLink} to={"/profile"} >Profile</MenuItem>
-      <MenuItem component={RouterLink} to={"/dashboard"}>My Dashboard</MenuItem>
+      <MenuItem component={RouterLink} to={"/profile"} onClick={handleAccountMenuClose}>Profile</MenuItem>
+      <MenuItem component={RouterLink} to={"/dashboard"} onClick={handleAccountMenuClose}>My Dashboard</MenuItem>
     </Menu>
   );
 
