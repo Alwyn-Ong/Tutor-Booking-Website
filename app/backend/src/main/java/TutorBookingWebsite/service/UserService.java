@@ -259,7 +259,7 @@ public class UserService {
 			levelsTaught.add(tempSubject.get("levelsTaught").toString());
 		}
 
-		List<Object> timeslots = (List<Object>) data.get("timeslots");
+		List<Object> timeslots = (List<Object>) data.get("timeslot");
 		List<String> userTimeslot = new ArrayList<>();
 
 		for (Object y : timeslots) {
