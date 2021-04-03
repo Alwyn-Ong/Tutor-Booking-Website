@@ -183,9 +183,9 @@ export const CustomCard = ({
     </div>
   );
 
-  const redirect = (userid) => {
-    useNavigate(`/tutor/`);
-  }
+  // const redirect = (userid) => {
+  //   useNavigate(`/tutor/`);
+  // }
   return (
     <Link to={`/tutor/${userid}`} style={{ textDecoration: 'none' }}>
 

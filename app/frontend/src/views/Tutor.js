@@ -37,6 +37,7 @@ import Reviews from "../components/Reviews";
 import Timetable from "../components/Timetable";
 import Stats from "../components/Tutor/Stats";
 import WeekPicker from "../components/Tutor/WeekPicker";
+import LoginModal from "../components/Auth/LoginModal";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -117,22 +118,99 @@ const Tutor = () => {
 
   // For save
   const sendTimeslotRequest = () => {
-    toast.promise(
-      new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve();
-        }, 2000);
-      }),
-      {
-        loading: "Accepting Request",
-        success: "Successfully accepted request!",
-        error: "Error when accepting request.",
-      }
-    );
+    // toast.promise(
+    //   new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //       resolve();
+    //     }, 2000);
+    //   }),
+    //   {
+    //     loading: "Accepting Request",
+    //     success: "Successfully accepted request!",
+    //     error: "Error when accepting request.",
+    //   }
+    // );
+    openModal();
+  };
+
+  // For modal
+  const [modalState, setModalState] = React.useState({
+    showModal: false,
+    loading: false,
+    error: null,
+  });
+
+  const openModal = () => {
+    setModalState((state) => {
+      return {
+        ...state,
+        showModal: true,
+      };
+    });
+  };
+  const closeModal = () => {
+    setModalState((state) => {
+      return {
+        ...state,
+        showModal: false,
+        error: null,
+      };
+    });
+  };
+
+  const startLoading = () => {
+    setModalState((state) => {
+      return {
+        ...state,
+        loading: true,
+      };
+    });
+  };
+
+  const finishLoading = () => {
+    setModalState((state) => {
+      return {
+        ...state,
+        loading: false,
+      };
+    });
+  };
+
+  const afterTabsChange = () => {
+    setModalState((state) => {
+      return {
+        ...state,
+        error: null,
+      };
+    });
+  };
+
+  const onLoginSuccess = (method, response) => {
+    toast.success("Login successful!");
+    console.log(response);
+  };
+
+  const onLoginFail = (method, response) => {
+    toast.error("Login failed...");
+    setModalState((state) => {
+      return {
+        ...state,
+        error: response,
+      };
+    });
   };
 
   return (
     <Page maxWidth="xl">
+      <LoginModal
+        modalState={modalState}
+        closeModal={closeModal}
+        startLoading={startLoading}
+        finishLoading={finishLoading}
+        afterTabsChange={afterTabsChange}
+        onLoginSuccess={onLoginSuccess}
+        onLoginFail={onLoginFail}
+      />
       <Backdrop className={classes.backdrop} open={isLoading}>
         <CircularProgress color="inherit" />
       </Backdrop>
@@ -195,6 +273,7 @@ const Tutor = () => {
                         alignItems: "center",
                         flexWrap: "wrap",
                         justifyContent: "center",
+                        display: "inline-flex",
                       }}
                     >
                       <Rating

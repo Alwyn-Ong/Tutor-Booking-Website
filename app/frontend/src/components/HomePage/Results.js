@@ -814,10 +814,10 @@ export const Results = React.memo(function SolidGameCard({
   }, [tutorResults, filterConditions, search]);
 
   // FOr redirect to individual tutor page
-  const redirectToTutor = (userid) => {
-    useNavigate(`/tutor/${userid}`);
-    // window.href
-  };
+  // const redirectToTutor = (userid) => {
+  //   useNavigate(`/tutor/${userid}`);
+  //   // window.href
+  // };
 
   for (const [index, value] of posts
     .slice((currentPage - 1) * 8, (currentPage - 1) * 8 + 8)
