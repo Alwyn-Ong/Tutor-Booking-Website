@@ -8,7 +8,7 @@ import { facebookConfig, googleConfig } from "./social-config";
 import { connect } from "react-redux";
 import { updateLogin } from "../../actions/authActions";
 
-class Sample extends React.Component {
+class LoginModal extends React.Component {
   constructor(props) {
     super(props);
 
@@ -147,6 +147,6 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(null, mapDispatchToProps, null, { forwardRef: true })(
-  Sample
+  LoginModal
 );
-// export default Sample;
+// export default LoginModal;
