@@ -1,103 +1,97 @@
-import { Button } from "@material-ui/core";
 import React from "react";
-import toast from "react-hot-toast";
 import ReactModalLogin from "react-modal-login";
-
+ 
 import { facebookConfig, googleConfig } from "./social-config";
-
+ 
 class Sample extends React.Component {
   constructor(props) {
     super(props);
-
+ 
     this.state = {
-      showModal: this.props.modalState.showModal,
-      loading: this.props.modalState.loading,
-      error: this.props.modalState.error,
+      showModal: false,
+      loading: false,
+      error: null
     };
   }
-
+ 
   openModal() {
     this.setState({
-      showModal: true,
+      showModal: true
     });
   }
-
+ 
   closeModal() {
     this.setState({
       showModal: false,
-      error: null,
+      error: null
     });
   }
-
+ 
   onLoginSuccess(method, response) {
     console.log(response);
     console.log("logged successfully with " + method);
-    // this.finishLoading();
-    fetch()
-    // toast.success("Login success!");
+    this.finishLoading();
   }
-
+ 
   onLoginFail(method, response) {
     console.log("logging failed with " + method);
     this.setState({
-      error: response,
+      error: response
     });
   }
-
+ 
   startLoading() {
     this.setState({
-      loading: true,
+      loading: true
     });
   }
-
+ 
   finishLoading() {
     this.setState({
-      loading: false,
+      loading: false
     });
   }
-
+ 
   afterTabsChange() {
     this.setState({
-      error: null,
+      error: null
     });
   }
-
+ 
   render() {
     return (
       <div>
-        {/* <button onClick={() => this.openModal()}>Open Modal</button> */}
-        {/* <Button variant="contained" onClick={() => this.openModal()}>
-          Send Request
-        </Button> */}
+        {/* <button onClick={() => thisx.openModal()}>Open Modal</button> */}
+ 
         <ReactModalLogin
           visible={this.state.showModal}
           onCloseModal={this.closeModal.bind(this)}
           loading={this.state.loading}
           error={this.state.error}
           tabs={{
-            afterChange: this.afterTabsChange.bind(this),
+            afterChange: this.afterTabsChange.bind(this)
           }}
           loginError={{
-            label: "Couldn't sign in, please try again.",
+            label: "Couldn't sign in, please try again."
           }}
           registerError={{
-            label: "Couldn't sign up, please try again.",
+            label: "Couldn't sign up, please try again."
           }}
           startLoading={this.startLoading.bind(this)}
           finishLoading={this.finishLoading.bind(this)}
           providers={{
-            // facebook: {
-            //   config: facebookConfig,
-            //   onLoginSuccess: this.onLoginSuccess.bind(this),
-            //   onLoginFail: this.onLoginFail.bind(this),
-            //   label: "Continue with Facebook",
-            // },
+            facebook: {
+              config: facebookConfig,
+              onLoginSuccess: this.onLoginSuccess.bind(this),
+              onLoginFail: this.onLoginFail.bind(this),
+              label: "Continue with Facebook"
+            },
             google: {
               config: googleConfig,
               onLoginSuccess: this.onLoginSuccess.bind(this),
               onLoginFail: this.onLoginFail.bind(this),
-              label: "Continue with Google",
-            },
+              label: "Continue with Google"
+            }
           }}
         />
       </div>

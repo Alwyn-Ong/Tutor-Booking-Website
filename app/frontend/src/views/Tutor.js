@@ -38,6 +38,7 @@ import Timetable from "../components/Timetable";
 import Stats from "../components/Tutor/Stats";
 import WeekPicker from "../components/Tutor/WeekPicker";
 import LoginModal from "../components/Auth/LoginModal";
+// import ReactModalLogin from "react-modal-login"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -139,9 +140,11 @@ const Tutor = () => {
     loading: false,
     error: null,
   });
+  const modalStateRef = React.createRef();
 
+  console.log(modalState);
   const openModal = () => {
-    setModalState((state) => {
+    modalStateRef.current.setState((state) => {
       return {
         ...state,
         showModal: true,
@@ -185,7 +188,7 @@ const Tutor = () => {
     });
   };
 
-  const onLoginSuccess = (method, response) => {
+  const onLoginSuccess = (args) => {
     toast.success("Login successful!");
     console.log(response);
   };
@@ -200,17 +203,21 @@ const Tutor = () => {
     });
   };
 
+
   return (
     <Page maxWidth="xl">
-      <LoginModal
+      {/* <LoginModal/> */}
+      {/* <LoginModal
         modalState={modalState}
         closeModal={closeModal}
         startLoading={startLoading}
         finishLoading={finishLoading}
         afterTabsChange={afterTabsChange}
-        onLoginSuccess={onLoginSuccess}
+        onLoginSuccess={() => {
+          onLoginSuccess;
+        }}
         onLoginFail={onLoginFail}
-      />
+      /> */}
       <Backdrop className={classes.backdrop} open={isLoading}>
         <CircularProgress color="inherit" />
       </Backdrop>
@@ -444,6 +451,18 @@ const Tutor = () => {
                       <Button variant="contained" onClick={sendTimeslotRequest}>
                         Send Request
                       </Button>
+                      <LoginModal
+                        modalState={modalState}
+                        closeModal={closeModal}
+                        startLoading={startLoading}
+                        finishLoading={finishLoading}
+                        afterTabsChange={afterTabsChange}
+                        onLoginSuccess={() => {
+                          onLoginSuccess;
+                        }}
+                        onLoginFail={onLoginFail}
+                        ref={modalStateRef}
+                      />
                     </Grid>
                   </Grid>
                 </>

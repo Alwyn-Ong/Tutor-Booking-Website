@@ -75,7 +75,7 @@ const LoginModal = ({
         onCloseModal={closeModal}
         loading={modalState.loading}
         error={modalState.error}
-        tabs={{
+        tabs={{ 
           afterChange: { afterTabsChange },
         }}
         loginError={{
