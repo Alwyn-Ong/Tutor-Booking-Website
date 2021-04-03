@@ -105,7 +105,6 @@ const PrettoSlider = withStyles({
 })(Slider);
 
 const Homepage = () => {
-
   // TODO: Change userid
   const auth = useSelector((state) => state.auth);
   const userId = auth.id;
@@ -211,8 +210,6 @@ const Homepage = () => {
 
   const [loading, setLoading] = React.useState(false);
   const [success, setSuccess] = React.useState(false);
-
-  
 
   const handleSave = (page) => {
     if (page === "/settings/general") {
@@ -327,7 +324,24 @@ const Homepage = () => {
     subjects: [],
     timeslots: [],
   });
-  console.log(tutorValues);
+
+  const [getTutorValues, setGetTutorValues] = React.useState(true);
+
+  if (getTutorValues) {
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+
+    fetch("http://localhost:8080/api/gettutorprofile/" + userId, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        setTutorValues(result);
+        setGetTutorValues(false);
+      })
+      .catch((error) => console.log("error", error));
+  }
 
   const handleSliderChange = (event, newValue) => {
     setTutorValues((state) => {
