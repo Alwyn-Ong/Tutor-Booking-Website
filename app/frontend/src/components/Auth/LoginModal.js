@@ -10,9 +10,12 @@ class Sample extends React.Component {
     super(props);
 
     this.state = {
-      showModal: this.props.modalState.showModal,
-      loading: this.props.modalState.loading,
-      error: this.props.modalState.error,
+      showModal: false,
+      loading: false,
+      error: false,
+      // showModal: this.props.modalState.showModal,
+      // loading: this.props.modalState.loading,
+      // error: this.props.modalState.error,
     };
   }
 
@@ -32,10 +35,30 @@ class Sample extends React.Component {
   onLoginSuccess(method, response) {
     console.log(response);
     console.log("logged successfully with " + method);
-    // this.finishLoading();
-    fetch()
-    // toast.success("Login success!");
+    let tokenId = response.id_token;
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", tokenId);
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
+    fetch("http://localhost:8080/api/verifytoken/", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        toast.success(`Welcome ${result.name}`);
+        this.finishLoading();
+        this.closeModal();
+        // Add to redux
+
+      })
+      .catch((error) => console.log("error", error));
   }
+
+  // toast.success("Login success!");
 
   onLoginFail(method, response) {
     console.log("logging failed with " + method);
