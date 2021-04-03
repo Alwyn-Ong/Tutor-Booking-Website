@@ -144,6 +144,7 @@ const Tutor = () => {
 
   console.log(modalState);
   const openModal = () => {
+    console.log(modalStateRef);
     modalStateRef.current.setState((state) => {
       return {
         ...state,
@@ -202,7 +203,6 @@ const Tutor = () => {
       };
     });
   };
-
 
   return (
     <Page maxWidth="xl">

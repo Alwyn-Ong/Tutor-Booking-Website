@@ -5,6 +5,9 @@ import ReactModalLogin from "react-modal-login";
 
 import { facebookConfig, googleConfig } from "./social-config";
 
+import { connect } from "react-redux";
+import { updateLogin } from "../../actions/authActions";
+
 class Sample extends React.Component {
   constructor(props) {
     super(props);
@@ -16,6 +19,7 @@ class Sample extends React.Component {
       // showModal: this.props.modalState.showModal,
       // loading: this.props.modalState.loading,
       // error: this.props.modalState.error,
+      updateLogin: updateLogin()
     };
   }
 
@@ -49,11 +53,16 @@ class Sample extends React.Component {
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
+        // Add to redux
+        updateLogin(result.name, result.userid, result.role);
+
         toast.success(`Welcome ${result.name}`);
+        let role = result.isTutor ? "TUTOR" : "TUTEE"
+
+        // TODO add token if doing calendar api
+        this.props.updateLogin(result.name,result.userid,role);
         this.finishLoading();
         this.closeModal();
-        // Add to redux
-
       })
       .catch((error) => console.log("error", error));
   }
@@ -128,4 +137,16 @@ class Sample extends React.Component {
   }
 }
 
-export default Sample;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateLogin: (name, userid, role) =>
+      dispatch(
+        updateLogin(name, userid, role)
+      ),
+  };
+};
+
+export default connect(null, mapDispatchToProps, null, { forwardRef: true })(
+  Sample
+);
+// export default Sample;
