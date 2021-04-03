@@ -117,12 +117,18 @@ const TopBar = () => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
+  const [accountAnchorEl, setAccountAnchorEl]=React.useState(null)
+  
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const isAccountMenuOpen = Boolean(accountAnchorEl);
 
-  const handleProfileMenuOpen = (event) => {
+  const handleNotificationsMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
+  };
+  
+  const handleMobileMenuOpen = (event) => {
+    setMobileMoreAnchorEl(event.currentTarget);
   };
 
   const handleMobileMenuClose = () => {
@@ -134,15 +140,20 @@ const TopBar = () => {
     handleMobileMenuClose();
   };
 
+  const handleAccountMenuOpen = (event) => {
+    setAccountAnchorEl(event.currentTarget);
+  }
+
+  const handleAccountMenuClose = (event) => {
+    setAccountAnchorEl(null);
+  }
+
   const viewProfile = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
     // window.location.href = "/tutorProfile";
   };
 
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
 
   let defaultNotifications = [
     {
@@ -311,7 +322,7 @@ const TopBar = () => {
       anchorEl={anchorEl}
       anchorOrigin={{
         vertical: "bottom",
-        horizontal: "center",
+        horizontal: "left",
       }}
       transformOrigin={{
         vertical: "top",
@@ -385,27 +396,28 @@ const TopBar = () => {
       })}
     </Menu>
   );
-  // const renderMenu = (
-  //   <Menu
-  //     anchorEl={anchorEl}
-  //     anchorOrigin={{
-  //       vertical: "bottom",
-  //       horizontal: "center",
-  //     }}
-  //     transformOrigin={{
-  //       vertical: "top",
-  //       horizontal: "center",
-  //     }}
-  //     getContentAnchorEl={null}
-  //     id={menuId}
-  //     keepMounted
-  //     open={isMenuOpen}
-  //     onClose={handleMenuClose}
-  //   >
-  //     <MenuItem onClick={viewProfile}>Profile</MenuItem>
-  //     <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-  //   </Menu>
-  // );
+
+  const renderAccountMenu = (
+    <Menu
+      anchorEl={accountAnchorEl}
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "center",
+      }}
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "center",
+      }}
+      getContentAnchorEl={null}
+      id={menuId}
+      keepMounted
+      open={isAccountMenuOpen}
+      onClose={handleAccountMenuClose}
+    >
+      <MenuItem component={RouterLink} to={"/profile"} >Profile</MenuItem>
+      <MenuItem component={RouterLink} to={"/dashboard"}>My Dashboard</MenuItem>
+    </Menu>
+  );
 
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
@@ -426,7 +438,7 @@ const TopBar = () => {
         </IconButton>
         <p>Messages</p>
       </MenuItem> */}
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem onClick={handleNotificationsMenuOpen}>
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={11} color="secondary">
             <NotificationsIcon />
@@ -434,7 +446,10 @@ const TopBar = () => {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      <MenuItem component={RouterLink} to={"/profile"}>
+      <MenuItem 
+      // component={RouterLink} to={"/profile"}
+      onClick={handleAccountMenuOpen}
+      >
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
@@ -510,7 +525,7 @@ const TopBar = () => {
             <IconButton
               aria-label="show new notifications"
               color="inherit"
-              onClick={handleProfileMenuOpen}
+              onClick={handleNotificationsMenuOpen}
             >
               <Badge badgeContent={notifications.length} color="secondary">
                 <NotificationsIcon />
@@ -521,9 +536,10 @@ const TopBar = () => {
               aria-label="account of current user"
               aria-controls={menuId}
               aria-haspopup="true"
-              // onClick={handleProfileMenuOpen}
-              component={RouterLink}
-              to="/profile"
+              onClick={handleAccountMenuOpen}
+              // component={RouterLink}
+              // to="/profile"
+
               color="inherit"
             >
               <AccountCircle />
@@ -544,6 +560,7 @@ const TopBar = () => {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
+      {renderAccountMenu}
     </div>
   );
 };
