@@ -23,57 +23,61 @@ const Homepage = () => {
   const [isOpenModal, setIsOpenModal] = React.useState(false);
   // return <Page>TUTOR PROFILE</Page>;
   return (
-    <Page maxWidth="lg" isFullHeight>
+    <>
       {auth.name ? (
-        <Profile />
+        <Page maxWidth="lg">
+          <Profile />
+        </Page>
       ) : (
-        <Box
-          display="flex"
-          flexDirection="column"
-          height="100%"
-          justifyContent="center"
-        >
-          <Container maxWidth="md">
-            <Grid
-              container
-              direction="column"
-              justify="center"
-              alignItems="center"
-              spacing={3}
-            >
-              <Grid item>
-                <Typography align="center" color="textPrimary" variant="h1">
-                  There's nothing to see here...
-                </Typography>
+        <Page maxWidth="lg" isFullHeight>
+          <Box
+            display="flex"
+            flexDirection="column"
+            height="100%"
+            justifyContent="center"
+          >
+            <Container maxWidth="md">
+              <Grid
+                container
+                direction="column"
+                justify="center"
+                alignItems="center"
+                spacing={3}
+              >
+                <Grid item>
+                  <Typography align="center" color="textPrimary" variant="h1">
+                    There's nothing to see here...
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Typography
+                    align="center"
+                    color="textPrimary"
+                    variant="subtitle2"
+                  >
+                    Login to view your personal profile.
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Button
+                    variant="outlined"
+                    onClick={() => {
+                      setIsOpenModal(true);
+                    }}
+                  >
+                    Login
+                  </Button>
+                </Grid>
               </Grid>
-              <Grid item>
-                <Typography
-                  align="center"
-                  color="textPrimary"
-                  variant="subtitle2"
-                >
-                  Login to view your personal dashboard.
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Button
-                  variant="outlined"
-                  onClick={() => {
-                    setIsOpenModal(true);
-                  }}
-                >
-                  Login
-                </Button>
-              </Grid>
-            </Grid>
-            <LoginModalWrapper
-              isOpenModal={isOpenModal}
-              setIsOpenModal={setIsOpenModal}
-            />
-          </Container>
-        </Box>
+              <LoginModalWrapper
+                isOpenModal={isOpenModal}
+                setIsOpenModal={setIsOpenModal}
+              />
+            </Container>
+          </Box>
+        </Page>
       )}
-    </Page>
+    </>
   );
 };
 

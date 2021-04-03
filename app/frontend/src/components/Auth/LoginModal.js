@@ -86,6 +86,9 @@ class LoginModal extends React.Component {
     this.setState({
       loading: false,
     });
+    if (this.props.setIsDone) {
+      this.props.setIsDone(true);
+    }
   }
 
   afterTabsChange() {

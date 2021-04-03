@@ -12,10 +12,13 @@ const DashboardView = () => {
   const [isOpenModal, setIsOpenModal] = React.useState(false);
 
   return (
-    <Page maxWidth="lg" isFullHeight>
+    <>
       {auth.name ? (
+      <Page maxWidth="lg">
         <Dashboard />
+      </Page>
       ) : (
+        <Page maxWidth="lg" isFullHeight>
         <Box
           display="flex"
           flexDirection="column"
@@ -54,8 +57,9 @@ const DashboardView = () => {
             />
           </Container>
         </Box>
-      )}
     </Page>
+      )}
+    </>
   );
 };
 

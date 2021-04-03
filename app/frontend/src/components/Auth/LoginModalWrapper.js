@@ -2,7 +2,7 @@ import React from "react";
 import LoginModal from "./LoginModal";
 
 // Wrapper to open modal if necessary
-const LoginModalWrapper = ({ isOpenModal, setIsOpenModal }) => {
+const LoginModalWrapper = ({ isOpenModal, setIsOpenModal,setIsDone }) => {
   const modalStateRef = React.useRef();
   const openModal = () => {
     console.log(modalStateRef);
@@ -21,7 +21,7 @@ const LoginModalWrapper = ({ isOpenModal, setIsOpenModal }) => {
 
   return (
     <div>
-      <LoginModal ref={modalStateRef} />
+      <LoginModal ref={modalStateRef} setIsDone={setIsDone}/>
     </div>
   );
 };

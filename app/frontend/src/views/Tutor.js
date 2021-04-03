@@ -12,7 +12,7 @@ import {
   Tabs,
   TextField,
   Tooltip,
-  Typography
+  Typography,
 } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import {
@@ -21,13 +21,12 @@ import {
   LocalLibrary,
   MonetizationOn,
   Person,
-  School
+  School,
 } from "@material-ui/icons";
 import { Rating } from "@material-ui/lab";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import "moment/locale/de";
 import React from "react";
-import toast from "react-hot-toast";
 // import ReactModalLogin from "react-modal-login"
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -37,6 +36,7 @@ import Reviews from "../components/Reviews";
 import Timetable from "../components/Timetable";
 import Stats from "../components/Tutor/Stats";
 import WeekPicker from "../components/Tutor/WeekPicker";
+import { toast } from "react-hot-toast";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -116,33 +116,20 @@ const Tutor = () => {
   console.log(data);
 
   let auth = useSelector((state) => state.auth);
+  let name = useSelector((state) => state.name);
   const [isOpenModal, setIsOpenModal] = React.useState(false);
 
   const [sendTimeslot, setSendTimeslot] = React.useState(false);
+  console.log("SENDTIMESLOT: " + sendTimeslot);
   // For save
   const sendTimeslotRequest = () => {
-    // toast.promise(
-    //   new Promise((resolve, reject) => {
-    //     setTimeout(() => {
-    //       resolve();
-    //     }, 2000);
-    //   }),
-    //   {
-    //     loading: "Accepting Request",
-    //     success: "Successfully accepted request!",
-    //     error: "Error when accepting request.",
-    //   }
-    // );
     if (!auth.name) {
       setIsOpenModal(true);
-    } else {
-      setSendTimeslot(true);
     }
   };
 
-  console.log(sendTimeslot)
+  // console.log(sendTimeslot)
   if (sendTimeslot) {
-    sendTimeslotRequest
     toast.promise(
       new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -492,9 +479,10 @@ const Tutor = () => {
                         Send Request
                       </Button>
                       <LoginModalWrapper
-              isOpenModal={isOpenModal}
-              setIsOpenModal={setIsOpenModal}
-            />
+                        isOpenModal={isOpenModal}
+                        setIsOpenModal={setIsOpenModal}
+                        setIsDone={setSendTimeslot}
+                      />
                     </Grid>
                   </Grid>
                 </>
