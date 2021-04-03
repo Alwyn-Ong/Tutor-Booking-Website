@@ -1,8 +1,5 @@
 import MomentUtils from "@date-io/moment";
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
   Avatar,
   Backdrop,
   Button,
@@ -15,7 +12,7 @@ import {
   Tabs,
   TextField,
   Tooltip,
-  Typography,
+  Typography
 } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import {
@@ -24,22 +21,22 @@ import {
   LocalLibrary,
   MonetizationOn,
   Person,
-  School,
+  School
 } from "@material-ui/icons";
 import { Rating } from "@material-ui/lab";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import "moment/locale/de";
 import React from "react";
 import toast from "react-hot-toast";
+// import ReactModalLogin from "react-modal-login"
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import LoginModalWrapper from "../components/Auth/LoginModalWrapper";
 import { Page } from "../components/Page";
 import Reviews from "../components/Reviews";
 import Timetable from "../components/Timetable";
 import Stats from "../components/Tutor/Stats";
 import WeekPicker from "../components/Tutor/WeekPicker";
-import LoginModal from "../components/Auth/LoginModal";
-// import ReactModalLogin from "react-modal-login"
-import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -119,6 +116,7 @@ const Tutor = () => {
   console.log(data);
 
   let auth = useSelector((state) => state.auth);
+  const [isOpenModal, setIsOpenModal] = React.useState(false);
 
   const [sendTimeslot, setSendTimeslot] = React.useState(false);
   // For save
@@ -135,14 +133,16 @@ const Tutor = () => {
     //     error: "Error when accepting request.",
     //   }
     // );
-    if (!auth) {
-      openModal();
+    if (!auth.name) {
+      setIsOpenModal(true);
     } else {
       setSendTimeslot(true);
     }
   };
 
+  console.log(sendTimeslot)
   if (sendTimeslot) {
+    sendTimeslotRequest
     toast.promise(
       new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -180,18 +180,18 @@ const Tutor = () => {
   //   loading: false,
   //   error: null,
   // });
-  const modalStateRef = React.createRef();
+  // const modalStateRef = React.createRef();
 
-  // console.log(modalState);
-  const openModal = () => {
-    console.log(modalStateRef);
-    modalStateRef.current.setState((state) => {
-      return {
-        ...state,
-        showModal: true,
-      };
-    });
-  };
+  // // console.log(modalState);
+  // const openModal = () => {
+  //   console.log(modalStateRef);
+  //   modalStateRef.current.setState((state) => {
+  //     return {
+  //       ...state,
+  //       showModal: true,
+  //     };
+  //   });
+  // };
   // const closeModal = () => {
   //   setModalState((state) => {
   //     return {
@@ -491,7 +491,10 @@ const Tutor = () => {
                       <Button variant="contained" onClick={sendTimeslotRequest}>
                         Send Request
                       </Button>
-                      <LoginModal ref={modalStateRef} />
+                      <LoginModalWrapper
+              isOpenModal={isOpenModal}
+              setIsOpenModal={setIsOpenModal}
+            />
                     </Grid>
                   </Grid>
                 </>

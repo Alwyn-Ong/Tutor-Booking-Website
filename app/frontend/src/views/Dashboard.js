@@ -12,7 +12,7 @@ const DashboardView = () => {
   const [isOpenModal, setIsOpenModal] = React.useState(false);
 
   return (
-    <Page maxWidth="lg">
+    <Page maxWidth="lg" isFullHeight>
       {auth.name ? (
         <Dashboard />
       ) : (
