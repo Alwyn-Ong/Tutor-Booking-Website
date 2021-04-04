@@ -105,8 +105,6 @@ const Tutor = () => {
       })
       .catch((error) => console.log("error", error));
 
-  // data.email = "mailto:" + "aojj97@gmail.com";
-
   // For the tab
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
@@ -120,17 +118,62 @@ const Tutor = () => {
   const [isOpenModal, setIsOpenModal] = React.useState(false);
 
   const [sendTimeslot, setSendTimeslot] = React.useState(false);
-  console.log("SENDTIMESLOT: " + sendTimeslot);
+
+  // Integration of send timeslot
+  const [timeslotRequest, setTimeslotRequest] = React.useState({
+    remarks: "",
+    timeslots: [],
+    date: "",
+  });
+
+  console.log(timeslotRequest);
+  const handleRemarksChange = (e) => {
+    setTimeslotRequest((state) => {
+      return {
+        ...state,
+        remarks: e.target.value,
+      };
+    });
+  };
+
   // For save
   //TODO: Integrate
   const sendTimeslotRequest = () => {
+    if (timeslotRequest.timeslots.length == 0) {
+      toast.error("Please select a timeslot and update before sending!");
+      return;
+    }
     if (!auth.name) {
       setIsOpenModal(true);
+    } else {
+      setSendTimeslot(true);
     }
   };
 
-  // console.log(sendTimeslot)
-  if (sendTimeslot) {
+  if (sendTimeslot && auth.id) {
+    for (let i = 0; i < timeslotRequest.timeslots.length; i++) {
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var raw = JSON.stringify({
+        remarks: timeslotRequest.remarks,
+        requestedTimeslot: timeslotRequest.timeslots[i].timeslot,
+        studentId: auth.id,
+        tutorId: id,
+      });
+
+      var requestOptions = {
+        method: "PUT",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
+
+      fetch("http://localhost:8080/api/saverequest", requestOptions)
+        .then((response) => response.text())
+        .then((result) => console.log(result))
+        .catch((error) => console.log("error", error));
+    }
     toast.promise(
       new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -144,6 +187,7 @@ const Tutor = () => {
       }
     );
     setSendTimeslot(false);
+
   }
   // React.useEffect(() => {
   //   return () => {
@@ -459,11 +503,20 @@ const Tutor = () => {
               ) : (
                 <>
                   <Grid item>
-                    <Timetable isTutor={false} data={data.openTimeslot} />
+                    <Timetable
+                      isTutor={false}
+                      data={data.openTimeslot}
+                      setProfileData={setTimeslotRequest}
+                    />
                   </Grid>
                   <Grid item container spacing={2} alignItems="center">
                     <Grid item>
-                      <TextField id="outlined-basic" label="Remarks" />
+                      <TextField
+                        id="outlined-basic"
+                        label="Remarks"
+                        value={timeslotRequest.remarks}
+                        onChange={handleRemarksChange}
+                      />
                     </Grid>
                     <Grid item>
                       <Grid item>
