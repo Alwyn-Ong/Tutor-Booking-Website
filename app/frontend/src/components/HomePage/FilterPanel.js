@@ -185,9 +185,9 @@ function FilterPanel({ state, setState }) {
               </MenuItem>
               <MenuItem value="Primary">Primary School</MenuItem>
               <MenuItem value="Secondary">Secondary School</MenuItem>
-              <MenuItem value="Poly">Polytechnic</MenuItem>
+              <MenuItem value="Polytechnic">Polytechnic</MenuItem>
               <MenuItem value="JC">JC</MenuItem>
-              <MenuItem value="Uni">University</MenuItem>
+              <MenuItem value="University">University</MenuItem>
             </Select>
           </FormControl>
         </Grid>
