@@ -32,10 +32,10 @@ public class Request {
 	@ApiModelProperty(notes= "user id of student")
 	private int studentId;
 	
-	public Request() {
-		
-	}
-	
+//	public Request() {
+//		
+//	}
+//	
 	public Request(String remarks, String requestedTimeslot, int studentId, int tutorId) {
 		this.remarks = remarks;
 		this.requestedTimeslot = requestedTimeslot;

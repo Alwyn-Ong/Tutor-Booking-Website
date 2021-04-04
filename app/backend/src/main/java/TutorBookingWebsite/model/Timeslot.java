@@ -26,9 +26,9 @@ public class Timeslot {
 	@ApiModelProperty(notes= "available timeslot")
 	private String timeslot;	
 	
-	public Timeslot() {
-		
-	}
+//	public Timeslot() {
+//		
+//	}
 
 	public int getTimeslotId() {
 		return timeslotId;

@@ -39,10 +39,10 @@ public class Review {
 	private String tuitionType;
 	
 	
-	
-	public Review() {
-		
-	}
+//	
+//	public Review() {
+//		
+//	}
 
 	public int getReviewId() {
 		return reviewId;
