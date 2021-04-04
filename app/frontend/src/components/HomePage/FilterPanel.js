@@ -210,7 +210,7 @@ function FilterPanel({ state, setState }) {
               <MenuItem value="Diploma">Diploma</MenuItem>
               <MenuItem value="Degree">Bachelor's Degree</MenuItem>
               <MenuItem value="Masters">Master</MenuItem>
-              <MenuItem value="phd">PhD</MenuItem>
+              <MenuItem value="PhD">PhD</MenuItem>
             </Select>
           </FormControl>
         </Grid>

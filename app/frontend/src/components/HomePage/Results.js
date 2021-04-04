@@ -777,14 +777,17 @@ export const Results = React.memo(function SolidGameCard({
       });
 
       let searchList = search.split(" ");
+      console.log(searchList)
       const noCheckList = ["userid", "rating", "reviews", "price"];
       for (var searchCondition of searchList) {
         res = res.filter((item) => {
           for (var key in item) {
             if (noCheckList.includes(key)) continue;
             if (key != "levelsTaught") {
+              console.log(item[key])
+              console.log(searchCondition)
               if (
-                item[key].toLowerCase().includes(searchCondition.toLowerCase())
+                item[key] && searchCondition && item[key].toLowerCase().includes(searchCondition.toLowerCase())
               ) {
                 return true;
               }
@@ -850,8 +853,8 @@ export const Results = React.memo(function SolidGameCard({
           reviews={value.reviews}
           rating={value.rating}
           userid={value.userid}
-          // redirect={redirectToTutor}
-          // onClick={() => redirectToTutor(value.userid)}
+        // redirect={redirectToTutor}
+        // onClick={() => redirectToTutor(value.userid)}
         />
       </Grid>
     );
