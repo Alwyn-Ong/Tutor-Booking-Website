@@ -188,6 +188,7 @@ export const CustomCard = ({
   // const redirect = (userid) => {
   //   useNavigate(`/tutor/`);
   // }
+          
 
   let toCompare = useSelector((state) => state.compare);
 
@@ -196,7 +197,7 @@ export const CustomCard = ({
       to={
         toCompare.length == 0
           ? `/tutor/${userid}`
-          : `/compare/${toCompare[0]}/${toCompare[1]}`
+          : `/compare/${toCompare[0]}/${userid}`
       }
       style={{ textDecoration: "none" }}
     >

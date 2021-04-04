@@ -82,13 +82,15 @@ const Tutor = () => {
     setToScroll(false);
   }
 
-  let id = useParams().id;
+  let id = useParams().id1;
+  let id2 = useParams().id2;
 
   // For Backdrop
   const [isLoading, setIsLoading] = React.useState(true);
 
   // From api
   const [data, setData] = React.useState({});
+  const [data2, setData2] = React.useState({});
 
   var requestOptions = {
     method: "GET",
@@ -100,6 +102,15 @@ const Tutor = () => {
       .then((response) => response.json())
       .then((result) => {
         setData(result);
+        console.log(data);
+      })
+      .catch((error) => console.log("error", error));
+
+  isLoading &&
+    fetch(`http://localhost:8080/api/gettutorbyid/${id2}`, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        setData2(result);
         setIsLoading(false);
         console.log(data);
       })
@@ -187,7 +198,6 @@ const Tutor = () => {
       }
     );
     setSendTimeslot(false);
-
   }
   // React.useEffect(() => {
   //   return () => {
@@ -452,7 +462,7 @@ const Tutor = () => {
                   </AccordionDetails>
                 </Accordion>
             </Grid> */}
-            <Grid container direction="column" spacing={3} item xs={12} md={7}>
+            <Grid container direction="column" spacing={3} item xs={12} md={6}>
               {/* <Grid item>
                 <Accordion expanded>
                   <AccordionSummary
@@ -471,76 +481,127 @@ const Tutor = () => {
               <Grid item>
                 <Stats />
               </Grid>
+            
+            </Grid>
+            <Grid
+              container
+              item
+              xs={12}
+              md={3}
+              direction="column"
+              spacing={1}
+              justify="flex-start"
+              alignItems="stretch"
+            >
               <Grid item>
-                <Tabs
-                  value={value}
-                  onChange={handleChange}
-                  indicatorColor="primary"
-                  textColor="primary"
-                  centered
+                <Avatar className={classes.large} src={data2.imageURL} />
+              </Grid>
+              <Grid item>
+                <Typography variant="h2">{data2.name}</Typography>
+              </Grid>
+              {/* <Grid item>
+                <Rating
+                  name="half-rating-read"
+                  value={data.rating}
+                  readOnly
+                  precision={0.5}
+                />
+              </Grid> */}
+              <Grid item>
+                <Typography variant="h5">
+                  {data.rating ? (
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        flexWrap: "wrap",
+                        // justifyContent: "center",
+                      }}
+                    >
+                      <Rating
+                        name="half-rating-read"
+                        value={data2.rating}
+                        readOnly
+                        precision={0.1}
+                      />
+                      <span>({data2.reviews.length})</span>
+                    </div>
+                  ) : (
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        flexWrap: "wrap",
+                        justifyContent: "center",
+                        display: "inline-flex",
+                      }}
+                    >
+                      <Rating
+                        name="half-rating-read"
+                        value={0}
+                        readOnly
+                        max={1}
+                      />
+                      <span style={{ fontSize: "small" }}>No reviews yet</span>
+                    </div>
+                  )}
+                </Typography>
+              </Grid>
+
+              <Grid item>
+                <IconButton
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.location.href = `mailto:${data2.email}`;
+                  }}
                 >
-                  <Tooltip
-                    title="Click and drag to select your preferred timeslot among the tutors free timeslots."
-                    disableFocusListener
-                  >
-                    <Tab label="Timetable" />
-                  </Tooltip>
-                  <Tooltip
-                    title="View reviews for this tutor."
-                    disableFocusListener
-                  >
-                    <Tab label="Reviews" />
-                  </Tooltip>
-                </Tabs>
+                  <Email />
+                </IconButton>
+                <IconButton
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.location.href = `tel:${data2.phoneNumber}`;
+                  }}
+                >
+                  <Call />
+                </IconButton>
               </Grid>
               <Grid item>
-                <Divider variant="middle" />
+                <Typography>
+                  <School /> {data2.qualification}
+                </Typography>
               </Grid>
-              {value ? (
-                <Grid item>
-                  <Reviews reviews={data.reviews} />
-                </Grid>
-              ) : (
-                <>
-                  <Grid item>
-                    <Timetable
-                      isTutor={false}
-                      data={data.openTimeslot}
-                      setProfileData={setTimeslotRequest}
-                    />
-                  </Grid>
-                  <Grid item container spacing={2} alignItems="center">
-                    <Grid item>
-                      <TextField
-                        id="outlined-basic"
-                        label="Remarks"
-                        value={timeslotRequest.remarks}
-                        onChange={handleRemarksChange}
-                      />
-                    </Grid>
-                    <Grid item>
+              <Grid item>
+                <Typography>
+                  <LocalLibrary /> Teaches:
+                </Typography>
+              </Grid>
+              <Grid item container spacing={1} justify="flex-start">
+                {Object.keys(data2.levelsTaught).map((key) => {
+                  let subjects = data2.levelsTaught[key];
+                  return subjects.map((subject) => {
+                    return (
                       <Grid item>
-                        <MuiPickersUtilsProvider
-                          utils={MomentUtils}
-                          locale="en"
-                        >
-                          <WeekPicker />
-                        </MuiPickersUtilsProvider>
+                        <Chip label={`${key} - ${subject}`} size="small" />
                       </Grid>
-                    </Grid>
-                    <Grid>
-                      <Button variant="contained" onClick={sendTimeslotRequest}>
-                        Send Request
-                      </Button>
-                      <LoginModalWrapper
-                        isOpenModal={isOpenModal}
-                        setIsOpenModal={setIsOpenModal}
-                        setIsDone={setSendTimeslot}
-                      />
-                    </Grid>
-                  </Grid>
-                </>
-              )}
+                    );
+                  });
+                })}
+              </Grid>
+              <Grid item>
+                <Typography>
+                  <Person /> {data2.gender}
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography>
+                  <MonetizationOn /> {` ${data2.price}/hr`}
+                </Typography>
+              </Grid>
+              <Grid item style={{ marginTop: "20px" }}>
+                <Typography variant="h4">{data2.description}</Typography>
+              </Grid>
+              
             </Grid>
           </Grid>
         </>

@@ -13,9 +13,10 @@ import DoughnutExample from "./Doughnut";
 import RadarExample from "./Radar";
 import AssessmentOutlinedIcon from "@material-ui/icons/AssessmentOutlined";
 import { useDispatch } from "react-redux";
-import {updateCompare} from "../../../actions/authActions"
+import { updateCompare } from "../../../actions/authActions";
+import { NavLink as RouterLink } from "react-router-dom";
 
-const Index = ({tutorId}) => {
+const Index = ({ tutorId }) => {
   const dispatch = useDispatch();
   const updateCompareDispatch = (tutorId) => {
     dispatch(updateCompare(tutorId));
@@ -30,7 +31,15 @@ const Index = ({tutorId}) => {
             </Typography>
           </Grid>
           <Grid item>
-            <Button onClick={()=>updateCompareDispatch(tutorId)}>Compare</Button>
+            <Tooltip title="Compare with another tutor">
+              <Button
+                onClick={() => updateCompareDispatch(tutorId)}
+                component={RouterLink}
+                to={"/"}
+              >
+                Compare
+              </Button>
+            </Tooltip>
           </Grid>
         </Grid>
         <Grid item md={6}>
