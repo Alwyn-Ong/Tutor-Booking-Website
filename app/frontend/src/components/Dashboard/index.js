@@ -40,7 +40,7 @@ import {
   faArrowUp,
   faArrowLeft,
   faAngleDown,
-  faEye
+  faEye,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -49,6 +49,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import avatar2 from "../../../assets/utils/images/avatars/2.jpg";
 // import avatar3 from "../../../assets/utils/images/avatars/3.jpg";
 // import avatar4 from "../../../assets/utils/images/avatars/4.jpg";
+import { useSelector } from "react-redux";
+import Users from "./Users";
 
 const data = [
   { name: "Page A", Tutees: 2, pv: 15, amt: 2400 },
@@ -105,561 +107,561 @@ export default class Dashboard extends Component {
 
   render() {
     return (
-        <Fragment>
-          <ReactCSSTransitionGroup
-            component="div"
-            transitionName="TabsAnimation"
-            transitionAppear={true}
-            transitionAppearTimeout={0}
-            transitionEnter={false}
-            transitionLeave={false}
-          >
-            <div style={{marginTop: "20px"}}>
-              {/* <PageTitle
+      <Fragment>
+        <ReactCSSTransitionGroup
+          component="div"
+          transitionName="TabsAnimation"
+          transitionAppear={true}
+          transitionAppearTimeout={0}
+          transitionEnter={false}
+          transitionLeave={false}
+        >
+          <div style={{ marginTop: "20px" }}>
+            {/* <PageTitle
                 heading="Basic Dashboard"
                 subheading="This is an example dashboard created using build-in elements and components."
                 icon="pe-7s-car icon-gradient bg-mean-fruit"
               /> */}
-              <Row>
-                <Col md="12" lg="6">
-                  <Card className="mb-3">
-                    <CardHeader className="card-header-tab">
-                      <div className="card-header-title">
-                        <i className="header-icon lnr-rocket icon-gradient bg-tempting-azure">
-                          {" "}
-                        </i>
-                        Overall Report
-                      </div>
-                      <div className="btn-actions-pane-right">
-                        <Button
-                          outline
-                          className={
-                            "border-0 btn-pill btn-wide btn-transition " +
-                            classnames({
-                              active: this.state.activeTab1 === "11",
-                            })
-                          }
-                          color="primary"
-                          onClick={() => {
-                            this.toggle1("11");
-                          }}
-                        >
-                          Tab 1
-                        </Button>
-                        <Button
-                          outline
-                          className={
-                            "ml-1 btn-pill btn-wide border-0 btn-transition " +
-                            classnames({
-                              active: this.state.activeTab1 === "22",
-                            })
-                          }
-                          color="primary"
-                          onClick={() => {
-                            this.toggle1("22");
-                          }}
-                        >
-                          Tab 2
-                        </Button>
-                      </div>
-                    </CardHeader>
-                    <TabContent activeTab={this.state.activeTab1}>
-                      <TabPane tabId="11">
-                        <CardBody className="pt-2">
-                          <Row className="mt-3">
-                            <Col md="6">
-                              <div className="widget-content">
-                                <div className="widget-content-outer">
-                                  <div className="widget-content-wrapper">
-                                    <div className="widget-content-left mr-3">
-                                      <div className="widget-numbers fsize-3 text-muted">
-                                        20%
-                                      </div>
-                                    </div>
-                                    <div className="widget-content-right">
-                                      <div className="text-muted opacity-6">
-                                        Rejected  Requests
-                                      </div>
+            <Row>
+              <Col md="12" lg="6">
+                <Card className="mb-3">
+                  <CardHeader className="card-header-tab">
+                    <div className="card-header-title">
+                      <i className="header-icon lnr-rocket icon-gradient bg-tempting-azure">
+                        {" "}
+                      </i>
+                      Overall Report
+                    </div>
+                    <div className="btn-actions-pane-right">
+                      <Button
+                        outline
+                        className={
+                          "border-0 btn-pill btn-wide btn-transition " +
+                          classnames({
+                            active: this.state.activeTab1 === "11",
+                          })
+                        }
+                        color="primary"
+                        onClick={() => {
+                          this.toggle1("11");
+                        }}
+                      >
+                        Tab 1
+                      </Button>
+                      <Button
+                        outline
+                        className={
+                          "ml-1 btn-pill btn-wide border-0 btn-transition " +
+                          classnames({
+                            active: this.state.activeTab1 === "22",
+                          })
+                        }
+                        color="primary"
+                        onClick={() => {
+                          this.toggle1("22");
+                        }}
+                      >
+                        Tab 2
+                      </Button>
+                    </div>
+                  </CardHeader>
+                  <TabContent activeTab={this.state.activeTab1}>
+                    <TabPane tabId="11">
+                      <CardBody className="pt-2">
+                        <Row className="mt-3">
+                          <Col md="6">
+                            <div className="widget-content">
+                              <div className="widget-content-outer">
+                                <div className="widget-content-wrapper">
+                                  <div className="widget-content-left mr-3">
+                                    <div className="widget-numbers fsize-3 text-muted">
+                                      20%
                                     </div>
                                   </div>
-                                  <div className="widget-progress-wrapper mt-1">
-                                    <Progress
-                                      className="progress-bar-sm progress-bar-animated-alt"
-                                      color="danger"
-                                      value="20"
-                                    />
+                                  <div className="widget-content-right">
+                                    <div className="text-muted opacity-6">
+                                      Rejected Requests
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            </Col>
-                            <Col md="6">
-                              <div className="widget-content">
-                                <div className="widget-content-outer">
-                                  <div className="widget-content-wrapper">
-                                    <div className="widget-content-left mr-3">
-                                      <div className="widget-numbers fsize-3 text-muted">
-                                        81%
-                                      </div>
-                                    </div>
-                                    <div className="widget-content-right">
-                                      <div className="text-muted opacity-6">
-                                        Satisfied Tutees
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="widget-progress-wrapper mt-1">
-                                    <Progress
-                                      className="progress-bar-sm progress-bar-animated-alt"
-                                      color="success"
-                                      value="81"
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                            </Col>
-                          </Row>
-                          <div className="divider mt-4" />
-                          <Row>
-                            <Col md="6">
-                              <div className="widget-content">
-                                <div className="widget-content-outer">
-                                  <div className="widget-content-wrapper">
-                                    <div className="widget-content-left mr-3">
-                                      <div className="widget-numbers fsize-3 text-muted">
-                                        71%
-                                      </div>
-                                    </div>
-                                    <div className="widget-content-right">
-                                      <div className="text-muted opacity-6">
-                                        Left a review
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="widget-progress-wrapper mt-1">
-                                    <Progress
-                                      className="progress-bar-sm progress-bar-animated-alt"
-                                      color="primary"
-                                      value="71"
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                            </Col>
-                            <Col md="6">
-                              <div className="widget-content">
-                                <div className="widget-content-outer">
-                                  <div className="widget-content-wrapper">
-                                    <div className="widget-content-left mr-3">
-                                      <div className="widget-numbers fsize-3 text-muted">
-                                        11%
-                                      </div>
-                                    </div>
-                                    <div className="widget-content-right">
-                                      <div className="text-muted opacity-6">
-                                        Unsatisfied Tutees
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="widget-progress-wrapper mt-1">
-                                    <Progress
-                                      className="progress-bar-sm progress-bar-animated-alt"
-                                      color="warning"
-                                      value="11"
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                            </Col>
-                          </Row>
-                        </CardBody>
-                        <div className="widget-chart p-0">
-                          <div className="widget-chart-content">
-                            <div className="widget-description mt-0 text-warning">
-                              <FontAwesomeIcon icon={faArrowUp} />
-                              <span className="pl-1">175.5%</span>
-                              <span className="text-muted opacity-8 pl-1">
-                                Concurrent Tutees
-                              </span>
-                            </div>
-                          </div>
-                          <ResponsiveContainer height={187}>
-                            <AreaChart
-                              data={data}
-                              margin={{
-                                top: -45,
-                                right: 0,
-                                left: 0,
-                                bottom: 0,
-                              }}
-                            >
-                              <defs>
-                                <linearGradient
-                                  id="colorPv2"
-                                  x1="0"
-                                  y1="0"
-                                  x2="0"
-                                  y2="1"
-                                >
-                                  <stop
-                                    offset="10%"
-                                    stopColor="var(--warning)"
-                                    stopOpacity={0.7}
+                                <div className="widget-progress-wrapper mt-1">
+                                  <Progress
+                                    className="progress-bar-sm progress-bar-animated-alt"
+                                    color="danger"
+                                    value="20"
                                   />
-                                  <stop
-                                    offset="90%"
-                                    stopColor="var(--warning)"
-                                    stopOpacity={0}
-                                  />
-                                </linearGradient>
-                              </defs>
-                              <Tooltip />
-                              <Area
-                                type="monotoneX"
-                                dataKey="Tutees"
-                                stroke="var(--warning)"
-                                strokeWidth={2}
-                                fillOpacity={1}
-                                fill="url(#colorPv2)"
-                              />
-                            </AreaChart>
-                          </ResponsiveContainer>
-                        </div>
-                      </TabPane>
-                      <TabPane tabId="22">
-                        <div className="widget-chart p-0">
-                          <ResponsiveContainer height={179}>
-                            <ComposedChart data={data2}>
-                              <CartesianGrid stroke="#ffffff" />
-                              <Area
-                                type="monotone"
-                                dataKey="amt"
-                                fill="#f7ffd0"
-                                stroke="#85a200"
-                              />
-                              <Bar
-                                dataKey="pv"
-                                barSize={16}
-                                fill="var(--primary)"
-                              />
-                              <Line
-                                type="monotone"
-                                dataKey="uv"
-                                strokeWidth="3"
-                                stroke="var(--danger)"
-                              />
-                            </ComposedChart>
-                          </ResponsiveContainer>
-                          <div className="widget-chart-content mt-3 mb-2">
-                            <div className="widget-description mt-0 text-success">
-                              <FontAwesomeIcon icon={faArrowUp} />
-                              <span className="pl-2 pr-2">37.2%</span>
-                              <span className="text-muted opacity-8">
-                                performance increase
-                              </span>
+                                </div>
+                              </div>
                             </div>
-                          </div>
-                        </div>
-                        <CardBody className="pt-2">
-                          <Row>
-                            <Col md="6">
-                              <div className="widget-content">
-                                <div className="widget-content-outer">
-                                  <div className="widget-content-wrapper">
-                                    <div className="widget-content-left mr-3">
-                                      <div className="widget-numbers fsize-3 text-muted">
-                                        23%
-                                      </div>
-                                    </div>
-                                    <div className="widget-content-right">
-                                      <div className="text-muted opacity-6">
-                                        Deploys
-                                      </div>
+                          </Col>
+                          <Col md="6">
+                            <div className="widget-content">
+                              <div className="widget-content-outer">
+                                <div className="widget-content-wrapper">
+                                  <div className="widget-content-left mr-3">
+                                    <div className="widget-numbers fsize-3 text-muted">
+                                      81%
                                     </div>
                                   </div>
-                                  <div className="widget-progress-wrapper mt-1">
-                                    <Progress
-                                      className="progress-bar-sm progress-bar-animated-alt"
-                                      color="warning"
-                                      value="23"
-                                    />
+                                  <div className="widget-content-right">
+                                    <div className="text-muted opacity-6">
+                                      Satisfied Tutees
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            </Col>
-                            <Col md="6">
-                              <div className="widget-content">
-                                <div className="widget-content-outer">
-                                  <div className="widget-content-wrapper">
-                                    <div className="widget-content-left mr-3">
-                                      <div className="widget-numbers fsize-3 text-muted">
-                                        76%
-                                      </div>
-                                    </div>
-                                    <div className="widget-content-right">
-                                      <div className="text-muted opacity-6">
-                                        Traffic
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="widget-progress-wrapper mt-1">
-                                    <Progress
-                                      className="progress-bar-sm progress-bar-animated-alt"
-                                      color="info"
-                                      value="76"
-                                    />
-                                  </div>
+                                <div className="widget-progress-wrapper mt-1">
+                                  <Progress
+                                    className="progress-bar-sm progress-bar-animated-alt"
+                                    color="success"
+                                    value="81"
+                                  />
                                 </div>
                               </div>
-                            </Col>
-                          </Row>
-                          <div className="divider mt-4" />
-                          <Row>
-                            <Col md="6">
-                              <div className="widget-content">
-                                <div className="widget-content-outer">
-                                  <div className="widget-content-wrapper">
-                                    <div className="widget-content-left mr-3">
-                                      <div className="widget-numbers fsize-3 text-muted">
-                                        83%
-                                      </div>
-                                    </div>
-                                    <div className="widget-content-right">
-                                      <div className="text-muted opacity-6">
-                                        Servers Load
-                                      </div>
+                            </div>
+                          </Col>
+                        </Row>
+                        <div className="divider mt-4" />
+                        <Row>
+                          <Col md="6">
+                            <div className="widget-content">
+                              <div className="widget-content-outer">
+                                <div className="widget-content-wrapper">
+                                  <div className="widget-content-left mr-3">
+                                    <div className="widget-numbers fsize-3 text-muted">
+                                      71%
                                     </div>
                                   </div>
-                                  <div className="widget-progress-wrapper mt-1">
-                                    <Progress
-                                      className="progress-bar-sm progress-bar-animated-alt"
-                                      color="danger"
-                                      value="83"
-                                    />
+                                  <div className="widget-content-right">
+                                    <div className="text-muted opacity-6">
+                                      Left a review
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            </Col>
-                            <Col md="6">
-                              <div className="widget-content">
-                                <div className="widget-content-outer">
-                                  <div className="widget-content-wrapper">
-                                    <div className="widget-content-left mr-3">
-                                      <div className="widget-numbers fsize-3 text-muted">
-                                        48%
-                                      </div>
-                                    </div>
-                                    <div className="widget-content-right">
-                                      <div className="text-muted opacity-6">
-                                        Reported Bugs
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="widget-progress-wrapper mt-1">
-                                    <Progress
-                                      className="progress-bar-sm progress-bar-animated-alt"
-                                      color="alternate"
-                                      value="48"
-                                    />
-                                  </div>
+                                <div className="widget-progress-wrapper mt-1">
+                                  <Progress
+                                    className="progress-bar-sm progress-bar-animated-alt"
+                                    color="primary"
+                                    value="71"
+                                  />
                                 </div>
                               </div>
-                            </Col>
-                          </Row>
-                        </CardBody>
-                      </TabPane>
-                    </TabContent>
-                  </Card>
-                  <Row>
-                    <Col lg="6">
-                      <div className="card mb-3 widget-chart">
+                            </div>
+                          </Col>
+                          <Col md="6">
+                            <div className="widget-content">
+                              <div className="widget-content-outer">
+                                <div className="widget-content-wrapper">
+                                  <div className="widget-content-left mr-3">
+                                    <div className="widget-numbers fsize-3 text-muted">
+                                      11%
+                                    </div>
+                                  </div>
+                                  <div className="widget-content-right">
+                                    <div className="text-muted opacity-6">
+                                      Unsatisfied Tutees
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="widget-progress-wrapper mt-1">
+                                  <Progress
+                                    className="progress-bar-sm progress-bar-animated-alt"
+                                    color="warning"
+                                    value="11"
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </Col>
+                        </Row>
+                      </CardBody>
+                      <div className="widget-chart p-0">
                         <div className="widget-chart-content">
-                          <div className="icon-wrapper rounded-circle">
-                            <div className="icon-wrapper-bg bg-primary" />
-                            <i className="lnr-graduation-hat text-primary" />
-                          </div>
-                          <div className="widget-numbers">43</div>
-                          <div className="widget-subheading">New Tutees</div>
-                          <div className="widget-description text-success">
-                            <FontAwesomeIcon icon={faAngleUp} />
+                          <div className="widget-description mt-0 text-warning">
+                            <FontAwesomeIcon icon={faArrowUp} />
                             <span className="pl-1">175.5%</span>
+                            <span className="text-muted opacity-8 pl-1">
+                              Concurrent Tutees
+                            </span>
                           </div>
                         </div>
-                        <div className="widget-chart-wrapper chart-wrapper-relative">
-                          <ResponsiveContainer height={100}>
-                            <LineChart
-                              data={data}
-                              margin={{ top: 5, right: 5, left: 5, bottom: 0 }}
-                            >
-                              <Line
-                                type="monotone"
-                                dataKey="pv"
-                                stroke="#3ac47d"
-                                strokeWidth={3}
-                              />
-                            </LineChart>
-                          </ResponsiveContainer>
-                        </div>
-                      </div>
-                    </Col>
-                    <Col lg="6">
-                      <div className="card mb-3 widget-chart">
-                        <div className="widget-chart-content">
-                          <div className="icon-wrapper rounded-circle">
-                            <div className="icon-wrapper-bg bg-danger" />
-                            <i className="lnr-envelope text-danger" />
-                          </div>
-                          <div className="widget-numbers">43</div>
-                          <div className="widget-subheading">
-                            Reviews Submitted
-                          </div>
-                          <div className="widget-description text-danger">
-                            <FontAwesomeIcon icon={faAngleDown} />
-                            <span className="pl-1">54.1%</span>
-                          </div>
-                        </div>
-                        <div className="widget-chart-wrapper chart-wrapper-relative">
-                          <ResponsiveContainer height={100}>
-                            <BarChart data={data}>
-                              <Bar
-                                dataKey="pv"
-                                fill="#81a4ff"
-                                stroke="#3f6ad8"
-                                strokeWidth={2}
-                              />
-                            </BarChart>
-                          </ResponsiveContainer>
-                        </div>
-                      </div>
-                    </Col>
-                  </Row>
-                </Col>
-                <Col md="12" lg="6">
-                  <Row>
-                    <Col md="6">
-                      <div className="card mb-3 bg-arielle-smile widget-chart text-white card-border">
-                        <div className="icon-wrapper rounded-circle">
-                          <div className="icon-wrapper-bg bg-white opacity-10" />
-                          <i className="lnr-calendar-full icon-gradient bg-arielle-smile" />
-                        </div>
-                        <div className="widget-numbers">10</div>
-                        <div className="widget-subheading">
-                          Months since joined
-                        </div>
-                        <div className="widget-description text-white">
-                          <FontAwesomeIcon icon={faAngleUp} />
-                          <span className="pl-1">54.9%</span>
-                        </div>
-                      </div>
-                    </Col>
-                    <Col md="6">
-                      <div className="card mb-3 bg-midnight-bloom widget-chart text-white card-border">
-                        <div className="icon-wrapper rounded">
-                          <div className="icon-wrapper-bg bg-white opacity-10" />
-                          <i className="lnr-screen icon-gradient bg-warm-flame" />
-                        </div>
-                        <div className="widget-numbers">149</div>
-                        <div className="widget-subheading">Total Sessions</div>
-                        <div className="widget-description text-white">
-                          <span className="pr-1">62,7%</span>
-                          <FontAwesomeIcon icon={faArrowLeft} />
-                        </div>
-                      </div>
-                    </Col>
-                    <Col md="6">
-                      <div className="card mb-3 bg-grow-early widget-chart text-white card-border">
-                        <div className="icon-wrapper rounded">
-                          <div className="icon-wrapper-bg bg-dark opacity-9" />
-                          <i className="lnr-graduation-hat text-white" />
-                        </div>
-                        <div className="widget-numbers">49</div>
-                        <div className="widget-subheading">Total Tutees</div>
-                        <div className="widget-description text-white">
-                          <FontAwesomeIcon icon={faArrowRight} />
-                          <span className="pl-1">72.1%</span>
-                        </div>
-                      </div>
-                    </Col>
-                    <Col md="6">
-                      <div className="card mb-3 bg-love-kiss widget-chart card-border">
-                        <div className="widget-chart-content text-white">
-                          <div className="icon-wrapper rounded-circle">
-                            <div className="icon-wrapper-bg bg-white opacity-4" />
-                            <i className="lnr-eye" />
-                          </div>
-                          <div className="widget-numbers">458</div>
-                          <div className="widget-subheading">Total Profile Views</div>
-                          <div className="widget-description">
-                            <FontAwesomeIcon
-                              className="text-white opacity-5"
-                              icon={faAngleUp}
+                        <ResponsiveContainer height={187}>
+                          <AreaChart
+                            data={data}
+                            margin={{
+                              top: -45,
+                              right: 0,
+                              left: 0,
+                              bottom: 0,
+                            }}
+                          >
+                            <defs>
+                              <linearGradient
+                                id="colorPv2"
+                                x1="0"
+                                y1="0"
+                                x2="0"
+                                y2="1"
+                              >
+                                <stop
+                                  offset="10%"
+                                  stopColor="var(--warning)"
+                                  stopOpacity={0.7}
+                                />
+                                <stop
+                                  offset="90%"
+                                  stopColor="var(--warning)"
+                                  stopOpacity={0}
+                                />
+                              </linearGradient>
+                            </defs>
+                            <Tooltip />
+                            <Area
+                              type="monotoneX"
+                              dataKey="Tutees"
+                              stroke="var(--warning)"
+                              strokeWidth={2}
+                              fillOpacity={1}
+                              fill="url(#colorPv2)"
                             />
-                            <span className="text-white">175.5%</span>
+                          </AreaChart>
+                        </ResponsiveContainer>
+                      </div>
+                    </TabPane>
+                    <TabPane tabId="22">
+                      <div className="widget-chart p-0">
+                        <ResponsiveContainer height={179}>
+                          <ComposedChart data={data2}>
+                            <CartesianGrid stroke="#ffffff" />
+                            <Area
+                              type="monotone"
+                              dataKey="amt"
+                              fill="#f7ffd0"
+                              stroke="#85a200"
+                            />
+                            <Bar
+                              dataKey="pv"
+                              barSize={16}
+                              fill="var(--primary)"
+                            />
+                            <Line
+                              type="monotone"
+                              dataKey="uv"
+                              strokeWidth="3"
+                              stroke="var(--danger)"
+                            />
+                          </ComposedChart>
+                        </ResponsiveContainer>
+                        <div className="widget-chart-content mt-3 mb-2">
+                          <div className="widget-description mt-0 text-success">
+                            <FontAwesomeIcon icon={faArrowUp} />
+                            <span className="pl-2 pr-2">37.2%</span>
+                            <span className="text-muted opacity-8">
+                              performance increase
+                            </span>
                           </div>
                         </div>
-                        <div className="widget-chart-wrapper">
-                          <ResponsiveContainer width="100%" aspect={3.0 / 1.0}>
-                            <LineChart
-                              data={data}
-                              margin={{ top: 0, right: 5, left: 5, bottom: 0 }}
-                            >
-                              <Line
-                                type="monotone"
-                                dataKey="pv"
-                                stroke="#ffffff"
-                                strokeWidth={3}
-                              />
-                            </LineChart>
-                          </ResponsiveContainer>
+                      </div>
+                      <CardBody className="pt-2">
+                        <Row>
+                          <Col md="6">
+                            <div className="widget-content">
+                              <div className="widget-content-outer">
+                                <div className="widget-content-wrapper">
+                                  <div className="widget-content-left mr-3">
+                                    <div className="widget-numbers fsize-3 text-muted">
+                                      23%
+                                    </div>
+                                  </div>
+                                  <div className="widget-content-right">
+                                    <div className="text-muted opacity-6">
+                                      Deploys
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="widget-progress-wrapper mt-1">
+                                  <Progress
+                                    className="progress-bar-sm progress-bar-animated-alt"
+                                    color="warning"
+                                    value="23"
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </Col>
+                          <Col md="6">
+                            <div className="widget-content">
+                              <div className="widget-content-outer">
+                                <div className="widget-content-wrapper">
+                                  <div className="widget-content-left mr-3">
+                                    <div className="widget-numbers fsize-3 text-muted">
+                                      76%
+                                    </div>
+                                  </div>
+                                  <div className="widget-content-right">
+                                    <div className="text-muted opacity-6">
+                                      Traffic
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="widget-progress-wrapper mt-1">
+                                  <Progress
+                                    className="progress-bar-sm progress-bar-animated-alt"
+                                    color="info"
+                                    value="76"
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </Col>
+                        </Row>
+                        <div className="divider mt-4" />
+                        <Row>
+                          <Col md="6">
+                            <div className="widget-content">
+                              <div className="widget-content-outer">
+                                <div className="widget-content-wrapper">
+                                  <div className="widget-content-left mr-3">
+                                    <div className="widget-numbers fsize-3 text-muted">
+                                      83%
+                                    </div>
+                                  </div>
+                                  <div className="widget-content-right">
+                                    <div className="text-muted opacity-6">
+                                      Servers Load
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="widget-progress-wrapper mt-1">
+                                  <Progress
+                                    className="progress-bar-sm progress-bar-animated-alt"
+                                    color="danger"
+                                    value="83"
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </Col>
+                          <Col md="6">
+                            <div className="widget-content">
+                              <div className="widget-content-outer">
+                                <div className="widget-content-wrapper">
+                                  <div className="widget-content-left mr-3">
+                                    <div className="widget-numbers fsize-3 text-muted">
+                                      48%
+                                    </div>
+                                  </div>
+                                  <div className="widget-content-right">
+                                    <div className="text-muted opacity-6">
+                                      Reported Bugs
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="widget-progress-wrapper mt-1">
+                                  <Progress
+                                    className="progress-bar-sm progress-bar-animated-alt"
+                                    color="alternate"
+                                    value="48"
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </Col>
+                        </Row>
+                      </CardBody>
+                    </TabPane>
+                  </TabContent>
+                </Card>
+                <Row>
+                  <Col lg="6">
+                    <div className="card mb-3 widget-chart">
+                      <div className="widget-chart-content">
+                        <div className="icon-wrapper rounded-circle">
+                          <div className="icon-wrapper-bg bg-primary" />
+                          <i className="lnr-graduation-hat text-primary" />
+                        </div>
+                        <div className="widget-numbers">43</div>
+                        <div className="widget-subheading">New Tutees</div>
+                        <div className="widget-description text-success">
+                          <FontAwesomeIcon icon={faAngleUp} />
+                          <span className="pl-1">175.5%</span>
                         </div>
                       </div>
-                    </Col>
-                  </Row>
-                  <div className="card mb-3 widget-chart">
-                    <div className="widget-chart-content">
-                      <div className="icon-wrapper rounded-circle">
-                        <div className="icon-wrapper-bg bg-warning" />
-                        <i className="lnr-heart icon-gradient bg-premium-dark">
-                          {" "}
-                        </i>
+                      <div className="widget-chart-wrapper chart-wrapper-relative">
+                        <ResponsiveContainer height={100}>
+                          <LineChart
+                            data={data}
+                            margin={{ top: 5, right: 5, left: 5, bottom: 0 }}
+                          >
+                            <Line
+                              type="monotone"
+                              dataKey="pv"
+                              stroke="#3ac47d"
+                              strokeWidth={3}
+                            />
+                          </LineChart>
+                        </ResponsiveContainer>
                       </div>
-                      <div className="widget-numbers">4.5</div>
-                      <div className="widget-subheading">
-                        Overall Rating
-                      </div>
-                      <div className="widget-description">
-                        Down by
-                        <span className="text-danger pl-1 pr-1">
+                    </div>
+                  </Col>
+                  <Col lg="6">
+                    <div className="card mb-3 widget-chart">
+                      <div className="widget-chart-content">
+                        <div className="icon-wrapper rounded-circle">
+                          <div className="icon-wrapper-bg bg-danger" />
+                          <i className="lnr-envelope text-danger" />
+                        </div>
+                        <div className="widget-numbers">43</div>
+                        <div className="widget-subheading">
+                          Reviews Submitted
+                        </div>
+                        <div className="widget-description text-danger">
                           <FontAwesomeIcon icon={faAngleDown} />
                           <span className="pl-1">54.1%</span>
-                        </span>
-                        from 30 days ago
+                        </div>
+                      </div>
+                      <div className="widget-chart-wrapper chart-wrapper-relative">
+                        <ResponsiveContainer height={100}>
+                          <BarChart data={data}>
+                            <Bar
+                              dataKey="pv"
+                              fill="#81a4ff"
+                              stroke="#3f6ad8"
+                              strokeWidth={2}
+                            />
+                          </BarChart>
+                        </ResponsiveContainer>
                       </div>
                     </div>
-                    <div className="widget-chart-wrapper chart-wrapper-relative">
-                      <ResponsiveContainer height={100}>
-                        <LineChart
-                          data={data2}
-                          margin={{ top: 0, right: 5, left: 5, bottom: 0 }}
-                        >
-                          <Line
-                            type="monotone"
-                            dataKey="pv"
-                            stroke="#d6b5ff"
-                            strokeWidth={2}
+                  </Col>
+                </Row>
+              </Col>
+              <Col md="12" lg="6">
+                <Row>
+                  <Col md="6">
+                    <div className="card mb-3 bg-arielle-smile widget-chart text-white card-border">
+                      <div className="icon-wrapper rounded-circle">
+                        <div className="icon-wrapper-bg bg-white opacity-10" />
+                        <i className="lnr-calendar-full icon-gradient bg-arielle-smile" />
+                      </div>
+                      <div className="widget-numbers">10</div>
+                      <div className="widget-subheading">
+                        Months since joined
+                      </div>
+                      <div className="widget-description text-white">
+                        <FontAwesomeIcon icon={faAngleUp} />
+                        <span className="pl-1">54.9%</span>
+                      </div>
+                    </div>
+                  </Col>
+                  <Col md="6">
+                    <div className="card mb-3 bg-midnight-bloom widget-chart text-white card-border">
+                      <div className="icon-wrapper rounded">
+                        <div className="icon-wrapper-bg bg-white opacity-10" />
+                        <i className="lnr-screen icon-gradient bg-warm-flame" />
+                      </div>
+                      <div className="widget-numbers">149</div>
+                      <div className="widget-subheading">Total Sessions</div>
+                      <div className="widget-description text-white">
+                        <span className="pr-1">62,7%</span>
+                        <FontAwesomeIcon icon={faArrowLeft} />
+                      </div>
+                    </div>
+                  </Col>
+                  <Col md="6">
+                    <div className="card mb-3 bg-grow-early widget-chart text-white card-border">
+                      <div className="icon-wrapper rounded">
+                        <div className="icon-wrapper-bg bg-dark opacity-9" />
+                        <i className="lnr-graduation-hat text-white" />
+                      </div>
+                      <div className="widget-numbers">49</div>
+                      <div className="widget-subheading">Total Tutees</div>
+                      <div className="widget-description text-white">
+                        <FontAwesomeIcon icon={faArrowRight} />
+                        <span className="pl-1">72.1%</span>
+                      </div>
+                    </div>
+                  </Col>
+                  <Col md="6">
+                    <div className="card mb-3 bg-love-kiss widget-chart card-border">
+                      <div className="widget-chart-content text-white">
+                        <div className="icon-wrapper rounded-circle">
+                          <div className="icon-wrapper-bg bg-white opacity-4" />
+                          <i className="lnr-eye" />
+                        </div>
+                        <div className="widget-numbers">458</div>
+                        <div className="widget-subheading">
+                          Total Profile Views
+                        </div>
+                        <div className="widget-description">
+                          <FontAwesomeIcon
+                            className="text-white opacity-5"
+                            icon={faAngleUp}
                           />
-                          <Line
-                            type="monotone"
-                            dataKey="uv"
-                            stroke="#a75fff"
-                            strokeWidth={2}
-                          />
-                        </LineChart>
-                      </ResponsiveContainer>
+                          <span className="text-white">175.5%</span>
+                        </div>
+                      </div>
+                      <div className="widget-chart-wrapper">
+                        <ResponsiveContainer width="100%" aspect={3.0 / 1.0}>
+                          <LineChart
+                            data={data}
+                            margin={{ top: 0, right: 5, left: 5, bottom: 0 }}
+                          >
+                            <Line
+                              type="monotone"
+                              dataKey="pv"
+                              stroke="#ffffff"
+                              strokeWidth={3}
+                            />
+                          </LineChart>
+                        </ResponsiveContainer>
+                      </div>
+                    </div>
+                  </Col>
+                </Row>
+                <div className="card mb-3 widget-chart">
+                  <div className="widget-chart-content">
+                    <div className="icon-wrapper rounded-circle">
+                      <div className="icon-wrapper-bg bg-warning" />
+                      <i className="lnr-heart icon-gradient bg-premium-dark">
+                        {" "}
+                      </i>
+                    </div>
+                    <div className="widget-numbers">4.5</div>
+                    <div className="widget-subheading">Overall Rating</div>
+                    <div className="widget-description">
+                      Down by
+                      <span className="text-danger pl-1 pr-1">
+                        <FontAwesomeIcon icon={faAngleDown} />
+                        <span className="pl-1">54.1%</span>
+                      </span>
+                      from 30 days ago
                     </div>
                   </div>
-                </Col>
-              </Row>
-              {/* <div className="row">
+                  <div className="widget-chart-wrapper chart-wrapper-relative">
+                    <ResponsiveContainer height={100}>
+                      <LineChart
+                        data={data2}
+                        margin={{ top: 0, right: 5, left: 5, bottom: 0 }}
+                      >
+                        <Line
+                          type="monotone"
+                          dataKey="pv"
+                          stroke="#d6b5ff"
+                          strokeWidth={2}
+                        />
+                        <Line
+                          type="monotone"
+                          dataKey="uv"
+                          stroke="#a75fff"
+                          strokeWidth={2}
+                        />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </div>
+                </div>
+              </Col>
+            </Row>
+            {/* <div className="row">
                 <div className="col-md-6 col-lg-3">
                   <div className="card-shadow-danger mb-3 widget-chart widget-chart2 text-left card">
                     <div className="widget-content">
@@ -789,205 +791,8 @@ export default class Dashboard extends Component {
                   </div>
                 </div>
               </div> */}
-              <Row>
-                <Col md="12">
-                  <Card className="main-card mb-3">
-                    <div className="card-header">
-                      Active Tutees
-                      {/* <div className="btn-actions-pane-right">
-                        <div role="group" className="btn-group-sm btn-group">
-                          <button className="active btn btn-info">
-                            Last Week
-                          </button>
-                          <button className="btn btn-info">All Month</button>
-                        </div>
-                      </div> */}
-                    </div>
-                    <div className="table-responsive">
-                      <table className="align-middle mb-0 table table-borderless table-striped table-hover">
-                        <thead>
-                          <tr>
-                            <th className="text-center">#</th>
-                            <th>Name</th>
-                            <th className="text-center">Location</th>
-                            <th className="text-center">Status</th>
-                            {/* <th className="text-center">Actions</th> */}
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td className="text-center text-muted">#1</td>
-                            <td>
-                              <div className="widget-content p-0">
-                                <div className="widget-content-wrapper">
-                                  <div className="widget-content-left mr-3">
-                                    <div className="widget-content-left">
-                                      <img
-                                        width={40}
-                                        className="rounded-circle"
-                                        src="http://localhost:8080/api/files/1"
-                                        alt="Avatar"
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="widget-content-left flex2">
-                                    <div className="widget-heading">
-                                      John Doe
-                                    </div>
-                                    <div className="widget-subheading opacity-7">
-                                      Secondary 3 Student
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </td>
-                            <td className="text-center">Toa Payoh</td>
-                            <td className="text-center">
-                              <div className="badge badge-warning">Past</div>
-                            </td>
-                            {/* <td className="text-center">
-                              <button
-                                type="button"
-                                className="btn btn-primary btn-sm"
-                              >
-                                Details
-                              </button>
-                            </td> */}
-                          </tr>
-                          <tr>
-                            <td className="text-center text-muted">#2</td>
-                            <td>
-                              <div className="widget-content p-0">
-                                <div className="widget-content-wrapper">
-                                  <div className="widget-content-left mr-3">
-                                    <div className="widget-content-left">
-                                      <img
-                                        width={40}
-                                        className="rounded-circle"
-                                        src="http://localhost:8080/api/files/2"
-                                        alt="Avatar"
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="widget-content-left flex2">
-                                    <div className="widget-heading">
-                                      Ruben Tillman
-                                    </div>
-                                    <div className="widget-subheading opacity-7">
-                                      JC Student
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </td>
-                            <td className="text-center">Pasir Ris</td>
-                            <td className="text-center">
-                              <div className="badge badge-success">
-                                Current
-                              </div>
-                            </td>
-                            {/* <td className="text-center">
-                              <button
-                                type="button"
-                                className="btn btn-primary btn-sm"
-                              >
-                                Details
-                              </button>
-                            </td> */}
-                          </tr>
-                          <tr>
-                            <td className="text-center text-muted">#3</td>
-                            <td>
-                              <div className="widget-content p-0">
-                                <div className="widget-content-wrapper">
-                                  <div className="widget-content-left mr-3">
-                                    <div className="widget-content-left">
-                                      <img
-                                        width={40}
-                                        className="rounded-circle"
-                                        src="http://localhost:8080/api/files/4"
-                                        alt="Avatar"
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="widget-content-left flex2">
-                                    <div className="widget-heading">
-                                      Elliot Huber
-                                    </div>
-                                    <div className="widget-subheading opacity-7">
-                                      JC 1 Student
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </td>
-                            <td className="text-center">Serangoon</td>
-                            <td className="text-center">
-                              <div className="badge badge-danger">
-                                Incoming
-                              </div>
-                            </td>
-                            {/* <td className="text-center">
-                              <button
-                                type="button"
-                                className="btn btn-primary btn-sm"
-                              >
-                                Details
-                              </button>
-                            </td> */}
-                          </tr>
-                          <tr>
-                            <td className="text-center text-muted">#4</td>
-                            <td>
-                              <div className="widget-content p-0">
-                                <div className="widget-content-wrapper">
-                                  <div className="widget-content-left mr-3">
-                                    <div className="widget-content-left">
-                                      <img
-                                        width={40}
-                                        className="rounded-circle"
-                                        alt="Avatar"
-                                        src="http://localhost:8080/api/files/5"
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="widget-content-left flex2">
-                                    <div className="widget-heading">
-                                      Vinnie Wagstaff
-                                    </div>
-                                    <div className="widget-subheading opacity-7">
-                                      Secondary 5 Student
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </td>
-                            <td className="text-center">Bukit Batok</td>
-                            <td className="text-center">
-                              <div className="badge badge-info">On Hold</div>
-                            </td>
-                            {/* <td className="text-center">
-                              <button
-                                type="button"
-                                className="btn btn-primary btn-sm"
-                              >
-                                Details
-                              </button>
-                            </td> */}
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    {/* <div className="d-block text-center card-footer">
-                      <button className="mr-2 btn-icon btn-icon-only btn btn-outline-danger">
-                        <i className="pe-7s-trash btn-icon-wrapper"> </i>
-                      </button>
-                      <button className="btn-wide btn btn-success">Save</button>
-                    </div> */}
-                  </Card>
-                </Col>
-              </Row>
-              {/* <Row>
+            <Users/>
+            {/* <Row>
                 <Col md="4">
                   <div className="card mb-3 widget-chart">
                     <div className="widget-chart-content">
@@ -1079,9 +884,9 @@ export default class Dashboard extends Component {
                   </div>
                 </Col>
               </Row> */}
-            </div>
-          </ReactCSSTransitionGroup>
-        </Fragment>
+          </div>
+        </ReactCSSTransitionGroup>
+      </Fragment>
     );
   }
 }
