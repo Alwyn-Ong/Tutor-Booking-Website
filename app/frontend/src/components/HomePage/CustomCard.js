@@ -18,7 +18,8 @@ import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { Rating } from "@material-ui/lab";
 import { useNavigate, Link } from "react-router-dom";
-import Color from 'color';
+import Color from "color";
+import { useSelector } from "react-redux";
 
 const useGridStyles = makeStyles(({ breakpoints }) => ({
   root: {
@@ -187,27 +188,36 @@ export const CustomCard = ({
   // const redirect = (userid) => {
   //   useNavigate(`/tutor/`);
   // }
-  return (
-    <Link to={`/tutor/${userid}`} style={{ textDecoration: 'none' }}>
 
-    <CardActionArea
-      className={classes.actionArea}
-      // onClick={() => redirect()}
-      // href={`/tutor/`}
-      // component={Link} to="/questions"
+  let toCompare = useSelector((state) => state.compare);
+
+  return (
+    <Link
+      to={
+        toCompare.length == 0
+          ? `/tutor/${userid}`
+          : `/compare/${toCompare[0]}/${toCompare[1]}`
+      }
+      style={{ textDecoration: "none" }}
     >
-      <Card className={classes.card}>
-        <CardMedia classes={mediaStyles} image={image} />
-        <CardContent>
-          <TextInfoContent
-            classes={textCardContentStyles}
-            overline={location}
-            heading={name}
-            body={element}
-          />
-        </CardContent>
-      </Card>
-    </CardActionArea>
+      <CardActionArea
+        className={classes.actionArea}
+        // onClick={() => redirect()}
+        // href={`/tutor/`}
+        // component={Link} to="/questions"
+      >
+        <Card className={classes.card}>
+          <CardMedia classes={mediaStyles} image={image} />
+          <CardContent>
+            <TextInfoContent
+              classes={textCardContentStyles}
+              overline={location}
+              heading={name}
+              body={element}
+            />
+          </CardContent>
+        </Card>
+      </CardActionArea>
     </Link>
   );
 };

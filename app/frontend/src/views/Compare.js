@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // TODO: Change to get data from API
-const Compare = () => {
+const Tutor = () => {
   // data = {
   //   name: "John Tutor",
   //   bio: "Made to be a tutor",
@@ -549,4 +549,4 @@ const Compare = () => {
   );
 };
 
-export default Compare;
+export default Tutor;

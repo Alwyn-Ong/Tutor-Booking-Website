@@ -5,6 +5,7 @@ import Tutor from "./views/Tutor";
 import Register from "./views/Register";
 import TutorProfile from "./views/TutorProfile";
 import Dashboard from "./views/Dashboard";
+import Compare from "./views/Compare"
 
 const routes = [
   // {
@@ -25,6 +26,7 @@ const routes = [
       { path: "register", element: <Register /> },
       { path: "tutorprofile", element: <TutorProfile /> },
       { path: "dashboard", element: <Dashboard /> },
+      { path: "compare/:id1/:id2", element: <Compare /> },
       { path: "*", element: <Homepage /> },
       // { path: "*", element: <Navigate to="/" /> },
     ],

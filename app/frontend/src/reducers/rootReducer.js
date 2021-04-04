@@ -1,3 +1,5 @@
+import { Satellite } from "@material-ui/icons";
+
 const initState = {
   auth: {
     id: null,
@@ -5,6 +7,7 @@ const initState = {
     name: null,
     role: null,
   },
+  compare: [],
 };
 
 const rootReducer = (state = initState, action) => {
@@ -25,6 +28,16 @@ const rootReducer = (state = initState, action) => {
       };
     case "LOGOUT_USER":
       return initState;
+    case "UPDATE_COMPARE":
+      return {
+        ...state,
+        compare: [...state.compare, action.payload.userid],
+      };
+    case "RESET_COMPARE":
+      return {
+        ...state,
+        compare: [],
+      };
     default:
       // If this reducer doesn't recognize the action type, or doesn't
       return state;

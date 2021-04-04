@@ -15,3 +15,18 @@ export const updateLogout = () => {
     type: 'LOGOUT_USER'
   };
 };
+
+export const updateCompare = (userid) => {
+  return {
+    type: 'UPDATE_COMPARE',
+    payload: {
+      userid: userid
+    }
+  }
+}
+
+export const resetCompare = () => {
+  return {
+    type: 'RESET_COMPARE'
+  }
+}
