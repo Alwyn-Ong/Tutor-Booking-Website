@@ -374,24 +374,41 @@ const TopBar = () => {
   };
 
   const rejectRequest = (requestId) => {
-    console.log(requestId);
-    toast.promise(
-      new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve();
-          setNotifications((state) => {
-            return state.filter(
-              (notification) => notification.requestId != requestId
-            );
-          });
-        }, 2000);
-      }),
-      {
-        loading: "Rejecting Request",
-        success: "Successfully rejected request!",
-        error: "Error when rejecting request.",
-      }
-    );
+    var requestOptions = {
+      method: "DELETE",
+      redirect: "follow",
+    };
+
+    fetch(
+      "http://localhost:8080/api/deleterequest/" + requestId,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        toast.promise(
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              if (result.details === "query success") {
+                resolve();
+                setNotifications((state) => {
+                  return state.filter(
+                    (notification) => notification.requestId != requestId
+                  );
+                });
+              } else {
+                reject();
+              }
+            }, 2000);
+          }),
+          {
+            loading: "Deleting Request",
+            success: "Successfully deleted request!",
+            error: "Error when deleting request.",
+          }
+        );
+      })
+      .catch((error) => console.log("error", error));
   };
 
   const menuId = "primary-search-account-menu";
