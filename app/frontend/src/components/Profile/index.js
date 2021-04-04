@@ -253,6 +253,7 @@ const Homepage = () => {
 
       let body = tutorValues;
       body.user.userId = userId;
+      body.timeslot = tutorValues.timeslots;
       var requestOptions = {
         method: "PUT",
         headers: myHeaders,
