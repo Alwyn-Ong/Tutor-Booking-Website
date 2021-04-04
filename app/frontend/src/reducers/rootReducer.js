@@ -29,9 +29,16 @@ const rootReducer = (state = initState, action) => {
     case "LOGOUT_USER":
       return initState;
     case "UPDATE_COMPARE":
+      let newList = state.compare;
+      for (let i = 0; i < 2; i++) {
+        if (newList[i] !== action.payload.userid) {
+          newList.push(action.payload.userid)
+          break;
+        }
+      } 
       return {
         ...state,
-        compare: [...state.compare, action.payload.userid],
+        compare: newList,
       };
     case "RESET_COMPARE":
       return {

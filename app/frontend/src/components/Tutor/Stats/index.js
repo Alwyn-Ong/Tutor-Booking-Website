@@ -1,19 +1,37 @@
-import { Card, Grid, Paper, Tooltip, Typography } from "@material-ui/core";
+import {
+  Button,
+  Card,
+  Grid,
+  Paper,
+  Tooltip,
+  Typography,
+} from "@material-ui/core";
 import React from "react";
 import { CardBody, CardTitle } from "reactstrap";
 import "../../Dashboard/base.css";
 import DoughnutExample from "./Doughnut";
 import RadarExample from "./Radar";
 import AssessmentOutlinedIcon from "@material-ui/icons/AssessmentOutlined";
+import { useDispatch } from "react-redux";
+import {updateCompare} from "../../../actions/authActions"
 
-const index = () => {
+const Index = ({tutorId}) => {
+  const dispatch = useDispatch();
+  const updateCompareDispatch = (tutorId) => {
+    dispatch(updateCompare(tutorId));
+  };
   return (
     <div>
       <Grid container spacing={1}>
-        <Grid item xs={12}>
-          <Typography>
-            <AssessmentOutlinedIcon /> Statistics
-          </Typography>
+        <Grid item xs={12} container justify="space-between">
+          <Grid item>
+            <Typography>
+              <AssessmentOutlinedIcon /> Statistics
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Button onClick={()=>updateCompareDispatch(tutorId)}>Compare</Button>
+          </Grid>
         </Grid>
         <Grid item md={6}>
           <Card className="main-card mb-4">
@@ -58,4 +76,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

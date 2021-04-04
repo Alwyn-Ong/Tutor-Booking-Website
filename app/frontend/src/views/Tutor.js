@@ -469,7 +469,7 @@ const Compare = () => {
                 </Accordion>
               </Grid> */}
               <Grid item>
-                <Stats />
+                <Stats tutorId={id}/>
               </Grid>
               <Grid item>
                 <Tabs
