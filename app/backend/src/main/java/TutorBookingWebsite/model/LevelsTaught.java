@@ -31,9 +31,9 @@ public class LevelsTaught {
 	private String subject;
 	
 	
-//	public LevelsTaught() {
-//		
-//	}
+	public LevelsTaught() {
+		
+	}
 	
 	public LevelsTaught(String subject, int tutorId) {
 		this.subject = subject;

@@ -82,7 +82,7 @@ public class RequestService {
 		try {
 			Request newRequest = new Request(request.getRemarks(), request.getRequestedTimeslot(), request.getStudentId(), request.getTutorId());
 			requestDao.save(newRequest);
-			notificationService.sendNotificationToAdmin(userDao.findById(request.getTutorId()).get(), userDao.findById(request.getStudentId()).get().getName(),request.getRequestedTimeslot());
+//			notificationService.sendNotificationToAdmin(userDao.findById(request.getTutorId()).get(), userDao.findById(request.getStudentId()).get().getName(),request.getRequestedTimeslot());
 			ResponseDetails responseDetails = new ResponseDetails(new Date(), "request has been saved",
 					"query success");
 			return new ResponseEntity(responseDetails, HttpStatus.OK);	

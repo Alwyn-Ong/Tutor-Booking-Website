@@ -47,9 +47,9 @@ public class User {
 	@ApiModelProperty(notes= "price of user")
 	private int price;	
 	
-//	public User() {
-//		
-//	}
+	public User() {
+		
+	}
 	
 	public User(String email, String name) {
 		this.email = email;
