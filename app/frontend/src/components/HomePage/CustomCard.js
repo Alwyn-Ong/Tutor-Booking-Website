@@ -133,7 +133,7 @@ export const CustomCard = ({
   const shadowStyles = useOverShadowStyles({ inactive: true });
   let limit = 30;
   let bioFormatted =
-    bio.length > limit ? bio.substring(0, limit - 3) + "..." : bio;
+    bio && bio.length > limit ? bio.substring(0, limit - 3) + "..." : bio;
   const element = (
     <div>
       <h3>${price}/hr</h3>
