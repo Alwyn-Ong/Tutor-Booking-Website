@@ -46,7 +46,7 @@ function SearchBar() {
               setSearch(e.target.value);
             }}
           ></input>
-          <input type="button" value="GO" onclick="searchUser"></input>
+          <input type="button" value="GO"></input>
         </form>
         <FilterPanel setState={setFilter} state={filter}></FilterPanel>
       </Container>
