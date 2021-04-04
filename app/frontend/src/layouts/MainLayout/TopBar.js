@@ -241,9 +241,27 @@ const TopBar = () => {
   ];
 
   //TODO: Integrate
-  const [notifications, setNotifications] = React.useState(
-    defaultNotifications
-  );
+  const [notifications, setNotifications] = React.useState([]);
+  const [fetchNotification, setFetchNotification] = React.useState(true);
+
+  if (fetchNotification) {
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+
+    fetch(
+      "http://localhost:8080/api/getallrequestfortutor/" + auth.id,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        setNotifications(result);
+        setFetchNotification(false);
+      })
+      .catch((error) => console.log("error", error));
+  }
 
   let renderTimeslot = (timeslot) => {
     // let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -385,7 +403,9 @@ const TopBar = () => {
                 <Avatar
                   width="15px"
                   height="15px"
-                  src={notification.imageURL}
+                  src={
+                    "http://localhost:8080/api/files/" + notification.studentId
+                  }
                 ></Avatar>
               </Grid>
               <Grid container item direction="column" xs={6}>
@@ -397,7 +417,7 @@ const TopBar = () => {
                 <Grid item>
                   <Typography variant="h5">
                     <Grid container spacing={1}>
-                      {notification.requestedTimeslot.map((timeslot) => {
+                      {/* {notification.requestedTimeslot.map((timeslot) => {
                         return (
                           <Grid item>
                             <ThemeProvider
@@ -417,7 +437,36 @@ const TopBar = () => {
                             </ThemeProvider>
                           </Grid>
                         );
-                      })}
+                      })} */}
+                      <Grid item>
+                        <ThemeProvider
+                          theme={
+                            dailyThemes[
+                              renderTimeslot(
+                                notification.requestedTimeslot
+                              )[0] - 1
+                            ]
+                          }
+                        >
+                          <Chip
+                            variant="outlined"
+                            size="small"
+                            color="primary"
+                            avatar={
+                              <Avatar>
+                                {
+                                  renderTimeslot(
+                                    notification.requestedTimeslot
+                                  )[2]
+                                }
+                              </Avatar>
+                            }
+                            label={
+                              renderTimeslot(notification.requestedTimeslot)[1]
+                            }
+                          ></Chip>
+                        </ThemeProvider>
+                      </Grid>
                     </Grid>
                   </Typography>
                 </Grid>
