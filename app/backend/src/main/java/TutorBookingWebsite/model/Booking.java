@@ -27,6 +27,10 @@ public class Booking {
 
 	private int studentId;
 
+	public Booking() {
+		
+	}
+	
 	public int getBookingId() {
 		return bookingId;
 	}
