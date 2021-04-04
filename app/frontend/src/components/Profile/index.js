@@ -218,6 +218,7 @@ const Homepage = () => {
 
       let body = values;
       body.userId = userId;
+      body.phoneNumber = values.phone;
       var requestOptions = {
         method: "PUT",
         headers: myHeaders,
