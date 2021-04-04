@@ -18,6 +18,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { Rating } from "@material-ui/lab";
 import { useNavigate, Link } from "react-router-dom";
+import Color from 'color';
 
 const useGridStyles = makeStyles(({ breakpoints }) => ({
   root: {

@@ -851,7 +851,7 @@ export const Results = React.memo(function SolidGameCard({
           rating={value.rating}
           userid={value.userid}
           // redirect={redirectToTutor}
-          onClick={() => redirectToTutor(value.userid)}
+          // onClick={() => redirectToTutor(value.userid)}
         />
       </Grid>
     );
