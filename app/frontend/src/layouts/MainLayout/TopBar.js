@@ -336,23 +336,41 @@ const TopBar = () => {
 
   //TODO: Integrate with backend
   const acceptRequest = (requestId) => {
-    toast.promise(
-      new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve();
-          setNotifications((state) => {
-            return state.filter(
-              (notification) => notification.requestId != requestId
-            );
-          });
-        }, 2000);
-      }),
-      {
-        loading: "Accepting Request",
-        success: "Successfully accepted request!",
-        error: "Error when accepting request.",
-      }
-    );
+    var requestOptions = {
+      method: "PUT",
+      redirect: "follow",
+    };
+
+    fetch(
+      "http://localhost:8080/api/acceptrequest/" + requestId,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        toast.promise(
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              if (result.details === "query success") {
+                resolve();
+                setNotifications((state) => {
+                  return state.filter(
+                    (notification) => notification.requestId != requestId
+                  );
+                });
+              } else {
+                reject();
+              }
+            }, 2000);
+          }),
+          {
+            loading: "Accepting Request",
+            success: "Successfully accepted request!",
+            error: "Error when accepting request.",
+          }
+        );
+      })
+      .catch((error) => console.log("error", error));
   };
 
   const rejectRequest = (requestId) => {
