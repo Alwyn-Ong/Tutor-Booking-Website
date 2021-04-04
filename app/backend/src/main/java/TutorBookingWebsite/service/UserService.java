@@ -317,7 +317,8 @@ public class UserService {
 				User user = userDao.findByEmail(email).orElse(null);
 				if (user == null) {
 					User newUser = new User(email, name);
-					userDao.save(newUser);
+					User savedUser = userDao.save(newUser);
+					user = savedUser;
 				}
 
 				result.put("userid", "" + user.getUserId());
