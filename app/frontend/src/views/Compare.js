@@ -493,7 +493,7 @@ const Tutor = () => {
               </Grid> */}
               <Grid item>
                 <Typography variant="h5">
-                  {data.rating ? (
+                  {data2.rating ? (
                     <div
                       style={{
                         display: "flex",
