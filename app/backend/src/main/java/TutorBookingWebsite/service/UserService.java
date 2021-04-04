@@ -57,8 +57,8 @@ public class UserService {
 	private FileController fileController;
 
 	public Map<String, Object> getTutorById(int userId) {
+		Map<String, Object> result = new HashMap<>();
 		try {
-			Map<String, Object> result = new HashMap<>();
 			Optional<User> user = userDao.findById(userId);
 			if (user.get().getIsTutor() != 1) {
 				throw new APIException("no such tutor");
@@ -124,7 +124,7 @@ public class UserService {
 
 			return result;
 		} catch (Throwable e) {
-			throw new APIException("no such tutor");
+			return result;
 		}
 	}
 
@@ -355,7 +355,7 @@ public class UserService {
 			result.put("qualification", existingUser.getQualification());
 			return result;
 		} catch (Exception e) {
-			throw new APIException("Error in retrieving!");
+			return result;
 		}
 	}
 
@@ -399,7 +399,7 @@ public class UserService {
 
 			return result;
 		} catch (Exception e) {
-			throw new APIException("Error in retrieving!");
+			return result;
 		}
 	}
 }

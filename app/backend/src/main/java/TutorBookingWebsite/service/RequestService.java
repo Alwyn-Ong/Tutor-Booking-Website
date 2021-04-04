@@ -62,7 +62,7 @@ public class RequestService {
 		List<Request> studentRequests = requestDao.findByStudentId(studentId);
 		List<Request> result = new ArrayList<>();
 		
-		if (userDao.findById(tutorId).get().getIsTutor() != 1) throw new APIException("no such tutor");
+		if (userDao.findById(tutorId).get().getIsTutor() != 1) return result;
 		
 		for (Request placeHolder:studentRequests) {
 			if (placeHolder.getTutorId() == tutorId) result.add(placeHolder);
@@ -73,7 +73,6 @@ public class RequestService {
 	
 	public List<Request> getAllRequestForTutor(int userId){
 		try {
-			System.out.println("test");
 			if (userDao.findById(userId).get().getIsTutor() != 1) {
 				List<Request> result = new ArrayList<>();
 				return result;
