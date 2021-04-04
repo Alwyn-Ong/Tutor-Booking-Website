@@ -326,6 +326,8 @@ const Homepage = () => {
     timeslots: [],
   });
 
+  console.log(tutorValues);
+
   const [getTutorValues, setGetTutorValues] = React.useState(true);
 
   if (getTutorValues) {
@@ -508,7 +510,6 @@ const Homepage = () => {
 
   // For listing of profiles
   const [isListingProfile, setIsListingProfile] = React.useState(false);
-  console.log(isListingProfile);
 
   const [isLoadingListingProfile, setIsLoadingListingProfile] = React.useState(
     true
@@ -520,10 +521,9 @@ const Homepage = () => {
       redirect: "follow",
     };
 
-    fetch("http://localhost:8080/api/gettutorstatus/1", requestOptions)
+    fetch("http://localhost:8080/api/gettutorstatus/" + userId, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        // console.log(result);
         setIsListingProfile(result.status);
         setIsLoadingListingProfile(false);
       })
@@ -1012,11 +1012,13 @@ const Homepage = () => {
                         `${option.levelsTaught} - ${option.subjectTaught}`
                       }
                       // style={{ width: 300 }}
+                      defaultValue={tutorValues.subjects}
                       renderInput={(params) => (
                         <TextField
                           {...params}
                           label="Subjects To Teach"
                           variant="outlined"
+                          required
                         />
                       )}
                       disableCloseOnSelect
