@@ -326,6 +326,8 @@ const Homepage = () => {
     timeslots: [],
   });
 
+  console.log(tutorValues);
+
   const [getTutorValues, setGetTutorValues] = React.useState(true);
 
   if (getTutorValues) {
@@ -1010,11 +1012,13 @@ const Homepage = () => {
                         `${option.levelsTaught} - ${option.subjectTaught}`
                       }
                       // style={{ width: 300 }}
+                      defaultValue={tutorValues.subjects}
                       renderInput={(params) => (
                         <TextField
                           {...params}
                           label="Subjects To Teach"
                           variant="outlined"
+                          required
                         />
                       )}
                       disableCloseOnSelect
