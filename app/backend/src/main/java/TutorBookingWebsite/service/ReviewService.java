@@ -1,5 +1,6 @@
 package TutorBookingWebsite.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +31,8 @@ public class ReviewService {
 				return reviewDao.findByTutorId(tutorId);	
 			}
 		} catch (Throwable e) {
-			throw new APIException("no such tutor");
+			List<Review> result = new ArrayList<>();
+			return result;
 		}
 	}
 }
