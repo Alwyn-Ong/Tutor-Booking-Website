@@ -508,7 +508,6 @@ const Homepage = () => {
 
   // For listing of profiles
   const [isListingProfile, setIsListingProfile] = React.useState(false);
-  console.log(isListingProfile);
 
   const [isLoadingListingProfile, setIsLoadingListingProfile] = React.useState(
     true
@@ -520,10 +519,9 @@ const Homepage = () => {
       redirect: "follow",
     };
 
-    fetch("http://localhost:8080/api/gettutorstatus/1", requestOptions)
+    fetch("http://localhost:8080/api/gettutorstatus/" + userId, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        // console.log(result);
         setIsListingProfile(result.status);
         setIsLoadingListingProfile(false);
       })
