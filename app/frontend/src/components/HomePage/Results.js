@@ -723,7 +723,7 @@ export const Results = React.memo(function SolidGameCard({
           }
 
           for (let condition of conditions) {
-            if (location.toLowerCase() === condition.value.toLowerCase()) {
+            if ( location && condition.value && location.toLowerCase() === condition.value.toLowerCase()) {
               return true;
             }
           }
@@ -853,8 +853,8 @@ export const Results = React.memo(function SolidGameCard({
           reviews={value.reviews}
           rating={value.rating}
           userid={value.userid}
-        // redirect={redirectToTutor}
-        // onClick={() => redirectToTutor(value.userid)}
+          // redirect={redirectToTutor}
+          // onClick={() => redirectToTutor(value.userid)}
         />
       </Grid>
     );
