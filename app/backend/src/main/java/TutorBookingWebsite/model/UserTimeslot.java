@@ -15,8 +15,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name="usertimeslot")
 @ApiModel(description = "UserTimeslot class ")
@@ -25,9 +23,11 @@ public class UserTimeslot {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@ApiModelProperty(notes= "unique id of usertimeslot")
 	private int userTimeslotId;
+	
 	@Enumerated(EnumType.STRING)
 	@ApiModelProperty(notes= "status of timeslot")
 	private Status status;
+	
 	@ApiModelProperty(notes= "timeslot id")
 	private int timeslotId;
 	@ApiModelProperty(notes= "user id of tutor")

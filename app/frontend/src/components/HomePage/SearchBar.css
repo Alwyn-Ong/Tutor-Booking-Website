@@ -28,7 +28,7 @@ body {
   
 }
 
-input[type="submit"] {
+input[type="button"] {
   height: 30px;
   border: 0px solid;
   width: 50px;

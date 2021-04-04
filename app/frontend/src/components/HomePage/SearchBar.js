@@ -28,6 +28,10 @@ function SearchBar() {
     selectedLocations: [],
   });
 
+  const searchUser = (event) => {
+    event.preventDefault();
+  }
+
   const [search, setSearch] = React.useState("");
 
   return (
@@ -42,7 +46,7 @@ function SearchBar() {
               setSearch(e.target.value);
             }}
           ></input>
-          <input type="submit" value="GO"></input>
+          <input type="button" value="GO" onclick="searchUser"></input>
         </form>
         <FilterPanel setState={setFilter} state={filter}></FilterPanel>
       </Container>
