@@ -34,7 +34,7 @@ import LoginModalWrapper from "../components/Auth/LoginModalWrapper";
 import { Page } from "../components/Page";
 import Reviews from "../components/Reviews";
 import Timetable from "../components/Timetable";
-import Stats from "../components/Tutor/Stats";
+import Stats from "../components/Tutor/Compare";
 import WeekPicker from "../components/Tutor/WeekPicker";
 import { toast } from "react-hot-toast";
 
@@ -463,25 +463,9 @@ const Tutor = () => {
                 </Accordion>
             </Grid> */}
             <Grid container direction="column" spacing={3} item xs={12} md={6}>
-              {/* <Grid item>
-                <Accordion expanded>
-                  <AccordionSummary
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                  >
-                    <Typography>
-                      <AssessmentOutlinedIcon /> Compare with other tutors
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Stats />
-                  </AccordionDetails>
-                </Accordion>
-              </Grid> */}
-              <Grid item>
-                <Stats />
-              </Grid>
-            
+              {/* <Grid item> */}
+                <Stats tutorId={id} data={data} data2={data2}/>
+              {/* </Grid> */}
             </Grid>
             <Grid
               container
