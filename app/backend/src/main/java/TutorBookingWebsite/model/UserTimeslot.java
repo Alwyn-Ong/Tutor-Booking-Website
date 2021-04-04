@@ -35,9 +35,9 @@ public class UserTimeslot {
 	@ApiModelProperty(notes= "user id of student")
 	private int studentId;
 	
-	public UserTimeslot() {
-		
-	}
+//	public UserTimeslot() {
+//		
+//	}
 	
 	public UserTimeslot(int timeslotId, int tutorId, Status status) {
 		this.timeslotId = timeslotId;
