@@ -72,10 +72,19 @@ public class RequestService {
 	}
 	
 	public List<Request> getAllRequestForTutor(int userId){
-		if (userDao.findById(userId).get().getIsTutor() != 1) throw new APIException("no such tutor");
-		
-		List<Request> result = requestDao.findByTutorId(userId);
-		return result;
+		try {
+			System.out.println("test");
+			if (userDao.findById(userId).get().getIsTutor() != 1) {
+				List<Request> result = new ArrayList<>();
+				return result;
+			};
+			
+			List<Request> result = requestDao.findByTutorId(userId);
+			return result;
+		} catch (Exception e){
+			List<Request> result = new ArrayList<>();
+			return result;
+		}
 	}
 	
 	public ResponseEntity saveRequest(Request request) {

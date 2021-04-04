@@ -442,7 +442,7 @@ const TopBar = () => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      {notifications.map((notification) => {
+      {notifications && notifications.map((notification) => {
         return (
           // <MenuItem onClick={viewProfile}>Profile</MenuItem>
           <MenuItem>
