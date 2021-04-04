@@ -335,7 +335,7 @@ const TopBar = () => {
   ];
 
   //TODO: Integrate with backend
-  const acceptRequest = (requestId) => {
+  const acceptRequest = (requestId, studentId) => {
     var requestOptions = {
       method: "PUT",
       redirect: "follow",
@@ -370,6 +370,16 @@ const TopBar = () => {
           }
         );
       })
+      .catch((error) => console.log("error", error));
+
+    var requestOptions = {
+      method: "POST",
+      redirect: "follow",
+    };
+
+    fetch(`http://localhost:8080/api/addbooking/${auth.id}/${studentId}`, requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
   };
 
@@ -508,7 +518,7 @@ const TopBar = () => {
               </Grid>
               <Grid item xs={2}>
                 <IconButton
-                  onClick={() => acceptRequest(notification.requestId)}
+                  onClick={() => acceptRequest(notification.requestId, notification.studentId)}
                 >
                   <CheckCircleOutlineIcon style={{ color: "green" }} />
                 </IconButton>
