@@ -244,7 +244,7 @@ const TopBar = () => {
   const [notifications, setNotifications] = React.useState([]);
   const [fetchNotification, setFetchNotification] = React.useState(true);
 
-  if (fetchNotification) {
+  if (fetchNotification && auth.id) {
     var requestOptions = {
       method: "GET",
       redirect: "follow",

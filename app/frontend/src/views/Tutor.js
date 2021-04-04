@@ -141,6 +141,10 @@ const Tutor = () => {
   // For save
   //TODO: Integrate
   const sendTimeslotRequest = () => {
+    if (timeslotRequest.timeslots.length == 0) {
+      toast.error("Please select a timeslot and update before sending!");
+      return;
+    }
     if (!auth.name) {
       setIsOpenModal(true);
     } else {
@@ -148,7 +152,7 @@ const Tutor = () => {
     }
   };
 
-  if (sendTimeslot) {
+  if (sendTimeslot && auth.id) {
     for (let i = 0; i < timeslotRequest.timeslots.length; i++) {
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
@@ -185,6 +189,7 @@ const Tutor = () => {
       }
     );
     setSendTimeslot(false);
+
   }
   // React.useEffect(() => {
   //   return () => {
