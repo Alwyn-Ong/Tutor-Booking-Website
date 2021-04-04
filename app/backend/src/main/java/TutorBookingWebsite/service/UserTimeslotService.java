@@ -33,7 +33,7 @@ public class UserTimeslotService {
 		Optional<User> existingUser = userDao.findById(userId);
 		
 		if (existingUser.isEmpty() || existingUser.get().getIsTutor() != 1) {
-			throw new APIException("no such tutor");
+			return result;
 		}
 		
 		List<UserTimeslot> userTimeslotData = userTimeslotDao.findByTutorId(userId);
@@ -55,7 +55,7 @@ public class UserTimeslotService {
 		Optional<User> existingUser = userDao.findById(userId);
 		
 		if (existingUser.isEmpty() || existingUser.get().getIsTutor() != 1) {
-			throw new APIException("no such tutor");
+			return result;
 		}
 		
 		List<UserTimeslot> userTimeslotData = userTimeslotDao.findByTutorId(userId);
