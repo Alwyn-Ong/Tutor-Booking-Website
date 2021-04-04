@@ -377,7 +377,10 @@ const TopBar = () => {
       redirect: "follow",
     };
 
-    fetch(`http://localhost:8080/api/addbooking/${auth.id}/${studentId}`, requestOptions)
+    fetch(
+      `http://localhost:8080/api/addbooking/${auth.id}/${studentId}`,
+      requestOptions
+    )
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
@@ -518,7 +521,12 @@ const TopBar = () => {
               </Grid>
               <Grid item xs={2}>
                 <IconButton
-                  onClick={() => acceptRequest(notification.requestId, notification.studentId)}
+                  onClick={() =>
+                    acceptRequest(
+                      notification.requestId,
+                      notification.studentId
+                    )
+                  }
                 >
                   <CheckCircleOutlineIcon style={{ color: "green" }} />
                 </IconButton>
@@ -595,7 +603,10 @@ const TopBar = () => {
       </MenuItem> */}
       <MenuItem onClick={handleNotificationsMenuOpen}>
         <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
+          <Badge
+            badgeContent={(notifications && notifications.length) || 0}
+            color="secondary"
+          >
             <NotificationsIcon />
           </Badge>
         </IconButton>
