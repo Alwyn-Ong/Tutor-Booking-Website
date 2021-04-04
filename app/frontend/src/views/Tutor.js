@@ -105,8 +105,6 @@ const Tutor = () => {
       })
       .catch((error) => console.log("error", error));
 
-  // data.email = "mailto:" + "aojj97@gmail.com";
-
   // For the tab
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
